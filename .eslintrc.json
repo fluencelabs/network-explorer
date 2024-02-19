@@ -1,0 +1,53 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-refresh", "simple-import-sort", "unused-imports"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "react-refresh/only-export-components": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "unused-imports/no-unused-imports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            "^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)"
+          ],
+          // Packages. `react` related packages come first.
+          ["^react", "^@?\\w"],
+          ["^(\\.+/)+(src|theme|components|assets|stores|utils|hooks)(/.*|$)"],
+          ["^\\u0000"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Style imports.
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ]
+  }
+}

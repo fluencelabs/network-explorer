@@ -1,0 +1,72 @@
+{
+  "name": "fluence-explorer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fluencelabs/deal-aurora": "file:fluencelabs-deal-ts-clients-0.5.0.tgz",
+    "@radix-ui/react-accordion": "^1.1.2",
+    "@radix-ui/react-aspect-ratio": "^1.0.3",
+    "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-popover": "^1.0.7",
+    "@radix-ui/react-select": "^1.2.2",
+    "@radix-ui/react-switch": "^1.0.3",
+    "@radix-ui/react-tooltip": "^1.0.7",
+    "copy-to-clipboard": "^3.3.3",
+    "normalize.css": "^8.0.1",
+    "react": "^18.2.0",
+    "react-datepicker": "^4.24.0",
+    "react-dom": "^18.2.0",
+    "react-loading-skeleton": "^3.3.1",
+    "viem": "^1.15.4",
+    "wagmi": "^1.4.3",
+    "wouter": "^2.12.0",
+    "zustand": "^4.4.3"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.23.0",
+    "@emotion/babel-plugin": "^11.11.0",
+    "@types/react": "^18.2.25",
+    "@types/react-datepicker": "^4.19.3",
+    "@types/react-dom": "^18.2.10",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "@vitejs/plugin-react": "^4.1.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11",
+    "vite-plugin-node-polyfills": "^0.17.0",
+    "vite-plugin-svgr": "^4.1.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

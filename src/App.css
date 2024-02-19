@@ -1,0 +1,86 @@
+/* Hauora-ExtraLight */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-ExtraLight.woff2') format('woff2');
+  font-weight: 200; /* Extra Light is typically 200 */
+  font-style: normal;
+}
+
+/* Hauora-Light */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-Light.woff2') format('woff2');
+  font-weight: 300; /* Light is typically 300 */
+  font-style: normal;
+}
+
+/* Hauora-Regular */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Hauora-Medium */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-Medium.woff2') format('woff2');
+  font-weight: 500; /* Medium is typically 500 */
+  font-style: normal;
+}
+
+/* Hauora-SemiBold */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-SemiBold.woff2') format('woff2');
+  font-weight: 600; /* Semi Bold is typically 600 */
+  font-style: normal;
+}
+
+/* Hauora-Bold */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Hauora-ExtraBold */
+@font-face {
+  font-family: 'Hauora';
+  src: url('./font/Hauora-ExtraBold.woff2') format('woff2');
+  font-weight: 800; /* Extra Bold is typically 800 */
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Hauora', sans-serif;
+  font-weight: normal;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  background: transparent;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  /* TODO How to pass color here? */
+  /* color: ; */
+  text-decoration: none;
+}
