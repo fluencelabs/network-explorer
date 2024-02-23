@@ -25,6 +25,11 @@ const items: SelectItem<ContractsENV>[] = [
     value: 'dar',
     icon: <TestnetIcon />,
   },
+  {
+    label: 'Kras',
+    value: 'kras',
+    icon: <MainnetIcon />,
+  },
 ]
 
 export const RightMenu: React.FC = () => {
