@@ -16,13 +16,13 @@ import { Text } from './Text'
 
 const items: SelectItem<ContractsENV>[] = [
   {
-    label: 'MainNet',
+    label: 'Stage',
     value: 'stage',
     icon: <MainnetIcon />,
   },
   {
-    label: 'TestNet',
-    value: 'testnet',
+    label: 'Dar',
+    value: 'dar',
     icon: <TestnetIcon />,
   },
 ]
