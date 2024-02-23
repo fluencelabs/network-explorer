@@ -22,7 +22,7 @@ const items: SelectItem<ContractsENV>[] = [
   },
   {
     label: 'TestNet',
-    value: 'testnet',
+    value: 'dar',
     icon: <TestnetIcon />,
   },
 ]
