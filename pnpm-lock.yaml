@@ -12,8 +12,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.25)(react@18.2.0)
   '@fluencelabs/deal-aurora':
-    specifier: file:fluencelabs-deal-ts-clients-0.5.0.tgz
-    version: file:fluencelabs-deal-ts-clients-0.5.0.tgz
+    specifier: npm:@fluencelabs/deal-ts-clients@0.6.5
+    version: /@fluencelabs/deal-ts-clients@0.6.5
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -967,6 +967,24 @@ packages:
 
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
+    dev: false
+
+  /@fluencelabs/deal-ts-clients@0.6.5:
+    resolution: {integrity: sha512-FLqC/6duq7z70rlxGtuWPBjpYStyZ1HAMkuJ9hsNFMlcO8s+D0FrMlAI5nNyIdh92vRrWeBv3ww+YSHSEa2e5g==}
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
+      debug: 4.3.4
+      dotenv: 16.3.1
+      ethers: 6.7.1
+      graphql: 16.8.1
+      graphql-request: 6.1.0(graphql@16.8.1)
+      graphql-scalars: 1.22.4(graphql@16.8.1)
+      graphql-tag: 2.12.6(graphql@16.8.1)
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@graphql-typed-document-node/core@3.2.0(graphql@16.8.1):
@@ -7080,22 +7098,4 @@ packages:
       '@types/react': 18.2.25
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
-
-  file:fluencelabs-deal-ts-clients-0.5.0.tgz:
-    resolution: {integrity: sha512-VBwyw8376GP8ZRdrAAirtE1Yl9gWgkxsU+wOdQ7Xn6iQHGO9w/E0+brUp8Sb60sZIGkFeSs7jlc/xFAYnqIi8A==, tarball: file:fluencelabs-deal-ts-clients-0.5.0.tgz}
-    name: '@fluencelabs/deal-ts-clients'
-    version: 0.5.0
-    dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
-      dotenv: 16.3.1
-      ethers: 6.7.1
-      graphql: 16.8.1
-      graphql-request: 6.1.0(graphql@16.8.1)
-      graphql-scalars: 1.22.4(graphql@16.8.1)
-      graphql-tag: 2.12.6(graphql@16.8.1)
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - utf-8-validate
     dev: false
