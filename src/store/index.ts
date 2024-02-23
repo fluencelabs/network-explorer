@@ -11,7 +11,7 @@ interface AppStore {
 export const useAppStore = create(
   persist<AppStore>(
     (set) => ({
-      network: 'testnet',
+      network: 'dar',
 
       setNetwork: (network) => set({ network }),
     }),

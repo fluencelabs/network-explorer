@@ -15,7 +15,7 @@ export const SUBGRAPH_URL: Record<ContractsENV, string> = {
 }
 
 export const RPC_URL: Record<ContractsENV, string> = {
-  testnet: 'https://rpc.ankr.com/polygon_mumbai',
+  dar: 'https://rpc.ankr.com/polygon_mumbai',
   stage: 'https://polygon.llamarpc.com',
   kras: 'https://rpc.ankr.com/polygon_mumbai',
   local: 'https://rpc.ankr.com/polygon_mumbai',
