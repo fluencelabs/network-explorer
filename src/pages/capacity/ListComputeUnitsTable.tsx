@@ -72,6 +72,7 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
 
   const hasNextPage = computeUnits && computeUnits.data.length > limit
   const pageComputeUnits = computeUnits && computeUnits.data.slice(0, limit)
+  const indexMultiplier = offset + 1
 
   return (
     <ListComputeUnitsTableWrapper>
@@ -85,8 +86,12 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
         <TableColumnTitle>Status</TableColumnTitle>
       </TableHeader>
       <TableBody skeletonCount={COMPUTE_UNITS_PER_PAGE} isLoading={isLoading}>
-        {pageComputeUnits?.map((computeUnit) => (
-          <ComputeUnitRow key={computeUnit.id} computeUnit={computeUnit} />
+        {pageComputeUnits?.map((computeUnit, index) => (
+          <ComputeUnitRow
+            key={computeUnit.id}
+            index={indexMultiplier + index}
+            computeUnit={computeUnit}
+          />
         ))}
       </TableBody>
       <Space height="32px" />
@@ -107,10 +112,11 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
 }
 
 interface CapacityRowProps {
+  index: number
   computeUnit: ComputeUnitsByCapacityCommitment
 }
 
-const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnit }) => {
+const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnit, index }) => {
   return (
     <RowBlock>
       <RowHeader>
@@ -118,7 +124,7 @@ const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnit }) => {
           <Row template={template}>
             {/* # */}
             <Cell>
-              <Text size={12}>136</Text>
+              <Text size={12}>{index}</Text>
             </Cell>
             {/* Compute Unit Id */}
             <Cell>

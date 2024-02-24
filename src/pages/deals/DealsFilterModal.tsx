@@ -7,16 +7,8 @@ import styled from '@emotion/styled'
 import { DealsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import * as Dialog from '@radix-ui/react-dialog'
 
-import {
-  CloseIcon,
-  DatePickerIcon,
-  InfoOutlineIcon,
-  ResetIcon,
-} from '../../assets/icons'
-import { Checkbox } from '../../components/Checkbox'
-import { Space } from '../../components/Space'
+import { CloseIcon, DatePickerIcon, ResetIcon } from '../../assets/icons'
 import { Text } from '../../components/Text'
-import { Tooltip } from '../../components/Tooltip'
 
 import { colors } from '../../constants/colors'
 
@@ -37,7 +29,6 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
   resetFilters,
 }) => {
   const {
-    status,
     createdAtFrom,
     createdAtTo,
     minPricePerWorkerEpoch = '',
@@ -54,7 +45,7 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
       </ModalHeader>
       <Divider />
       <ModalContent>
-        <CheckboxContainer>
+        {/* <CheckboxContainer>
           <Checkbox
             id="active-deals"
             label={
@@ -71,7 +62,7 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
               setFilter('status', checked ? 'active' : undefined)
             }}
           />
-        </CheckboxContainer>
+        </CheckboxContainer> */}
         <FromToContainer>
           <Text size={10} weight={700} uppercase color="grey400">
             Created At
@@ -268,9 +259,9 @@ const FromToRow = styled.div`
   align-items: center;
 `
 
-const CheckboxContainer = styled.div`
-  padding: 16px 16px 24px;
-`
+// const CheckboxContainer = styled.div`
+//   padding: 16px 16px 24px;
+// `
 
 const CloseIconStyled = styled(CloseIcon)`
   cursor: pointer;

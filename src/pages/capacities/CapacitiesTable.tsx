@@ -207,7 +207,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Duration */}
             <Cell>
-              <Text size={12}>NOT EXIST</Text>
+              <Text size={12}>{capacity.duration}</Text>
             </Cell>
             {/* Expiration */}
             <Cell>
@@ -232,7 +232,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Delegation Rate */}
             <Cell>
-              <Text size={12}>NOT EXIST</Text>
+              <Text size={12}>{capacity.rewardDelegatorRate}</Text>
             </Cell>
             {/* Status */}
             <Cell>

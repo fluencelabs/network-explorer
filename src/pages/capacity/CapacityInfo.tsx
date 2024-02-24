@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
+import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { CapacityStatus } from '../../components/CapacityStatus'
@@ -9,6 +10,7 @@ import { Copyable } from '../../components/Copyable'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
+import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
@@ -54,40 +56,77 @@ export const CapacityInfo: React.FC = () => {
           <Space height="33px" />
           <InfoRow>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Capacity commitment
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Capacity commitment
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Unique identifier of the Capacity commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
               <TextWithIcon>
                 <A href={`/capacity/${id}`}>{id}</A>
                 <Copyable value={id} />
               </TextWithIcon>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Compute units
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Compute units
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Number of Compute Units of the Peer linked to the Capacity
+                    commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
               <Text size={12}>{capacity.computeUnitsCount}</Text>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Created at
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Created at
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Time when the Capacity commitment was created.
+                  </Text>
+                </Tooltip>
+              </Row>
               <Text size={12}>
                 {createdAt.date} {createdAt.time}
               </Text>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Provider id
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Provider id
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Identifier of the Provider who submitted the Capacity
+                    commitment for the Peer.
+                  </Text>
+                </Tooltip>
+              </Row>
               <A href={`/provider/${capacity.providerId}`}>
                 {capacity.providerId}
               </A>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Total collateral
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Total collateral
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Collateral required to activate the Capacity Commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
               <Row>
                 <Text size={12}>{capacity.totalCollateral}</Text>
                 <TokenBadge bg="black900">
@@ -98,33 +137,79 @@ export const CapacityInfo: React.FC = () => {
               </Row>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Expiration
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Expiration
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Time when the Capacity commitment expires.
+                  </Text>
+                </Tooltip>
+              </Row>
               <Text size={12}>
                 {expiredAt.date} {expiredAt.time}
               </Text>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Peer id
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Peer id
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Unique identifier of the Fluence Peer associated with the
+                    Capacity commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
               <TextWithIcon>
                 <A href={`/peer/${capacity.peerId}`}>{capacity.peerId}</A>
                 <Copyable value={capacity.peerId} />
               </TextWithIcon>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Reward delegator rate
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Reward delegator rate
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Share of rewards that will be allocated to the Delegator who
+                    activated the Capacity commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
               <Text size={12}>{capacity.rewardDelegatorRate}%</Text>
             </Info>
             <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Status
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Status
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Current status of the Capacity commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
               <CapacityStatus status={capacity.status} />
+            </Info>
+            <Info>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Delegator address
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    Delegator Address who can activate the Capacity commitment.
+                  </Text>
+                </Tooltip>
+              </Row>
+              <TextWithIcon>
+                NOT EXIST
+                <Copyable value={id} />
+              </TextWithIcon>
             </Info>
           </InfoRow>
           <Space height="64px" />
@@ -132,9 +217,17 @@ export const CapacityInfo: React.FC = () => {
           <Space height="24px" />
           <ParametersRow>
             <Parameter>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Total CC rewards over time
-              </Text>
+              <Row>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Total CC rewards over time
+                </Text>
+                <Tooltip trigger={<InfoOutlineIcon />}>
+                  <Text color="grey600" weight={600} size={12}>
+                    The total amount of rewards in FLT tokens earned by the
+                    capacity commitment since activation.
+                  </Text>
+                </Tooltip>
+              </Row>
               <ParameterValue>
                 <Text size={12}>{capacity.rewardsTotal}</Text>
                 <TokenBadge bg="black900">
@@ -151,9 +244,19 @@ export const CapacityInfo: React.FC = () => {
               <Text size={24}>Provider</Text>
               <Space height="24px" />
               <Parameter>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Not Withdrawn Rewards
-                </Text>
+                <Row>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Not Withdrawn Rewards
+                  </Text>
+                  <Tooltip trigger={<InfoOutlineIcon />}>
+                    <Text color="grey600" weight={600} size={12}>
+                      The total amount of FLT token rewards earned that have not
+                      yet been withdrawn by the provider. Attention! Some of
+                      them may be in Vesting still. Tokens available for
+                      withdrawal now are Unlocked Rewards.
+                    </Text>
+                  </Tooltip>
+                </Row>
                 <ParameterValue>
                   <Text size={12}>{capacity.rewardsNotWithdrawnProvider}</Text>
                   <TokenBadge bg="black900">
@@ -165,9 +268,17 @@ export const CapacityInfo: React.FC = () => {
               </Parameter>
               <Space height="32px" />
               <Parameter>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Unlocked Rewards
-                </Text>
+                <Row>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Unlocked Rewards
+                  </Text>
+                  <Tooltip trigger={<InfoOutlineIcon />}>
+                    <Text color="grey600" weight={600} size={12}>
+                      The total amount of Unlocked Rewards that can be withdrawn
+                      by the Provider right now.
+                    </Text>
+                  </Tooltip>
+                </Row>
                 <ParameterValue>
                   <Text size={12}>{capacity.rewardsUnlockedProvider}</Text>
                   <TokenBadge bg="black900">
@@ -182,9 +293,19 @@ export const CapacityInfo: React.FC = () => {
               <Text size={24}>Delegator</Text>
               <Space height="24px" />
               <Parameter>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Not Withdrawn Rewards
-                </Text>
+                <Row>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Not Withdrawn Rewards
+                  </Text>
+                  <Tooltip trigger={<InfoOutlineIcon />}>
+                    <Text color="grey600" weight={600} size={12}>
+                      The total amount of FLT token rewards earned that have not
+                      yet been withdrawn by the Delegator. Attention! Some of
+                      them may be in vesting. Tokens available for withdrawal
+                      now are in Unlocked Rewards.
+                    </Text>
+                  </Tooltip>
+                </Row>
                 <ParameterValue>
                   <Text size={12}>{capacity.rewardsNotWithdrawnDelegator}</Text>
                   <TokenBadge bg="black900">
@@ -196,9 +317,17 @@ export const CapacityInfo: React.FC = () => {
               </Parameter>
               <Space height="32px" />
               <Parameter>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Unlocked Rewards
-                </Text>
+                <Row>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Unlocked Rewards
+                  </Text>
+                  <Tooltip trigger={<InfoOutlineIcon />}>
+                    <Text color="grey600" weight={600} size={12}>
+                      The total amount of Unlocked Rewards that can be withdrawn
+                      by the Delegator now.
+                    </Text>
+                  </Tooltip>
+                </Row>
                 <ParameterValue>
                   <Text size={12}>{capacity.rewardsUnlockedDelegator}</Text>
                   <TokenBadge bg="black900">

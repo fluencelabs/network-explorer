@@ -96,7 +96,7 @@ export const OfferInfo: React.FC = () => {
                 Price per worker epoch
               </Text>
               <ParameterValue>
-                <Text size={20}>22 [NOT EXIST]</Text>
+                <Text size={20}>{offer.pricePerEpoch}</Text>
                 <TokenBadge bg="grey300">
                   <Text size={12} weight={800} color="grey600">
                     {offer.paymentToken.symbol}

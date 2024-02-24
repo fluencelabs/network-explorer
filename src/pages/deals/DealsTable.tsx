@@ -101,8 +101,10 @@ export const DealsTable: React.FC<DealsTableProps> = ({ filters }) => {
         <HeaderCellWithTooltip>
           <TableColumnTitle>Matching</TableColumnTitle>
           <Tooltip>
-            <Text color="grey600" weight={600}>
-              Test
+            <Text color="grey600" weight={600} size={12}>
+              Matching Process results: Minimum Participants Required for the
+              Deal, Current Matched Participants / Maximum Potential
+              Participants
             </Text>
           </Tooltip>
         </HeaderCellWithTooltip>

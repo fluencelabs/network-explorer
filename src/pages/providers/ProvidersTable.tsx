@@ -215,16 +215,27 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
     <ProviderContentBlock>
       <Border />
       <ProviderContentHeader>
+        <TableColumnTitle>#</TableColumnTitle>
         <TableColumnTitle>Offer ID</TableColumnTitle>
+        <TableColumnTitle>Peers</TableColumnTitle>
         <TableColumnTitle>Compute Units</TableColumnTitle>
         <TableColumnTitle>Payment Token</TableColumnTitle>
         <TableColumnTitle>Effectors</TableColumnTitle>
       </ProviderContentHeader>
       <ProviderContentTable>
-        {offers.map((offer) => (
+        {offers.map((offer, index) => (
           <ProviderContentRow key={offer.id}>
+            {/* # */}
+            <Cell>
+              <Text size={12}>{index + 1}</Text>
+            </Cell>
+            {/* Offer ID */}
             <Cell>
               <A href={`/offer/${offer.id}`}>{offer.id}</A>
+            </Cell>
+            {/* Peers */}
+            <Cell>
+              <Text size={12}>{offer.peersCount}</Text>
             </Cell>
             <Cell>
               <Text size={12}>{offer.totalComputeUnits}</Text>
@@ -233,6 +244,7 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
                 {offer.freeComputeUnits}
               </ProviderComputeUnitsAvailable>
             </Cell>
+            {/* Compute Units */}
             <Cell>
               <TokenBadge>
                 <Text size={10} color="grey500" weight={800}>
@@ -240,12 +252,14 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
                 </Text>
               </TokenBadge>
             </Cell>
+            {/* Payment Token */}
             <Cell>
               <ShrinkText size={12}>
                 {offer.effectors.map((e) => e.description).join(',')}
               </ShrinkText>
               <EffectorsTooltip effectors={offer.effectors} />
             </Cell>
+            {/* Effectors */}
             <Cell>
               <DetailsButton onClick={() => navigate(`/offer/${offer.id}`)}>
                 <Text size={10} weight={800} uppercase>
@@ -298,8 +312,8 @@ const ProviderContentBlock = styled.div`
 const GridBaseProviderContent = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(150px, 1fr) minmax(10px, 1fr) minmax(100px, 1fr)
-    minmax(50px, 1fr) 75px;
+    25px minmax(150px, 1fr) 50px
+    minmax(10px, 1fr) minmax(100px, 1fr) minmax(50px, 1fr) 75px;
 `
 
 const ProviderContentRow = styled(GridBaseProviderContent)`

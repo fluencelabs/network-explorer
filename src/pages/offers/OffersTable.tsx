@@ -11,6 +11,7 @@ import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
 import { DetailsButton } from '../../components/DetailsButton'
+import { EffectorsTooltip } from '../../components/EffectorsTooltip'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
@@ -35,7 +36,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
+  '50px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -197,6 +198,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
               <ShrinkText size={12}>
                 {offer.effectors.map((e) => e.description).join(', ')}
               </ShrinkText>
+              <EffectorsTooltip effectors={offer.effectors} />
             </Cell>
             <Cell>
               <DetailsButton>

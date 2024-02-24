@@ -39,7 +39,9 @@ export const TableBody: React.FC<TableBodyProps> = ({
     return (
       <TableBodyStyled>
         <EmptyTable>
-          <Text>No data</Text>
+          <Text size={12} color="grey500" weight={600} uppercase>
+            No data
+          </Text>
         </EmptyTable>
       </TableBodyStyled>
     )
@@ -97,6 +99,7 @@ const EmptyTable = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
 `
 
 export const TableHeader = styled.div<{

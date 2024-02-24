@@ -15,7 +15,7 @@ export const ComputeUnitStatus: React.FC<ComputeUnitStatusProps> = ({
     return (
       <Status color="blue">
         <Text color="white" weight={800} size={10} uppercase>
-          Capcity
+          Capacity
         </Text>
       </Status>
     )

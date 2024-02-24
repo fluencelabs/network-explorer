@@ -79,7 +79,8 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
 
   return (
     <ProofsTableWrapper>
-      <Text size={24}>Proofs</Text>
+      <Text size={24}>History of epoches</Text>
+      <Space height="30px" />
       <TableHeader template={template} alignItems="flex-start">
         <TableColumnTitle>Epoch</TableColumnTitle>
         <TableColumnTitle wrap>Epoch period (blocks)</TableColumnTitle>

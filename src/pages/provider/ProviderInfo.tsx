@@ -40,8 +40,8 @@ export const ProviderInfo: React.FC = () => {
               Total Peers
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
+              <Text color="grey600" weight={600} size={12}>
+                The total number of peers with activated Capacity commitments
               </Text>
             </Tooltip>
           </StatisticTitle>
@@ -54,8 +54,8 @@ export const ProviderInfo: React.FC = () => {
               Available Compute Units
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
+              <Text color="grey600" weight={600} size={12}>
+                The total number of CUs which are not in a Deal at the moment
               </Text>
             </Tooltip>
           </StatisticTitle>
@@ -68,8 +68,8 @@ export const ProviderInfo: React.FC = () => {
               Total Compute Units
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
+              <Text color="grey600" weight={600} size={12}>
+                The overall number of CUs with Capacity commitment
               </Text>
             </Tooltip>
           </StatisticTitle>
