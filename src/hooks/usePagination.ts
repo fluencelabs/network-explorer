@@ -15,10 +15,18 @@ export const usePagination = (perPage: number) => {
     return Math.ceil(parseInt(totalItems) / perPage)
   }
 
+  const getPageItems = <T>(items: T[]) => {
+    const hasNextPage = items.length > perPage
+    const pageItems = items.slice(0, perPage)
+
+    return { hasNextPage, pageItems }
+  }
+
   return {
     page,
     selectPage,
     getTotalPages,
+    getPageItems,
     offset: (page - 1) * perPage,
     limit: perPage,
   }
