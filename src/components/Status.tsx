@@ -3,7 +3,10 @@ import styled from '@emotion/styled'
 
 import { Colors, colors } from '../constants/colors'
 
-type StatusColor = Extract<Colors, 'green' | 'red' | 'blue' | 'grey300'>
+type StatusColor = Extract<
+  Colors,
+  'green' | 'red' | 'blue' | 'grey300' | 'grey200'
+>
 
 interface StatusProps {
   type?: 'label' | 'dot'
