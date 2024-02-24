@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import styled from '@emotion/styled'
+import {
+  ComputeUnitsOrderBy,
+  OrderType,
+} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+import { ComputeUnitsByCapacityCommitment } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
+import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
-import { Status } from '../../components/Status'
 import {
   Cell,
   Row,
@@ -15,44 +22,95 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+import { useApiQuery, usePagination } from '../../hooks'
 
 const template = ['30px', 'minmax(10px, 1fr)', '70px']
 
-export const ListComputeUnitsTable: React.FC = () => {
-  const [page, setPage] = useState(1)
+const COMPUTE_UNITS_PER_PAGE = 4
+
+type ComputeUnitSort = `${ComputeUnitsOrderBy}:${OrderType}`
+
+interface ListComputeUnitsTableProps {
+  capacityCommitmentId: string
+}
+
+export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
+  capacityCommitmentId,
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [order, setOrder] = useState<ComputeUnitSort>('createdAt:desc')
+  const [orderBy, orderType] = order.split(':') as [
+    ComputeUnitsOrderBy,
+    OrderType,
+  ]
+
+  const { page, selectPage, limit, offset, getTotalPages } = usePagination(
+    COMPUTE_UNITS_PER_PAGE,
+  )
+
+  const { data: computeUnits, isLoading } = useApiQuery(
+    (client) =>
+      client.getComputeUnitsByCapacityCommitment(
+        capacityCommitmentId,
+        offset,
+        limit + 1,
+        orderBy,
+        orderType,
+      ),
+    [page, orderBy, orderType],
+    {
+      key: `capacity-commitment-compute-units:${JSON.stringify({
+        capacityCommitmentId,
+        offset,
+        limit,
+        order,
+        orderBy,
+      })}`,
+      ttl: 1_000 * 60, // 1 minute
+    },
+  )
+
+  const hasNextPage = computeUnits && computeUnits.data.length > limit
+  const pageComputeUnits = computeUnits && computeUnits.data.slice(0, limit)
 
   return (
-    <>
+    <ListComputeUnitsTableWrapper>
+      <Text size={24}>List of compute units</Text>
+      {/* <Space height="24px" />
+      <ButtonGroup value={value} onSelect={setValue} items={items} /> */}
+      <Space height="30px" />
       <TableHeader template={template}>
         <TableColumnTitle>#</TableColumnTitle>
         <TableColumnTitle>Compute Unit Id</TableColumnTitle>
         <TableColumnTitle>Status</TableColumnTitle>
       </TableHeader>
-      <TableBody>
-        <ComputeUnitRow computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ComputeUnitRow computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ComputeUnitRow computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ComputeUnitRow computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ComputeUnitRow computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ComputeUnitRow computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+      <TableBody skeletonCount={COMPUTE_UNITS_PER_PAGE} isLoading={isLoading}>
+        {pageComputeUnits?.map((computeUnit) => (
+          <ComputeUnitRow key={computeUnit.id} computeUnit={computeUnit} />
+        ))}
       </TableBody>
       <Space height="32px" />
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Pagination
-          pages={25}
-          page={page}
-          onSelect={(page) => setPage(() => page)}
-        />
+      <div style={{ alignSelf: 'flex-end' }}>
+        {!computeUnits ? (
+          <Skeleton width={200} height={34} count={1} />
+        ) : (
+          <Pagination
+            pages={getTotalPages(computeUnits.total)}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
+        )}
       </div>
-    </>
+    </ListComputeUnitsTableWrapper>
   )
 }
 
 interface CapacityRowProps {
-  computeUnitId: string
+  computeUnit: ComputeUnitsByCapacityCommitment
 }
 
-const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnitId }) => {
+const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnit }) => {
   return (
     <RowBlock>
       <RowHeader>
@@ -64,15 +122,11 @@ const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnitId }) => {
             </Cell>
             {/* Compute Unit Id */}
             <Cell>
-              <A href={`/compute-unit/${computeUnitId}`}>{computeUnitId}</A>
+              <A href={`/compute-unit/${computeUnit.id}`}>{computeUnit.id}</A>
             </Cell>
             {/* Status */}
             <Cell>
-              <Status color="blue">
-                <Text size={10} color="white" uppercase weight={800}>
-                  Capacity
-                </Text>
-              </Status>
+              <ComputeUnitStatus status={computeUnit.status} />
             </Cell>
           </Row>
         </RowTrigger>
@@ -80,3 +134,9 @@ const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnitId }) => {
     </RowBlock>
   )
 }
+
+const ListComputeUnitsTableWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+`

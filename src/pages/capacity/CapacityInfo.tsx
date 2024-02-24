@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
 import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
-import { ButtonGroup } from '../../components/ButtonGroup'
 import { CapacityStatus } from '../../components/CapacityStatus'
 import { Copyable } from '../../components/Copyable'
 import { Space } from '../../components/Space'
@@ -16,15 +15,8 @@ import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
 import { ProofsTable } from './ProofsTable'
 
-const items = [
-  { value: 'all', label: 'All' },
-  { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
-]
-
 export const CapacityInfo: React.FC = () => {
   const params = useParams()
-  const [value, setValue] = useState(items[0].value)
 
   const { id } = params
 
@@ -219,17 +211,9 @@ export const CapacityInfo: React.FC = () => {
             </div>
           </ParametersRow>
           <Space height="80px" />
-          <Text size={24}>List of compute units [NOT EXIST]</Text>
-          <Space height="24px" />
-          <ButtonGroup value={value} onSelect={setValue} items={items} />
-          <Space height="32px" />
-          <ListComputeUnitsTableWrapper>
-            <ListComputeUnitsTable />
-          </ListComputeUnitsTableWrapper>
-          <Space height="24px" />
-          <Text size={24}>Proofs [NOT EXIST]</Text>
+          <ListComputeUnitsTable capacityCommitmentId={id} />
           <Space height="30px" />
-          <ProofsTable />
+          <ProofsTable capacityCommitmentId={id} />
         </Right>
       </Content>
     </>
@@ -250,6 +234,7 @@ const Left = styled.div`
 `
 
 const Right = styled.div`
+  display: flex;
   width: 100%;
   flex-direction: column;
 `
@@ -296,8 +281,4 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-`
-
-const ListComputeUnitsTableWrapper = styled.div`
-  width: 50%;
 `

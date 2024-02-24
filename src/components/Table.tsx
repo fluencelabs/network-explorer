@@ -12,6 +12,7 @@ import { Text } from './Text'
 
 interface TableBodyProps {
   isLoading?: boolean
+  isEmpty?: boolean
   skeletonCount?: number
   skeletonHeight?: number
   children: React.ReactNode | React.ReactNode[]
@@ -19,6 +20,7 @@ interface TableBodyProps {
 
 export const TableBody: React.FC<TableBodyProps> = ({
   isLoading,
+  isEmpty,
   skeletonCount = 5,
   skeletonHeight = 48,
   children,
@@ -30,6 +32,16 @@ export const TableBody: React.FC<TableBodyProps> = ({
           <Skeleton key={i} height={skeletonHeight} />
         ))}
       </TableBodySkeleton>
+    )
+  }
+
+  if (isEmpty) {
+    return (
+      <TableBodyStyled>
+        <EmptyTable>
+          <Text>No data</Text>
+        </EmptyTable>
+      </TableBodyStyled>
     )
   }
 
@@ -79,12 +91,23 @@ const TableBodyStyled = styled.div`
   gap: 6px;
 `
 
-export const TableHeader = styled.div<{ template: string[] }>`
+const EmptyTable = styled.div`
+  background-color: ${colors.grey100};
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const TableHeader = styled.div<{
+  template: string[]
+  alignItems?: CSSProperties['alignItems']
+}>`
   padding: 12px;
   display: grid;
   grid-template-columns: ${({ template }) => template.join(' ')};
   gap: 24px;
-  align-items: center;
+  align-items: ${({ alignItems }) => alignItems ?? 'center'};
 `
 
 export const HeaderCellWithTooltip = styled.div`
@@ -99,14 +122,14 @@ const HeaderCellWithSort = styled.div`
   align-items: flex-start;
 `
 
-export const TableColumnTitle = styled(Text)`
+export const TableColumnTitle = styled(Text)<{ wrap?: boolean }>`
   color: ${colors.grey400};
   font-size: 10px;
   font-weight: 700;
   line-height: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  text-wrap: nowrap;
+  text-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
 `
 
 export const RowBlock = styled.div`

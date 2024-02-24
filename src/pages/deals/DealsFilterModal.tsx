@@ -40,8 +40,8 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
     status,
     createdAtFrom,
     createdAtTo,
-    minPricePerWorkerEpoch,
-    maxPricePerWorkerEpoch,
+    minPricePerWorkerEpoch = '',
+    maxPricePerWorkerEpoch = '',
   } = filters
 
   return (

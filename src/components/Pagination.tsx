@@ -23,7 +23,11 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const isFirstPage = page === 1
   const isLastPage = page === pages
-  console.log(isLastPage, hasNextPage)
+
+  // If there is only one page, don't show pagination
+  if (page === 1 && pages === -1 && !hasNextPage) {
+    return null
+  }
 
   return (
     <Wrapper>
