@@ -8,6 +8,7 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
@@ -25,16 +26,18 @@ export const SupportedEffectorsTable: React.FC<
 > = ({ effectors }) => {
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>#</TableColumnTitle>
-        <TableColumnTitle>CID</TableColumnTitle>
-        <TableColumnTitle>Description</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        {effectors.map((effector, index) => (
-          <EffectorRow key={effector.cid} index={index} effector={effector} />
-        ))}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>CID</TableColumnTitle>
+          <TableColumnTitle>Description</TableColumnTitle>
+        </TableHeader>
+        <TableBody>
+          {effectors.map((effector, index) => (
+            <EffectorRow key={effector.cid} index={index} effector={effector} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
     </>
   )
 }

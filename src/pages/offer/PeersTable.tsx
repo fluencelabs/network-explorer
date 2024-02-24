@@ -8,6 +8,7 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
@@ -23,16 +24,18 @@ interface PeersTableProps {
 export const PeersTable: React.FC<PeersTableProps> = ({ peers }) => {
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>#</TableColumnTitle>
-        <TableColumnTitle>Peer id</TableColumnTitle>
-        <TableColumnTitle>Compute units</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        {peers.map((peer, index) => (
-          <PeerRow key={peer.id} index={index} peer={peer} />
-        ))}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Peer id</TableColumnTitle>
+          <TableColumnTitle>Compute units</TableColumnTitle>
+        </TableHeader>
+        <TableBody>
+          {peers.map((peer, index) => (
+            <PeerRow key={peer.id} index={index} peer={peer} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
     </>
   )
 }

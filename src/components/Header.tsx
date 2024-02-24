@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { Logo } from '../assets/icons'
+import { media } from '../hooks/useMedia'
 
 import { ROUTES } from '../constants'
 import { colors } from '../constants/colors'
@@ -36,4 +37,8 @@ const HeaderBackgroundBlock = styled.div`
   align-items: flex-start;
   background-color: ${colors.grey100};
   min-height: 180px;
+
+  ${media.mobile} {
+    min-height: 70px;
+  }
 `

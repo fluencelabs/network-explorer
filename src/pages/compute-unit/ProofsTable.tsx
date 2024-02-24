@@ -10,9 +10,11 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -30,29 +32,31 @@ export const ProofsTable: React.FC = () => {
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>Epoch</TableColumnTitle>
-        <TableColumnTitle>Tx</TableColumnTitle>
-        <TableColumnTitle>Timestamp</TableColumnTitle>
-        <TableColumnTitle>Collateral</TableColumnTitle>
-        <TableColumnTitle align="center">Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-        <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Epoch</TableColumnTitle>
+          <TableColumnTitle>Tx</TableColumnTitle>
+          <TableColumnTitle>Timestamp</TableColumnTitle>
+          <TableColumnTitle>Collateral</TableColumnTitle>
+          <TableColumnTitle align="center">Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody>
+          <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+          <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+          <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+          <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+          <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+          <ProofRow tx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1" />
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <TablePagination>
         <Pagination
           pages={25}
           page={page}
           onSelect={(page) => setPage(() => page)}
         />
-      </div>
+      </TablePagination>
     </>
   )
 }

@@ -21,10 +21,12 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableColumnTitleWithSort,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -87,40 +89,42 @@ export const DealsTable: React.FC<DealsTableProps> = ({ filters }) => {
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>Deal Id</TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="createdAt"
-          isActive={orderBy === 'createdAt'}
-          onSort={handleSort}
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Deal Id</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="createdAt"
+            isActive={orderBy === 'createdAt'}
+            onSort={handleSort}
+          >
+            Created At
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Client</TableColumnTitle>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Matching</TableColumnTitle>
+            <Tooltip>
+              <Text color="grey600" weight={600} size={12}>
+                Matching Process results: Minimum Participants Required for the
+                Deal, Current Matched Participants / Maximum Potential
+                Participants
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
+          <TableColumnTitle>Balance</TableColumnTitle>
+          <TableColumnTitle>Providers earnings</TableColumnTitle>
+          <TableColumnTitle>Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody
+          skeletonCount={DEALS_PER_PAGE}
+          skeletonHeight={48}
+          isLoading={isLoading}
         >
-          Created At
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Client</TableColumnTitle>
-        <HeaderCellWithTooltip>
-          <TableColumnTitle>Matching</TableColumnTitle>
-          <Tooltip>
-            <Text color="grey600" weight={600} size={12}>
-              Matching Process results: Minimum Participants Required for the
-              Deal, Current Matched Participants / Maximum Potential
-              Participants
-            </Text>
-          </Tooltip>
-        </HeaderCellWithTooltip>
-        <TableColumnTitle>Balance</TableColumnTitle>
-        <TableColumnTitle>Providers earnings</TableColumnTitle>
-        <TableColumnTitle>Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody
-        skeletonCount={DEALS_PER_PAGE}
-        skeletonHeight={48}
-        isLoading={isLoading}
-      >
-        {pageDeals?.map((deal) => <DealRow key={deal.id} deal={deal} />)}
-      </TableBody>
+          {pageDeals?.map((deal) => <DealRow key={deal.id} deal={deal} />)}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!deals ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -131,7 +135,7 @@ export const DealsTable: React.FC<DealsTableProps> = ({ filters }) => {
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </>
   )
 }

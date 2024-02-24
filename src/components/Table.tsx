@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { SortIcon } from '../assets/icons'
+import { media } from '../hooks/useMedia'
 import { setProp } from '../utils/setProp'
 
 import { colors } from '../constants/colors'
@@ -77,6 +78,18 @@ export const TableColumnTitleWithSort = <Field extends string>({
         <SortIconStyled type={isActive ? order : 'desc'} />
       </HeaderCellWithTooltip>
     </HeaderCellWithSort>
+  )
+}
+
+interface ScrollableTable {
+  children: React.ReactNode | React.ReactNode[]
+}
+
+export const ScrollableTable: React.FC<ScrollableTable> = ({ children }) => {
+  return (
+    <ScrollableTableWrapper>
+      <ScrollableTableContent>{children}</ScrollableTableContent>
+    </ScrollableTableWrapper>
   )
 }
 
@@ -178,4 +191,35 @@ export const SortIconStyled = styled(SortIcon)<{ type: OrderType }>`
   transform: ${({ type }) =>
     type === 'asc' ? 'rotate(-180deg)' : 'rotate(0deg)'};
   transition: transform 250ms ease-in-out;
+`
+
+export const ScrollableTableWrapper = styled.div`
+  ${media.tablet} {
+    width: 100%;
+    overflow-x: scroll;
+  }
+
+  ${media.mobile} {
+    width: 100%;
+    overflow-x: scroll;
+  }
+`
+
+export const ScrollableTableContent = styled.div`
+  ${media.tablet} {
+    width: 1200px;
+  }
+
+  ${media.mobile} {
+    width: 1200px;
+  }
+`
+
+export const TablePagination = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  ${media.mobile} {
+    justify-content: flex-start;
+  }
 `

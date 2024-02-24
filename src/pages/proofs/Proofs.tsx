@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { ProofsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
+import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
@@ -14,7 +15,7 @@ export const Proofs: React.FC = () => {
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <Text size={32}>List of proofs</Text>
         <FiltersBlock>
           <Search
@@ -23,19 +24,12 @@ export const Proofs: React.FC = () => {
             placeholder="Search by Tx / Provider ID / Peer ID"
           />
         </FiltersBlock>
-      </Header>
+      </PageHeader>
       <Space height="64px" />
       <ProofsTable filters={filters} />
     </>
   )
 }
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
 
 const FiltersBlock = styled.div`
   display: flex;

@@ -16,10 +16,12 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableColumnTitleWithSort,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
@@ -74,33 +76,35 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({ filters }) => {
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>Proof tx</TableColumnTitle>
-        <TableColumnTitle>Timestamp</TableColumnTitle>
-        <TableColumnTitle>Provider</TableColumnTitle>
-        <TableColumnTitle>Capacity commitment</TableColumnTitle>
-        <TableColumnTitle>Peer id</TableColumnTitle>
-        <TableColumnTitle>Compute units</TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="epoch"
-          isActive={orderBy === 'epoch'}
-          onSort={handleSort}
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Proof tx</TableColumnTitle>
+          <TableColumnTitle>Timestamp</TableColumnTitle>
+          <TableColumnTitle>Provider</TableColumnTitle>
+          <TableColumnTitle>Capacity commitment</TableColumnTitle>
+          <TableColumnTitle>Peer id</TableColumnTitle>
+          <TableColumnTitle>Compute units</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="epoch"
+            isActive={orderBy === 'epoch'}
+            onSort={handleSort}
+          >
+            Epoch
+          </TableColumnTitleWithSort>
+        </TableHeader>
+        <TableBody
+          isEmpty={!pageProofs?.length}
+          skeletonCount={PROOFS_PER_PAGE}
+          isLoading={isLoading}
         >
-          Epoch
-        </TableColumnTitleWithSort>
-      </TableHeader>
-      <TableBody
-        isEmpty={!pageProofs?.length}
-        skeletonCount={PROOFS_PER_PAGE}
-        isLoading={isLoading}
-      >
-        {pageProofs?.map((proof) => (
-          <ProofRow key={proof.transactionId} proof={proof} />
-        ))}
-      </TableBody>
+          {pageProofs?.map((proof) => (
+            <ProofRow key={proof.transactionId} proof={proof} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!proofs ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -111,7 +115,7 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({ filters }) => {
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </>
   )
 }

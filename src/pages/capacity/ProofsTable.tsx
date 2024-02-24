@@ -15,9 +15,11 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
@@ -81,25 +83,27 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
     <ProofsTableWrapper>
       <Text size={24}>History of epoches</Text>
       <Space height="30px" />
-      <TableHeader template={template} alignItems="flex-start">
-        <TableColumnTitle>Epoch</TableColumnTitle>
-        <TableColumnTitle wrap>Epoch period (blocks)</TableColumnTitle>
-        <TableColumnTitle wrap>Expected Number of CUs</TableColumnTitle>
-        <TableColumnTitle wrap>Successful CUs / Failed CU</TableColumnTitle>
-        <TableColumnTitle>Total proofs</TableColumnTitle>
-        <TableColumnTitle wrap>Average proofs per CU</TableColumnTitle>
-      </TableHeader>
-      <TableBody
-        isEmpty={!pageProofs?.length}
-        skeletonCount={PROOFS_PER_PAGE}
-        isLoading={isLoading}
-      >
-        {pageProofs?.map((proof) => (
-          <ProofRow key={JSON.stringify(proof)} proof={proof} />
-        ))}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template} alignItems="flex-start">
+          <TableColumnTitle>Epoch</TableColumnTitle>
+          <TableColumnTitle wrap>Epoch period (blocks)</TableColumnTitle>
+          <TableColumnTitle wrap>Expected Number of CUs</TableColumnTitle>
+          <TableColumnTitle wrap>Successful CUs / Failed CU</TableColumnTitle>
+          <TableColumnTitle>Total proofs</TableColumnTitle>
+          <TableColumnTitle wrap>Average proofs per CU</TableColumnTitle>
+        </TableHeader>
+        <TableBody
+          isEmpty={!pageProofs?.length}
+          skeletonCount={PROOFS_PER_PAGE}
+          isLoading={isLoading}
+        >
+          {pageProofs?.map((proof) => (
+            <ProofRow key={JSON.stringify(proof)} proof={proof} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!proofs ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -110,7 +114,7 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </ProofsTableWrapper>
   )
 }

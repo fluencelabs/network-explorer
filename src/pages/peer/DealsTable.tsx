@@ -9,9 +9,11 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 
@@ -29,46 +31,48 @@ export const DealsTable: React.FC<DealsTableProps> = () => {
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>#</TableColumnTitle>
-        <TableColumnTitle>Deal id</TableColumnTitle>
-        <TableColumnTitle>Compute unit</TableColumnTitle>
-        <TableColumnTitle>Worker id</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        <CapacityRow
-          computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <CapacityRow
-          computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <CapacityRow
-          computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <CapacityRow
-          computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <CapacityRow
-          computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <CapacityRow
-          computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Deal id</TableColumnTitle>
+          <TableColumnTitle>Compute unit</TableColumnTitle>
+          <TableColumnTitle>Worker id</TableColumnTitle>
+        </TableHeader>
+        <TableBody>
+          <CapacityRow
+            computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+            dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+          />
+          <CapacityRow
+            computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+            dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+          />
+          <CapacityRow
+            computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+            dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+          />
+          <CapacityRow
+            computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+            dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+          />
+          <CapacityRow
+            computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+            dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+          />
+          <CapacityRow
+            computeUnitId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+            dealId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
+          />
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <TablePagination>
         <Pagination
           pages={25}
           page={page}
           onSelect={(page) => setPage(() => page)}
         />
-      </div>
+      </TablePagination>
     </>
   )
 }

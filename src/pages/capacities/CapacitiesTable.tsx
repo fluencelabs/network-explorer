@@ -22,10 +22,12 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableColumnTitleWithSort,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
@@ -96,66 +98,68 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
 
   return (
     <>
-      <TableHeader template={template}>
-        <HeaderCellWithTooltip>
-          <TableColumnTitle>Commitment id</TableColumnTitle>
-          <Tooltip trigger={<InfoOutlineIcon />}>
-            <Text color="grey600" weight={600}>
-              Test
-            </Text>
-          </Tooltip>
-        </HeaderCellWithTooltip>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="createdAt"
-          isActive={orderBy === 'createdAt'}
-          onSort={handleSort}
-        >
-          Created at
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Duration</TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="expirationAt"
-          isActive={orderBy === 'expirationAt'}
-          onSort={handleSort}
-        >
-          Expiration
-        </TableColumnTitleWithSort>
-        <HeaderCellWithTooltip>
-          <TableColumnTitle>Provider id</TableColumnTitle>
-          <Tooltip trigger={<InfoOutlineIcon />}>
-            <Text color="grey600" weight={600}>
-              Test
-            </Text>
-          </Tooltip>
-        </HeaderCellWithTooltip>
-        <HeaderCellWithTooltip>
-          <TableColumnTitle>Peer id</TableColumnTitle>
-          <Tooltip trigger={<InfoOutlineIcon />}>
-            <Text color="grey600" weight={600}>
-              Test
-            </Text>
-          </Tooltip>
-        </HeaderCellWithTooltip>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="computeUnitsCount"
-          isActive={orderBy === 'computeUnitsCount'}
-          onSort={handleSort}
-        >
-          Compute units
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Delegation Rate</TableColumnTitle>
-        <TableColumnTitle>Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody skeletonCount={CAPACITIES_PER_PAGE} isLoading={isLoading}>
-        {pageCapacities?.map((capacity) => (
-          <CapacityRow key={capacity.id} capacity={capacity} />
-        ))}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Commitment id</TableColumnTitle>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600}>
+                Test
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="createdAt"
+            isActive={orderBy === 'createdAt'}
+            onSort={handleSort}
+          >
+            Created at
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Duration</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="expirationAt"
+            isActive={orderBy === 'expirationAt'}
+            onSort={handleSort}
+          >
+            Expiration
+          </TableColumnTitleWithSort>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Provider id</TableColumnTitle>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600}>
+                Test
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Peer id</TableColumnTitle>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600}>
+                Test
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="computeUnitsCount"
+            isActive={orderBy === 'computeUnitsCount'}
+            onSort={handleSort}
+          >
+            Compute units
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Delegation Rate</TableColumnTitle>
+          <TableColumnTitle>Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody skeletonCount={CAPACITIES_PER_PAGE} isLoading={isLoading}>
+          {pageCapacities?.map((capacity) => (
+            <CapacityRow key={capacity.id} capacity={capacity} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!capacities ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -166,7 +170,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </>
   )
 }

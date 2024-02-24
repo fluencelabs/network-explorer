@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
 
+import { media } from '../hooks/useMedia'
+
 import { ROUTES, Routes } from '../constants'
 
 import { ActiveLink } from './ActiveLink'
@@ -57,6 +59,14 @@ export const Menu: React.FC = () => {
 const MenuBlock = styled.div`
   display: flex;
   gap: 40px;
+
+  ${media.tablet} {
+    gap: 12px;
+  }
+
+  ${media.mobile} {
+    display: none;
+  }
 `
 
 const StyledActiveLink = styled(ActiveLink)`

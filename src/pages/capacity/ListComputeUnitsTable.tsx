@@ -17,9 +17,11 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
@@ -80,22 +82,24 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
       {/* <Space height="24px" />
       <ButtonGroup value={value} onSelect={setValue} items={items} /> */}
       <Space height="30px" />
-      <TableHeader template={template}>
-        <TableColumnTitle>#</TableColumnTitle>
-        <TableColumnTitle>Compute Unit Id</TableColumnTitle>
-        <TableColumnTitle>Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody skeletonCount={COMPUTE_UNITS_PER_PAGE} isLoading={isLoading}>
-        {pageComputeUnits?.map((computeUnit, index) => (
-          <ComputeUnitRow
-            key={computeUnit.id}
-            index={indexMultiplier + index}
-            computeUnit={computeUnit}
-          />
-        ))}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Compute Unit Id</TableColumnTitle>
+          <TableColumnTitle>Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody skeletonCount={COMPUTE_UNITS_PER_PAGE} isLoading={isLoading}>
+          {pageComputeUnits?.map((computeUnit, index) => (
+            <ComputeUnitRow
+              key={computeUnit.id}
+              index={indexMultiplier + index}
+              computeUnit={computeUnit}
+            />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!computeUnits ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -106,7 +110,7 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </ListComputeUnitsTableWrapper>
   )
 }

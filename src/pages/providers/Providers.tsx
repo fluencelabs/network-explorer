@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { ProvidersFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
+import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Switch } from '../../components/Switch'
@@ -15,7 +16,7 @@ export const Providers: React.FC = () => {
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <Text size={32}>Compute provider list</Text>
         <FiltersBlock>
           <Search
@@ -24,7 +25,7 @@ export const Providers: React.FC = () => {
             placeholder="Search by Address / Provider name"
           />
         </FiltersBlock>
-      </Header>
+      </PageHeader>
       <Space height="16px" />
       <Switch
         label="Approved providers"
@@ -38,13 +39,6 @@ export const Providers: React.FC = () => {
     </>
   )
 }
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
 
 const FiltersBlock = styled.div`
   display: flex;

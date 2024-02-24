@@ -22,10 +22,12 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableColumnTitleWithSort,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -122,38 +124,45 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
         items={items}
       />
       <Space height="32px" />
-      <TableHeader template={template}>
-        <TableColumnTitle>Offer Id</TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="createdAt"
-          isActive={orderBy === 'createdAt'}
-          onSort={handleSort}
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Offer Id</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="createdAt"
+            isActive={orderBy === 'createdAt'}
+            onSort={handleSort}
+          >
+            Created At
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Peers</TableColumnTitle>
+          <TableColumnTitle>
+            Compute Units{' '}
+            <Text size={10} weight={500} color="green" uppercase>
+              ( Available )
+            </Text>
+          </TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="pricePerWorkerEpoch"
+            isActive={orderBy === 'pricePerWorkerEpoch'}
+            onSort={handleSort}
+          >
+            Price Per Epoch
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Effectors List</TableColumnTitle>
+        </TableHeader>
+        <TableBody
+          skeletonCount={PROVIDER_OFFERS_PER_PAGE}
+          isLoading={isLoading}
         >
-          Created At
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Peers</TableColumnTitle>
-        <TableColumnTitle>
-          Compute Units{' '}
-          <Text size={10} weight={500} color="green" uppercase>
-            ( Available )
-          </Text>
-        </TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="pricePerWorkerEpoch"
-          isActive={orderBy === 'pricePerWorkerEpoch'}
-          onSort={handleSort}
-        >
-          Price Per Epoch
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Effectors List</TableColumnTitle>
-      </TableHeader>
-      <TableBody skeletonCount={PROVIDER_OFFERS_PER_PAGE} isLoading={isLoading}>
-        {pageOffers?.map((offer) => <OfferRow key={offer.id} offer={offer} />)}
-      </TableBody>
+          {pageOffers?.map((offer) => (
+            <OfferRow key={offer.id} offer={offer} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!offers ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -164,7 +173,7 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </>
   )
 }

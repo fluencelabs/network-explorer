@@ -12,9 +12,11 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { WorkerStatus } from '../../components/WorkerStatus'
@@ -76,28 +78,30 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>#</TableColumnTitle>
-        <TableColumnTitle>Provider Id</TableColumnTitle>
-        <TableColumnTitle>Compute Unit</TableColumnTitle>
-        <TableColumnTitle>Worker Id</TableColumnTitle>
-        <TableColumnTitle>Worker Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody
-        isEmpty={!pageCapacities?.length}
-        skeletonCount={CAPACITIES_PER_PAGE}
-        isLoading={isLoading}
-      >
-        {pageCapacities?.map((unit, index) => (
-          <ComputeUnitWorkerRow
-            key={unit.id}
-            index={indexMultiplier + index}
-            computeUnit={unit}
-          />
-        ))}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Provider Id</TableColumnTitle>
+          <TableColumnTitle>Compute Unit</TableColumnTitle>
+          <TableColumnTitle>Worker Id</TableColumnTitle>
+          <TableColumnTitle>Worker Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody
+          isEmpty={!pageCapacities?.length}
+          skeletonCount={CAPACITIES_PER_PAGE}
+          isLoading={isLoading}
+        >
+          {pageCapacities?.map((unit, index) => (
+            <ComputeUnitWorkerRow
+              key={unit.id}
+              index={indexMultiplier + index}
+              computeUnit={unit}
+            />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!computeUnits ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -108,7 +112,7 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </>
   )
 }
