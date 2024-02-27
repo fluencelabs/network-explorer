@@ -1,58 +1,35 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
+import { ProofsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
+import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
-import { Sort } from '../../components/Sort'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
+import { useFilters } from '../../hooks/useFilters'
 
 import { ProofsTable } from './ProofsTable'
 
 export const Proofs: React.FC = () => {
-  const [search, setSearch] = useState('')
+  const [filters, setFilter] = useFilters<ProofsFilters>()
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <Text size={32}>List of proofs</Text>
         <FiltersBlock>
           <Search
-            value={search}
-            onChange={setSearch}
+            value={filters.search ?? ''}
+            onChange={(search) => setFilter('search', search)}
             placeholder="Search by Tx / Provider ID / Peer ID"
           />
-          <Sort
-            items={[
-              {
-                label: 'Newest',
-                value: 'newest',
-              },
-              {
-                label: 'Oldest',
-                value: 'oldest',
-              },
-              {
-                label: 'Compute units',
-                value: 'units',
-              },
-            ]}
-            value="newest"
-            setValue={() => null}
-          />
         </FiltersBlock>
-      </Header>
+      </PageHeader>
       <Space height="64px" />
-      <ProofsTable />
+      <ProofsTable filters={filters} />
     </>
   )
 }
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
 
 const FiltersBlock = styled.div`
   display: flex;

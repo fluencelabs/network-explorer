@@ -35,7 +35,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
 }
 
 const Content = styled(RadixTooltip.Content)<{ fill: Colors }>`
-  padding: 4px 12px 5px 12px;
+  padding: 8px 16px;
   border-radius: 4px;
   background: ${({ fill }) => colors[fill]};
   box-shadow:

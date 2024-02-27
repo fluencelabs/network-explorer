@@ -5,6 +5,7 @@ import { DealStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/typ
 
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { Filters } from '../../components/Filters'
+import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
@@ -24,7 +25,7 @@ export const Deals: React.FC = () => {
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <Text size={32}>List of deals</Text>
         <FiltersBlock>
           <Filters selectedCount={Object.keys(filters).length}>
@@ -40,7 +41,7 @@ export const Deals: React.FC = () => {
             placeholder="Search by Deal / Client ID"
           />
         </FiltersBlock>
-      </Header>
+      </PageHeader>
       <Space height="28px" />
       <ButtonGroup
         value={filters.status ?? 'all'}
@@ -54,13 +55,6 @@ export const Deals: React.FC = () => {
     </>
   )
 }
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
 
 const FiltersBlock = styled.div`
   display: flex;

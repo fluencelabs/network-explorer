@@ -1,25 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
   CapacityCommitmentsOrderBy,
-  ChildEntitiesByProviderFilter,
-  OrderType,
+  ChildEntitiesByPeerFilter,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
-import { useLocation } from 'wouter'
 
-import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { CapacityStatus } from '../../components/CapacityStatus'
-import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
   Cell,
-  HeaderCellWithTooltip,
   Row,
   RowBlock,
   RowHeader,
@@ -31,34 +26,22 @@ import {
   TableHeader,
   TablePagination,
 } from '../../components/Table'
-import { ShrinkText, Text } from '../../components/Text'
-import { Tooltip } from '../../components/Tooltip'
-import { useApiQuery, usePagination } from '../../hooks'
+import { Text } from '../../components/Text'
+import { useApiQuery, useOrder, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 const template = [
+  '30px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(50px, 1fr)',
-  '70px',
+  '100px',
 ]
 
-interface ProviderCapacityTableProps {
-  providerId: string
-}
-
-const PROVIDER_CAPACITIES_PER_PAGE = 5
-
-type ProviderCapacitySort = `${CapacityCommitmentsOrderBy}:${OrderType}`
-
 const items: {
-  value: ProviderChildEntityStatusFilter | 'all'
+  value: ProviderChildEntityStatusFilter
   label: string
 }[] = [
   { value: 'all', label: 'All' },
@@ -66,26 +49,26 @@ const items: {
   { value: 'inactive', label: 'Inactive' },
 ]
 
-export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
-  providerId,
-}) => {
-  const [filters, setFilter] = useFilters<ChildEntitiesByProviderFilter>({
-    providerId,
+interface PeerCapacityCommitmentsTableProps {
+  peerId: string
+}
+
+export const PeerCapacityCommitmentsTable: React.FC<
+  PeerCapacityCommitmentsTableProps
+> = ({ peerId }) => {
+  const [filters, setFilter] = useFilters<ChildEntitiesByPeerFilter>({
+    peerId,
   })
 
-  const [order, setOrder] = useState<ProviderCapacitySort>('createdAt:desc')
-  const [orderBy, orderType] = order.split(':') as [
-    CapacityCommitmentsOrderBy,
-    OrderType,
-  ]
+  const { orderBy, orderType, handleSort } =
+    useOrder<CapacityCommitmentsOrderBy>('createdAt:desc')
 
-  const { page, selectPage, limit, offset, getTotalPages } = usePagination(
-    PROVIDER_CAPACITIES_PER_PAGE,
-  )
+  const { page, selectPage, limit, offset, getTotalPages, getPageItems } =
+    usePagination(5)
 
   const { data: capacities, isLoading } = useApiQuery(
     (client) =>
-      client.getCapacityCommitmentsByProvider(
+      client.getCapacityCommitmentsByPeer(
         filters,
         offset,
         limit + 1,
@@ -94,27 +77,18 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
       ),
     [page, orderBy, orderType, filters],
     {
-      key: `provider-capacities:${JSON.stringify({
+      key: `peer-capacities:${JSON.stringify({
         filters,
         offset,
         limit,
-        order,
         orderBy,
+        orderType,
       })}`,
       ttl: 1_000 * 60, // 1 minute
     },
   )
 
-  const hasNextPage = capacities && capacities.data.length > limit
-  const pageCapacities = capacities && capacities.data.slice(0, limit)
-
-  const handleSort = (key: CapacityCommitmentsOrderBy, order: OrderType) => {
-    setOrder(`${key}:${order}`)
-  }
-
-  const handleSetStatus = (value: ProviderChildEntityStatusFilter) => {
-    setFilter('status', value)
-  }
+  const { hasNextPage, pageItems } = getPageItems(capacities?.data ?? [])
 
   return (
     <>
@@ -122,20 +96,14 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
       <Space height="24px" />
       <ButtonGroup
         value={filters.status ?? 'all'}
-        onSelect={handleSetStatus}
+        onSelect={(value) => setFilter('status', value)}
         items={items}
       />
       <Space height="32px" />
       <ScrollableTable>
         <TableHeader template={template}>
-          <HeaderCellWithTooltip>
-            <TableColumnTitle>Commitment Id</TableColumnTitle>
-            <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
-              </Text>
-            </Tooltip>
-          </HeaderCellWithTooltip>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Capacity commitment</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="createdAt"
@@ -144,7 +112,6 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
           >
             Created At
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Duration</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="expirationAt"
@@ -153,31 +120,20 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
           >
             Expiration
           </TableColumnTitleWithSort>
-          <HeaderCellWithTooltip>
-            <TableColumnTitle>Peer Id</TableColumnTitle>
-            <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
-              </Text>
-            </Tooltip>
-          </HeaderCellWithTooltip>
-          <TableColumnTitleWithSort
-            order={orderType}
-            field="computeUnitsCount"
-            isActive={orderBy === 'computeUnitsCount'}
-            onSort={handleSort}
-          >
-            Compute units
-          </TableColumnTitleWithSort>
-          <TableColumnTitle>Delegate Rate</TableColumnTitle>
-          <TableColumnTitle>Status</TableColumnTitle>
+          <TableColumnTitle>Compute units</TableColumnTitle>
+          <TableColumnTitle align="center">Status</TableColumnTitle>
         </TableHeader>
         <TableBody
-          skeletonCount={PROVIDER_CAPACITIES_PER_PAGE}
+          skeletonCount={limit}
           isLoading={isLoading}
+          isEmpty={!pageItems.length}
         >
-          {pageCapacities?.map((capacity) => (
-            <CapacityRow key={capacity.id} capacity={capacity} />
+          {pageItems.map((capacity, index) => (
+            <CapacityRow
+              key={capacity.id}
+              index={offset + index + 1}
+              capacity={capacity}
+            />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -199,12 +155,11 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
 }
 
 interface CapacityRowProps {
+  index: number
   capacity: CapacityCommitmentShort
 }
 
-const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
-  const [, navigate] = useLocation()
-
+const CapacityRow: React.FC<CapacityRowProps> = ({ capacity, index }) => {
   const createdAt = formatUnixTimestamp(capacity.createdAt)
   const expiredAt = capacity.expiredAt
     ? formatUnixTimestamp(capacity.expiredAt)
@@ -215,21 +170,19 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
       <RowHeader>
         <RowTrigger>
           <Row template={template}>
-            {/* Commitment Id */}
+            {/* # */}
+            <Cell>
+              <Text size={12}>{index}</Text>
+            </Cell>
+            {/* Capacity commitment */}
             <Cell>
               <A href={`/capacity/${capacity.id}`}>{capacity.id}</A>
             </Cell>
-            {/* # Created At */}
+            {/* Created at */}
             <Cell>
               <Column>
                 <Text size={12}>{createdAt.date}</Text>
                 <Text size={12}>{createdAt.time}</Text>
-              </Column>
-            </Cell>
-            {/* Duration */}
-            <Cell>
-              <Column>
-                <Text size={12}>{capacity.duration}</Text>
               </Column>
             </Cell>
             {/* Expiration */}
@@ -239,30 +192,13 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
                 <Text size={12}>{expiredAt.time}</Text>
               </Column>
             </Cell>
-            {/* Peer Id */}
-            <Cell>
-              <ShrinkText size={12}>{capacity.peerId}</ShrinkText>
-            </Cell>
-            {/* Compute Units */}
+            {/* Compute units */}
             <Cell>
               <Text size={12}>{capacity.computeUnitsCount}</Text>
-            </Cell>
-            {/* Delegate Rate */}
-            <Cell>
-              <Text size={12}>{capacity.rewardDelegatorRate}</Text>
             </Cell>
             {/* Status */}
             <Cell>
               <CapacityStatus status={capacity.status} />
-            </Cell>
-            <Cell>
-              <DetailsButton
-                onClick={() => navigate(`/capacity/${capacity.id}`)}
-              >
-                <Text size={10} weight={800} uppercase>
-                  Details
-                </Text>
-              </DetailsButton>
             </Cell>
           </Row>
         </RowTrigger>

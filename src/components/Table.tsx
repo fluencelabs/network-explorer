@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { SortIcon } from '../assets/icons'
+import { media } from '../hooks/useMedia'
 import { setProp } from '../utils/setProp'
 
 import { colors } from '../constants/colors'
@@ -12,6 +13,7 @@ import { Text } from './Text'
 
 interface TableBodyProps {
   isLoading?: boolean
+  isEmpty?: boolean
   skeletonCount?: number
   skeletonHeight?: number
   children: React.ReactNode | React.ReactNode[]
@@ -19,6 +21,7 @@ interface TableBodyProps {
 
 export const TableBody: React.FC<TableBodyProps> = ({
   isLoading,
+  isEmpty,
   skeletonCount = 5,
   skeletonHeight = 48,
   children,
@@ -30,6 +33,18 @@ export const TableBody: React.FC<TableBodyProps> = ({
           <Skeleton key={i} height={skeletonHeight} />
         ))}
       </TableBodySkeleton>
+    )
+  }
+
+  if (isEmpty) {
+    return (
+      <TableBodyStyled>
+        <EmptyTable>
+          <Text size={12} color="grey500" weight={600} uppercase>
+            No data
+          </Text>
+        </EmptyTable>
+      </TableBodyStyled>
     )
   }
 
@@ -66,6 +81,18 @@ export const TableColumnTitleWithSort = <Field extends string>({
   )
 }
 
+interface ScrollableTable {
+  children: React.ReactNode | React.ReactNode[]
+}
+
+export const ScrollableTable: React.FC<ScrollableTable> = ({ children }) => {
+  return (
+    <ScrollableTableWrapper>
+      <ScrollableTableContent>{children}</ScrollableTableContent>
+    </ScrollableTableWrapper>
+  )
+}
+
 const TableBodySkeleton = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,12 +106,24 @@ const TableBodyStyled = styled.div`
   gap: 6px;
 `
 
-export const TableHeader = styled.div<{ template: string[] }>`
+const EmptyTable = styled.div`
+  background-color: ${colors.grey100};
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+`
+
+export const TableHeader = styled.div<{
+  template: string[]
+  alignItems?: CSSProperties['alignItems']
+}>`
   padding: 12px;
   display: grid;
   grid-template-columns: ${({ template }) => template.join(' ')};
   gap: 24px;
-  align-items: center;
+  align-items: ${({ alignItems }) => alignItems ?? 'center'};
 `
 
 export const HeaderCellWithTooltip = styled.div`
@@ -99,14 +138,14 @@ const HeaderCellWithSort = styled.div`
   align-items: flex-start;
 `
 
-export const TableColumnTitle = styled(Text)`
+export const TableColumnTitle = styled(Text)<{ wrap?: boolean }>`
   color: ${colors.grey400};
   font-size: 10px;
   font-weight: 700;
   line-height: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  text-wrap: nowrap;
+  text-wrap: ${({ wrap }) => (wrap ? 'wrap' : 'nowrap')};
 `
 
 export const RowBlock = styled.div`
@@ -152,4 +191,35 @@ export const SortIconStyled = styled(SortIcon)<{ type: OrderType }>`
   transform: ${({ type }) =>
     type === 'asc' ? 'rotate(-180deg)' : 'rotate(0deg)'};
   transition: transform 250ms ease-in-out;
+`
+
+export const ScrollableTableWrapper = styled.div`
+  ${media.tablet} {
+    width: 100%;
+    overflow-x: scroll;
+  }
+
+  ${media.mobile} {
+    width: 100%;
+    overflow-x: scroll;
+  }
+`
+
+export const ScrollableTableContent = styled.div`
+  ${media.tablet} {
+    width: 1200px;
+  }
+
+  ${media.mobile} {
+    width: 1200px;
+  }
+`
+
+export const TablePagination = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  ${media.mobile} {
+    justify-content: flex-start;
+  }
 `

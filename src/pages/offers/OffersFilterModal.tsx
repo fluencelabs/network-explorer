@@ -44,11 +44,10 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
   const {
     createdAtFrom,
     createdAtTo,
-    minPricePerWorkerEpoch,
-    maxPricePerWorkerEpoch,
+    minPricePerWorkerEpoch = '',
+    maxPricePerWorkerEpoch = '',
+    onlyActive = false,
   } = filters
-
-  const [onlyActive, setOnlyActive] = useState(false)
 
   const [effectors] = useState<Effector[]>([
     {
@@ -88,7 +87,7 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
               </>
             }
             checked={onlyActive}
-            onToggle={setOnlyActive}
+            onToggle={(value) => setFilter('onlyActive', value)}
           />
         </CheckboxContainer>
         <FromToContainer>
@@ -171,7 +170,7 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
         </EffectorsContainer>
         <EffectorsList>
           {effectors.map(({ cid, description }, index) => (
-            <EffectorRow key={cid}>
+            <EffectorRow key={`${cid}-${description}`}>
               <Text size={12} color="black900">
                 {index + 1}
               </Text>

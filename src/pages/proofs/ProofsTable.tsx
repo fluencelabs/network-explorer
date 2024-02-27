@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
-import { useLocation } from 'wouter'
+import Skeleton from 'react-loading-skeleton'
+import {
+  OrderType,
+  ProofsFilters,
+  ProofsOrderBy,
+} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+import { ProofBasic } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
-import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
@@ -11,11 +16,16 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
+  TableColumnTitleWithSort,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+import { useApiQuery, usePagination } from '../../hooks'
+import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -25,146 +35,137 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  '70px',
 ]
 
-export const ProofsTable: React.FC = () => {
-  const [page, setPage] = useState(1)
+type ProofsSort = `${ProofsOrderBy}:${OrderType}`
+
+interface ProofsTableProps {
+  filters: ProofsFilters
+}
+
+const PROOFS_PER_PAGE = 10
+
+export const ProofsTable: React.FC<ProofsTableProps> = ({ filters }) => {
+  const [order, setOrder] = useState<ProofsSort>('createdAt:desc')
+  const [orderBy, orderType] = order.split(':') as [ProofsOrderBy, OrderType]
+
+  const { page, selectPage, limit, offset, getTotalPages } =
+    usePagination(PROOFS_PER_PAGE)
+
+  const { data: proofs, isLoading } = useApiQuery(
+    (client) => client.getProofs(filters, offset, limit, orderBy, orderType),
+    [page, orderBy, orderType, filters],
+    {
+      key: `proofs:${JSON.stringify({
+        filters,
+        offset,
+        limit,
+        order,
+        orderBy,
+      })}`,
+      ttl: 1_000 * 60, // 1 minute
+    },
+  )
+
+  const hasNextPage = proofs && proofs.data.length > limit
+  const pageProofs = proofs && proofs.data.slice(0, limit)
+
+  const handleSort = (key: ProofsOrderBy, order: OrderType) => {
+    setOrder(`${key}:${order}`)
+  }
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>Proof tx</TableColumnTitle>
-        <TableColumnTitle>Timestamp</TableColumnTitle>
-        <TableColumnTitle>Provider</TableColumnTitle>
-        <TableColumnTitle>Capacity commitment</TableColumnTitle>
-        <TableColumnTitle>Peer id</TableColumnTitle>
-        <TableColumnTitle>Compute units</TableColumnTitle>
-        <TableColumnTitle>Epoch</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        <ProofRow
-          proofTx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          commitmentId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          peerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <ProofRow
-          proofTx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          commitmentId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          peerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <ProofRow
-          proofTx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          commitmentId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          peerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <ProofRow
-          proofTx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          commitmentId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          peerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <ProofRow
-          proofTx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          commitmentId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          peerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <ProofRow
-          proofTx="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          commitmentId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          peerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Proof tx</TableColumnTitle>
+          <TableColumnTitle>Timestamp</TableColumnTitle>
+          <TableColumnTitle>Provider</TableColumnTitle>
+          <TableColumnTitle>Capacity commitment</TableColumnTitle>
+          <TableColumnTitle>Peer id</TableColumnTitle>
+          <TableColumnTitle>Compute units</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="epoch"
+            isActive={orderBy === 'epoch'}
+            onSort={handleSort}
+          >
+            Epoch
+          </TableColumnTitleWithSort>
+        </TableHeader>
+        <TableBody
+          isEmpty={!pageProofs?.length}
+          skeletonCount={PROOFS_PER_PAGE}
+          isLoading={isLoading}
+        >
+          {pageProofs?.map((proof) => (
+            <ProofRow key={proof.transactionId} proof={proof} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
-        <Pagination
-          pages={25}
-          page={page}
-          onSelect={(page) => setPage(() => page)}
-        />
-      </div>
+      <TablePagination>
+        {!proofs ? (
+          <Skeleton width={200} height={34} count={1} />
+        ) : (
+          <Pagination
+            pages={getTotalPages(proofs.total)}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
+        )}
+      </TablePagination>
     </>
   )
 }
 
 interface ProofRowProps {
-  proofTx: string
-  providerId: string
-  commitmentId: string
-  peerId: string
-  computeUnit: string
+  proof: ProofBasic
 }
 
-const ProofRow: React.FC<ProofRowProps> = ({
-  proofTx,
-  providerId,
-  commitmentId,
-  peerId,
-  computeUnit,
-}) => {
-  const [, navigate] = useLocation()
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    e.preventDefault()
-    navigate(`/deal/${peerId}`)
-  }
+const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
+  const createdAt = formatUnixTimestamp(proof.createdAt)
 
   return (
     <RowBlock>
-      <RowHeader onClick={handleClick}>
+      <RowHeader>
         <RowTrigger>
           <Row template={template}>
             {/* Proof tx */}
             <Cell>
-              <A href={`/offer/${proofTx}`}>{proofTx}</A>
+              <A href={`/offer/${proof.transactionId}`}>
+                {proof.transactionId}
+              </A>
             </Cell>
             {/* Timestamp */}
-            <Cell>
-              <Text size={12}>1 Sep 2023 - 01:22:31 AM +UTC</Text>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{createdAt.date}</Text>
+              <Text size={12}>{createdAt.time}</Text>
             </Cell>
             {/* Provider id */}
             <Cell>
-              <A href={`/provider/${providerId}`}>{providerId}</A>
+              <A href={`/provider/${proof.peerId}`}>NOT EXIST</A>
             </Cell>
             {/* Capacity commitment */}
             <Cell>
-              <A href={`/capacity/${commitmentId}`}>{commitmentId}</A>
+              <A href={`/capacity/${proof.capacityCommitmentId}`}>
+                {proof.capacityCommitmentId}
+              </A>
             </Cell>
             {/* Peer id */}
             <Cell>
-              <A href={`/peer/${peerId}`}>{peerId}</A>
+              <A href={`/peer/${proof.peerId}`}>{proof.peerId}</A>
             </Cell>
             {/* Compute unit */}
             <Cell>
-              <A href={`/compute-unit/${computeUnit}`}>{computeUnit}</A>
+              <A href={`/compute-unit/${proof.computeUnitId}`}>
+                {proof.computeUnitId}
+              </A>
             </Cell>
             {/* Epoch */}
             <Cell>
-              <Text size={12}>500</Text>
-            </Cell>
-            {/* Details */}
-            <Cell>
-              <DetailsButton
-                onClick={() =>
-                  navigate(`/capacity/5e9d7ffe-5b01-43a0-9243-782e4572f1d6`)
-                }
-              >
-                <Text size={10} weight={800} uppercase>
-                  Details
-                </Text>
-              </DetailsButton>
+              <Text size={12}>NOT EXIST</Text>
             </Cell>
           </Row>
         </RowTrigger>

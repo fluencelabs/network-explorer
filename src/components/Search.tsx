@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { SearchIcon } from '../assets/icons'
+import { media } from '../hooks/useMedia'
 
 import { colors } from '../constants/colors'
 
@@ -38,6 +39,10 @@ const SearchInput = styled.div`
   width: 400px;
   height: 32px;
   padding-right: 12px;
+
+  ${media.mobile} {
+    width: 100%;
+  }
 `
 
 const Input = styled.input`

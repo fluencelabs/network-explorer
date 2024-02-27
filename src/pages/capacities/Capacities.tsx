@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { CapacityCommitmentsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { Filters } from '../../components/Filters'
+import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
@@ -17,7 +18,7 @@ export const Capacities: React.FC = () => {
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <Text size={32}>List of capacity</Text>
         <FiltersBlock>
           <Filters>
@@ -30,22 +31,15 @@ export const Capacities: React.FC = () => {
           <Search
             value={filters.search ?? ''}
             onChange={(search) => setFilter('search', search)}
-            placeholder="Search by Provider ID / Commitment ID / Peer ID"
+            placeholder="Search by Provider ID / Commitment ID / Peer ID / Delegator"
           />
         </FiltersBlock>
-      </Header>
+      </PageHeader>
       <Space height="68px" />
       <CapacitiesTable filters={filters} />
     </>
   )
 }
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
 
 const FiltersBlock = styled.div`
   display: flex;

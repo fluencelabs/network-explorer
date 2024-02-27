@@ -14,6 +14,7 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
@@ -49,32 +50,34 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
 
   return (
     <>
-      <TableHeader template={template}>
-        <HeaderCellWithTooltip>
-          <TableColumnTitle>Deal Id</TableColumnTitle>
-          <Tooltip trigger={<InfoOutlineIcon />}>
-            <Text color="grey600" weight={600}>
-              Test
-            </Text>
-          </Tooltip>
-        </HeaderCellWithTooltip>
-        <TableColumnTitle>Matched at</TableColumnTitle>
-        <HeaderCellWithTooltip>
-          <TableColumnTitle>Offer Id</TableColumnTitle>
-          <Tooltip trigger={<InfoOutlineIcon />}>
-            <Text color="grey600" weight={600}>
-              Test
-            </Text>
-          </Tooltip>
-        </HeaderCellWithTooltip>
-        <TableColumnTitle>Payment Token</TableColumnTitle>
-        <TableColumnTitle>Matched Compute Units</TableColumnTitle>
-        <TableColumnTitle>Active Workers</TableColumnTitle>
-        <TableColumnTitle>Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody isLoading={isLoading}>
-        {deals?.data.map((deal) => <DealRow key={deal.id} deal={deal} />)}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Deal Id</TableColumnTitle>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600}>
+                Test
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
+          <TableColumnTitle>Matched at</TableColumnTitle>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Offer Id</TableColumnTitle>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600}>
+                Test
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
+          <TableColumnTitle>Payment Token</TableColumnTitle>
+          <TableColumnTitle>Matched Compute Units</TableColumnTitle>
+          <TableColumnTitle>Active Workers</TableColumnTitle>
+          <TableColumnTitle>Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody isLoading={isLoading}>
+          {deals?.data.map((deal) => <DealRow key={deal.id} deal={deal} />)}
+        </TableBody>
+      </ScrollableTable>
     </>
   )
 }

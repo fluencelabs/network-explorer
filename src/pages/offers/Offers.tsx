@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { OffersFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { Filters } from '../../components/Filters'
+import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Switch } from '../../components/Switch'
@@ -17,7 +18,7 @@ export const Offers: React.FC = () => {
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <Text size={32}>List of offers</Text>
         <FiltersBlock>
           <Filters>
@@ -33,7 +34,7 @@ export const Offers: React.FC = () => {
             placeholder="Search by Offer ID / Provider ID"
           />
         </FiltersBlock>
-      </Header>
+      </PageHeader>
       <Space height="16px" />
       <Switch
         label="Offers from approved providers"
@@ -47,13 +48,6 @@ export const Offers: React.FC = () => {
     </>
   )
 }
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`
 
 const FiltersBlock = styled.div`
   display: flex;

@@ -11,6 +11,7 @@ import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
 import { DetailsButton } from '../../components/DetailsButton'
+import { EffectorsTooltip } from '../../components/EffectorsTooltip'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
@@ -19,10 +20,12 @@ import {
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableColumnTitleWithSort,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -35,7 +38,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
+  '50px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -85,44 +88,48 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
 
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>Offer Id</TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="createdAt"
-          isActive={orderBy === 'createdAt'}
-          onSort={handleSort}
-        >
-          Created At
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Provider</TableColumnTitle>
-        <TableColumnTitle>Peers</TableColumnTitle>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="updatedAt" // TODO
-          isActive={orderBy === 'updatedAt'}
-          onSort={handleSort}
-        >
-          Compute units{' '}
-          <Text size={10} weight={500} color="green" uppercase>
-            ( Available )
-          </Text>
-        </TableColumnTitleWithSort>
-        <TableColumnTitleWithSort
-          order={orderType}
-          field="pricePerWorkerEpoch"
-          isActive={orderBy === 'pricePerWorkerEpoch'}
-          onSort={handleSort}
-        >
-          Price per epoch
-        </TableColumnTitleWithSort>
-        <TableColumnTitle>Effectors list</TableColumnTitle>
-      </TableHeader>
-      <TableBody skeletonCount={OFFERS_PER_PAGE} isLoading={isLoading}>
-        {pageOffers?.map((offer) => <OfferRow key={offer.id} offer={offer} />)}
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Offer Id</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="createdAt"
+            isActive={orderBy === 'createdAt'}
+            onSort={handleSort}
+          >
+            Created At
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Provider</TableColumnTitle>
+          <TableColumnTitle>Peers</TableColumnTitle>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="updatedAt" // TODO
+            isActive={orderBy === 'updatedAt'}
+            onSort={handleSort}
+          >
+            Compute units{' '}
+            <Text size={10} weight={500} color="green" uppercase>
+              ( Available )
+            </Text>
+          </TableColumnTitleWithSort>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="pricePerWorkerEpoch"
+            isActive={orderBy === 'pricePerWorkerEpoch'}
+            onSort={handleSort}
+          >
+            Price per epoch
+          </TableColumnTitleWithSort>
+          <TableColumnTitle>Effectors list</TableColumnTitle>
+        </TableHeader>
+        <TableBody skeletonCount={OFFERS_PER_PAGE} isLoading={isLoading}>
+          {pageOffers?.map((offer) => (
+            <OfferRow key={offer.id} offer={offer} />
+          ))}
+        </TableBody>
+      </ScrollableTable>
       <Space height="32px" />
-      <div style={{ alignSelf: 'flex-end' }}>
+      <TablePagination>
         {!offers ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
@@ -133,7 +140,7 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
             onSelect={selectPage}
           />
         )}
-      </div>
+      </TablePagination>
     </>
   )
 }
@@ -197,6 +204,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
               <ShrinkText size={12}>
                 {offer.effectors.map((e) => e.description).join(', ')}
               </ShrinkText>
+              <EffectorsTooltip effectors={offer.effectors} />
             </Cell>
             <Cell>
               <DetailsButton>

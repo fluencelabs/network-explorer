@@ -1,18 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
-import { Status } from '../../components/Status'
+import { Pagination } from '../../components/Pagination'
+import { Space } from '../../components/Space'
 import {
   Cell,
   Row,
   RowBlock,
   RowHeader,
   RowTrigger,
+  ScrollableTable,
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
+import { WorkerStatus } from '../../components/WorkerStatus'
+import { useApiQuery, usePagination } from '../../hooks'
 
 const template = [
   '20px',
@@ -22,62 +30,101 @@ const template = [
   'minmax(10px, 1fr)',
 ]
 
-export const MatchingTable: React.FC = () => {
+const CAPACITIES_PER_PAGE = 20
+
+type MatchingOrderBy = 'createdAt'
+type MatchingSort = `${MatchingOrderBy}:${OrderType}`
+
+interface MatchingTableProps {
+  dealId: string
+}
+
+export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
+  const [order] = useState<MatchingSort>('createdAt:desc')
+  const [orderBy, orderType] = order.split(':') as [MatchingOrderBy, OrderType]
+
+  const { page, selectPage, limit, offset, getTotalPages } =
+    usePagination(CAPACITIES_PER_PAGE)
+
+  const { data: computeUnits, isLoading } = useApiQuery(
+    (client) =>
+      client.getComputeUnitsByDeal(
+        dealId,
+        offset,
+        limit + 1,
+        orderBy,
+        orderType,
+      ),
+    [page, orderBy, orderType, dealId],
+    {
+      key: `matchingTable:${JSON.stringify({
+        dealId,
+        offset,
+        limit,
+        order,
+        orderBy,
+      })}`,
+      ttl: 1_000 * 60, // 1 minute
+    },
+  )
+
+  const hasNextPage = computeUnits && computeUnits.data.length > limit
+  const pageCapacities = computeUnits && computeUnits.data.slice(0, limit)
+  const indexMultiplier = offset + 1
+
+  // const handleSort = (key: MatchingOrderBy, order: OrderType) => {
+  //   setOrder(`${key}:${order}`)
+  // }
+
   return (
     <>
-      <TableHeader template={template}>
-        <TableColumnTitle>#</TableColumnTitle>
-        <TableColumnTitle>Provider Id</TableColumnTitle>
-        <TableColumnTitle>Compute Unit</TableColumnTitle>
-        <TableColumnTitle>Worker Id</TableColumnTitle>
-        <TableColumnTitle>Worker Status</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        <PeerRow
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-          workerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d1"
-        />
-        <PeerRow
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d2"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d2"
-          workerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d2"
-        />
-        <PeerRow
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d3"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d3"
-          workerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d3"
-        />
-        <PeerRow
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d4"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d4"
-          workerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d4"
-        />
-        <PeerRow
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d5"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d5"
-          workerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d5"
-        />
-        <PeerRow
-          providerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d6"
-          computeUnit="5e9d7ffe-5b01-43a0-9243-782e4572f1d6"
-          workerId="5e9d7ffe-5b01-43a0-9243-782e4572f1d6"
-        />
-      </TableBody>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Provider Id</TableColumnTitle>
+          <TableColumnTitle>Compute Unit</TableColumnTitle>
+          <TableColumnTitle>Worker Id</TableColumnTitle>
+          <TableColumnTitle>Worker Status</TableColumnTitle>
+        </TableHeader>
+        <TableBody
+          isEmpty={!pageCapacities?.length}
+          skeletonCount={CAPACITIES_PER_PAGE}
+          isLoading={isLoading}
+        >
+          {pageCapacities?.map((unit, index) => (
+            <ComputeUnitWorkerRow
+              key={unit.id}
+              index={indexMultiplier + index}
+              computeUnit={unit}
+            />
+          ))}
+        </TableBody>
+      </ScrollableTable>
+      <Space height="32px" />
+      <TablePagination>
+        {!computeUnits ? (
+          <Skeleton width={200} height={34} count={1} />
+        ) : (
+          <Pagination
+            pages={getTotalPages(computeUnits.total)}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
+        )}
+      </TablePagination>
     </>
   )
 }
 
-interface PeerRowProps {
-  providerId: string
-  computeUnit: string
-  workerId: string
+interface ComputeUnitWorkerRowProps {
+  index: number
+  computeUnit: ComputeUnitWorkerDetail
 }
 
-const PeerRow: React.FC<PeerRowProps> = ({
-  providerId,
+const ComputeUnitWorkerRow: React.FC<ComputeUnitWorkerRowProps> = ({
+  index,
   computeUnit,
-  workerId,
 }) => {
   return (
     <RowBlock>
@@ -86,27 +133,25 @@ const PeerRow: React.FC<PeerRowProps> = ({
           <Row template={template}>
             {/* # */}
             <Cell>
-              <Text size={12}>1</Text>
+              <Text size={12}>{index}</Text>
             </Cell>
             {/* Provider ID */}
             <Cell>
-              <A href={`/provider/${providerId}`}>{providerId}</A>
+              <A href={`/provider/${computeUnit.providerId}`}>
+                {computeUnit.providerId}
+              </A>
             </Cell>
             {/* Compute Unit */}
             <Cell>
-              <ShrinkText size={12}>{computeUnit}</ShrinkText>
+              <ShrinkText size={12}>NOT EXIST</ShrinkText>
             </Cell>
             {/* Worker Id  */}
             <Cell>
-              <ShrinkText size={12}>{workerId}</ShrinkText>
+              <ShrinkText size={12}>{computeUnit.workerId}</ShrinkText>
             </Cell>
             {/* Status */}
             <Cell>
-              <Status type="label" color="blue">
-                <Text uppercase size={10} weight={800} color="white">
-                  Registered
-                </Text>
-              </Status>
+              <WorkerStatus status={computeUnit.workerStatus} />
             </Cell>
           </Row>
         </RowTrigger>

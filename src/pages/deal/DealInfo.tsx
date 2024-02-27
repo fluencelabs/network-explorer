@@ -141,7 +141,10 @@ export const DealInfo: React.FC = () => {
                   Min Workers
                 </Text>
                 <Tooltip>
-                  <Text>Example</Text>
+                  <Text color="grey600" weight={600} size={12}>
+                    The minimum number of workers required for a Deal to be
+                    active and serviced by the subnet.
+                  </Text>
                 </Tooltip>
               </Row>
               <ParameterValue>
@@ -154,7 +157,10 @@ export const DealInfo: React.FC = () => {
                   Target Workers
                 </Text>
                 <Tooltip>
-                  <Text>Example</Text>
+                  <Text color="grey600" weight={600} size={12}>
+                    The maximum number of workers that can be involved in
+                    servicing the Deal.
+                  </Text>
                 </Tooltip>
               </Row>
               <ParameterValue>
@@ -167,7 +173,10 @@ export const DealInfo: React.FC = () => {
                   Max Workers Per Provider
                 </Text>
                 <Tooltip>
-                  <Text>Example</Text>
+                  <Text color="grey600" weight={600} size={12}>
+                    The maximum number of workers from the same provider that
+                    can participate in a Deal.
+                  </Text>
                 </Tooltip>
               </Row>
               <ParameterValue>
@@ -203,7 +212,7 @@ export const DealInfo: React.FC = () => {
           <ParametersRowSingle>
             <ParameterSmall>
               <Text size={10} weight={700} uppercase color="grey400">
-                Providers Whitelist Bloom
+                Providers Whitelist
               </Text>
               {renderProviderList(deal.whitelist)}
             </ParameterSmall>
@@ -212,7 +221,7 @@ export const DealInfo: React.FC = () => {
           <ParametersRowSingle>
             <ParameterSmall>
               <Text size={10} weight={700} uppercase color="grey400">
-                Providers Blacklist Bloom
+                Providers Blacklist
               </Text>
               {renderProviderList(deal.blacklist)}
             </ParameterSmall>
@@ -233,7 +242,10 @@ export const DealInfo: React.FC = () => {
                   Min, Matched / Target
                 </Text>
                 <Tooltip>
-                  <Text>Example</Text>
+                  <Text color="grey600" weight={600} size={12}>
+                    Minimum Participants Required for the Deal, Current Matched
+                    Participants / Maximum Potential Participants.
+                  </Text>
                 </Tooltip>
               </Row>
               <ParameterValue>
@@ -248,7 +260,9 @@ export const DealInfo: React.FC = () => {
                   Registered / Matched
                 </Text>
                 <Tooltip>
-                  <Text>Example</Text>
+                  <Text color="grey600" weight={600} size={12}>
+                    The number of workers registered in the deal after matching.
+                  </Text>
                 </Tooltip>
               </Row>
               <ParameterValue>
@@ -259,7 +273,7 @@ export const DealInfo: React.FC = () => {
             </Parameter>
           </ParametersRow>
           <Space height="40px" />
-          <MatchingTable />
+          <MatchingTable dealId={id} />
         </Right>
       </Content>
     </>
