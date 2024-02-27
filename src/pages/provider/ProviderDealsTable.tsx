@@ -52,25 +52,18 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
     <>
       <ScrollableTable>
         <TableHeader template={template}>
-          <HeaderCellWithTooltip>
-            <TableColumnTitle>Deal Id</TableColumnTitle>
-            <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
-              </Text>
-            </Tooltip>
-          </HeaderCellWithTooltip>
+          <TableColumnTitle>Deal Id</TableColumnTitle>
           <TableColumnTitle>Matched at</TableColumnTitle>
           <HeaderCellWithTooltip>
             <TableColumnTitle>Offer Id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600}>
-                Test
+                The deal was matched from the capacity declared in this offer
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
           <TableColumnTitle>Payment Token</TableColumnTitle>
-          <TableColumnTitle>Matched Compute Units</TableColumnTitle>
+          <TableColumnTitle>Matched CU</TableColumnTitle>
           <TableColumnTitle>Active Workers</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>

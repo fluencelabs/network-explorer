@@ -36,3 +36,5 @@ export const WAGMI_CONFIG = createConfig({
   publicClient,
   webSocketPublicClient,
 })
+
+export const CONTRACTS_PRECISION = 10_000_000

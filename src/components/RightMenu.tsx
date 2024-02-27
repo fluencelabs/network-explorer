@@ -25,11 +25,11 @@ const items: SelectItem<ContractsENV>[] = [
     value: 'dar',
     icon: <TestnetIcon />,
   },
-  {
-    label: 'Kras',
-    value: 'kras',
-    icon: <MainnetIcon />,
-  },
+  // {
+  //   label: 'Kras',
+  //   value: 'kras',
+  //   icon: <MainnetIcon />,
+  // },
 ]
 
 export const RightMenu: React.FC = () => {
@@ -39,7 +39,7 @@ export const RightMenu: React.FC = () => {
   return (
     <RightMenuBlock>
       <LinksBlock>
-        <StyledA href="#">
+        <StyledA href="https://fluence.dev/docs/learn/overview" target="_blank">
           <DocsIcon />
           <Text size={14}>Docs</Text>
         </StyledA>

@@ -124,7 +124,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
             <TableColumnTitle>Approved</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600}>
-                Test
+                DAO Approved Providers
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
@@ -189,7 +189,7 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ toggle, provider }) => {
                 {provider.freeComputeUnits}
               </ProviderComputeUnitsAvailable>
             </Cell>
-            <Cell>{provider.isApproved && <ApprovedIcon />}</Cell>
+            <Cell>{provider.isApproved ? <ApprovedIcon /> : <>-</>}</Cell>
             <Cell onClick={handleOpen}>
               {/* <ProviderTrigger> */}
               <Text size={10} weight={800} uppercase>
