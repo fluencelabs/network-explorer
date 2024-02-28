@@ -192,7 +192,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             </Cell>
             {/* Price per epoch */}
             <Cell gap="8px">
-              <Text size={12}>10</Text>
+              <Text size={12}>{offer.pricePerEpoch}</Text>
               <TokenBadge bg="grey200">
                 <Text size={10} weight={800} color="grey500">
                   {offer.paymentToken.symbol}

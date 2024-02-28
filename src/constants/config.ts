@@ -21,6 +21,13 @@ export const RPC_URL: Record<ContractsENV, string> = {
   local: 'https://rpc.ankr.com/polygon_mumbai',
 }
 
+export const BLOCKSCOUT_URL: Record<ContractsENV, string> = {
+  dar: 'https://blockscout-dar.fluence.dev',
+  stage: 'https://blockscout-stage.fluence.dev/',
+  kras: 'https://blockscout-kras.fluence.dev',
+  local: 'http://localhost:4000/',
+}
+
 const { publicClient, webSocketPublicClient } = configureChains(
   SUPPORTED_CHAINS,
   [
@@ -36,3 +43,5 @@ export const WAGMI_CONFIG = createConfig({
   publicClient,
   webSocketPublicClient,
 })
+
+export const CONTRACTS_PRECISION = 10_000_000

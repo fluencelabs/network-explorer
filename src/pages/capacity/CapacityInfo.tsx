@@ -14,6 +14,8 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { CONTRACTS_PRECISION } from '../../constants/config'
+
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
 import { ProofsTable } from './ProofsTable'
 
@@ -79,6 +81,7 @@ export const CapacityInfo: React.FC = () => {
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
                     Number of Compute Units of the Peer linked to the Capacity
+                    <br />
                     commitment.
                   </Text>
                 </Tooltip>
@@ -108,6 +111,7 @@ export const CapacityInfo: React.FC = () => {
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
                     Identifier of the Provider who submitted the Capacity
+                    <br />
                     commitment for the Peer.
                   </Text>
                 </Tooltip>
@@ -159,6 +163,7 @@ export const CapacityInfo: React.FC = () => {
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
                     Unique identifier of the Fluence Peer associated with the
+                    <br />
                     Capacity commitment.
                   </Text>
                 </Tooltip>
@@ -176,11 +181,18 @@ export const CapacityInfo: React.FC = () => {
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
                     Share of rewards that will be allocated to the Delegator who
+                    <br />
                     activated the Capacity commitment.
                   </Text>
                 </Tooltip>
               </Row>
-              <Text size={12}>{capacity.rewardDelegatorRate}%</Text>
+              <Text size={12}>
+                {(
+                  (capacity.rewardDelegatorRate / CONTRACTS_PRECISION) *
+                  100
+                ).toFixed(2)}
+                %
+              </Text>
             </Info>
             <Info>
               <Row>
@@ -224,6 +236,7 @@ export const CapacityInfo: React.FC = () => {
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
                     The total amount of rewards in FLT tokens earned by the
+                    <br />
                     capacity commitment since activation.
                   </Text>
                 </Tooltip>
@@ -251,8 +264,11 @@ export const CapacityInfo: React.FC = () => {
                   <Tooltip trigger={<InfoOutlineIcon />}>
                     <Text color="grey600" weight={600} size={12}>
                       The total amount of FLT token rewards earned that have not
+                      <br />
                       yet been withdrawn by the provider. Attention! Some of
+                      <br />
                       them may be in Vesting still. Tokens available for
+                      <br />
                       withdrawal now are Unlocked Rewards.
                     </Text>
                   </Tooltip>
@@ -275,6 +291,7 @@ export const CapacityInfo: React.FC = () => {
                   <Tooltip trigger={<InfoOutlineIcon />}>
                     <Text color="grey600" weight={600} size={12}>
                       The total amount of Unlocked Rewards that can be withdrawn
+                      <br />
                       by the Provider right now.
                     </Text>
                   </Tooltip>
@@ -300,8 +317,11 @@ export const CapacityInfo: React.FC = () => {
                   <Tooltip trigger={<InfoOutlineIcon />}>
                     <Text color="grey600" weight={600} size={12}>
                       The total amount of FLT token rewards earned that have not
+                      <br />
                       yet been withdrawn by the Delegator. Attention! Some of
+                      <br />
                       them may be in vesting. Tokens available for withdrawal
+                      <br />
                       now are in Unlocked Rewards.
                     </Text>
                   </Tooltip>
@@ -324,6 +344,7 @@ export const CapacityInfo: React.FC = () => {
                   <Tooltip trigger={<InfoOutlineIcon />}>
                     <Text color="grey600" weight={600} size={12}>
                       The total amount of Unlocked Rewards that can be withdrawn
+                      <br />
                       by the Delegator now.
                     </Text>
                   </Tooltip>

@@ -34,6 +34,8 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { CONTRACTS_PRECISION } from '../../constants/config'
+
 const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -104,7 +106,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
             <TableColumnTitle>Commitment id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600}>
-                Test
+                Unique Capacity Commitment Identifier
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
@@ -116,7 +118,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           >
             Created at
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Duration</TableColumnTitle>
+          <TableColumnTitle>Duration, epoches</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="expirationAt"
@@ -125,19 +127,12 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           >
             Expiration
           </TableColumnTitleWithSort>
-          <HeaderCellWithTooltip>
-            <TableColumnTitle>Provider id</TableColumnTitle>
-            <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
-                Test
-              </Text>
-            </Tooltip>
-          </HeaderCellWithTooltip>
+          <TableColumnTitle>Provider id</TableColumnTitle>
           <HeaderCellWithTooltip>
             <TableColumnTitle>Peer id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600}>
-                Test
+                Peer tied to the capacity commitment
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
@@ -236,7 +231,13 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Delegation Rate */}
             <Cell>
-              <Text size={12}>{capacity.rewardDelegatorRate}</Text>
+              <Text size={12}>
+                {(
+                  (capacity.rewardDelegatorRate / CONTRACTS_PRECISION) *
+                  100
+                ).toFixed(2)}
+                %
+              </Text>
             </Cell>
             {/* Status */}
             <Cell>

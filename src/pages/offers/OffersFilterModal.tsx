@@ -82,7 +82,7 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
                 <Text size={14}>Only active offers</Text>
                 <Space width="3px" />
                 <Tooltip trigger={<InfoOutlineIcon />}>
-                  <Text>Example</Text>
+                  <Text>Show offers with available compute units</Text>
                 </Tooltip>
               </>
             }

@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
-import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
 import { DealStatus } from '../../components/DealStatus'
@@ -13,6 +12,8 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 
 import { colors } from '../../constants/colors'
+import { BLOCKSCOUT_URL } from '../../constants/config'
+import { useAppStore } from '../../store'
 
 import { MatchingTable } from './MatchingTable'
 import { RequiredEffectorsTable } from './RequiredEffectorsTable'
@@ -20,9 +21,11 @@ import { RequiredEffectorsTable } from './RequiredEffectorsTable'
 export const DealInfo: React.FC = () => {
   const params = useParams()
 
+  const network = useAppStore((s) => s.network)
+
   const { id } = params
 
-  const { data: deal } = useApiQuery((client) => client.getDeal(id))
+  const { data: deal } = useApiQuery((client) => client.getDeal(id ?? ''))
 
   if (!deal) {
     return
@@ -70,7 +73,7 @@ export const DealInfo: React.FC = () => {
                 Deal ID
               </Text>
               <TextWithIcon>
-                <A href={'#'}>{id}</A>
+                <Text size={12}>{id}</Text>
                 <Copyable value={id} />
               </TextWithIcon>
             </Info>
@@ -88,8 +91,13 @@ export const DealInfo: React.FC = () => {
                 Client
               </Text>
               <TextWithIcon>
-                <A href={'#'}>{id}</A>
-                <Copyable value={id} />
+                <StyledA
+                  href={BLOCKSCOUT_URL[network] + `/address/${deal.client}`}
+                  target="_blank"
+                >
+                  {deal.client}
+                </StyledA>
+                <Copyable value={deal.client} />
               </TextWithIcon>
             </Info>
             <Info>
@@ -113,7 +121,7 @@ export const DealInfo: React.FC = () => {
                 App CID
               </Text>
               <TextWithIcon>
-                <A href={'#'}>{id}</A>
+                <Text size={12}>{id}</Text>
                 <Copyable value={id} />
               </TextWithIcon>
             </Info>
@@ -366,4 +374,12 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+`
+
+const StyledA = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: ${colors.blue};
 `

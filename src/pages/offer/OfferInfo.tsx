@@ -71,11 +71,11 @@ export const OfferInfo: React.FC = () => {
               </Text>
               <TextWithIcon>
                 <Text size={12}>
-                  <Link href="/provider/5e9d7ffe-5b01-43a0-9243-782e4572f1d6">
+                  <Link href={`/provider/${offer.providerId}`}>
                     {offer.providerId}
                   </Link>
                 </Text>
-                <Copyable value="5e9d7ffe-5b01-43a0-9243-782e4572f1d6" />
+                <Copyable value={offer.providerId} />
               </TextWithIcon>
             </Info>
             <Info>
