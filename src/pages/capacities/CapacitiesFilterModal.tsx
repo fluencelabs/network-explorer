@@ -64,7 +64,7 @@ export const CapacitiesFilterModal: React.FC<CapacitiesFilterModalProps> = ({
                 <Text size={14}>Only active Commitment</Text>
                 <Space width="3px" />
                 <Tooltip trigger={<InfoOutlineIcon />}>
-                  <Text>Example</Text>
+                  <Text>Show active capacity commitments</Text>
                 </Tooltip>
               </>
             }

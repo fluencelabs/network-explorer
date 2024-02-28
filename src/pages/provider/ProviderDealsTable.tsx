@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
+import {
+  ChildEntitiesByProviderFilter,
+  DealsOrderBy,
+  OrderType,
+  ProviderChildEntityStatusFilter,
+} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { DealShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
+import { ButtonGroup } from '../../components/ButtonGroup'
 import { DealStatus } from '../../components/DealStatus'
 import { DetailsButton } from '../../components/DetailsButton'
+import { Pagination } from '../../components/Pagination'
+import { Space } from '../../components/Space'
 import {
   Cell,
   HeaderCellWithTooltip,
@@ -18,11 +28,14 @@ import {
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { Tooltip } from '../../components/Tooltip'
-import { useApiQuery } from '../../hooks'
+import { useApiQuery, usePagination } from '../../hooks'
+import { useFilters } from '../../hooks/useFilters'
+import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -39,21 +52,74 @@ interface ProviderDealsTableProps {
   providerId: string
 }
 
+const PER_PAGE = 5
+
+type ProviderDealSort = `${DealsOrderBy}:${OrderType}`
+
+const items: {
+  value: ProviderChildEntityStatusFilter | 'all'
+  label: string
+}[] = [
+  { value: 'all', label: 'All' },
+  { value: 'active', label: 'Active' },
+  { value: 'inactive', label: 'Inactive' },
+]
+
 export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
   providerId,
 }) => {
-  const { data: deals, isLoading } = useApiQuery((client) =>
-    client.getDealsByProvider({
-      providerId,
-    }),
+  const [filters, setFilter] = useFilters<ChildEntitiesByProviderFilter>({
+    providerId,
+  })
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [order, setOrder] = useState<ProviderDealSort>('createdAt:desc')
+  const [orderBy, orderType] = order.split(':') as [DealsOrderBy, OrderType]
+
+  const { page, selectPage, limit, offset, getTotalPages } =
+    usePagination(PER_PAGE)
+
+  const { data: deals, isLoading } = useApiQuery(
+    (client) =>
+      client.getDealsByProvider(
+        {
+          providerId,
+          status: filters.status,
+        },
+        offset,
+        limit + 1,
+        orderBy,
+        orderType,
+      ),
+    [page, orderBy, orderType, filters],
   )
+
+  const hasNextPage = deals && deals.data.length > limit
+  const pageDeals = deals && deals.data.slice(0, limit)
+
+  // const handleSort = (key: DealsOrderBy, order: OrderType) => {
+  //   setOrder(`${key}:${order}`)
+  // }
+
+  const handleSetStatus = (value: ProviderChildEntityStatusFilter) => {
+    setFilter('status', value)
+  }
 
   return (
     <>
+      <Text size={32}>Deals</Text>
+      <Space height="24px" />
+      <ButtonGroup
+        value={filters.status ?? 'all'}
+        onSelect={handleSetStatus}
+        items={items}
+      />
+      <Space height="32px" />
       <ScrollableTable>
         <TableHeader template={template}>
           <TableColumnTitle>Deal Id</TableColumnTitle>
-          <TableColumnTitle>Matched at</TableColumnTitle>
+          <TableColumnTitle>Created at</TableColumnTitle>
+          {/* TODO -> Matched at */}
           <HeaderCellWithTooltip>
             <TableColumnTitle>Offer Id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
@@ -67,10 +133,23 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
           <TableColumnTitle>Active Workers</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
-        <TableBody isLoading={isLoading}>
-          {deals?.data.map((deal) => <DealRow key={deal.id} deal={deal} />)}
+        <TableBody isLoading={isLoading} skeletonCount={PER_PAGE}>
+          {pageDeals?.map((deal) => <DealRow key={deal.id} deal={deal} />)}
         </TableBody>
       </ScrollableTable>
+      <Space height="32px" />
+      <TablePagination>
+        {!deals ? (
+          <Skeleton width={200} height={34} count={1} />
+        ) : (
+          <Pagination
+            pages={getTotalPages(deals.total)}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
+        )}
+      </TablePagination>
     </>
   )
 }
@@ -81,6 +160,9 @@ interface DealRowProps {
 
 const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   const [, navigate] = useLocation()
+
+  const createdAt = formatUnixTimestamp(deal.createdAt)
+
   return (
     <RowBlock>
       <RowHeader>
@@ -91,8 +173,8 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             </Cell>
             <Cell>
               <Column>
-                <Text size={12}>1 Sep 2023</Text>
-                <Text size={12}>06:07:59 AM +UTC</Text>
+                <Text size={12}>{createdAt.date}</Text>
+                <Text size={12}>{createdAt.time}</Text>
               </Column>
             </Cell>
             <Cell>
