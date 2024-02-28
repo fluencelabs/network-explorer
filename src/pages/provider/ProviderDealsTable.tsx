@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
   ChildEntitiesByProviderFilter,
-  DealsOrderBy,
-  OrderType,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { DealShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
@@ -54,7 +52,7 @@ interface ProviderDealsTableProps {
 
 const PER_PAGE = 5
 
-type ProviderDealSort = `${DealsOrderBy}:${OrderType}`
+// type ProviderDealSort = `${DealsOrderBy}:${OrderType}`
 
 const items: {
   value: ProviderChildEntityStatusFilter | 'all'
@@ -72,9 +70,8 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
     providerId,
   })
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [order, setOrder] = useState<ProviderDealSort>('createdAt:desc')
-  const [orderBy, orderType] = order.split(':') as [DealsOrderBy, OrderType]
+  // const [order, setOrder] = useState<ProviderDealSort>('createdAt:desc')
+  // const [orderBy, orderType] = order.split(':') as [DealsOrderBy, OrderType]
 
   const { page, selectPage, limit, offset, getTotalPages } =
     usePagination(PER_PAGE)
@@ -88,10 +85,8 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
         },
         offset,
         limit + 1,
-        orderBy,
-        orderType,
       ),
-    [page, orderBy, orderType, filters],
+    [page, filters],
   )
 
   const hasNextPage = deals && deals.data.length > limit
