@@ -8,6 +8,7 @@ import { MainnetIcon, TestnetIcon } from '../assets/icons'
 import { ArrowIcon } from '../assets/icons'
 
 import { colors } from '../constants/colors'
+import { ADD_LOCAL_NETWORK } from '../constants/config.ts'
 import { useAppStore } from '../store'
 
 import { Button } from './Button'
@@ -31,6 +32,14 @@ const items: SelectItem<ContractsENV>[] = [
   //   icon: <MainnetIcon />,
   // },
 ]
+
+if (ADD_LOCAL_NETWORK) {
+  items.push({
+    label: 'Local',
+    value: 'local',
+    icon: <TestnetIcon />,
+  })
+}
 
 export const RightMenu: React.FC = () => {
   const network = useAppStore((s) => s.network)

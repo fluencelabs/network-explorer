@@ -4,31 +4,26 @@ import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
 import { type ChainId, RPC, SUPPORTED_CHAINS } from '.'
 
-export const SUBGRAPH_URL: Record<ContractsENV, string> = {
-  testnet:
-    'https://api.thegraph.com/subgraphs/name/alcibiadescleinias/fluence-deal-contracts',
-  stage:
-    'https://api.thegraph.com/subgraphs/name/alcibiadescleinias/fluence-deal-contracts',
-  kras: 'https://api.thegraph.com/subgraphs/name/alcibiadescleinias/fluence-deal-contracts',
-  local:
-    'https://api.thegraph.com/subgraphs/name/alcibiadescleinias/fluence-deal-contracts',
-}
+export const ADD_LOCAL_NETWORK = ['true', 'True', 1, '1'].includes(
+  import.meta.env.VITE_ADD_LOCAL_NETWORK,
+)
 
 export const RPC_URL: Record<ContractsENV, string> = {
   dar: 'https://ipc-dar.fluence.dev/',
   stage: 'https://ipc-stage.fluence.dev/',
-  kras: 'https://rpc.ankr.com/polygon_mumbai',
-  local: 'https://rpc.ankr.com/polygon_mumbai',
+  kras: 'https://rpc.ankr.com/polygon_mumbai/',
+  local: 'http://0.0.0.0:8545/',
 }
 
 export const BLOCKSCOUT_URL: Record<ContractsENV, string> = {
-  dar: 'https://blockscout-dar.fluence.dev',
+  dar: 'https://blockscout-dar.fluence.dev/',
   stage: 'https://blockscout-stage.fluence.dev/',
-  kras: 'https://blockscout-kras.fluence.dev',
+  kras: 'https://blockscout-kras.fluence.dev/',
   local: 'http://localhost:4000/',
 }
 
 const { publicClient, webSocketPublicClient } = configureChains(
+  // TODO: what is supported chains? it consists only of polygonMumbai for now.
   SUPPORTED_CHAINS,
   [
     jsonRpcProvider({
