@@ -44,11 +44,26 @@ export const PeerInfo: React.FC = () => {
       />
       <Content>
         <Left>
-          <Text size={32}>Peer ID</Text>
+          <Text size={32}>Peer info</Text>
         </Left>
         <Right>
           <Space height="33px" />
           <InfoRow>
+            <Info>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Peer ID
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>{id}</Text>
+                <Copyable value={id ?? ''} />
+              </TextWithIcon>
+            </Info>
+            <Info>
+              <Text size={10} weight={700} uppercase color="grey400">
+                CU in deals
+              </Text>
+              <Text size={12}>{peer.computeUnitsInDeal}</Text>
+            </Info>
             <Info>
               <Text size={10} weight={700} uppercase color="grey400">
                 Provider ID
@@ -60,18 +75,6 @@ export const PeerInfo: React.FC = () => {
             </Info>
             <Info>
               <Text size={10} weight={700} uppercase color="grey400">
-                CU in deals
-              </Text>
-              <Text size={12}>{peer.computeUnitsInDeal}</Text>
-            </Info>
-            <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Peer ID
-              </Text>
-              <Text size={12}>{id}</Text>
-            </Info>
-            <Info>
-              <Text size={10} weight={700} uppercase color="grey400">
                 CU in capacity commitment
               </Text>
               <Text size={12}>{peer.computeUnitsInCapacityCommitment}</Text>
@@ -80,7 +83,10 @@ export const PeerInfo: React.FC = () => {
               <Text size={10} weight={700} uppercase color="grey400">
                 Offer ID
               </Text>
-              <Text size={12}>{peer.offerId}</Text>
+              <TextWithIcon>
+                <A href={`/offer/${peer.offerId}`}>{peer.offerId}</A>
+                <Copyable value={peer.offerId} />
+              </TextWithIcon>
             </Info>
             <Info>
               <Text size={10} weight={700} uppercase color="grey400">

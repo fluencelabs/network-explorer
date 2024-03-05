@@ -8,7 +8,6 @@ import {
 import { DealShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
-import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { DealStatus } from '../../components/DealStatus'
@@ -17,7 +16,6 @@ import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
   Cell,
-  HeaderCellWithTooltip,
   Row,
   RowBlock,
   RowHeader,
@@ -30,7 +28,6 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
-import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
@@ -115,14 +112,14 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
           <TableColumnTitle>Deal Id</TableColumnTitle>
           <TableColumnTitle>Created at</TableColumnTitle>
           {/* TODO -> Matched at */}
-          <HeaderCellWithTooltip>
+          {/* <HeaderCellWithTooltip>
             <TableColumnTitle>Offer Id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600}>
                 The deal was matched from the capacity declared in this offer
               </Text>
             </Tooltip>
-          </HeaderCellWithTooltip>
+          </HeaderCellWithTooltip> */}
           <TableColumnTitle>Payment Token</TableColumnTitle>
           <TableColumnTitle>Matched CU</TableColumnTitle>
           <TableColumnTitle>Active Workers</TableColumnTitle>
@@ -172,9 +169,9 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
                 <Text size={12}>{createdAt.time}</Text>
               </Column>
             </Cell>
-            <Cell>
+            {/* <Cell>
               <A href={`/offer/${deal.client}`}>{deal.client}</A>
-            </Cell>
+            </Cell> */}
             <Cell>
               <TokenBadge bg="grey200">
                 <Text size={10} weight={800} color="grey500">
@@ -193,9 +190,9 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             </Cell>
             <Cell>
               <DetailsButton
-                onClick={() =>
-                  navigate(`/capacity/5e9d7ffe-5b01-43a0-9243-782e4572f1d6`)
-                }
+                onClick={() => {
+                  navigate(`/deal/${deal.id}`)
+                }}
               >
                 <Text size={10} weight={800} uppercase>
                   Details
