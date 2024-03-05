@@ -238,7 +238,9 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Peer Id */}
             <Cell>
-              <ShrinkText size={12}>{capacity.peerId}</ShrinkText>
+              <ShrinkText size={12}>
+                <A href={`/peer/${capacity.peerId}`}>{capacity.peerId}</A>
+              </ShrinkText>
             </Cell>
             {/* Compute Units */}
             <Cell>

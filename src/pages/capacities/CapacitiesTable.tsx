@@ -227,7 +227,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Compute units */}
             <Cell>
-              <Text size={12}>136</Text>
+              <Text size={12}>{capacity.computeUnitsCount}</Text>
             </Cell>
             {/* Delegation Rate */}
             <Cell>
