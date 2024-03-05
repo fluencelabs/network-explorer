@@ -183,6 +183,7 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
               <Text size={12}>{deal.matchedWorkers}</Text>
             </Cell>
             <Cell>
+              {/* TODO: what active workers are actually means?*/}
               <Text size={12}>{deal.registeredWorkers}</Text>
             </Cell>
             <Cell>
