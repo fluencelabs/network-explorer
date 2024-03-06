@@ -180,10 +180,11 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
               </TokenBadge>
             </Cell>
             <Cell>
-              <Text size={12}>2</Text>
+              <Text size={12}>{deal.matchedWorkers}</Text>
             </Cell>
             <Cell>
-              <Text size={12}>2</Text>
+              {/* TODO: what active workers are actually means?*/}
+              <Text size={12}>{deal.registeredWorkers}</Text>
             </Cell>
             <Cell>
               <DealStatus status={deal.status} />

@@ -219,7 +219,7 @@ export const CapacityInfo: React.FC = () => {
                 </Tooltip>
               </Row>
               <TextWithIcon>
-                NOT EXIST
+                {capacity.delegatorAddress}
                 <Copyable value={id} />
               </TextWithIcon>
             </Info>
