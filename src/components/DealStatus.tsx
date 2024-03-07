@@ -19,11 +19,31 @@ export const DealStatus: React.FC<DealStatusProps> = ({ status }) => {
     )
   }
 
-  if (status === 'inactive') {
+  if (status === 'insufficientFunds') {
     return (
       <Status color="grey300">
         <Text color="white" weight={800} size={10} uppercase>
-          Inactive
+          Insufficient Funds
+        </Text>
+      </Status>
+    )
+  }
+
+  if (status === 'notEnoughWorkers') {
+    return (
+      <Status color="grey300">
+        <Text color="white" weight={800} size={10} uppercase>
+          Not enough workers
+        </Text>
+      </Status>
+    )
+  }
+
+  if (status === 'smallBalance') {
+    return (
+      <Status color="grey300">
+        <Text color="white" weight={800} size={10} uppercase>
+          Small Balance
         </Text>
       </Status>
     )
