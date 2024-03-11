@@ -221,6 +221,7 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
       <ProviderContentHeader>
         <TableColumnTitle>#</TableColumnTitle>
         <TableColumnTitle>Offer ID</TableColumnTitle>
+        <TableColumnTitle></TableColumnTitle>
         <TableColumnTitle>Peers</TableColumnTitle>
         <TableColumnTitle>Compute Units</TableColumnTitle>
         <TableColumnTitle>Payment Token</TableColumnTitle>
@@ -237,6 +238,7 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
             <Cell>
               <A href={`/offer/${offer.id}`}>{offer.id}</A>
             </Cell>
+            <Cell></Cell>
             {/* Peers */}
             <Cell>
               <Text size={12}>{offer.peersCount}</Text>
@@ -316,7 +318,7 @@ const ProviderContentBlock = styled.div`
 const GridBaseProviderContent = styled.div`
   display: grid;
   grid-template-columns:
-    25px minmax(150px, 1fr) 50px
+    25px minmax(150px, 1fr) 50px 150px
     minmax(10px, 1fr) minmax(100px, 1fr) minmax(50px, 1fr) 75px;
 `
 
