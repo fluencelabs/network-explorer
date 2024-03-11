@@ -37,8 +37,6 @@ import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
-import { CONTRACTS_PRECISION } from '../../constants/config'
-
 const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -249,11 +247,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             {/* Delegate Rate */}
             <Cell>
               <Text size={12}>
-                {(
-                  (capacity.rewardDelegatorRate / CONTRACTS_PRECISION) *
-                  100
-                ).toFixed(2)}
-                %
+                {(capacity.rewardDelegatorRate * 100).toFixed(2)}%
               </Text>
             </Cell>
             {/* Status */}

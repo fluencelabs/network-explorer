@@ -14,8 +14,6 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
-import { CONTRACTS_PRECISION } from '../../constants/config'
-
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
 import { ProofsTable } from './ProofsTable'
 
@@ -187,11 +185,7 @@ export const CapacityInfo: React.FC = () => {
                 </Tooltip>
               </Row>
               <Text size={12}>
-                {(
-                  (capacity.rewardDelegatorRate / CONTRACTS_PRECISION) *
-                  100
-                ).toFixed(2)}
-                %
+                {(capacity.rewardDelegatorRate * 100).toFixed(2)}%
               </Text>
             </Info>
             <Info>
