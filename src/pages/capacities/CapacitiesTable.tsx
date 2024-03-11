@@ -118,7 +118,15 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           >
             Created at
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Duration, epoches</TableColumnTitle>
+          <HeaderCellWithTooltip>
+            <TableColumnTitle>Duration</TableColumnTitle>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600}>
+                Duration capacity commitment in epochs. Currently, one epoch is
+                set as 24 hours.
+              </Text>
+            </Tooltip>
+          </HeaderCellWithTooltip>
           <TableColumnTitleWithSort
             order={orderType}
             field="expirationAt"
