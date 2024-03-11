@@ -105,9 +105,8 @@ export const DealsTable: React.FC<DealsTableProps> = ({ filters }) => {
             <TableColumnTitle>Matching</TableColumnTitle>
             <Tooltip>
               <Text color="grey600" weight={600} size={12}>
-                Matching Process results: Minimum Participants Required for the
-                Deal, Current Matched Participants / Maximum Potential
-                Participants
+                Matching State: Minimum Workers Required for the Deal, Current
+                Matched Workers / Maximum Workers
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>

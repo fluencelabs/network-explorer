@@ -251,8 +251,8 @@ export const DealInfo: React.FC = () => {
                 </Text>
                 <Tooltip>
                   <Text color="grey600" weight={600} size={12}>
-                    Minimum Participants Required for the Deal, Current Matched
-                    Participants / Maximum Potential Participants.
+                    Minimum Workers Required for the Deal, Current Matched
+                    Workers / Maximum Workers.
                   </Text>
                 </Tooltip>
               </Row>
