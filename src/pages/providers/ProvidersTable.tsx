@@ -59,6 +59,19 @@ interface ProviderTableProps {
   filters: ProvidersFilters
 }
 
+interface ProviderAddressProps {
+  id: string
+  className?: string
+}
+
+const ProviderAddress: React.FC<ProviderAddressProps> = ({ id, ...rest }) => {
+  return (
+    <A href={`/offer/${id}`} {...rest}>
+      {id}
+    </A>
+  )
+}
+
 const PROVIDERS_PER_PAGE = 5
 
 export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
@@ -221,7 +234,6 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
       <ProviderContentHeader>
         <TableColumnTitle>#</TableColumnTitle>
         <TableColumnTitle>Offer ID</TableColumnTitle>
-        <TableColumnTitle></TableColumnTitle>
         <TableColumnTitle>Peers</TableColumnTitle>
         <TableColumnTitle>Compute Units</TableColumnTitle>
         <TableColumnTitle>Payment Token</TableColumnTitle>
@@ -236,9 +248,9 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
             </Cell>
             {/* Offer ID */}
             <Cell>
-              <A href={`/offer/${offer.id}`}>{offer.id}</A>
+              <PaddedProviderAddress id={offer.id}></PaddedProviderAddress>
             </Cell>
-            <Cell></Cell>
+
             {/* Peers */}
             <Cell>
               <Text size={12}>{offer.peersCount}</Text>
@@ -318,7 +330,7 @@ const ProviderContentBlock = styled.div`
 const GridBaseProviderContent = styled.div`
   display: grid;
   grid-template-columns:
-    25px minmax(150px, 1fr) 50px 150px
+    25px minmax(150px, 1fr) 150px
     minmax(10px, 1fr) minmax(100px, 1fr) minmax(50px, 1fr) 75px;
 `
 
@@ -380,4 +392,8 @@ const AccordionContent = styled(Accordion.Content)`
 const ImgStyled = styled.img`
   height: 24px;
   width: 24px;
+`
+
+const PaddedProviderAddress = styled(ProviderAddress)`
+  padding-right: 30px;
 `
