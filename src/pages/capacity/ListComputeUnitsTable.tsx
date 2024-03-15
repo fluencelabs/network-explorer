@@ -5,7 +5,7 @@ import {
   ComputeUnitsOrderBy,
   OrderType,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ComputeUnitsByCapacityCommitment } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { ComputeUnitsWithCCStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
@@ -117,7 +117,7 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
 
 interface CapacityRowProps {
   index: number
-  computeUnit: ComputeUnitsByCapacityCommitment
+  computeUnit: ComputeUnitsWithCCStatus
 }
 
 const ComputeUnitRow: React.FC<CapacityRowProps> = ({ computeUnit, index }) => {

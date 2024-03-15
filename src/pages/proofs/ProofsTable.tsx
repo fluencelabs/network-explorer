@@ -53,7 +53,8 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({ filters }) => {
     usePagination(PROOFS_PER_PAGE)
 
   const { data: proofs, isLoading } = useApiQuery(
-    (client) => client.getProofs(filters, offset, limit, orderBy, orderType),
+    (client) =>
+      client.getProofs(filters, offset, limit + 1, orderBy, orderType),
     [page, orderBy, orderType, filters],
     {
       key: `proofs:${JSON.stringify({

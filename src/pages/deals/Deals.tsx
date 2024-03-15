@@ -17,7 +17,9 @@ import { DealsTable } from './DealsTable'
 const items: { value: DealStatus | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: 'insufficientFunds', label: 'Insufficiet Funds' },
+  { value: 'notEnoughWorkers', label: 'Not Enough Workers' },
+  { value: 'smallBalance', label: 'Small Balance' },
 ]
 
 export const Deals: React.FC = () => {
