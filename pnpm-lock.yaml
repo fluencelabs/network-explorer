@@ -12,8 +12,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.25)(react@18.2.0)
   '@fluencelabs/deal-aurora':
-    specifier: npm:@fluencelabs/deal-ts-clients@0.11.2
-    version: /@fluencelabs/deal-ts-clients@0.11.2
+    specifier: npm:@fluencelabs/deal-ts-clients@0.11.4
+    version: /@fluencelabs/deal-ts-clients@0.11.4
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -969,16 +969,16 @@ packages:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
     dev: false
 
-  /@fluencelabs/deal-ts-clients@0.11.2:
-    resolution: {integrity: sha512-ktJbYnWEk0XXXp634VXtGIqoJC3K46LK8ArpYGsqIElk/SicpkCcWu1cz5yF99eu8F9mjnb+7+Bcsj2LMRNeXw==}
+  /@fluencelabs/deal-ts-clients@0.11.4:
+    resolution: {integrity: sha512-QhA0Wa8lLBgVOFdgGRT+lt5XQpL6rzipRNwfz3D6BQzXOVnIJiF4c/K1EAhNYnlXTVmSWl9JKhORxB+lAFhgFQ==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       debug: 4.3.4
-      dotenv: 16.3.1
+      dotenv: 16.4.5
       ethers: 6.7.1
       graphql: 16.8.1
       graphql-request: 6.1.0(graphql@16.8.1)
-      graphql-scalars: 1.22.4(graphql@16.8.1)
+      graphql-scalars: 1.22.5(graphql@16.8.1)
       graphql-tag: 2.12.6(graphql@16.8.1)
     transitivePeerDependencies:
       - bufferutil
@@ -3854,8 +3854,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /dotenv@16.3.1:
-    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+  /dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
     engines: {node: '>=12'}
     dev: false
 
@@ -4722,8 +4722,8 @@ packages:
       - encoding
     dev: false
 
-  /graphql-scalars@1.22.4(graphql@16.8.1):
-    resolution: {integrity: sha512-ILnv7jq5VKHLUyoaTFX7lgYrjCd6vTee9i8/B+D4zJKJT5TguOl0KkpPEbXHjmeor8AZYrVsrYUHdqRBMX1pjA==}
+  /graphql-scalars@1.22.5(graphql@16.8.1):
+    resolution: {integrity: sha512-Mw7uaqRscjdaXmxlHbt3sYGLU8o1hfFvTvN2VRrYEJyEPy6zGIbaFyJ4PPyt9H6GRHp01MQwS6HqXroRYHyGOg==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
