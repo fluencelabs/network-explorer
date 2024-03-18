@@ -11,14 +11,14 @@ export const ADD_LOCAL_NETWORK = ['true', 'True', 1, '1'].includes(
 export const RPC_URL: Record<ContractsENV, string> = {
   dar: 'https://ipc-dar.fluence.dev/',
   stage: 'https://ipc-stage.fluence.dev/',
-  kras: 'https://rpc.ankr.com/polygon_mumbai/',
+  kras: 'https://ipc.kras.fluence.dev/',
   local: 'http://0.0.0.0:8545/',
 }
 
 export const BLOCKSCOUT_URL: Record<ContractsENV, string> = {
   dar: 'https://blockscout-dar.fluence.dev/',
   stage: 'https://blockscout-stage.fluence.dev/',
-  kras: 'https://blockscout-kras.fluence.dev/',
+  kras: 'https://blockscout.kras.fluence.dev/',
   local: 'http://localhost:4000/',
 }
 

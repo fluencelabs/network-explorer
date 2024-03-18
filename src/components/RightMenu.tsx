@@ -26,11 +26,11 @@ const items: SelectItem<ContractsENV>[] = [
     value: 'dar',
     icon: <TestnetIcon />,
   },
-  // {
-  //   label: 'Kras',
-  //   value: 'kras',
-  //   icon: <MainnetIcon />,
-  // },
+  {
+    label: 'Kras',
+    value: 'kras',
+    icon: <MainnetIcon />,
+  },
 ]
 
 if (ADD_LOCAL_NETWORK) {
