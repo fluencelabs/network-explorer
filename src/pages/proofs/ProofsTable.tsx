@@ -146,7 +146,7 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
             </Cell>
             {/* Provider id */}
             <Cell>
-              <A href={`/provider/${proof.peerId}`}>NOT EXIST</A>
+              <A href={`/provider/${proof.peerId}`}>{proof.providerId}</A>
             </Cell>
             {/* Capacity commitment */}
             <Cell>
@@ -166,7 +166,7 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
             </Cell>
             {/* Epoch */}
             <Cell>
-              <Text size={12}>NOT EXIST</Text>
+              <Text size={12}>{proof.createdAtEpoch}</Text>
             </Cell>
           </Row>
         </RowTrigger>

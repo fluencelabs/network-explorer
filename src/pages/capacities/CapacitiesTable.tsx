@@ -34,8 +34,6 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
-import { CONTRACTS_PRECISION } from '../../constants/config'
-
 const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -239,13 +237,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Delegation Rate */}
             <Cell>
-              <Text size={12}>
-                {(
-                  (capacity.rewardDelegatorRate / CONTRACTS_PRECISION) *
-                  100
-                ).toFixed(2)}
-                %
-              </Text>
+              <Text size={12}>{capacity.rewardDelegatorRate}%</Text>
             </Cell>
             {/* Status */}
             <Cell>
