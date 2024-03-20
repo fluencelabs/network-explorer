@@ -246,9 +246,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Delegate Rate */}
             <Cell>
-              <Text size={12}>
-                {(capacity.rewardDelegatorRate * 100).toFixed(2)}%
-              </Text>
+              <Text size={12}>{capacity.rewardDelegatorRate.toFixed(2)}%</Text>
             </Cell>
             {/* Status */}
             <Cell>

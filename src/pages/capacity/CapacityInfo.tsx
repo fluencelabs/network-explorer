@@ -184,9 +184,7 @@ export const CapacityInfo: React.FC = () => {
                   </Text>
                 </Tooltip>
               </Row>
-              <Text size={12}>
-                {(capacity.rewardDelegatorRate * 100).toFixed(2)}%
-              </Text>
+              <Text size={12}>{capacity.rewardDelegatorRate.toFixed(2)}%</Text>
             </Info>
             <Info>
               <Row>
