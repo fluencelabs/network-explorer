@@ -5,7 +5,6 @@ import {
   OrderType,
   ProofStatsByCapacityCommitmentOrderBy,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ProofStatsByCapacityCommitment } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
@@ -23,6 +22,8 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
+
+import { ProofStatsByCapacityCommitment } from '../../client/types/schemes.ts'
 
 const template = [
   '30px',

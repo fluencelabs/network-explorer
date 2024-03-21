@@ -1,5 +1,6 @@
 import React from 'react'
-import { CapacityCommitmentStatus as ICapacityCommitmentStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+
+import { CapacityCommitmentStatus as ICapacityCommitmentStatus } from '../client/types/schemes.ts'
 
 import { Status } from './Status'
 import { Text } from './Text'

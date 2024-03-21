@@ -1,5 +1,4 @@
 import React from 'react'
-import { Peer } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import {
@@ -14,6 +13,8 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+
+import { Peer } from '../../client/types/schemes.ts'
 
 const template = ['20px', 'minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 

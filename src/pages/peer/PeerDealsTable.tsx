@@ -1,6 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { DealByPeer } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
@@ -19,6 +18,8 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, useOrder, usePagination } from '../../hooks'
+
+import { DealByPeer } from '../../client/types/schemes.ts'
 
 const template = [
   '30px',

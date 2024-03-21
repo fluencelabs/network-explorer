@@ -2,15 +2,6 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import {
-  OrderType,
-  ProvidersFilters,
-  ProviderShortOrderBy,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import {
-  OfferShort,
-  ProviderShort,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import * as Accordion from '@radix-ui/react-accordion'
 import { useLocation } from 'wouter'
 
@@ -38,6 +29,12 @@ import { Tooltip } from '../../components/Tooltip'
 import { usePagination } from '../../hooks'
 import { useApiQuery } from '../../hooks/useApiQuery'
 
+import {
+  OrderType,
+  ProvidersFilters,
+  ProviderShortOrderBy,
+} from '../../client/types/filters.ts'
+import { OfferShort, ProviderShort } from '../../client/types/schemes.ts'
 import { colors } from '../../constants/colors'
 
 const template = [

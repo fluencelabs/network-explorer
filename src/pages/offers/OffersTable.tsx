@@ -6,7 +6,6 @@ import {
   OfferShortOrderBy,
   OrderType,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { OfferShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
@@ -32,6 +31,7 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { OfferShort } from '../../client/types/schemes.ts'
 import { colors } from '../../constants/colors'
 
 const template = [

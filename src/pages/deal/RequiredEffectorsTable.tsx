@@ -1,5 +1,4 @@
 import React from 'react'
-import { Effector } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import {
   Cell,
@@ -13,6 +12,8 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
+
+import { Effector } from '../../client/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 300px)', 'minmax(10px, 100px)']
 

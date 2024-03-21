@@ -1,5 +1,6 @@
 import React from 'react'
-import { ComputeUnitStatus as IComputeUnitStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+
+import { ComputeUnitStatus as IComputeUnitStatus } from '../client/types/schemes.ts'
 
 import { Status } from './Status'
 import { Text } from './Text'

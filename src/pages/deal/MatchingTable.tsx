@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
@@ -21,6 +19,9 @@ import {
 import { ShrinkText, Text } from '../../components/Text'
 import { WorkerStatus } from '../../components/WorkerStatus'
 import { useApiQuery, usePagination } from '../../hooks'
+
+import { OrderType } from '../../client/types/filters.ts'
+import { ComputeUnitWorkerDetail } from '../../client/types/schemes.ts'
 
 const template = [
   '20px',

@@ -5,7 +5,6 @@ import {
   ProofsFilters,
   ProofsOrderBy,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ProofBasic } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
@@ -26,6 +25,8 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { ProofBasic } from '../../client/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { DealExplorerClient } from '@fluencelabs/deal-aurora'
 
+import { DealExplorerClient } from '../client'
 import { RPC_URL } from '../constants/config'
 import { useAppStore } from '../store'
 

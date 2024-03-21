@@ -5,7 +5,6 @@ import {
   ChildEntitiesByProviderFilter,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { DealShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
@@ -31,6 +30,8 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { DealShort } from '../../client/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

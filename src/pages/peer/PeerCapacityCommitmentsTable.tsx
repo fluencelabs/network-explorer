@@ -6,7 +6,6 @@ import {
   ChildEntitiesByPeerFilter,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { CapacityCommitmentShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
@@ -30,6 +29,8 @@ import { Text } from '../../components/Text'
 import { useApiQuery, useOrder, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
 
 const template = [
   '30px',

@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Effector } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { InfoOutlineIcon } from '../assets/icons'
+
+import { Effector } from '../client/types/schemes.ts'
 
 import { Text } from './Text'
 import { Tooltip } from './Tooltip'

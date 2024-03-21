@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { ProviderDetail } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ActiveLink } from '../../components/ActiveLink'
@@ -9,6 +8,8 @@ import { Copyable } from '../../components/Copyable'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { ProviderDetail } from '../../client/types/schemes.ts'
 
 interface ProviderProps {
   children: React.ReactNode | React.ReactNode[]

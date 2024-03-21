@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { ProvidersFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
@@ -8,6 +7,8 @@ import { Space } from '../../components/Space'
 import { Switch } from '../../components/Switch'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
+
+import { ProvidersFilters } from '../../client/types/filters.ts'
 
 import { ProviderTable } from './ProvidersTable'
 

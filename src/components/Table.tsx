@@ -1,12 +1,12 @@
 import React, { CSSProperties } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { SortIcon } from '../assets/icons'
 import { media } from '../hooks/useMedia'
 import { setProp } from '../utils/setProp'
 
+import { OrderDirection as OrderType } from '../client/generated.types.ts'
 import { colors } from '../constants/colors'
 
 import { Text } from './Text'

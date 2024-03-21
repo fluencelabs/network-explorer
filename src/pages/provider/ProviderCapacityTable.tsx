@@ -7,7 +7,6 @@ import {
   OrderType,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { CapacityCommitmentShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -36,6 +35,8 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

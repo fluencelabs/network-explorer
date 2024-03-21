@@ -6,7 +6,6 @@ import {
   CapacityCommitmentsOrderBy,
   OrderType,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { CapacityCommitmentShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -33,6 +32,8 @@ import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

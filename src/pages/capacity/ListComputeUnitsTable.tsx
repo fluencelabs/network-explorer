@@ -5,7 +5,6 @@ import {
   ComputeUnitsOrderBy,
   OrderType,
 } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ComputeUnitsWithCCStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
@@ -25,6 +24,8 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
+
+import { ComputeUnitsWithCCStatus } from '../../client/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 1fr)', '70px']
 
