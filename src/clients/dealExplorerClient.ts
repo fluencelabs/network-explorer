@@ -5,6 +5,7 @@
 import type { ContractsENV } from '@fluencelabs/deal-aurora'
 import type { ICapacity } from '@fluencelabs/deal-aurora'
 import { DealClient } from '@fluencelabs/deal-aurora'
+import { DealRpcClient } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/rpcClient'
 import { ethers } from 'ethers'
 
 import {
@@ -23,7 +24,6 @@ import type {
   ComputeUnitBasicFragment,
 } from './queries/deals-query.generated.js'
 import type { BasicPeerFragment } from './queries/offers-query.generated.js'
-import { DealRpcClient } from './rpcClient/index.js'
 import {
   FiltersError,
   serializeCapacityCommitmentsFiltersToIndexer,
