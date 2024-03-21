@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  CapacityCommitmentsOrderBy,
-  ChildEntitiesByProviderFilter,
-  OrderType,
-  ProviderChildEntityStatusFilter,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -36,6 +30,12 @@ import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import {
+  CapacityCommitmentsOrderBy,
+  ChildEntitiesByProviderFilter,
+  OrderType,
+  ProviderChildEntityStatusFilter,
+} from '../../client/types/filters'
 import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
 
 const template = [

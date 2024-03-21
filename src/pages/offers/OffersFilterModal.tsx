@@ -4,7 +4,6 @@
 import React, { forwardRef, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import styled from '@emotion/styled'
-import { OffersFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import {
@@ -18,6 +17,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 
+import { OffersFilters } from '../../client/types/filters'
 import { colors } from '../../constants/colors'
 
 import 'react-datepicker/dist/react-datepicker.css'

@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  DealsFilters,
-  DealsShortOrderBy,
-  OrderType,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
@@ -33,6 +28,11 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import {
+  DealsFilters,
+  DealsShortOrderBy,
+  OrderType,
+} from '../../client/types/filters'
 import { DealShort } from '../../client/types/schemes.ts'
 
 const template = [

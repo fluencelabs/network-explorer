@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  ComputeUnitsOrderBy,
-  OrderType,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { A } from '../../components/A'
 import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
@@ -25,6 +21,7 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
 
+import { ComputeUnitsOrderBy, OrderType } from '../../client/types/filters'
 import { ComputeUnitsWithCCStatus } from '../../client/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 1fr)', '70px']

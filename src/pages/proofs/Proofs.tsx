@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { ProofsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
+
+import { ProofsFilters } from '../../client/types/filters'
 
 import { ProofsTable } from './ProofsTable'
 

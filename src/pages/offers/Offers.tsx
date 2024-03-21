@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { OffersFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { Filters } from '../../components/Filters'
 import { PageHeader } from '../../components/PageHeader'
@@ -9,6 +8,8 @@ import { Space } from '../../components/Space'
 import { Switch } from '../../components/Switch'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
+
+import { OffersFilters } from '../../client/types/filters'
 
 import { OffersFilterModal } from './OffersFilterModal'
 import { OffersTable } from './OffersTable'

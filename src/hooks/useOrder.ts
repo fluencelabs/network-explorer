@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+
+import { OrderDirection as OrderType } from '../client/generated.types.ts'
 
 export const useOrder = <
   OrderBy extends string,

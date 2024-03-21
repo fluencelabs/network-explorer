@@ -4,7 +4,7 @@ import type {
   Deal_OrderBy,
   Offer_OrderBy,
   SubmittedProof_OrderBy,
-} from '../indexerClient/generated.types.js'
+} from '../generated.types.js'
 import type {
   CapacityCommitmentsOrderBy,
   DealsShortOrderBy,

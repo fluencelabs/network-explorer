@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { DealExplorerClient } from '@fluencelabs/deal-aurora'
 
 import { cached, CacheParameters } from '../utils'
 
+import { DealExplorerClient } from '../client'
 import { useAppStore } from '../store'
 
 import { useClient } from './useClient'

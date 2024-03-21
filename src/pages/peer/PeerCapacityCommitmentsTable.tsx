@@ -1,11 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  CapacityCommitmentsOrderBy,
-  ChildEntitiesByPeerFilter,
-  ProviderChildEntityStatusFilter,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
@@ -30,6 +25,11 @@ import { useApiQuery, useOrder, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import {
+  CapacityCommitmentsOrderBy,
+  ChildEntitiesByPeerFilter,
+  ProviderChildEntityStatusFilter,
+} from '../../client/types/filters'
 import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
 
 const template = [

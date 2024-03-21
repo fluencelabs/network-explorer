@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  OrderType,
-  ProofStatsByCapacityCommitmentOrderBy,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
@@ -23,6 +19,10 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
 
+import {
+  OrderType,
+  ProofStatsByCapacityCommitmentOrderBy,
+} from '../../client/types/filters'
 import { ProofStatsByCapacityCommitment } from '../../client/types/schemes.ts'
 
 const template = [

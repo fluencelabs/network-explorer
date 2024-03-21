@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { CapacityCommitmentsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { Filters } from '../../components/Filters'
 import { PageHeader } from '../../components/PageHeader'
@@ -8,6 +7,8 @@ import { Search } from '../../components/Search'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
+
+import { CapacityCommitmentsFilters } from '../../client/types/filters.ts'
 
 import { CapacitiesFilterModal } from './CapacitiesFilterModal'
 import { CapacitiesTable } from './CapacitiesTable'

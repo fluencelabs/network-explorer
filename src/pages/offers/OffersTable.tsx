@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  OffersFilters,
-  OfferShortOrderBy,
-  OrderType,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
@@ -31,6 +26,11 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import {
+  OffersFilters,
+  OfferShortOrderBy,
+  OrderType,
+} from '../../client/types/filters'
 import { OfferShort } from '../../client/types/schemes.ts'
 import { colors } from '../../constants/colors'
 

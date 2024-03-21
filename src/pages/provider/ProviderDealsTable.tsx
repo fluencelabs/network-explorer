@@ -1,10 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import {
-  ChildEntitiesByProviderFilter,
-  ProviderChildEntityStatusFilter,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
@@ -31,6 +27,10 @@ import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import {
+  ChildEntitiesByProviderFilter,
+  ProviderChildEntityStatusFilter,
+} from '../../client/types/filters'
 import { DealShort } from '../../client/types/schemes.ts'
 
 const template = [

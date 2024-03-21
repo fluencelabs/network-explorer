@@ -4,12 +4,12 @@
 import React, { forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
 import styled from '@emotion/styled'
-import { DealsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { CloseIcon, DatePickerIcon, ResetIcon } from '../../assets/icons'
 import { Text } from '../../components/Text'
 
+import { DealsFilters } from '../../client/types/filters'
 import { colors } from '../../constants/colors'
 
 import 'react-datepicker/dist/react-datepicker.css'

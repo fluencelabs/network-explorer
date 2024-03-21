@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { DealsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { Filters } from '../../components/Filters'
@@ -10,6 +9,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
+import { DealsFilters } from '../../client/types/filters'
 import { DealStatus } from '../../client/types/schemes.ts'
 
 import { DealsFilterModal } from './DealsFilterModal'

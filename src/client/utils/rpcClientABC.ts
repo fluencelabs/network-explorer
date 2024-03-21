@@ -4,10 +4,6 @@ import {
 } from '@fluencelabs/deal-aurora'
 import type { ethers, Interface, Result } from 'ethers'
 
-import { getLogger } from './logger.js'
-
-const logger = getLogger('deal-ts-clients:rpcClientABC')
-
 export type Multicall3ContractCall = {
   target: string
   allowFailure: boolean
@@ -64,14 +60,14 @@ export abstract class Multicall3ContractClientABC {
         'Assertion: callsEncoded, callResultsInterfaces, contractMethods, txResultsConverters should have the same length.',
       )
     }
-    logger.info(
+    console.log(
       `[_callBatch] Send batch request with callsEncoded = ${JSON.stringify(
         callsEncoded,
       )}...`,
     )
     const multicallContractCallResults: Aggregate3Response[] =
       await this._multicall3Contract.aggregate3.staticCall(callsEncoded)
-    logger.debug(
+    console.log(
       `[_callBatch] Got: ${JSON.stringify(multicallContractCallResults)}`,
     )
 
@@ -99,14 +95,14 @@ export abstract class Multicall3ContractClientABC {
       }
 
       const rawReturnData = rawResult.returnData
-      logger.debug(`[_callBatch] Raw data: ${rawReturnData}`)
+      console.log(`[_callBatch] Raw data: ${rawReturnData}`)
 
       const decoded = callResultsInterface.decodeFunctionResult(
         contractMethod,
         rawReturnData,
       )
-      logger.debug(`[_callBatch] Got after decoding: ${decoded}`)
-      logger.info(`[_callBatch] Apply converter: ${txResultsConverter.name}`)
+      console.log(`[_callBatch] Got after decoding: ${decoded}`)
+      console.log(`[_callBatch] Apply converter: ${txResultsConverter.name}`)
       decodedResults.push(txResultsConverter(decoded))
     }
     return decodedResults

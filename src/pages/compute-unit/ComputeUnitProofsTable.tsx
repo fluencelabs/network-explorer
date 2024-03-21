@@ -1,9 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import {
-  ProofsFilters,
-  ProofsOrderBy,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
@@ -26,6 +22,7 @@ import { useApiQuery, useOrder, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { ProofsFilters, ProofsOrderBy } from '../../client/types/filters'
 import { ProofBasic } from '../../client/types/schemes.ts'
 
 const template = [
