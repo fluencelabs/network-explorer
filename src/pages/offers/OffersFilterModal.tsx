@@ -17,7 +17,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 
-import { OffersFilters } from '../../client/types/filters'
+import { OffersFilters } from '../../clients/types/filters'
 import { colors } from '../../constants/colors'
 
 import 'react-datepicker/dist/react-datepicker.css'

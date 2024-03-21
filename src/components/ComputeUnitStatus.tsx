@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ComputeUnitStatus as IComputeUnitStatus } from '../client/types/schemes.ts'
+import { ComputeUnitStatus as IComputeUnitStatus } from '../clients/types/schemes.ts'
 
 import { Status } from './Status'
 import { Text } from './Text'

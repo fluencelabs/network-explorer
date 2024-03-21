@@ -8,7 +8,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
-import { CapacityCommitmentsFilters } from '../../client/types/filters.ts'
+import { CapacityCommitmentsFilters } from '../../clients/types/filters.ts'
 
 import { CapacitiesFilterModal } from './CapacitiesFilterModal'
 import { CapacitiesTable } from './CapacitiesTable'

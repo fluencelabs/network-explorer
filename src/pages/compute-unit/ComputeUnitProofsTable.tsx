@@ -22,8 +22,8 @@ import { useApiQuery, useOrder, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
-import { ProofsFilters, ProofsOrderBy } from '../../client/types/filters'
-import { ProofBasic } from '../../client/types/schemes.ts'
+import { ProofsFilters, ProofsOrderBy } from '../../clients/types/filters'
+import { ProofBasic } from '../../clients/types/schemes.ts'
 
 const template = [
   '30px',

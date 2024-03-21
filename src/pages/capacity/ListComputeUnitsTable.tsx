@@ -21,8 +21,8 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
 
-import { ComputeUnitsOrderBy, OrderType } from '../../client/types/filters'
-import { ComputeUnitsWithCCStatus } from '../../client/types/schemes.ts'
+import { ComputeUnitsOrderBy, OrderType } from '../../clients/types/filters'
+import { ComputeUnitsWithCCStatus } from '../../clients/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 1fr)', '70px']
 

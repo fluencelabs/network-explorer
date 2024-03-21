@@ -35,8 +35,8 @@ import {
   ChildEntitiesByProviderFilter,
   OrderType,
   ProviderChildEntityStatusFilter,
-} from '../../client/types/filters'
-import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
+} from '../../clients/types/filters'
+import { CapacityCommitmentShort } from '../../clients/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

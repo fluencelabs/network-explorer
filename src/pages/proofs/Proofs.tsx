@@ -7,7 +7,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
-import { ProofsFilters } from '../../client/types/filters'
+import { ProofsFilters } from '../../clients/types/filters'
 
 import { ProofsTable } from './ProofsTable'
 

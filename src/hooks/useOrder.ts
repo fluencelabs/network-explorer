@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { OrderDirection as OrderType } from '../client/generated.types.ts'
+import { OrderDirection as OrderType } from '../clients/generated.types.ts'
 
 export const useOrder = <
   OrderBy extends string,

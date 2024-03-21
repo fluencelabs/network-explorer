@@ -22,8 +22,8 @@ import { useApiQuery, usePagination } from '../../hooks'
 import {
   OrderType,
   ProofStatsByCapacityCommitmentOrderBy,
-} from '../../client/types/filters'
-import { ProofStatsByCapacityCommitment } from '../../client/types/schemes.ts'
+} from '../../clients/types/filters'
+import { ProofStatsByCapacityCommitment } from '../../clients/types/schemes.ts'
 
 const template = [
   '30px',

@@ -8,7 +8,7 @@ import { Switch } from '../../components/Switch'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
-import { ProvidersFilters } from '../../client/types/filters.ts'
+import { ProvidersFilters } from '../../clients/types/filters.ts'
 
 import { ProviderTable } from './ProvidersTable'
 

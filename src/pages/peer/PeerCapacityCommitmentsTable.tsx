@@ -29,8 +29,8 @@ import {
   CapacityCommitmentsOrderBy,
   ChildEntitiesByPeerFilter,
   ProviderChildEntityStatusFilter,
-} from '../../client/types/filters'
-import { CapacityCommitmentShort } from '../../client/types/schemes.ts'
+} from '../../clients/types/filters'
+import { CapacityCommitmentShort } from '../../clients/types/schemes.ts'
 
 const template = [
   '30px',

@@ -9,7 +9,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { CloseIcon, DatePickerIcon, ResetIcon } from '../../assets/icons'
 import { Text } from '../../components/Text'
 
-import { DealsFilters } from '../../client/types/filters'
+import { DealsFilters } from '../../clients/types/filters'
 import { colors } from '../../constants/colors'
 
 import 'react-datepicker/dist/react-datepicker.css'

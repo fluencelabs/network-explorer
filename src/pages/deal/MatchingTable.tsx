@@ -20,8 +20,8 @@ import { ShrinkText, Text } from '../../components/Text'
 import { WorkerStatus } from '../../components/WorkerStatus'
 import { useApiQuery, usePagination } from '../../hooks'
 
-import { OrderType } from '../../client/types/filters.ts'
-import { ComputeUnitWorkerDetail } from '../../client/types/schemes.ts'
+import { OrderType } from '../../clients/types/filters.ts'
+import { ComputeUnitWorkerDetail } from '../../clients/types/schemes.ts'
 
 const template = [
   '20px',

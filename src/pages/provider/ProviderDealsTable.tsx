@@ -30,8 +30,8 @@ import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import {
   ChildEntitiesByProviderFilter,
   ProviderChildEntityStatusFilter,
-} from '../../client/types/filters'
-import { DealShort } from '../../client/types/schemes.ts'
+} from '../../clients/types/filters'
+import { DealShort } from '../../clients/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

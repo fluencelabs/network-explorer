@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ComputeUnitWorkerDetail } from '../client/types/schemes.ts'
+import { ComputeUnitWorkerDetail } from '../clients/types/schemes.ts'
 
 import { Status } from './Status'
 import { Text } from './Text'

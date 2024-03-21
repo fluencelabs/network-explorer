@@ -19,7 +19,7 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, useOrder, usePagination } from '../../hooks'
 
-import { DealByPeer } from '../../client/types/schemes.ts'
+import { DealByPeer } from '../../clients/types/schemes.ts'
 
 const template = [
   '30px',

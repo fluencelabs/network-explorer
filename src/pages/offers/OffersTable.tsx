@@ -30,8 +30,8 @@ import {
   OffersFilters,
   OfferShortOrderBy,
   OrderType,
-} from '../../client/types/filters'
-import { OfferShort } from '../../client/types/schemes.ts'
+} from '../../clients/types/filters'
+import { OfferShort } from '../../clients/types/schemes.ts'
 import { colors } from '../../constants/colors'
 
 const template = [

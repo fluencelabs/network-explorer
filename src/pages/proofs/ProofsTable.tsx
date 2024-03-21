@@ -25,8 +25,8 @@ import {
   OrderType,
   ProofsFilters,
   ProofsOrderBy,
-} from '../../client/types/filters'
-import { ProofBasic } from '../../client/types/schemes.ts'
+} from '../../clients/types/filters'
+import { ProofBasic } from '../../clients/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',
