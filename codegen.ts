@@ -7,10 +7,10 @@ const config: CodegenConfig = {
   overwrite: true,
   schema:
     'https://graph-node.kras.fluence.dev/subgraphs/name/fluence-deal-contracts',
-  documents: 'src/client/queries/*.graphql',
+  documents: 'src/clients/queries/*.graphql',
   emitLegacyCommonJSImports: false,
   generates: {
-    'src/client/generated.types.ts': {
+    'src/clients/generated.types.ts': {
       plugins: [
         {
           add: {
@@ -22,11 +22,12 @@ const config: CodegenConfig = {
       config: {
         scalars: {
           BigInt: 'string',
+          Int8: 'number',
         },
         enumsAsTypes: true,
       },
     },
-    'src/client/': {
+    'src/clients/': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.generated.ts',
