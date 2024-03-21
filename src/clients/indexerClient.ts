@@ -1,7 +1,6 @@
 import type { ContractsENV } from '@fluencelabs/deal-aurora'
+import { getIndexerUrl } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/config'
 import { GraphQLClient } from 'graphql-request'
-
-import { getIndexerUrl } from './utils/indexerClient/config.ts'
 
 import type {
   CapacityCommitmentQueryQueryVariables,
