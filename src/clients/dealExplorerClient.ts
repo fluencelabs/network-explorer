@@ -6,13 +6,13 @@ import type { ContractsENV } from '@fluencelabs/deal-aurora'
 import type { ICapacity } from '@fluencelabs/deal-aurora'
 import { DealClient } from '@fluencelabs/deal-aurora'
 import { DealRpcClient } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/rpcClient'
-import { ethers } from 'ethers'
-
 import {
   serializeDealProviderAccessLists,
   serializeEffectorDescription,
   serializeEffectors,
-} from './utils/indexerClient/serializers.js'
+} from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers'
+import { ethers } from 'ethers'
+
 import {
   type SerializationSettings,
   tokenValueToRounded,
