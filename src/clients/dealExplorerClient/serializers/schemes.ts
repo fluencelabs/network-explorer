@@ -1,22 +1,25 @@
 // To store serializers, e.g. from indexer fields/fragments to DealExplorerClient schemes.
-import { serializeEffectors } from '../utils/indexerClient/serializers.js'
+import {
+  serializeContractRateToPercentage,
+  serializeEffectors,
+} from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers.js'
 import {
   type SerializationSettings,
   tokenValueToRounded,
-} from '../utils/serializers.js'
+} from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
 
 import { FLTToken } from '../constants.js'
-import type { CapacityCommitmentBasicFragment } from '../queries/capacity-commitments-query.generated.js'
+import type { CapacityCommitmentBasicFragment } from '../indexerClient/queries/capacity-commitments-query.generated.js'
 import type {
   BasicDealFragment,
   ComputeUnitBasicFragment,
-} from '../queries/deals-query.generated.js'
+} from '../indexerClient/queries/deals-query.generated.js'
 import type {
   BasicOfferFragment,
   BasicPeerFragment,
-} from '../queries/offers-query.generated.js'
-import type { ComputeUnitWithCcDataBasicFragment } from '../queries/peers-query.generated.js'
-import type { ProviderOfProvidersQueryFragment } from '../queries/providers-query.generated.js'
+} from '../indexerClient/queries/offers-query.generated.js'
+import type { ComputeUnitWithCcDataBasicFragment } from '../indexerClient/queries/peers-query.generated.js'
+import type { ProviderOfProvidersQueryFragment } from '../indexerClient/queries/providers-query.generated.js'
 import type {
   CapacityCommitmentDetail,
   CapacityCommitmentShort,
@@ -194,6 +197,7 @@ export function serializeCapacityCommitmentShort(
   statusFromRpc: CapacityCommitmentStatus,
   coreInitTimestamp: number,
   coreEpochDuration: number,
+  precision: number,
 ): CapacityCommitmentShort {
   let expiredAt = null
   let startedAt = null
@@ -222,8 +226,9 @@ export function serializeCapacityCommitmentShort(
     peerId: capacityCommitmentFromIndexer.peer.id,
     computeUnitsCount: Number(capacityCommitmentFromIndexer.computeUnitsCount),
     status: statusFromRpc,
-    rewardDelegatorRate: Number(
-      capacityCommitmentFromIndexer.rewardDelegatorRate,
+    rewardDelegatorRate: serializeContractRateToPercentage(
+      Number(capacityCommitmentFromIndexer.rewardDelegatorRate),
+      precision,
     ),
     duration: Number(capacityCommitmentFromIndexer.duration),
   }
@@ -245,6 +250,11 @@ export function serializeCapacityCommitmentDetail(
 ): CapacityCommitmentDetail {
   const _totalRewards = totalRewards ? totalRewards : BigInt(0)
   const _unlockedRewards = unlockedRewards ? unlockedRewards : BigInt(0)
+  // First of all convert to [0, 1] with accordance of precision and than to [0, 100] to % format.
+  const rewardDelegatorRatePercentage = serializeContractRateToPercentage(
+    rewardDelegatorRate,
+    precision,
+  )
   const unclockedRewardsSerialized = serializeRewards(
     _unlockedRewards,
     rewardDelegatorRate,
@@ -263,6 +273,7 @@ export function serializeCapacityCommitmentDetail(
       statusFromRpc,
       coreInitTimestamp,
       coreEpochDuration,
+      precision,
     ),
     // FLT.
     totalCollateral: tokenValueToRounded(
@@ -270,7 +281,7 @@ export function serializeCapacityCommitmentDetail(
       serializationSettings.parseNativeTokenToFixedDefault,
     ),
     collateralToken: FLTToken,
-    rewardDelegatorRate: rewardDelegatorRate,
+    rewardDelegatorRate: rewardDelegatorRatePercentage,
     // FLT.
     rewardsUnlocked: tokenValueToRounded(
       _unlockedRewards,

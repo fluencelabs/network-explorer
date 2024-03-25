@@ -32,8 +32,8 @@ import {
   DealsFilters,
   DealsShortOrderBy,
   OrderType,
-} from '../../clients/types/filters'
-import { DealShort } from '../../clients/types/schemes.ts'
+} from '../../clients/dealExplorerClient/types/filters'
+import { DealShort } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

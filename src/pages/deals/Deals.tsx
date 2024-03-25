@@ -9,8 +9,8 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
-import { DealsFilters } from '../../clients/types/filters'
-import { DealStatus } from '../../clients/types/schemes.ts'
+import { DealsFilters } from '../../clients/dealExplorerClient/types/filters'
+import { DealStatus } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 import { DealsFilterModal } from './DealsFilterModal'
 import { DealsTable } from './DealsTable'

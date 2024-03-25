@@ -17,7 +17,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 
-import { CapacityCommitmentsFilters } from '../../clients/types/filters.ts'
+import { CapacityCommitmentsFilters } from '../../clients/dealExplorerClient/types/filters.ts'
 import { colors } from '../../constants/colors'
 
 import 'react-datepicker/dist/react-datepicker.css'

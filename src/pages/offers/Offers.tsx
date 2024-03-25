@@ -9,7 +9,7 @@ import { Switch } from '../../components/Switch'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
-import { OffersFilters } from '../../clients/types/filters'
+import { OffersFilters } from '../../clients/dealExplorerClient/types/filters'
 
 import { OffersFilterModal } from './OffersFilterModal'
 import { OffersTable } from './OffersTable'

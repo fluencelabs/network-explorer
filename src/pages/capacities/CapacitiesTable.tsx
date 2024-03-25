@@ -32,8 +32,8 @@ import {
   CapacityCommitmentsFilters,
   CapacityCommitmentsOrderBy,
   OrderType,
-} from '../../clients/types/filters.ts'
-import { CapacityCommitmentShort } from '../../clients/types/schemes.ts'
+} from '../../clients/dealExplorerClient/types/filters.ts'
+import { CapacityCommitmentShort } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 const template = [
   'minmax(10px, 1fr)',

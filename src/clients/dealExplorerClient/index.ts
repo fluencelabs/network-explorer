@@ -1,1 +1,1 @@
-export { DealExplorerClient } from './dealExplorerClient.js'
+export { DealIndexerClient, DealExplorerClient } from './dealExplorerClient.js'

@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 import { InfoOutlineIcon } from '../assets/icons'
 
-import { Effector } from '../clients/types/schemes.ts'
+import { Effector } from '../clients/dealExplorerClient/types/schemes.ts'
 
 import { Text } from './Text'
 import { Tooltip } from './Tooltip'

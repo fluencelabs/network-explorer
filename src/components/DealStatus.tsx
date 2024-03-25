@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DealStatus as IDealStatus } from '../clients/types/schemes.ts'
+import { DealStatus as IDealStatus } from '../clients/dealExplorerClient/types/schemes.ts'
 
 import { Status } from './Status'
 import { Text } from './Text'

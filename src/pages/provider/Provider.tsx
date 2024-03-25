@@ -9,7 +9,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
-import { ProviderDetail } from '../../clients/types/schemes.ts'
+import { ProviderDetail } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 interface ProviderProps {
   children: React.ReactNode | React.ReactNode[]

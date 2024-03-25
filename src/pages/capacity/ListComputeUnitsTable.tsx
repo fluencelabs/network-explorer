@@ -21,8 +21,11 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
 
-import { ComputeUnitsOrderBy, OrderType } from '../../clients/types/filters'
-import { ComputeUnitsWithCCStatus } from '../../clients/types/schemes.ts'
+import {
+  ComputeUnitsOrderBy,
+  OrderType,
+} from '../../clients/dealExplorerClient/types/filters'
+import { ComputeUnitsWithCCStatus } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 1fr)', '70px']
 

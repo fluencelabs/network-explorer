@@ -4,9 +4,9 @@
 import {
   type SerializationSettings,
   tokenValueToRounded,
-} from '../utils/serializers.js'
+} from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
 
-import type { ComputeUnitWithCcDataBasicFragment } from '../queries/peers-query.generated.js'
+import type { ComputeUnitWithCcDataBasicFragment } from '../indexerClient/queries/peers-query.generated.js'
 import type { ComputeUnitStatus } from '../types/schemes.js'
 
 export function serializeProviderName(

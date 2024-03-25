@@ -14,7 +14,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 
-import { Effector } from '../../clients/types/schemes.ts'
+import { Effector } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 

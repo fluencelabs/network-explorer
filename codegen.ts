@@ -13,10 +13,10 @@ const CODEGEN_SUBGRAPH_URL =
 const config: CodegenConfig = {
   overwrite: true,
   schema: CODEGEN_SUBGRAPH_URL,
-  documents: 'src/clients/dealExplorerClient/queries/*.graphql',
+  documents: 'src/clients/dealExplorerClient/indexerClient/queries/*.graphql',
   emitLegacyCommonJSImports: false,
   generates: {
-    'src/clients/dealExplorerClient/generated.types.ts': {
+    'src/clients/dealExplorerClient/indexerClient/generated.types.ts': {
       plugins: [
         {
           add: {
@@ -33,7 +33,7 @@ const config: CodegenConfig = {
         enumsAsTypes: true,
       },
     },
-    'src/clients/dealExplorerClient/': {
+    'src/clients/dealExplorerClient/indexerClient/': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.generated.ts',

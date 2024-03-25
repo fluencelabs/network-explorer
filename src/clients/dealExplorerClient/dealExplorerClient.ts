@@ -5,25 +5,25 @@
 import type { ContractsENV } from '@fluencelabs/deal-aurora'
 import type { ICapacity } from '@fluencelabs/deal-aurora'
 import { DealClient } from '@fluencelabs/deal-aurora'
-import { DealRpcClient } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/rpcClient'
 import {
   serializeDealProviderAccessLists,
   serializeEffectorDescription,
   serializeEffectors,
-} from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers'
-import { ethers } from 'ethers'
-
+} from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers.js'
 import {
   type SerializationSettings,
   tokenValueToRounded,
-} from './utils/serializers.js'
+} from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
+import { ethers } from 'ethers'
 
-import type { CapacityCommitmentBasicFragment } from './queries/capacity-commitments-query.generated.js'
+import { IndexerClient } from './indexerClient/indexerClient.js'
+import type { CapacityCommitmentBasicFragment } from './indexerClient/queries/capacity-commitments-query.generated.js'
 import type {
   BasicDealFragment,
   ComputeUnitBasicFragment,
-} from './queries/deals-query.generated.js'
-import type { BasicPeerFragment } from './queries/offers-query.generated.js'
+} from './indexerClient/queries/deals-query.generated.js'
+import type { BasicPeerFragment } from './indexerClient/queries/offers-query.generated.js'
+import { DealRpcClient } from './rpcClient/dealRpcClient.ts'
 import {
   FiltersError,
   serializeCapacityCommitmentsFiltersToIndexer,
@@ -102,7 +102,6 @@ import type {
   ProviderShortListView,
 } from './types/schemes.js'
 import { FLTToken } from './constants.js'
-import { IndexerClient } from './indexerClient.js'
 import {
   calculateEpoch,
   DEFAULT_ORDER_TYPE,
@@ -779,25 +778,16 @@ export class DealExplorerClient {
     const orderBySerialized =
       serializeCapacityCommitmentsOrderByToIndexer(orderBy)
 
-    let currentEpoch = undefined
-    if (
-      filters?.onlyActive ||
-      filters?.status == 'active' ||
-      filters?.status == 'inactive'
-    ) {
-      if (this._coreInitTimestamp == null || this._coreEpochDuration == null) {
-        throw new Error('Assertion: Class object was not inited correctly.')
-      }
-      currentEpoch = calculateEpoch(
-        Date.now() / 1000,
-        this._coreInitTimestamp,
-        this._coreEpochDuration,
-      ).toString()
-    }
+    const currentEpoch = calculateEpoch(
+      Date.now() / 1000,
+      this._coreInitTimestamp!,
+      this._coreEpochDuration!,
+    ).toString()
 
     const filtersSerialized = serializeCapacityCommitmentsFiltersToIndexer(
-      filters,
+      filters ?? {},
       currentEpoch,
+      this._corePrecision!,
     )
     const data = await this._indexerClient.getCapacityCommitments({
       filters: filtersSerialized,
@@ -840,6 +830,7 @@ export class DealExplorerClient {
             capacityCommitmentsStatuses[i] ?? 'undefined',
             this._coreInitTimestamp!,
             this._coreEpochDuration!,
+            this._corePrecision!,
           ),
         )
       }
@@ -849,7 +840,9 @@ export class DealExplorerClient {
     if (
       data.graphNetworks.length == 1 &&
       data.graphNetworks[0] &&
-      data.graphNetworks[0].capacityCommitmentsTotal
+      data.graphNetworks[0].capacityCommitmentsTotal &&
+      // No filters used.
+      Object.keys(filtersSerialized).length == 0
     ) {
       total = data.graphNetworks[0].capacityCommitmentsTotal as string
     }
@@ -1145,7 +1138,7 @@ export class DealExplorerClient {
     }
   }
 
-  // @notice [Figma] Capacity Commitment. Proofs.
+  // @notice [Figma] Capacity Commitment. Proofs | Epochs History.
   async getProofsByCapacityCommitment(
     capacityCommitmentId: string,
     offset: number = 0,
@@ -1289,3 +1282,8 @@ export class DealExplorerClient {
     }
   }
 }
+
+/*
+ * @deprecated: rename to DealExplorerClient
+ */
+export class DealIndexerClient extends DealExplorerClient {}

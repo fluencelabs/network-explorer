@@ -14,7 +14,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 
-import { Peer } from '../../clients/types/schemes.ts'
+import { Peer } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 const template = ['20px', 'minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 

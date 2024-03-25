@@ -1,6 +1,5 @@
 import type { ContractsENV } from '@fluencelabs/deal-aurora'
-import { getIndexerUrl } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/config'
-import { GraphQLClient } from 'graphql-request'
+import { IndexerClientABC } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/indexerClientABC.js'
 
 import type {
   CapacityCommitmentQueryQueryVariables,
@@ -42,9 +41,7 @@ import type {
 } from './queries/providers-query.generated.js'
 import { getSdk as getProvidersSdk } from './queries/providers-query.generated.js'
 
-export class IndexerClient {
-  // There is a limitation for the 1 page.
-  INDEXER_MAX_FIRST = 1000
+export class IndexerClient extends IndexerClientABC {
   private dealsClient: DealsSdk
   private offersClient: OffersSdk
   private providersClient: ProvidersSdk
@@ -52,18 +49,15 @@ export class IndexerClient {
   private contractConstantsClient: ContractConstantsSdk
   private peersClient: PeersSdk
   constructor(network: ContractsENV) {
-    if (!network) {
-      throw new Error('Provide rather indexerUrl or network.')
-    }
-
-    const graphqlClient = new GraphQLClient(getIndexerUrl(network))
-
-    this.dealsClient = getDealsSdk(graphqlClient)
-    this.offersClient = getOffersSdk(graphqlClient)
-    this.capacityCommitmentsClient = getCapacityCommitmentsSdk(graphqlClient)
-    this.peersClient = getPeersSdk(graphqlClient)
-    this.providersClient = getProvidersSdk(graphqlClient)
-    this.contractConstantsClient = getContractConstantsSdk(graphqlClient)
+    super(network)
+    this.dealsClient = getDealsSdk(this._graphqlClient)
+    this.offersClient = getOffersSdk(this._graphqlClient)
+    this.capacityCommitmentsClient = getCapacityCommitmentsSdk(
+      this._graphqlClient,
+    )
+    this.peersClient = getPeersSdk(this._graphqlClient)
+    this.providersClient = getProvidersSdk(this._graphqlClient)
+    this.contractConstantsClient = getContractConstantsSdk(this._graphqlClient)
   }
 
   async getProviders(variables: ProvidersQueryQueryVariables) {

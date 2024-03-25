@@ -1,6 +1,7 @@
 // Module is for filter serializers.
 // TODO: into all filters add assert on unrecognised filter.
-import { valueToTokenValue } from '../utils/serializers.js'
+import { serializePercentageToContractRate } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers.js'
+import { valueToTokenValue } from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
 
 import type {
   CapacityCommitment_Filter,
@@ -8,7 +9,7 @@ import type {
   Offer_Filter,
   Provider_Filter,
   SubmittedProof_Filter,
-} from '../generated.types.js'
+} from '../indexerClient/generated.types.js'
 import type {
   CapacityCommitmentsFilters,
   DealsFilters,
@@ -195,10 +196,11 @@ export async function serializeDealsFiltersToIndexer(
 }
 
 export function serializeCapacityCommitmentsFiltersToIndexer(
-  v?: CapacityCommitmentsFilters,
-  currentEpoch?: string,
+  v: CapacityCommitmentsFilters,
+  currentEpoch: string,
+  precision: number,
 ): CapacityCommitment_Filter {
-  if (!v) {
+  if (Object.keys(v).length == 0) {
     return {}
   }
   const convertedFilters: CapacityCommitment_Filter = { and: [] }
@@ -230,12 +232,18 @@ export function serializeCapacityCommitmentsFiltersToIndexer(
   }
   if (v.rewardDelegatorRateFrom) {
     convertedFilters.and?.push({
-      rewardDelegatorRate_gte: v.rewardDelegatorRateFrom,
+      rewardDelegatorRate_gte: serializePercentageToContractRate(
+        v.rewardDelegatorRateFrom,
+        precision,
+      ),
     })
   }
   if (v.rewardDelegatorRateTo) {
     convertedFilters.and?.push({
-      rewardDelegatorRate_lte: v.rewardDelegatorRateTo,
+      rewardDelegatorRate_lte: serializePercentageToContractRate(
+        v.rewardDelegatorRateTo,
+        precision,
+      ),
     })
   }
   // TODO: deprecate onlyActive.

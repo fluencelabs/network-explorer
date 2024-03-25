@@ -13,7 +13,7 @@ import {
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 
-import { Effector } from '../../clients/types/schemes.ts'
+import { Effector } from '../../clients/dealExplorerClient/types/schemes.ts'
 
 const template = ['30px', 'minmax(10px, 300px)', 'minmax(10px, 100px)']
 

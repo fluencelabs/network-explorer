@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { DealExplorerClient } from '../clients'
+import { DealExplorerClient } from '../clients/dealExplorerClient'
 import { RPC_URL } from '../constants/config'
 import { useAppStore } from '../store'
 

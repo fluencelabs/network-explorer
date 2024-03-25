@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CapacityCommitmentStatus as ICapacityCommitmentStatus } from '../clients/types/schemes.ts'
+import { CapacityCommitmentStatus as ICapacityCommitmentStatus } from '../clients/dealExplorerClient/types/schemes.ts'
 
 import { Status } from './Status'
 import { Text } from './Text'
