@@ -123,7 +123,6 @@ export class DealRpcClient extends Multicall3ContractClientABC {
         target: capacityContractAddress,
         allowFailure: true, // We allow failure for all calls.
         callData: contractInstance.interface.encodeFunctionData(
-          // @ts-expect-error It is tested, and I needd this generic code.
           contractMethod,
           [capacityCommitmentIds[i]],
         ),
