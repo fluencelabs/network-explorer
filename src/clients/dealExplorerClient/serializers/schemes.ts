@@ -3,10 +3,11 @@ import {
   serializeContractRateToPercentage,
   serializeEffectors,
 } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers.js'
+
 import {
   type SerializationSettings,
   tokenValueToRounded,
-} from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
+} from '../../utils/serializers.ts'
 
 import { FLTToken } from '../constants.js'
 import type { CapacityCommitmentBasicFragment } from '../indexerClient/queries/capacity-commitments-query.generated.js'

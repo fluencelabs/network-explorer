@@ -10,11 +10,12 @@ import {
   serializeEffectorDescription,
   serializeEffectors,
 } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers.js'
+import { ethers } from 'ethers'
+
 import {
   type SerializationSettings,
   tokenValueToRounded,
-} from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
-import { ethers } from 'ethers'
+} from '../utils/serializers.ts'
 
 import { IndexerClient } from './indexerClient/indexerClient.js'
 import type { CapacityCommitmentBasicFragment } from './indexerClient/queries/capacity-commitments-query.generated.js'

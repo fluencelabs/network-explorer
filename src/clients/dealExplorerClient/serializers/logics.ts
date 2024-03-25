@@ -4,7 +4,7 @@
 import {
   type SerializationSettings,
   tokenValueToRounded,
-} from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
+} from '../../utils/serializers.ts'
 
 import type { ComputeUnitWithCcDataBasicFragment } from '../indexerClient/queries/peers-query.generated.js'
 import type { ComputeUnitStatus } from '../types/schemes.js'
