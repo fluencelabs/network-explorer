@@ -1,7 +1,8 @@
 // Module is for filter serializers.
 // TODO: into all filters add assert on unrecognised filter.
 import { serializePercentageToContractRate } from '@fluencelabs/deal-aurora/dist/utils/indexerClient/serializers.js'
-import { valueToTokenValue } from '@fluencelabs/deal-aurora/dist/utils/serializers.js'
+
+import { valueToTokenValue } from '../../utils/serializers.ts'
 
 import type {
   CapacityCommitment_Filter,
