@@ -2,15 +2,21 @@
 import { exec } from 'child_process'
 
 import type { CodegenConfig } from '@graphql-codegen/cli'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+const CODEGEN_SUBGRAPH_URL =
+  process.env.CODEGEN_SUBGRAPH_URL ??
+  'https://graph-node.kras.fluence.dev/subgraphs/name/fluence-deal-contracts'
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema:
-    'https://graph-node.kras.fluence.dev/subgraphs/name/fluence-deal-contracts',
-  documents: 'src/clients/queries/*.graphql',
+  schema: CODEGEN_SUBGRAPH_URL,
+  documents: 'src/clients/dealExplorerClient/queries/*.graphql',
   emitLegacyCommonJSImports: false,
   generates: {
-    'src/clients/generated.types.ts': {
+    'src/clients/dealExplorerClient/generated.types.ts': {
       plugins: [
         {
           add: {
@@ -27,7 +33,7 @@ const config: CodegenConfig = {
         enumsAsTypes: true,
       },
     },
-    'src/clients/': {
+    'src/clients/dealExplorerClient/': {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.generated.ts',
