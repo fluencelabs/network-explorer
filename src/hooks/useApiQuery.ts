@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { cached, CacheParameters } from '../utils'
 
-import { DealExplorerClient } from '../clients'
+import { DealExplorerClient } from '../clients/dealExplorerClient'
 import { useAppStore } from '../store'
 
 import { useClient } from './useClient'
