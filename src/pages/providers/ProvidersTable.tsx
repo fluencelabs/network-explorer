@@ -87,7 +87,8 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState<string[]>([])
 
   const { data: providers, isLoading } = useApiQuery(
-    (client) => client.getProviders(filters, offset, limit, orderBy, orderType),
+    (client) =>
+      client.getProviders(filters, offset, limit + 1, orderBy, orderType),
     [page, orderBy, orderType, filters],
     {
       key: `providers:${JSON.stringify({
