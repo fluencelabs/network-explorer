@@ -1,11 +1,9 @@
 import { useMemo } from 'react'
 import { DealExplorerClient } from '@fluencelabs/deal-ts-clients'
 
-import {
-  PARSE_NATIVE_TOKEN_TO_FIXED_DEFAULT,
-  PARSE_TOKEN_TO_FIXED_DEFAULT,
-  RPC_URL,
-} from '../constants/config'
+import { formatNativeTokenValue, formatPaymentTokenValue } from '../utils'
+
+import { RPC_URL } from '../constants/config'
 import { useAppStore } from '../store'
 
 export const useClient = () => {
@@ -13,8 +11,8 @@ export const useClient = () => {
 
   return useMemo(() => {
     return new DealExplorerClient(network, RPC_URL[network], undefined, {
-      parseNativeTokenToFixedDefault: PARSE_NATIVE_TOKEN_TO_FIXED_DEFAULT,
-      parseTokenToFixedDefault: PARSE_TOKEN_TO_FIXED_DEFAULT,
+      nativeTokenValueAdditionalFormatter: formatNativeTokenValue,
+      paymentTokenValueAdditionalFormatter: formatPaymentTokenValue,
     })
   }, [network])
 }
