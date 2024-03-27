@@ -40,3 +40,5 @@ export const WAGMI_CONFIG = createConfig({
 })
 
 export const FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT = true
+export const PARSE_TOKEN_TO_FIXED_DEFAULT = 3
+export const PARSE_NATIVE_TOKEN_TO_FIXED_DEFAULT = 6
