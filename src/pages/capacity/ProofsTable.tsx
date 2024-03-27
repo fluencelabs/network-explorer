@@ -160,7 +160,7 @@ const ProofRow: React.FC<ProofRow> = ({ proof }) => {
             </Cell>
             {/* Average proofs per CU */}
             <Cell>
-              <Text size={12}>{proof.submittedProofsPerCU}</Text>
+              <Text size={12}>{proof.submittedProofsPerCU.toFixed(1)}</Text>
             </Cell>
           </Row>
         </RowTrigger>
