@@ -72,7 +72,7 @@ const ProviderAddress: React.FC<ProviderAddressProps> = ({ id, ...rest }) => {
   )
 }
 
-const PROVIDERS_PER_PAGE = 12
+const PROVIDERS_PER_PAGE = 5
 
 export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
   const [order, setOrder] = useState<ProviderSort>('createdAt:desc')
