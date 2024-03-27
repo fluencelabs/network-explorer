@@ -39,4 +39,4 @@ export const WAGMI_CONFIG = createConfig({
   webSocketPublicClient,
 })
 
-export const CONTRACTS_PRECISION = 10_000_000
+export const FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT = true

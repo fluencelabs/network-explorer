@@ -9,6 +9,8 @@ import { Switch } from '../../components/Switch'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
 
+import { FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT } from '../../constants/config.ts'
+
 import { ProviderTable } from './ProvidersTable'
 
 export const Providers: React.FC = () => {
@@ -16,7 +18,7 @@ export const Providers: React.FC = () => {
 
   // Set default value for onlyApproved filter.
   if (filters.onlyApproved == undefined) {
-    setFilters('onlyApproved', true)
+    setFilters('onlyApproved', FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT)
   }
 
   return (
@@ -34,7 +36,11 @@ export const Providers: React.FC = () => {
       <Space height="16px" />
       <Switch
         label="Approved providers"
-        value={filters.onlyApproved === undefined ? true : filters.onlyApproved}
+        value={
+          filters.onlyApproved === undefined
+            ? FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT
+            : filters.onlyApproved
+        }
         onSwitch={(value) => setFilters('onlyApproved', value)}
       />
       <Space height="64px" />
