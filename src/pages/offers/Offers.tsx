@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { OffersFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+import { OffersFilters } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 
 import { Filters } from '../../components/Filters'
 import { PageHeader } from '../../components/PageHeader'

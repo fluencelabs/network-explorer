@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { Status } from './Status'
 import { Text } from './Text'

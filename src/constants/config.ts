@@ -1,4 +1,4 @@
-import { ContractsENV } from '@fluencelabs/deal-aurora'
+import { ContractsENV } from '@fluencelabs/deal-ts-clients'
 import { configureChains, createConfig } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 

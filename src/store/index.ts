@@ -1,4 +1,4 @@
-import { ContractsENV } from '@fluencelabs/deal-aurora'
+import { ContractsENV } from '@fluencelabs/deal-ts-clients'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 

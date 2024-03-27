@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import {
   ComputeUnitsOrderBy,
   OrderType,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ComputeUnitsWithCCStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { ComputeUnitsWithCCStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
