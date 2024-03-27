@@ -72,7 +72,7 @@ const ProviderAddress: React.FC<ProviderAddressProps> = ({ id, ...rest }) => {
   )
 }
 
-const PROVIDERS_PER_PAGE = 12
+const PROVIDERS_PER_PAGE = 5
 
 export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
   const [order, setOrder] = useState<ProviderSort>('createdAt:desc')
@@ -87,7 +87,8 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState<string[]>([])
 
   const { data: providers, isLoading } = useApiQuery(
-    (client) => client.getProviders(filters, offset, limit, orderBy, orderType),
+    (client) =>
+      client.getProviders(filters, offset, limit + 1, orderBy, orderType),
     [page, orderBy, orderType, filters],
     {
       key: `providers:${JSON.stringify({
