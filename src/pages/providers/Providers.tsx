@@ -14,6 +14,11 @@ import { ProviderTable } from './ProvidersTable'
 export const Providers: React.FC = () => {
   const [filters, setFilters] = useFilters<ProvidersFilters>()
 
+  // Set default value for onlyApproved filter.
+  if (filters.onlyApproved == undefined) {
+    setFilters('onlyApproved', true)
+  }
+
   return (
     <>
       <PageHeader>
@@ -29,10 +34,8 @@ export const Providers: React.FC = () => {
       <Space height="16px" />
       <Switch
         label="Approved providers"
-        value={filters.onlyApproved ?? false}
-        onSwitch={(value) =>
-          setFilters('onlyApproved', !value ? undefined : true)
-        }
+        value={filters.onlyApproved === undefined ? true : filters.onlyApproved}
+        onSwitch={(value) => setFilters('onlyApproved', value)}
       />
       <Space height="64px" />
       <ProviderTable filters={filters} />
