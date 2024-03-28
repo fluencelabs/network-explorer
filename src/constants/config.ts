@@ -9,7 +9,7 @@ export const ADD_LOCAL_NETWORK = ['true', 'True', 1, '1'].includes(
 )
 
 export const RPC_URL: Record<ContractsENV, string> = {
-  dar: 'https://ipc-dar.fluence.dev/',
+  dar: 'https://ipc.dar.fluence.dev/',
   stage: 'https://ipc-stage.fluence.dev/',
   kras: 'https://ipc.kras.fluence.dev/',
   local: 'http://0.0.0.0:8545/',
