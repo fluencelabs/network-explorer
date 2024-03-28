@@ -16,7 +16,7 @@ export const RPC_URL: Record<ContractsENV, string> = {
 }
 
 export const BLOCKSCOUT_URL: Record<ContractsENV, string> = {
-  dar: 'https://blockscout-dar.fluence.dev/',
+  dar: 'https://blockscout.dar.fluence.dev/',
   stage: 'https://blockscout-stage.fluence.dev/',
   kras: 'https://blockscout.kras.fluence.dev/',
   local: 'http://localhost:4000/',
