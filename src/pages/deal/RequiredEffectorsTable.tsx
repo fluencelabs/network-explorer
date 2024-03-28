@@ -1,5 +1,5 @@
 import React from 'react'
-import { Effector } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { Effector } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import {
   Cell,

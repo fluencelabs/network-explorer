@@ -6,11 +6,11 @@ import {
   OrderType,
   ProvidersFilters,
   ProviderShortOrderBy,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import {
   OfferShort,
   ProviderShort,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import * as Accordion from '@radix-ui/react-accordion'
 import { useLocation } from 'wouter'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { ProviderDetail } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { ProviderDetail } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ActiveLink } from '../../components/ActiveLink'

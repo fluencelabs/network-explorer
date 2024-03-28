@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Effector } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { Effector } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { InfoOutlineIcon } from '../assets/icons'
 

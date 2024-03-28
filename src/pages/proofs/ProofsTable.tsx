@@ -4,8 +4,8 @@ import {
   OrderType,
   ProofsFilters,
   ProofsOrderBy,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ProofBasic } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { ProofBasic } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'

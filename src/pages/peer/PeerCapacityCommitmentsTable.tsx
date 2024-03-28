@@ -5,8 +5,8 @@ import {
   CapacityCommitmentsOrderBy,
   ChildEntitiesByPeerFilter,
   ProviderChildEntityStatusFilter,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { CapacityCommitmentShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'

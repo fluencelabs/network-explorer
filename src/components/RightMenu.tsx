@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { ContractsENV } from '@fluencelabs/deal-aurora'
+import { ContractsENV } from '@fluencelabs/deal-ts-clients'
 import * as RadixSelect from '@radix-ui/react-select'
 
 import { DocsIcon } from '../assets/icons'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DealStatus as IDealStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { DealStatus as IDealStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { Status } from './Status'
 import { Text } from './Text'

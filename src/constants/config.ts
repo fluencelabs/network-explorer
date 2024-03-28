@@ -1,4 +1,4 @@
-import { ContractsENV } from '@fluencelabs/deal-aurora'
+import { ContractsENV } from '@fluencelabs/deal-ts-clients'
 import { configureChains, createConfig } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
@@ -39,4 +39,6 @@ export const WAGMI_CONFIG = createConfig({
   webSocketPublicClient,
 })
 
-export const CONTRACTS_PRECISION = 10_000_000
+export const FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT = true
+export const FORMAT_PAYMENT_TOKEN_TO_FIXED_DEFAULT = 3
+export const FORMAT_NATIVE_TOKEN_TO_FIXED_DEFAULT = 6

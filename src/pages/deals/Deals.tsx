@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { DealsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { DealStatus } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { DealsFilters } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { DealStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { Filters } from '../../components/Filters'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Peer } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { Peer } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import {

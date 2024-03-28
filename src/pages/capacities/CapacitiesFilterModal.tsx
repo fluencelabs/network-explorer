@@ -4,7 +4,7 @@
 import React, { forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
 import styled from '@emotion/styled'
-import { CapacityCommitmentsFilters } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+import { CapacityCommitmentsFilters } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import {
