@@ -146,9 +146,9 @@ const ProofRow: React.FC<ProofRow> = ({ proof, currentEpoch }) => {
             {/* Epoch period (blocks) */}
             <Cell>
               <Text size={12}>
-                {proof.createdAtEpochBlockNumberStart} -{' '}
+                {proof.epochBlockStart} -{' '}
                 {proof.createdAtEpoch != currentEpoch
-                  ? proof.createdAtEpochBlockNumberEnd
+                  ? proof.epochBlockEnd
                   : '...'}
               </Text>
             </Cell>
