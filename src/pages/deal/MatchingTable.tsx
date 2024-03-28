@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+import { OrderType } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'

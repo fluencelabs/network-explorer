@@ -5,8 +5,8 @@ import {
   DealsFilters,
   DealsShortOrderBy,
   OrderType,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { DealShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { DealShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'

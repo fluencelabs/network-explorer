@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { OrderType } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
+import { OrderType } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 
 export const useOrder = <
   OrderBy extends string,
