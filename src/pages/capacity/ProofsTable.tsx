@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import {
   OrderType,
   ProofStatsByCapacityCommitmentOrderBy,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { ProofStatsByCapacityCommitment } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { ProofStatsByCapacityCommitment } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'

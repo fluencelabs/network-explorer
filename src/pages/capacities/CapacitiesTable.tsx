@@ -5,8 +5,8 @@ import {
   CapacityCommitmentsFilters,
   CapacityCommitmentsOrderBy,
   OrderType,
-} from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/filters'
-import { CapacityCommitmentShort } from '@fluencelabs/deal-aurora/dist/dealExplorerClient/types/schemes'
+} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
+import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
