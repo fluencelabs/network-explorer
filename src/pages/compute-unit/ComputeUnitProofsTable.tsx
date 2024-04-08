@@ -8,6 +8,7 @@ import { ProofBasic } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
+import { ProofStatus } from '../../components/ProofStatus.tsx'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -32,7 +33,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  '150px',
+  '200px',
 ]
 
 interface ComputeUnitProofsTableProps {
@@ -84,7 +85,7 @@ export const ComputeUnitProofsTable: React.FC<ComputeUnitProofsTableProps> = ({
           >
             Timestamp
           </TableColumnTitleWithSort>
-          <TableColumnTitle align="center">Status</TableColumnTitle>
+          <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
         <TableBody
           isEmpty={!pageItems.length}
@@ -127,7 +128,7 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
           <Row template={template}>
             {/* Epoch */}
             <Cell>
-              <Text size={12}>[NO DATA]</Text>
+              <Text size={12}>{proof.createdAtEpoch}</Text>
             </Cell>
             {/* Tx */}
             <Cell>
@@ -140,8 +141,10 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
               <Text size={12}>{createdAt.date}</Text>
               <Text size={12}>{createdAt.time}</Text>
             </Cell>
-            {/* Status */}
-            <Cell>[NO DATA]</Cell>
+            {/* Status: currently only submitted (success) proofs returned from DealExplorerClient. */}
+            <Cell>
+              <ProofStatus status="success" />
+            </Cell>
           </Row>
         </RowTrigger>
       </RowHeader>
