@@ -45,7 +45,7 @@ const template = [
   '70px',
 ]
 
-const OFFERS_PER_PAGE = 5
+const OFFERS_PER_PAGE = 15
 
 type OfferSort = `${OfferShortOrderBy}:${OrderType}`
 
