@@ -53,7 +53,7 @@ interface ProviderCapacityTableProps {
   providerId: string
 }
 
-const PROVIDER_CAPACITIES_PER_PAGE = 5
+const PROVIDER_CAPACITIES_PER_PAGE = 15
 
 type ProviderCapacitySort = `${CapacityCommitmentsOrderBy}:${OrderType}`
 
