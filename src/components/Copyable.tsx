@@ -31,8 +31,8 @@ export const Copyable: React.FC<CopyableProps> = ({ value }) => {
       <RadixTooltip.Provider delayDuration={0}>
         <RadixTooltip.Root open={notify}>
           <RadixTooltip.Trigger asChild>
-            <button style={{ height: '16px' }}>
-              <StyledCopyIcon onClick={handleCopy} />
+            <button style={{ height: '16px' }} onClick={handleCopy}>
+              <StyledCopyIcon />
             </button>
           </RadixTooltip.Trigger>
           <RadixTooltip.Portal>
