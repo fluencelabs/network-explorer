@@ -44,6 +44,7 @@ if (ADD_LOCAL_NETWORK) {
 export const RightMenu: React.FC = () => {
   const network = useAppStore((s) => s.network)
   const setNetwork = useAppStore((s) => s.setNetwork)
+  // const [epochNumber, setEpochNumber] = React.useState<number | undefined>(undefined)
 
   return (
     <RightMenuBlock>
@@ -55,6 +56,7 @@ export const RightMenu: React.FC = () => {
       </LinksBlock>
       <Select value={network} onChange={setNetwork} items={items}>
         {(item) => {
+          // TODO warning <button> cannot appear as a descendant of <button>
           return (
             <StyledButton variant="outline" leftIcon={item.icon}>
               <RadixSelect.Value />

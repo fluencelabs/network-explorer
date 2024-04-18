@@ -34,6 +34,11 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import {
+  formatEffectors,
+  formatHexData,
+  modifyEffectors,
+} from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
@@ -194,7 +199,9 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
           <Row template={template}>
             {/* Offer Id */}
             <Cell>
-              <A href={`/offer/${offer.id}`}>{offer.id}</A>
+              <A href={`/offer/${offer.id}`}>
+                {formatHexData(offer.id, 8, 10)}
+              </A>
             </Cell>
             {/* Created At */}
             <Cell flexDirection="column" alignItems="flex-start">
@@ -225,9 +232,9 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             {/* Effectors List */}
             <Cell>
               <ShrinkText size={12}>
-                {offer.effectors.map((e) => e.description).join(',')}
+                {formatEffectors(offer.effectors)}
               </ShrinkText>
-              <EffectorsTooltip effectors={offer.effectors} />
+              <EffectorsTooltip effectors={modifyEffectors(offer.effectors)} />
             </Cell>
             {/* Details */}
             <Cell>

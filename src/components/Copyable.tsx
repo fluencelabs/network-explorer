@@ -16,7 +16,8 @@ interface CopyableProps {
 export const Copyable: React.FC<CopyableProps> = ({ value }) => {
   const [notify, setNotify] = useState(false)
 
-  const handleCopy = () => {
+  const handleCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
     copy(value)
 
     if (!notify) {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { GridLoader } from 'react-spinners'
 import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
@@ -14,6 +15,8 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { colors } from '../../constants/colors'
+
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
 import { ProofsTable } from './ProofsTable'
 
@@ -22,12 +25,16 @@ export const CapacityInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: capacity } = useApiQuery((client) =>
+  const { data: capacity, isLoading } = useApiQuery((client) =>
     client.getCapacityCommitment(id),
   )
 
-  if (!capacity) {
-    return null
+  if (!capacity || isLoading) {
+    return (
+      <Centered>
+        <GridLoader color={colors.blue} loading={true} size={15} />
+      </Centered>
+    )
   }
 
   const createdAt = formatUnixTimestamp(capacity.createdAt)
@@ -369,6 +376,13 @@ const Content = styled.div`
   @media (max-width: 1100px) {
     flex-direction: column;
   }
+`
+
+const Centered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 42px;
 `
 
 const Left = styled.div`

@@ -1,4 +1,5 @@
 import React from 'react'
+import { GridLoader } from 'react-spinners'
 import styled from '@emotion/styled'
 import { Link, useParams } from 'wouter'
 
@@ -10,6 +11,9 @@ import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { modifyEffectors } from '../../utils/helpers'
+
+import { colors } from '../../constants/colors'
 
 import { PeersTable } from './PeersTable'
 import { SupportedEffectorsTable } from './SupportedEffectorsTable'
@@ -19,10 +23,16 @@ export const OfferInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: offer } = useApiQuery((client) => client.getOffer(id))
+  const { data: offer, isLoading } = useApiQuery((client) =>
+    client.getOffer(id),
+  )
 
-  if (!offer) {
-    return null
+  if (!offer || isLoading) {
+    return (
+      <Centered>
+        <GridLoader color={colors.blue} loading={true} size={15} />
+      </Centered>
+    )
   }
 
   const createdAt = formatUnixTimestamp(offer.createdAt)
@@ -109,7 +119,9 @@ export const OfferInfo: React.FC = () => {
           <Text size={20}>Supported effectors</Text>
           <Space height="24px" />
           <PeersTableWrapper>
-            <SupportedEffectorsTable effectors={offer.effectors} />
+            <SupportedEffectorsTable
+              effectors={modifyEffectors(offer.effectors)}
+            />
           </PeersTableWrapper>
           <Space height="40px" />
           <Text size={20}>Peers</Text>
@@ -179,4 +191,11 @@ const ParameterValue = styled.div`
 
 const PeersTableWrapper = styled.div`
   width: 45%;
+`
+
+const Centered = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 42px;
 `

@@ -37,6 +37,7 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { Tooltip } from '../../components/Tooltip'
 import { usePagination } from '../../hooks'
 import { useApiQuery } from '../../hooks/useApiQuery'
+import { formatEffectors, modifyEffectors } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
@@ -274,9 +275,9 @@ const ProviderRowContent: React.FC<ProviderRowContentProps> = ({ offers }) => {
             {/* Payment Token */}
             <Cell>
               <ShrinkText size={12}>
-                {offer.effectors.map((e) => e.description).join(',')}
+                {formatEffectors(offer.effectors)}
               </ShrinkText>
-              <EffectorsTooltip effectors={offer.effectors} />
+              <EffectorsTooltip effectors={modifyEffectors(offer.effectors)} />
             </Cell>
             {/* Effectors */}
             <Cell>

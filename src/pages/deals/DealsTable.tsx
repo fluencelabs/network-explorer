@@ -10,6 +10,7 @@ import { DealShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
+import { Copyable } from '../../components/Copyable'
 import { DealStatus } from '../../components/DealStatus'
 import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
@@ -33,6 +34,11 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { formatHexData, stopPropagation } from '../../utils/helpers'
+
+import { colors } from '../../constants/colors'
+import { BLOCKSCOUT_URL } from '../../constants/config'
+import { useAppStore } from '../../store'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -45,23 +51,26 @@ const template = [
   '70px',
 ]
 
-const DEALS_PER_PAGE = 5
+export const DEALS_PER_PAGE = 5
 
 type DealSort = `${DealsShortOrderBy}:${OrderType}`
 
 interface DealsTableProps {
   filters: DealsFilters
+  pagination: ReturnType<typeof usePagination>
 }
 
-export const DealsTable: React.FC<DealsTableProps> = ({ filters }) => {
+export const DealsTable: React.FC<DealsTableProps> = ({
+  filters,
+  pagination,
+}) => {
   const [order, setOrder] = useState<DealSort>('createdAt:desc')
   const [orderBy, orderType] = order.split(':') as [
     DealsShortOrderBy,
     OrderType,
   ]
 
-  const { page, selectPage, limit, offset, getTotalPages } =
-    usePagination(DEALS_PER_PAGE)
+  const { page, selectPage, limit, offset, getTotalPages } = pagination
 
   const { data: deals, isLoading } = useApiQuery(
     (client) => {
@@ -100,7 +109,7 @@ export const DealsTable: React.FC<DealsTableProps> = ({ filters }) => {
           >
             Created At
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Client</TableColumnTitle>
+          <TableColumnTitle>Deal Creator</TableColumnTitle>
           <HeaderCellWithTooltip>
             <TableColumnTitle>Matching</TableColumnTitle>
             <Tooltip>
@@ -146,6 +155,10 @@ interface DealRowProps {
 const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   const [, navigate] = useLocation()
 
+  const network = useAppStore((s) => s.network)
+
+  const [copyShown, setCopyshown] = useState(false)
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
@@ -161,7 +174,7 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
           <Row template={template}>
             {/* deal ID */}
             <Cell>
-              <A href={`/deal/${deal.id}`}>{deal.id}</A>
+              <A href={`/deal/${deal.id}`}>{formatHexData(deal.id)}</A>
             </Cell>
             {/* Created at */}
             <Cell flexDirection="column" alignItems="flex-start">
@@ -169,10 +182,20 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
               <Text size={12}>{createdAt.time}</Text>
             </Cell>
             {/* Client */}
-            <Cell>
+            <Cell
+              onMouseOver={() => setCopyshown(true)}
+              onMouseLeave={() => setCopyshown(false)}
+            >
               <ShrinkText size={12} color="blue">
-                {deal.client}
+                <StyledA
+                  href={BLOCKSCOUT_URL[network] + `address/${deal.client}`}
+                  target="_blank"
+                  onClick={stopPropagation}
+                >
+                  {formatHexData(deal.client)}
+                </StyledA>
               </ShrinkText>
+              {copyShown && <Copyable value={deal.client} />}
             </Cell>
             {/* Matching */}
             <Cell>
@@ -224,4 +247,10 @@ const TextWithBadge = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+`
+
+const StyledA = styled.a`
+  gap: 4px;
+  font-size: 12px;
+  color: ${colors.blue};
 `
