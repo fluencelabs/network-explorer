@@ -31,7 +31,6 @@ import { formatHexData, stopPropagation } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
-import { useAppStore } from '../../store'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -133,7 +132,6 @@ interface ProofRowProps {
 
 const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
   const createdAt = formatUnixTimestamp(proof.createdAt)
-  const network = useAppStore((s) => s.network)
 
   return (
     <RowBlock>
@@ -143,7 +141,7 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
             {/* Proof tx */}
             <Cell>
               <StyledA
-                href={`${BLOCKSCOUT_URL[network]}tx/${proof.transactionId}`}
+                href={`${BLOCKSCOUT_URL}tx/${proof.transactionId}`}
                 onClick={stopPropagation}
                 target="_blank"
               >

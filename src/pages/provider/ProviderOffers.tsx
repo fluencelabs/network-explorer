@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'wouter'
 
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { useApiQuery } from '../../hooks'
 
@@ -12,10 +13,12 @@ export const ProviderOffers: React.FC = () => {
 
   const { id } = params
 
-  const { data: provider } = useApiQuery((client) => client.getProvider(id))
+  const { data: provider, isLoading } = useApiQuery((client) =>
+    client.getProvider(id),
+  )
 
-  if (!provider) {
-    return
+  if (!provider || isLoading) {
+    return <InfoLoader />
   }
 
   return (

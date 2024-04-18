@@ -3,7 +3,7 @@ import { DealExplorerClient } from '@fluencelabs/deal-ts-clients'
 
 import { cached, CacheParameters } from '../utils'
 
-import { useAppStore } from '../store'
+import { CHAIN_NAME } from '../constants/config'
 
 import { useClient } from './useClient'
 
@@ -19,7 +19,6 @@ export const useApiQuery = <T>(
   cache?: CacheParameters,
 ) => {
   const client = useClient()
-  const network = useAppStore((s) => s.network)
   const [result, setResult] = useState<ApiResult<T>>({
     data: undefined,
     isLoading: true,
@@ -36,7 +35,7 @@ export const useApiQuery = <T>(
 
       const data = await (cache
         ? cached(() => fn(client), {
-            key: `${network}:${cache.key}`,
+            key: `${CHAIN_NAME}:${cache.key}`,
             ttl: cache.ttl,
           })
         : fn(client))

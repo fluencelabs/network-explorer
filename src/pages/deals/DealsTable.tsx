@@ -38,7 +38,6 @@ import { formatHexData, stopPropagation } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
-import { useAppStore } from '../../store'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -155,8 +154,6 @@ interface DealRowProps {
 const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   const [, navigate] = useLocation()
 
-  const network = useAppStore((s) => s.network)
-
   const [copyShown, setCopyshown] = useState(false)
 
   const handleClick = (e: React.MouseEvent) => {
@@ -188,7 +185,7 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             >
               <ShrinkText size={12} color="blue">
                 <StyledA
-                  href={BLOCKSCOUT_URL[network] + `address/${deal.client}`}
+                  href={BLOCKSCOUT_URL + `address/${deal.client}`}
                   target="_blank"
                   onClick={stopPropagation}
                 >

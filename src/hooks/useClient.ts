@@ -3,16 +3,13 @@ import { DealExplorerClient } from '@fluencelabs/deal-ts-clients'
 
 import { formatNativeTokenValue, formatPaymentTokenValue } from '../utils'
 
-import { RPC_URL } from '../constants/config'
-import { useAppStore } from '../store'
+import { CHAIN_NAME, RPC_URL } from '../constants/config'
 
 export const useClient = () => {
-  const network = useAppStore((s) => s.network)
-
   return useMemo(() => {
-    return new DealExplorerClient(network, RPC_URL[network], undefined, {
+    return new DealExplorerClient(CHAIN_NAME, RPC_URL, undefined, {
       nativeTokenValueAdditionalFormatter: formatNativeTokenValue,
       paymentTokenValueAdditionalFormatter: formatPaymentTokenValue,
     })
-  }, [network])
+  }, [])
 }

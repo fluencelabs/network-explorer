@@ -6,6 +6,7 @@ import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
 import { Copyable } from '../../components/Copyable'
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -18,12 +19,12 @@ export const ComputeUnitInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: computeUnit } = useApiQuery((client) =>
+  const { data: computeUnit, isLoading } = useApiQuery((client) =>
     client.getComputeUnit(id),
   )
 
-  if (!computeUnit) {
-    return
+  if (!computeUnit || isLoading) {
+    return <InfoLoader />
   }
 
   return (

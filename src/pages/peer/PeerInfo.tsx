@@ -5,6 +5,7 @@ import { useParams } from 'wouter'
 import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useApiQuery } from '../../hooks'
@@ -23,10 +24,10 @@ export const PeerInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: peer } = useApiQuery((client) => client.getPeer(id))
+  const { data: peer, isLoading } = useApiQuery((client) => client.getPeer(id))
 
-  if (!peer) {
-    return
+  if (!peer || isLoading) {
+    return <InfoLoader />
   }
 
   return (
