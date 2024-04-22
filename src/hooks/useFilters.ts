@@ -26,7 +26,7 @@ export const useFilters = <Filters extends Record<string, any>>(
     }
 
     setFilters(filtersCopy)
-    if (filtersCopy[key]) {
+    if (filtersCopy[key] && typeof filtersCopy[key] === 'string') {
       const url = new URL(window.location.href)
       url.searchParams.set('filter', filtersCopy[key])
       window.history.pushState({}, '', url.toString())

@@ -9,6 +9,7 @@ import { colors } from '../constants/colors'
 
 import { Menu } from './Menu'
 import { RightMenu } from './RightMenu'
+// import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 export const Header: React.FC = () => {
   return (
@@ -18,7 +19,18 @@ export const Header: React.FC = () => {
           <Logo />
         </a>
         <Menu />
-        <RightMenu />
+        <div>
+          <RightMenu />
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '6px',
+            }}
+          >
+            {/* <ConnectButton /> */}
+          </div>
+        </div>
       </HeaderBlock>
     </HeaderBackgroundBlock>
   )
@@ -27,7 +39,7 @@ export const Header: React.FC = () => {
 const HeaderBlock = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
 
   width: 100%;
   padding: 16px 24px;
