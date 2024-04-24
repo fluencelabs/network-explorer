@@ -43,6 +43,7 @@ import { colors } from '../../constants/colors'
 const template = [
   'minmax(150px, 1fr)',
   'minmax(10px, 1fr)',
+  'minmax(10px, 1fr)',
   'minmax(100px, 1fr)',
   'minmax(50px, 1fr)',
   '60px',
@@ -123,6 +124,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
         <TableHeader template={template}>
           <TableColumnTitle>Name</TableColumnTitle>
           <TableColumnTitle>Provider Address</TableColumnTitle>
+          <TableColumnTitle>Peers</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="computeUnitsTotal"
@@ -195,6 +197,9 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ toggle, provider }) => {
             </Cell>
             <Cell>
               <A href={`/provider/${provider.id}`}>{provider.id}</A>
+            </Cell>
+            <Cell>
+              <Text size={12}>{provider.peerCount}</Text>
             </Cell>
             <Cell>
               <Text size={12}>{provider.totalComputeUnits}</Text>
