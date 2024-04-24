@@ -92,7 +92,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
         <TableHeader template={template}>
           <TableColumnTitle>Name</TableColumnTitle>
           <TableColumnTitle>Provider Address</TableColumnTitle>
-          <TableColumnTitle>{/* Peers */}</TableColumnTitle>
+          <TableColumnTitle>Peers</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="computeUnitsTotal"
@@ -155,7 +155,9 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
           <Cell>
             <A href={`/provider/${provider.id}`}>{provider.id}</A>
           </Cell>
-          <Cell>{/* peers */}</Cell>
+          <Cell>
+            <Text size={12}>{provider.peerCount}</Text>
+          </Cell>
           <Cell>
             <Text size={12}>{provider.totalComputeUnits}</Text>
             <Space width="6px" />
