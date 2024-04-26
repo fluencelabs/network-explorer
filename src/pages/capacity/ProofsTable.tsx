@@ -45,7 +45,7 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
   capacityCommitmentId,
 }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [order, setOrder] = useState<ProofSort>('epoch:asc')
+  const [order, setOrder] = useState<ProofSort>('epoch:desc')
   const [orderBy, orderType] = order.split(':') as [
     ProofStatsByCapacityCommitmentOrderBy,
     OrderType,
@@ -76,6 +76,11 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
     },
   )
 
+  const { data: currentEpoch, isLoading: isEpochLoading } = useApiQuery(
+    (client) => client.getCurrentEpoch(),
+    [],
+  )
+
   const hasNextPage = proofs && proofs.data.length > limit
   const pageProofs = proofs && proofs.data.slice(0, limit)
 
@@ -95,10 +100,14 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
         <TableBody
           isEmpty={!pageProofs?.length}
           skeletonCount={PROOFS_PER_PAGE}
-          isLoading={isLoading}
+          isLoading={isLoading || isEpochLoading}
         >
           {pageProofs?.map((proof) => (
-            <ProofRow key={JSON.stringify(proof)} proof={proof} />
+            <ProofRow
+              key={JSON.stringify(proof)}
+              proof={proof}
+              currentEpoch={currentEpoch ?? 0}
+            />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -121,9 +130,10 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
 
 interface ProofRow {
   proof: ProofStatsByCapacityCommitment
+  currentEpoch: number
 }
 
-const ProofRow: React.FC<ProofRow> = ({ proof }) => {
+const ProofRow: React.FC<ProofRow> = ({ proof, currentEpoch }) => {
   return (
     <RowBlock>
       <RowHeader>
@@ -136,8 +146,10 @@ const ProofRow: React.FC<ProofRow> = ({ proof }) => {
             {/* Epoch period (blocks) */}
             <Cell>
               <Text size={12}>
-                {proof.createdAtEpochBlockNumberStart} -{' '}
-                {proof.createdAtEpochBlockNumberEnd}
+                {proof.epochBlockStart} -{' '}
+                {proof.createdAtEpoch != currentEpoch
+                  ? proof.epochBlockEnd
+                  : '...'}
               </Text>
             </Cell>
             {/* Expected Number of CUs */}
