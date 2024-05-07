@@ -136,8 +136,7 @@ const ProofRow: React.FC<ProofRow> = ({ proof }) => {
             {/* Epoch period (blocks) */}
             <Cell>
               <Text size={12}>
-                {proof.createdAtEpochBlockNumberStart} -{' '}
-                {proof.createdAtEpochBlockNumberEnd}
+                {proof.epochBlockStart} - {proof.epochBlockEnd}
               </Text>
             </Cell>
             {/* Expected Number of CUs */}
