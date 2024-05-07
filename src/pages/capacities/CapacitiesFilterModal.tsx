@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import React, { forwardRef } from 'react'
 import DatePicker from 'react-datepicker'
