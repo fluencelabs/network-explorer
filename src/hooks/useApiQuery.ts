@@ -3,7 +3,7 @@ import { DealExplorerClient } from '@fluencelabs/deal-ts-clients'
 
 import { cached, CacheParameters } from '../utils'
 
-import { CHAIN_NAME } from '../constants/config'
+import { FLUENCE_CLIENT_NETWORK } from '../constants/config'
 
 import { useClient } from './useClient'
 
@@ -35,7 +35,7 @@ export const useApiQuery = <T>(
 
       const data = await (cache
         ? cached(() => fn(client), {
-            key: `${CHAIN_NAME}:${cache.key}`,
+            key: `${FLUENCE_CLIENT_NETWORK}:${cache.key}`,
             ttl: cache.ttl,
           })
         : fn(client))
