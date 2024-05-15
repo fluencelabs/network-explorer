@@ -1,9 +1,15 @@
 import { useState } from 'react'
+import { useSearch } from 'wouter/use-location'
 
 export const usePagination = (perPage: number) => {
-  const [page, setPage] = useState(1)
+  const urlParams = new URLSearchParams(useSearch())
+  const pageParam = urlParams.get('page')
+  const [page, setPage] = useState(() => (pageParam ? parseInt(pageParam) : 1))
 
   const selectPage = (newPage: number) => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('page', newPage.toString())
+    window.history.pushState({}, '', url.toString())
     setPage(() => newPage)
   }
 

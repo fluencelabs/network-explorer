@@ -5,6 +5,7 @@ import { useParams } from 'wouter'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
 import { DealStatus } from '../../components/DealStatus'
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -13,7 +14,6 @@ import { useApiQuery } from '../../hooks'
 
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
-import { useAppStore } from '../../store'
 
 import { MatchingTable } from './MatchingTable'
 import { RequiredEffectorsTable } from './RequiredEffectorsTable'
@@ -21,14 +21,14 @@ import { RequiredEffectorsTable } from './RequiredEffectorsTable'
 export const DealInfo: React.FC = () => {
   const params = useParams()
 
-  const network = useAppStore((s) => s.network)
-
   const { id } = params
 
-  const { data: deal } = useApiQuery((client) => client.getDeal(id ?? ''))
+  const { data: deal, isLoading } = useApiQuery((client) =>
+    client.getDeal(id ?? ''),
+  )
 
-  if (!deal) {
-    return
+  if (!deal || isLoading || !id) {
+    return <InfoLoader />
   }
 
   const renderProviderList = (list: string[]) => {
@@ -92,7 +92,7 @@ export const DealInfo: React.FC = () => {
               </Text>
               <TextWithIcon>
                 <StyledA
-                  href={BLOCKSCOUT_URL[network] + `/address/${deal.client}`}
+                  href={BLOCKSCOUT_URL + `/address/${deal.client}`}
                   target="_blank"
                 >
                   {deal.client}

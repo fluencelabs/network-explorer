@@ -31,6 +31,7 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { formatHexData } from '../../utils/helpers'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -161,7 +162,7 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
         <RowTrigger>
           <Row template={template}>
             <Cell>
-              <A href={`/deal/${deal.id}`}>{deal.id}</A>
+              <A href={`/deal/${deal.id}`}>{formatHexData(deal.id)}</A>
             </Cell>
             <Cell>
               <Column>
