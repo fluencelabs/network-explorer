@@ -121,8 +121,8 @@ export const DealInfo: React.FC = () => {
                 App CID
               </Text>
               <TextWithIcon>
-                <Text size={12}>{id}</Text>
-                <Copyable value={id} />
+                <Text size={12}>{deal.appCID}</Text>
+                <Copyable value={deal.appCID} />
               </TextWithIcon>
             </Info>
             <Info>
