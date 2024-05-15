@@ -36,8 +36,8 @@ const items: SelectItem<ContractsENV>[] = [
 ]
 
 const explorerUrls: Record<string, string> = {
-  dar: 'https://dar.explorer.fluence.dev',
-  kras: 'https://explorer.fluence.dev',
+  dar: 'https://explorer.dar.fluence.dev',
+  kras: 'https://explorer.kras.fluence.dev',
 }
 
 // if (ADD_LOCAL_NETWORK) {
