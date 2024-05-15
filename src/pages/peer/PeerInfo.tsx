@@ -24,7 +24,9 @@ export const PeerInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: peer, isLoading } = useApiQuery((client) => client.getPeer(id))
+  const { data: peer, isLoading } = useApiQuery((client) =>
+    client.getPeer(id ?? ''),
+  )
 
   if (!peer || isLoading) {
     return <InfoLoader />
@@ -39,7 +41,7 @@ export const PeerInfo: React.FC = () => {
             path: '/proofs',
           },
           {
-            label: id,
+            label: id ?? '',
           },
         ]}
       />

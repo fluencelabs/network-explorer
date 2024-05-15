@@ -20,10 +20,10 @@ export const ComputeUnitInfo: React.FC = () => {
   const { id } = params
 
   const { data: computeUnit, isLoading } = useApiQuery((client) =>
-    client.getComputeUnit(id),
+    client.getComputeUnit(id ?? ''),
   )
 
-  if (!computeUnit || isLoading) {
+  if (!computeUnit || isLoading || !id) {
     return <InfoLoader />
   }
 

@@ -27,7 +27,7 @@ export const DealInfo: React.FC = () => {
     client.getDeal(id ?? ''),
   )
 
-  if (!deal || isLoading) {
+  if (!deal || isLoading || !id) {
     return <InfoLoader />
   }
 

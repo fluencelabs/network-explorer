@@ -14,7 +14,7 @@ export const ProviderCapacity: React.FC = () => {
   const { id } = params
 
   const { data: provider, isLoading } = useApiQuery((client) =>
-    client.getProvider(id),
+    client.getProvider(id ?? ''),
   )
 
   if (!provider || isLoading) {

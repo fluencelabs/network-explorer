@@ -27,7 +27,7 @@ export const CapacityInfo: React.FC = () => {
     client.getCapacityCommitment(id ?? ''),
   )
 
-  if (!capacity || isLoading) {
+  if (!capacity || isLoading || !id) {
     return <InfoLoader />
   }
 
@@ -213,7 +213,7 @@ export const CapacityInfo: React.FC = () => {
               </Row>
               <TextWithIcon>
                 {capacity.delegatorAddress}
-                <Copyable value={id} />
+                <Copyable value={capacity.delegatorAddress ?? ''} />
               </TextWithIcon>
             </Info>
           </InfoRow>

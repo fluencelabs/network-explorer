@@ -25,7 +25,7 @@ export const OfferInfo: React.FC = () => {
     client.getOffer(id),
   )
 
-  if (!offer || isLoading) {
+  if (!offer || isLoading || !id) {
     return <InfoLoader />
   }
 
