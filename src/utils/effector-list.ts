@@ -1,6 +1,0 @@
-export const PREDEFINED_EFFECTORS: Record<string, string> = {
-  '0155122072d6966403a184bdba20d6e32163c9d7acdaa79617863b4b63048c5639477a11':
-    'cURL',
-  '015512206bedaa396c8edbe962a706a892c362653136752d1ec518b1ef3de35c03e78068':
-    'IPFS',
-}

@@ -11,7 +11,6 @@ import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
-import { modifyEffectors } from '../../utils/helpers'
 
 import { PeersTable } from './PeersTable'
 import { SupportedEffectorsTable } from './SupportedEffectorsTable'
@@ -113,9 +112,7 @@ export const OfferInfo: React.FC = () => {
           <Text size={20}>Supported effectors</Text>
           <Space height="24px" />
           <PeersTableWrapper>
-            <SupportedEffectorsTable
-              effectors={modifyEffectors(offer.effectors)}
-            />
+            <SupportedEffectorsTable effectors={offer.effectors} />
           </PeersTableWrapper>
           <Space height="40px" />
           <Text size={20}>Peers</Text>
