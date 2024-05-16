@@ -1,6 +1,6 @@
 # Fluence Network Explorer
 
-Web application to show the current onchain market that consists of Offers, Provider, Deals, CC.
+Web application to show the Fluence onchain market states consist of Offers, Providers, Deals, Capacity Commitments and their Proofs.
 
 Stack: React + TypeScript + Vite
 
