@@ -7,6 +7,7 @@ import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { CapacityStatus } from '../../components/CapacityStatus'
 import { Copyable } from '../../components/Copyable'
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -22,12 +23,12 @@ export const CapacityInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: capacity } = useApiQuery((client) =>
-    client.getCapacityCommitment(id),
+  const { data: capacity, isLoading } = useApiQuery((client) =>
+    client.getCapacityCommitment(id ?? ''),
   )
 
-  if (!capacity) {
-    return null
+  if (!capacity || isLoading || !id) {
+    return <InfoLoader />
   }
 
   const createdAt = formatUnixTimestamp(capacity.createdAt)
@@ -212,7 +213,7 @@ export const CapacityInfo: React.FC = () => {
               </Row>
               <TextWithIcon>
                 {capacity.delegatorAddress}
-                <Copyable value={id} />
+                <Copyable value={capacity.delegatorAddress ?? ''} />
               </TextWithIcon>
             </Info>
           </InfoRow>

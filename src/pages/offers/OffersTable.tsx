@@ -31,6 +31,11 @@ import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import {
+  formatEffectors,
+  formatHexData,
+  modifyEffectors,
+} from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
@@ -167,7 +172,9 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
           <Row template={template}>
             {/* Offer Id */}
             <Cell>
-              <A href={`/offer/${offer.id}`}>{offer.id}</A>
+              <A href={`/offer/${offer.id}`}>
+                {formatHexData(offer.id, 8, 10)}
+              </A>
             </Cell>
             {/* Created at */}
             <Cell flexDirection="column" alignItems="flex-start">
@@ -176,7 +183,9 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             </Cell>
             {/* Provider */}
             <Cell>
-              <A href={`/provider/${offer.providerId}`}>{offer.providerId}</A>
+              <A href={`/provider/${offer.providerId}`}>
+                {formatHexData(offer.providerId, 8, 10)}
+              </A>
             </Cell>
             {/* Peers */}
             <Cell>
@@ -202,9 +211,9 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             {/* Effectors list */}
             <Cell>
               <ShrinkText size={12}>
-                {offer.effectors.map((e) => e.description).join(', ')}
+                {formatEffectors(offer.effectors)}
               </ShrinkText>
-              <EffectorsTooltip effectors={offer.effectors} />
+              <EffectorsTooltip effectors={modifyEffectors(offer.effectors)} />
             </Cell>
             <Cell>
               <DetailsButton>

@@ -33,6 +33,7 @@ import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { formatHexData } from '../../utils/helpers'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -68,14 +69,15 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
     usePagination(CAPACITIES_PER_PAGE)
 
   const { data: capacities, isLoading } = useApiQuery(
-    (client) =>
-      client.getCapacityCommitments(
+    (client) => {
+      return client.getCapacityCommitments(
         filters,
         offset,
         limit + 1,
         orderBy,
         orderType,
-      ),
+      )
+    },
     [page, orderBy, orderType, filters],
     {
       key: `capacities:${JSON.stringify({
@@ -201,7 +203,9 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
           <Row template={template}>
             {/* Commitment id */}
             <Cell>
-              <A href={`/capacity/${capacity.id}`}>{capacity.id}</A>
+              <A href={`/capacity/${capacity.id}`}>
+                {formatHexData(capacity.id, 8, 10)}
+              </A>
             </Cell>
             {/* Created at */}
             <Cell>
@@ -224,12 +228,14 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             {/* Provider id */}
             <Cell>
               <A href={`/provider/${capacity.providerId}`}>
-                {capacity.providerId}
+                {formatHexData(capacity.providerId)}
               </A>
             </Cell>
             {/* Peer id */}
             <Cell>
-              <A href={`/peer/${capacity.peerId}`}>{capacity.peerId}</A>
+              <A href={`/peer/${capacity.peerId}`}>
+                {formatHexData(capacity.peerId)}
+              </A>
             </Cell>
             {/* Compute units */}
             <Cell>

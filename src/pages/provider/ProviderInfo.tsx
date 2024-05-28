@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
@@ -24,10 +25,12 @@ export const ProviderInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: provider } = useApiQuery((client) => client.getProvider(id))
+  const { data: provider, isLoading } = useApiQuery((client) =>
+    client.getProvider(id ?? ''),
+  )
 
-  if (!provider) {
-    return
+  if (!provider || isLoading) {
+    return <InfoLoader />
   }
 
   return (

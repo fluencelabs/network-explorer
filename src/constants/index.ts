@@ -1,15 +1,3 @@
-import { polygonMumbai } from 'wagmi/chains'
-
-export enum ChainId {
-  MUMBAI = 80001,
-}
-
-export const SUPPORTED_CHAINS = [polygonMumbai]
-
-export const RPC: Record<ChainId, string> = {
-  [ChainId.MUMBAI]: 'https://polygon-mumbai.gateway.tenderly.co',
-}
-
 export const ROUTES = {
   providers: '/',
   providerInfo: '/provider/:id',

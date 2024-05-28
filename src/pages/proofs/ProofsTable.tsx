@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
+import styled from '@emotion/styled'
 import {
   OrderType,
   ProofsFilters,
@@ -26,6 +27,10 @@ import {
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { formatHexData, stopPropagation } from '../../utils/helpers'
+
+import { colors } from '../../constants/colors'
+import { BLOCKSCOUT_URL } from '../../constants/config'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -84,7 +89,7 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({ filters }) => {
           <TableColumnTitle>Provider</TableColumnTitle>
           <TableColumnTitle>Capacity commitment</TableColumnTitle>
           <TableColumnTitle>Peer id</TableColumnTitle>
-          <TableColumnTitle>Compute units</TableColumnTitle>
+          <TableColumnTitle>Compute unit</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="epoch"
@@ -135,9 +140,13 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
           <Row template={template}>
             {/* Proof tx */}
             <Cell>
-              <A href={`/offer/${proof.transactionId}`}>
-                {proof.transactionId}
-              </A>
+              <StyledA
+                href={`${BLOCKSCOUT_URL}tx/${proof.transactionId}`}
+                onClick={stopPropagation}
+                target="_blank"
+              >
+                {formatHexData(proof.transactionId, 8, 10)}
+              </StyledA>
             </Cell>
             {/* Timestamp */}
             <Cell flexDirection="column" alignItems="flex-start">
@@ -146,22 +155,26 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
             </Cell>
             {/* Provider id */}
             <Cell>
-              <A href={`/provider/${proof.peerId}`}>{proof.providerId}</A>
+              <A href={`/provider/${proof.providerId}`}>
+                {formatHexData(proof.providerId)}
+              </A>
             </Cell>
             {/* Capacity commitment */}
             <Cell>
               <A href={`/capacity/${proof.capacityCommitmentId}`}>
-                {proof.capacityCommitmentId}
+                {formatHexData(proof.capacityCommitmentId)}
               </A>
             </Cell>
             {/* Peer id */}
             <Cell>
-              <A href={`/peer/${proof.peerId}`}>{proof.peerId}</A>
+              <A href={`/peer/${proof.peerId}`}>
+                {formatHexData(proof.peerId)}
+              </A>
             </Cell>
             {/* Compute unit */}
             <Cell>
               <A href={`/compute-unit/${proof.computeUnitId}`}>
-                {proof.computeUnitId}
+                {formatHexData(proof.computeUnitId)}
               </A>
             </Cell>
             {/* Epoch */}
@@ -174,3 +187,9 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
     </RowBlock>
   )
 }
+
+const StyledA = styled.a`
+  gap: 4px;
+  font-size: 12px;
+  color: ${colors.blue};
+`

@@ -36,6 +36,7 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { formatHexData } from '../../utils/helpers'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -212,7 +213,9 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
           <Row template={template}>
             {/* Commitment Id */}
             <Cell>
-              <A href={`/capacity/${capacity.id}`}>{capacity.id}</A>
+              <A href={`/capacity/${capacity.id}`}>
+                {formatHexData(capacity.id)}
+              </A>
             </Cell>
             {/* # Created At */}
             <Cell>
@@ -237,7 +240,9 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             {/* Peer Id */}
             <Cell>
               <ShrinkText size={12}>
-                <A href={`/peer/${capacity.peerId}`}>{capacity.peerId}</A>
+                <A href={`/peer/${capacity.peerId}`}>
+                  {formatHexData(capacity.peerId)}
+                </A>
               </ShrinkText>
             </Cell>
             {/* Compute Units */}

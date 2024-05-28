@@ -1,42 +1,28 @@
-import { ContractsENV } from '@fluencelabs/deal-ts-clients'
-import { configureChains, createConfig } from 'wagmi'
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
+import { getDefaultConfig } from '@rainbow-me/rainbowkit'
+import { defineChain } from 'viem'
 
-import { type ChainId, RPC, SUPPORTED_CHAINS } from '.'
+// import { SUPPORTED_CHAINS } from '.'
+import { dar, kras } from './chains'
 
-export const ADD_LOCAL_NETWORK = ['true', 'True', 1, '1'].includes(
-  import.meta.env.VITE_ADD_LOCAL_NETWORK,
-)
+// export const ADD_LOCAL_NETWORK = ['true', 'True', 1, '1'].includes(
+//   import.meta.env.VITE_ADD_LOCAL_NETWORK,
+// )
 
-export const RPC_URL: Record<ContractsENV, string> = {
-  dar: 'https://ipc.dar.fluence.dev/',
-  stage: 'https://ipc-stage.fluence.dev/',
-  kras: 'https://ipc.kras.fluence.dev/',
-  local: 'http://0.0.0.0:8545/',
+const chainMap: Record<string, ReturnType<typeof defineChain>> = {
+  dar,
+  kras,
+  // TODO add local network
 }
 
-export const BLOCKSCOUT_URL: Record<ContractsENV, string> = {
-  dar: 'https://blockscout.dar.fluence.dev/',
-  stage: 'https://blockscout-stage.fluence.dev/',
-  kras: 'https://blockscout.kras.fluence.dev/',
-  local: 'http://localhost:4000/',
-}
+export const CHAIN: typeof dar = chainMap[import.meta.env.VITE_CHAIN] ?? dar
+export const CHAIN_NAME = CHAIN.name.toLowerCase()
+export const BLOCKSCOUT_URL = CHAIN.blockExplorers.default.url
+export const RPC_URL = CHAIN.rpcUrls.default.http[0]
 
-const { publicClient, webSocketPublicClient } = configureChains(
-  // TODO: what is supported chains? it consists only of polygonMumbai for now.
-  SUPPORTED_CHAINS,
-  [
-    jsonRpcProvider({
-      rpc: (chain) => ({
-        http: RPC[chain.id as ChainId],
-      }),
-    }),
-  ],
-)
-
-export const WAGMI_CONFIG = createConfig({
-  publicClient,
-  webSocketPublicClient,
+export const WAGMI_CONFIG = getDefaultConfig({
+  chains: [CHAIN],
+  projectId: import.meta.env.VITE_WC_PROJECT_ID,
+  appName: 'Fluence Network Explorer',
 })
 
 export const FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT = true
