@@ -19,6 +19,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, useOrder, usePagination } from '../../hooks'
+import { formatHexData } from '../../utils/helpers'
 
 const template = [
   '30px',
@@ -110,7 +111,7 @@ const DealRow: React.FC<DealRowProps> = ({ index, deal }) => {
             </Cell>
             {/* Deal id */}
             <Cell>
-              <A href={`/deal/${deal.dealId}`}>{deal.dealId}</A>
+              <A href={`/deal/${deal.dealId}`}>{formatHexData(deal.dealId)}</A>
             </Cell>
             {/* Compute unit */}
             <Cell>

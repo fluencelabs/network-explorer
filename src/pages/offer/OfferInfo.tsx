@@ -5,11 +5,13 @@ import { Link, useParams } from 'wouter'
 import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
+import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { modifyEffectors } from '../../utils/helpers'
 
 import { PeersTable } from './PeersTable'
 import { SupportedEffectorsTable } from './SupportedEffectorsTable'
@@ -19,10 +21,12 @@ export const OfferInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: offer } = useApiQuery((client) => client.getOffer(id))
+  const { data: offer, isLoading } = useApiQuery((client) =>
+    client.getOffer(id ?? ''),
+  )
 
-  if (!offer) {
-    return null
+  if (!offer || isLoading || !id) {
+    return <InfoLoader />
   }
 
   const createdAt = formatUnixTimestamp(offer.createdAt)
@@ -109,7 +113,9 @@ export const OfferInfo: React.FC = () => {
           <Text size={20}>Supported effectors</Text>
           <Space height="24px" />
           <PeersTableWrapper>
-            <SupportedEffectorsTable effectors={offer.effectors} />
+            <SupportedEffectorsTable
+              effectors={modifyEffectors(offer.effectors)}
+            />
           </PeersTableWrapper>
           <Space height="40px" />
           <Text size={20}>Peers</Text>
