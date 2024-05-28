@@ -1,0 +1,46 @@
+name: deploy
+
+on:
+  workflow_call:
+    inputs:
+      ENV:
+        description: "env to deploy to"
+        type: string
+        required: true
+      VERCEL_ORG_ID:
+        description: "Vercel Organization ID"
+        type: string
+        required: true
+      VERCEL_PROJECT_ID:
+        description: "Vercel Project ID"
+        type: string
+        required: true
+    secrets:
+      VERCEL_TOKEN:
+        description: "Vercel Token"
+        required: true
+
+  workflow_dispatch:
+    inputs:
+      ENV:
+        type: choice
+        description: env to deploy to
+        options:
+        - dar
+        - kras
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name:  ${{ inputs.env || github.event.inputs.env }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ vars.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ vars.VERCEL_PROJECT_ID}}
+          scope: ${{ vars.VERCEL_ORG_ID}}
