@@ -12,7 +12,6 @@ import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
-import { DetailsButton } from '../../components/DetailsButton'
 import { EffectorsTooltip } from '../../components/EffectorsTooltip'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
@@ -48,8 +47,7 @@ const template = [
   'minmax(10px, 60px)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(50px, 1fr)',
-  '70px',
+  '100px',
 ]
 
 interface ProviderOffersTableProps {
@@ -194,7 +192,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
 
   return (
     <RowBlock>
-      <RowHeader>
+      <RowHeader onClick={() => navigate(`/offer/${offer.id}`)}>
         <RowTrigger>
           <Row template={template}>
             {/* Offer Id */}
@@ -235,14 +233,6 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
                 {formatEffectors(offer.effectors)}
               </ShrinkText>
               <EffectorsTooltip effectors={modifyEffectors(offer.effectors)} />
-            </Cell>
-            {/* Details */}
-            <Cell>
-              <DetailsButton onClick={() => navigate(`/offer/${offer.id}`)}>
-                <Text size={10} weight={800} uppercase>
-                  Details
-                </Text>
-              </DetailsButton>
             </Cell>
           </Row>
         </RowTrigger>
