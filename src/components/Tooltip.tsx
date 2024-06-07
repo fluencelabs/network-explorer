@@ -42,6 +42,7 @@ const Content = styled(RadixTooltip.Content)<{ fill: Colors }>`
     0px 4px 6px -2px #18181b0d,
     0px 10px 15px -3px #18181b1a;
   z-index: 10000;
+  max-width: 340px;
 `
 
 const Arrow = styled(RadixTooltip.Arrow)<{ fill: Colors }>`

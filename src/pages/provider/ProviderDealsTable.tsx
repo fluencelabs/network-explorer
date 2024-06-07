@@ -11,7 +11,6 @@ import { useLocation } from 'wouter'
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { DealStatus } from '../../components/DealStatus'
-import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
@@ -40,8 +39,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  '70px',
+  '100px',
 ]
 
 interface ProviderDealsTableProps {
@@ -116,7 +114,7 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
           {/* <HeaderCellWithTooltip>
             <TableColumnTitle>Offer Id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
+              <Text color="grey600" weight={600} size={12}>
                 The deal was matched from the capacity declared in this offer
               </Text>
             </Tooltip>
@@ -158,7 +156,11 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
 
   return (
     <RowBlock>
-      <RowHeader>
+      <RowHeader
+        onClick={() => {
+          navigate(`/deal/${deal.id}`)
+        }}
+      >
         <RowTrigger>
           <Row template={template}>
             <Cell>
@@ -189,17 +191,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             </Cell>
             <Cell>
               <DealStatus status={deal.status} />
-            </Cell>
-            <Cell>
-              <DetailsButton
-                onClick={() => {
-                  navigate(`/deal/${deal.id}`)
-                }}
-              >
-                <Text size={10} weight={800} uppercase>
-                  Details
-                </Text>
-              </DetailsButton>
             </Cell>
           </Row>
         </RowTrigger>

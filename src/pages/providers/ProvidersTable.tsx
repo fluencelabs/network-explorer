@@ -90,7 +90,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
     <>
       <ScrollableTable>
         <TableHeader template={template}>
-          <TableColumnTitle>Name</TableColumnTitle>
+          <TableColumnTitle>Provider name</TableColumnTitle>
           <TableColumnTitle>Provider Address</TableColumnTitle>
           <TableColumnTitle>Peers</TableColumnTitle>
           <TableColumnTitleWithSort
@@ -107,7 +107,7 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
           <HeaderCellWithTooltip>
             <TableColumnTitle>Approved</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
+              <Text color="grey600" weight={600} size={12}>
                 DAO Approved Providers
               </Text>
             </Tooltip>

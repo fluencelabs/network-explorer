@@ -105,7 +105,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           <HeaderCellWithTooltip>
             <TableColumnTitle>Commitment id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
+              <Text color="grey600" weight={600} size={12}>
                 Unique Capacity Commitment Identifier
               </Text>
             </Tooltip>
@@ -121,7 +121,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           <HeaderCellWithTooltip>
             <TableColumnTitle>Duration</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
+              <Text color="grey600" weight={600} size={12}>
                 Duration capacity commitment in epochs. Currently, one epoch is
                 set as 24 hours.
               </Text>
@@ -139,7 +139,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           <HeaderCellWithTooltip>
             <TableColumnTitle>Peer id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
+              <Text color="grey600" weight={600} size={12}>
                 Peer tied to the capacity commitment
               </Text>
             </Tooltip>
