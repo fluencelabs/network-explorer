@@ -10,19 +10,18 @@ import { ArrowIcon } from '../assets/icons'
 import { useCurrentEpoch } from '../hooks/useCurrentEpoch'
 
 import { colors } from '../constants/colors'
-import { CHAIN_NAME } from '../constants/config'
+import { FLUENCE_CLIENT_NETWORK } from '../constants/config'
 
-// import { ADD_LOCAL_NETWORK } from '../constants/config.ts'
 import { Button } from './Button'
 import { Select, SelectItem } from './Select'
 import { Text } from './Text'
 
 const items: SelectItem<ContractsENV>[] = [
-  // {
-  //   label: 'Stage',
-  //   value: 'stage',
-  //   icon: <MainnetIcon />,
-  // },
+  {
+    label: 'Stage',
+    value: 'stage',
+    icon: <TestnetIcon />,
+  },
   {
     label: 'Dar',
     value: 'dar',
@@ -35,18 +34,20 @@ const items: SelectItem<ContractsENV>[] = [
   },
 ]
 
+// TODO: if no key in dict choose default instead of this hardcode.
+if (FLUENCE_CLIENT_NETWORK === 'local') {
+  items.push({
+    label: 'Local',
+    value: 'local',
+    icon: <TestnetIcon />,
+  })
+}
+
 const explorerUrls: Record<string, string> = {
+  stage: 'https://explorer.stage.fluence.dev',
   dar: 'https://explorer.dar.fluence.dev',
   kras: 'https://explorer.kras.fluence.dev',
 }
-
-// if (ADD_LOCAL_NETWORK) {
-//   items.push({
-//     label: 'Local',
-//     value: 'local',
-//     icon: <TestnetIcon />,
-//   })
-// }
 
 export const RightMenu: React.FC = () => {
   const curEpoch = useCurrentEpoch()
@@ -60,7 +61,7 @@ export const RightMenu: React.FC = () => {
         </StyledA>
       </LinksBlock>
       <Select
-        value={CHAIN_NAME}
+        value={FLUENCE_CLIENT_NETWORK}
         onChange={(value) => window.open(explorerUrls[value], '_self')}
         items={items}
       >

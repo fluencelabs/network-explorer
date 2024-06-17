@@ -33,11 +33,7 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
-import {
-  formatEffectors,
-  formatHexData,
-  modifyEffectors,
-} from '../../utils/helpers'
+import { formatEffectors, formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
@@ -232,7 +228,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
               <ShrinkText size={12}>
                 {formatEffectors(offer.effectors)}
               </ShrinkText>
-              <EffectorsTooltip effectors={modifyEffectors(offer.effectors)} />
+              <EffectorsTooltip effectors={offer.effectors} />
             </Cell>
           </Row>
         </RowTrigger>

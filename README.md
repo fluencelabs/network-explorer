@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+# Fluence Network Explorer
+
+Web application to show the Fluence onchain market states consist of Offers, Providers, Deals, Capacity Commitments and their Proofs.
+
+Stack: React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -6,6 +10,19 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+# Develop
+
+```bash
+pnpm i
+pnpm run dev
+```
+
+## Env
+Without `.env` file, the app will use the default values adjusted for the localhost.
+
+For the example env - check out [.example.env](.example.env) that is adjusted for the Dar stand.
+
 
 ## Expanding the ESLint configuration
 
