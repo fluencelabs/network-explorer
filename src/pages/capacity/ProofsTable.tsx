@@ -184,5 +184,5 @@ const ProofRow: React.FC<ProofRow> = ({ proof, currentEpoch }) => {
 const ProofsTableWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 80%;
 `

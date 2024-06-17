@@ -14,7 +14,6 @@ import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { ButtonGroup } from '../../components/ButtonGroup'
 import { CapacityStatus } from '../../components/CapacityStatus'
-import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
@@ -46,8 +45,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(50px, 1fr)',
-  '70px',
+  '100px',
 ]
 
 interface ProviderCapacityTableProps {
@@ -152,7 +150,7 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
           <HeaderCellWithTooltip>
             <TableColumnTitle>Peer Id</TableColumnTitle>
             <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600}>
+              <Text color="grey600" weight={600} size={12}>
                 Peer tied to the capacity commitment
               </Text>
             </Tooltip>
@@ -208,7 +206,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
 
   return (
     <RowBlock>
-      <RowHeader>
+      <RowHeader onClick={() => navigate(`/capacity/${capacity.id}`)}>
         <RowTrigger>
           <Row template={template}>
             {/* Commitment Id */}
@@ -256,15 +254,6 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             {/* Status */}
             <Cell>
               <CapacityStatus status={capacity.status} />
-            </Cell>
-            <Cell>
-              <DetailsButton
-                onClick={() => navigate(`/capacity/${capacity.id}`)}
-              >
-                <Text size={10} weight={800} uppercase>
-                  Details
-                </Text>
-              </DetailsButton>
             </Cell>
           </Row>
         </RowTrigger>
