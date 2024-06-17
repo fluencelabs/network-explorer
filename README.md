@@ -14,7 +14,7 @@ Currently, two official plugins are available:
 # Develop
 
 ```bash
-pnnpm i
+pnpm i
 pnpm run dev
 ```
 
