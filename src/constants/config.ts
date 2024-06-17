@@ -16,7 +16,7 @@ export const WAGMI_CONFIG = getDefaultConfig({
       nativeCurrency: {
         decimals: 18,
         name: import.meta.env.VITE_CHAIN_NATIVE_TOKEN_NAME ?? 'Fluence',
-        symbol: import.meta.env.VITE_CHAIN_NATIVE_TOKEN_SYNBOL ?? 'tFLT',
+        symbol: import.meta.env.VITE_CHAIN_NATIVE_TOKEN_SYMBOL ?? 'tFLT',
       },
       rpcUrls: {
         default: { http: [RPC_URL] },
