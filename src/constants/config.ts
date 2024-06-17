@@ -1,7 +1,7 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
 import { defineChain } from 'viem'
 
-// The network name for fluence contract clients: {kras, dar, local}
+// The network name for fluence contract clients: {kras, dar, stage, local}
 export const FLUENCE_CLIENT_NETWORK =
   import.meta.env.VITE_FLUENCE_CLIENT_NETWORK ?? 'local'
 export const BLOCKSCOUT_URL =

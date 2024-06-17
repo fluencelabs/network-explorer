@@ -18,6 +18,11 @@ import { Text } from './Text'
 
 const items: SelectItem<ContractsENV>[] = [
   {
+    label: 'Stage',
+    value: 'stage',
+    icon: <TestnetIcon />,
+  },
+  {
     label: 'Dar',
     value: 'dar',
     icon: <TestnetIcon />,
@@ -39,6 +44,7 @@ if (FLUENCE_CLIENT_NETWORK === 'local') {
 }
 
 const explorerUrls: Record<string, string> = {
+  stage: 'https://explorer.stage.fluence.dev',
   dar: 'https://explorer.dar.fluence.dev',
   kras: 'https://explorer.kras.fluence.dev',
 }
