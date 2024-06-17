@@ -11,7 +11,7 @@ export const RPC_URL = import.meta.env.VITE_RPC_URL ?? 'http://localhost:8545'
 export const WAGMI_CONFIG = getDefaultConfig({
   chains: [
     defineChain({
-      id: import.meta.env.VITE_CHAIN_ID ?? 0x8613d62c79827,
+      id: parseInt(import.meta.env.VITE_CHAIN_ID ?? 0x8613d62c79827),
       name: FLUENCE_CLIENT_NETWORK,
       nativeCurrency: {
         decimals: 18,
