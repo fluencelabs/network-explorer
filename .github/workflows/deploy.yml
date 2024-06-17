@@ -26,6 +26,7 @@ on:
         type: choice
         description: env to deploy to
         options:
+        - stage
         - dar
         - kras
 
