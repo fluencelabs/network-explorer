@@ -15,8 +15,8 @@ importers:
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1(@types/react@18.2.25)(react@18.2.0))(@types/react@18.2.25)(react@18.2.0)
       '@fluencelabs/deal-ts-clients':
-        specifier: ^0.13.12
-        version: 0.13.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@6.0.3)
+        specifier: ^0.14.0
+        version: 0.14.0(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@6.0.3)
       '@radix-ui/react-accordion':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1242,8 +1242,8 @@ packages:
   '@floating-ui/utils@0.1.6':
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
 
-  '@fluencelabs/deal-ts-clients@0.13.12':
-    resolution: {integrity: sha512-2NSflGD8bkAaMCRj8gHz5XtEiRWJ2JyUsXYvjTYJh89GQzRFdTqENPzWSosezJabHY76aHVlx1vLbKQYig8Yvg==}
+  '@fluencelabs/deal-ts-clients@0.14.0':
+    resolution: {integrity: sha512-/WsSFFlObDxKmi+J8lXhWv8vsyw7gkZkDK7HKp+7J24UcbVK72ciVFh37pah6yYi4DqCRTJf5gGF9QCd8f3vkQ==}
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -5482,6 +5482,7 @@ packages:
 
   rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@3.0.2:
@@ -7602,7 +7603,7 @@ snapshots:
 
   '@floating-ui/utils@0.1.6': {}
 
-  '@fluencelabs/deal-ts-clients@0.13.12(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@6.0.3)':
+  '@fluencelabs/deal-ts-clients@0.14.0(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@6.0.3)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
       debug: 4.3.4
