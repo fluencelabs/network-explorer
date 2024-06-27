@@ -1,5 +1,5 @@
-import { Chain, createClient } from 'viem'
-import { createConfig, http } from 'wagmi'
+import { Chain } from 'viem'
+import { createConfig, createStorage, http } from 'wagmi'
 
 // The network name for fluence contract clients: {kras, dar, stage, local}
 export const FLUENCE_CLIENT_NETWORK =
@@ -28,9 +28,15 @@ const CHAIN = {
   },
 } as const satisfies Chain
 
+const storage = createStorage({
+  storage: localStorage,
+  key: FLUENCE_CLIENT_NETWORK,
+})
+
 export const WAGMI_CONFIG = createConfig({
   chains: [CHAIN],
-  client({ chain }) {
-    return createClient({ chain, transport: http() })
+  transports: {
+    [CHAIN_ID]: http(RPC_URL),
   },
+  storage,
 })
