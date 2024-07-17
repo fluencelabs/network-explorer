@@ -12,8 +12,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.25)(react@18.2.0)
   '@fluencelabs/deal-ts-clients':
-    specifier: ^0.14.2
-    version: 0.14.2
+    specifier: ^0.14.3
+    version: 0.14.3
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -2168,8 +2168,8 @@ packages:
     resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
     dev: false
 
-  /@fluencelabs/deal-ts-clients@0.14.2:
-    resolution: {integrity: sha512-MLEVHxeXv/3W2bQFE947s95D1Ibx5tSUkWKfe18hWHHBtTVFTI1M6bUqg03Iugf4mMd1bYyoUrU9e8BUoHZlfg==}
+  /@fluencelabs/deal-ts-clients@0.14.3:
+    resolution: {integrity: sha512-6b6kcXTiVxew6h15/+wUB9//npbgB6oAfauuKzFMD8xpUuac93KfBWDSuGT3nZfIiQo9GQuIcNBA4m6AxqJGZw==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.9.0)
       debug: 4.3.5
@@ -10110,7 +10110,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 18.19.39
+      '@types/node': 20.14.10
       long: 5.2.3
     dev: false
 
