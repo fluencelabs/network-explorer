@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
+  CapacityCommitmentsByProviderFilter,
   CapacityCommitmentsOrderBy,
-  ChildEntitiesByProviderFilter,
+  CapacityCommitmentsStatusFilter,
   OrderType,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
@@ -68,7 +69,7 @@ const items: {
 export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
   providerId,
 }) => {
-  const [filters, setFilter] = useFilters<ChildEntitiesByProviderFilter>({
+  const [filters, setFilter] = useFilters<CapacityCommitmentsByProviderFilter>({
     providerId,
   })
 
@@ -111,8 +112,9 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     setOrder(`${key}:${order}`)
   }
 
-  const handleSetStatus = (value: ProviderChildEntityStatusFilter) => {
-    setFilter('status', value)
+  const handleSetStatus = (value: CapacityCommitmentsStatusFilter | 'all') => {
+    const filter = value === 'all' ? undefined : value
+    setFilter('status', filter)
   }
 
   return (

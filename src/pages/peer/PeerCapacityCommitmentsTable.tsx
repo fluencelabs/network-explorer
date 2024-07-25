@@ -2,8 +2,9 @@ import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
+  CapacityCommitmentsByPeerFilter,
   CapacityCommitmentsOrderBy,
-  ChildEntitiesByPeerFilter,
+  CapacityCommitmentsStatusFilter,
   ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
@@ -57,7 +58,7 @@ interface PeerCapacityCommitmentsTableProps {
 export const PeerCapacityCommitmentsTable: React.FC<
   PeerCapacityCommitmentsTableProps
 > = ({ peerId }) => {
-  const [filters, setFilter] = useFilters<ChildEntitiesByPeerFilter>({
+  const [filters, setFilter] = useFilters<CapacityCommitmentsByPeerFilter>({
     peerId,
   })
 
@@ -91,13 +92,18 @@ export const PeerCapacityCommitmentsTable: React.FC<
 
   const { hasNextPage, pageItems } = getPageItems(capacities?.data ?? [])
 
+  const handleSetStatus = (value: CapacityCommitmentsStatusFilter | 'all') => {
+    const filter = value === 'all' ? undefined : value
+    setFilter('status', filter)
+  }
+
   return (
     <>
       <Text size={32}>Capacity commitments</Text>
       <Space height="24px" />
       <ButtonGroup
         value={filters.status ?? 'all'}
-        onSelect={(value) => setFilter('status', value)}
+        onSelect={handleSetStatus}
         items={items}
       />
       <Space height="32px" />
