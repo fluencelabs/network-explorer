@@ -10,7 +10,5 @@ export const useCurrentEpoch = () => {
     to: getDeployment(FLUENCE_CLIENT_NETWORK).core as `0x${string}`,
     data: toFunctionSelector('currentEpoch()'),
   })
-  console.log('use current epoch result:', result)
-  console.dir(result)
   return result
 }

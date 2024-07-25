@@ -52,6 +52,9 @@ const explorerUrls: Record<string, string> = {
 export const RightMenu: React.FC = () => {
   const curEpoch = useCurrentEpoch()
 
+  console.log('use current epoch result:', curEpoch)
+  console.dir(curEpoch)
+
   return (
     <RightMenuBlock>
       <LinksBlock>
