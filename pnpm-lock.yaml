@@ -12,8 +12,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.25)(react@18.2.0)
   '@fluencelabs/deal-ts-clients':
-    specifier: 0.15.0
-    version: 0.15.0
+    specifier: 0.15.1
+    version: 0.15.1
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -2168,8 +2168,8 @@ packages:
     resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
     dev: false
 
-  /@fluencelabs/deal-ts-clients@0.15.0:
-    resolution: {integrity: sha512-RO5Ct7N7Np++mM9UQBnKbD8NmGdLVMXrRrAU3lfrfzeN1R0JiVSXLEypvFzNNwgGXYktDOIjaVlLwkEet8/Xqw==}
+  /@fluencelabs/deal-ts-clients@0.15.1:
+    resolution: {integrity: sha512-3ALLXqYcSqKlce750YwiN9KnwclHG1epqvXkwKeWHO0ZKWl1P1HcaYcfVhTlecclXojEAe980jIYdVf0zPGd1g==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.9.0)
       debug: 4.3.5
