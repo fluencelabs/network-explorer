@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.4](https://github.com/fluencelabs/network-explorer/compare/v0.0.3...v0.0.4) (2024-07-26)
+
+
+### Bug Fixes
+
+* **deps:** deal-ts-clients 0.15.0, diamond on stage ([#55](https://github.com/fluencelabs/network-explorer/issues/55)) ([c0a937f](https://github.com/fluencelabs/network-explorer/commit/c0a937f71737dce610c42221b361f558ced5c4d4))
+* **deps:** deal-ts-clients 0.15.1 ([#59](https://github.com/fluencelabs/network-explorer/issues/59)) ([69459a1](https://github.com/fluencelabs/network-explorer/commit/69459a184008ec47fe2f1a7db3864b6f8ad1de05))
+
 ## [0.0.3](https://github.com/fluencelabs/network-explorer/compare/v0.0.2...v0.0.3) (2024-06-28)
 
 
