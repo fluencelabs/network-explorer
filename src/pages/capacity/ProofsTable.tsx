@@ -77,7 +77,13 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
   )
 
   const { data: currentEpoch, isLoading: isEpochLoading } = useApiQuery(
-    (client) => client.getCurrentEpoch(),
+    (client) => {
+      // TODO: return `getCurrentEpoch()` method to DealExplorerClient
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const result: Promise<number> = client.epochManager.getCurrentEpoch()
+      return result
+    },
     [],
   )
 
