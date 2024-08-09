@@ -34,11 +34,11 @@ export const useApiQuery = <T>(
       })
 
       const data = await (cache
-        ? cached(() => fn(client), {
+        ? cached(() => fn(client!), {
             key: `${FLUENCE_CLIENT_NETWORK}:${cache.key}`,
             ttl: cache.ttl,
           })
-        : fn(client))
+        : fn(client!))
 
       setResult({
         error: undefined,
