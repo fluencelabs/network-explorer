@@ -10,7 +10,7 @@ import { ArrowIcon } from '../assets/icons'
 import { useCurrentEpoch } from '../hooks/useCurrentEpoch'
 
 import { colors } from '../constants/colors'
-import { FLUENCE_CLIENT_NETWORK } from '../constants/config'
+import { CHAIN_ID, FLUENCE_CLIENT_NETWORK } from '../constants/config'
 
 import { Button } from './Button'
 import { Select, SelectItem } from './Select'
@@ -67,7 +67,7 @@ export const RightMenu: React.FC = () => {
         </StyledA>
       </LinksBlock>
       <Select
-        value={FLUENCE_CLIENT_NETWORK}
+        value={CHAIN_ID == 9999999 ? 'mainnet' : FLUENCE_CLIENT_NETWORK}
         onChange={(value) => window.open(explorerUrls[value], '_self')}
         items={items}
       >
