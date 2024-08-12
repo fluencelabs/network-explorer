@@ -32,6 +32,11 @@ const items: SelectItem<ContractsENV>[] = [
     value: 'kras',
     icon: <MainnetIcon />,
   },
+  {
+    label: 'New',
+    value: 'mainnet',
+    icon: <MainnetIcon />,
+  },
 ]
 
 // TODO: if no key in dict choose default instead of this hardcode.
@@ -47,6 +52,7 @@ const explorerUrls: Record<string, string> = {
   stage: 'https://explorer.stage.fluence.dev',
   dar: 'https://explorer.dar.fluence.dev',
   kras: 'https://explorer.kras.fluence.dev',
+  mainnet: 'https://explorer.new.fluence.dev',
 }
 
 export const RightMenu: React.FC = () => {
