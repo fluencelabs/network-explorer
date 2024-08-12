@@ -10,16 +10,10 @@ export const useClient = () => {
 
   useEffect(() => {
     ;(async () => {
-      console.log(`RPC URL: ${RPC_URL}`)
-      const client = await DealExplorerClient.create(
-        FLUENCE_CLIENT_NETWORK,
-        RPC_URL,
-        undefined,
-        {
-          nativeTokenValueAdditionalFormatter: formatNativeTokenValue,
-          paymentTokenValueAdditionalFormatter: formatPaymentTokenValue,
-        },
-      )
+      const client = await DealExplorerClient.create(FLUENCE_CLIENT_NETWORK, RPC_URL, undefined, {
+        nativeTokenValueAdditionalFormatter: formatNativeTokenValue,
+        paymentTokenValueAdditionalFormatter: formatPaymentTokenValue,
+      })
       setClient(client)
     })()
   }, [])

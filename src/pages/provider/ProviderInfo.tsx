@@ -58,7 +58,7 @@ export const ProviderInfo: React.FC = () => {
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
-                The total number of peers with activated Capacity Commitments
+                The total number of peers without activated Capacity Commitments
               </Text>
             </Tooltip>
           </StatisticTitle>
