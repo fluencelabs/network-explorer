@@ -40,17 +40,35 @@ export const ProviderInfo: React.FC = () => {
         <Statistic>
           <StatisticTitle>
             <Text size={10} weight={700} uppercase color="grey400">
-              Total Peers
+              Confirmed Peers
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
-                The total number of peers with activated Capacity commitments
+                The total number of peers with activated Capacity Commitments
               </Text>
             </Tooltip>
           </StatisticTitle>
-          <Text size={32}>{provider.peerCount}</Text>
+          <Text size={32}>{provider.peersInCapacityCommitment}</Text>
         </Statistic>
 
+        <Statistic>
+          <StatisticTitle>
+            <Text size={10} weight={700} uppercase color="grey400">
+              Unconfirmed Peers
+            </Text>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600} size={12}>
+                The total number of peers with activated Capacity Commitments
+              </Text>
+            </Tooltip>
+          </StatisticTitle>
+          <Text size={32}>
+            {provider.peersTotal - provider.peersInCapacityCommitment}
+          </Text>
+        </Statistic>
+      </StatisticsRow>
+
+      <StatisticsRow>
         <Statistic>
           <StatisticTitle>
             <Text size={10} weight={700} uppercase color="grey400">
@@ -58,11 +76,30 @@ export const ProviderInfo: React.FC = () => {
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
-                The total number of CUs which are not in a Deal at the moment
+                The total number of Confirmed Compute Units that are not in a
+                Deal at the moment
               </Text>
             </Tooltip>
           </StatisticTitle>
-          <Text size={32}>{provider.freeComputeUnits}</Text>
+          <Text size={32}>{provider.computeUnitsInCapacityCommitment}</Text>
+        </Statistic>
+
+        <Statistic>
+          <StatisticTitle>
+            <Text size={10} weight={700} uppercase color="grey400">
+              Confirmed Compute Units
+            </Text>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600} size={12}>
+                The total number of Compute Units with active Capacity
+                Commitment
+              </Text>
+            </Tooltip>
+          </StatisticTitle>
+          <Text size={32}>
+            {provider.computeUnitsInCapacityCommitment +
+              provider.computeUnitsInDeal}
+          </Text>
         </Statistic>
 
         <Statistic>
@@ -72,11 +109,11 @@ export const ProviderInfo: React.FC = () => {
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
-                The overall number of CUs with Capacity commitment
+                The overall number of Compute Units
               </Text>
             </Tooltip>
           </StatisticTitle>
-          <Text size={32}>{provider.totalComputeUnits}</Text>
+          <Text size={32}>{provider.computeUnitsTotal}</Text>
         </Statistic>
       </StatisticsRow>
       {/* <Space height="60px" />

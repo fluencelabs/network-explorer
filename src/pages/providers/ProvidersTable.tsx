@@ -6,7 +6,7 @@ import {
   ProvidersFilters,
   ProviderShortOrderBy,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
-import { ProviderShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
+import { ProviderListEntry } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { ApprovedIcon, ArrowIcon, InfoOutlineIcon } from '../../assets/icons'
@@ -42,7 +42,7 @@ const template = [
 ]
 
 interface ProviderRowProps {
-  provider: ProviderShort
+  provider: ProviderListEntry
 }
 
 type ProviderSort = `${ProviderShortOrderBy}:${OrderType}`
@@ -156,13 +156,13 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
             <A href={`/provider/${provider.id}`}>{provider.id}</A>
           </Cell>
           <Cell>
-            <Text size={12}>{provider.peerCount}</Text>
+            <Text size={12}>{provider.peersTotal}</Text>
           </Cell>
           <Cell>
-            <Text size={12}>{provider.totalComputeUnits}</Text>
+            <Text size={12}>{provider.computeUnitsTotal}</Text>
             <Space width="6px" />
             <ProviderComputeUnitsAvailable size={12} color="white">
-              {provider.freeComputeUnits}
+              {provider.computeUnitsInCapacityCommitment}
             </ProviderComputeUnitsAvailable>
           </Cell>
           <Cell>{provider.isApproved ? <ApprovedIcon /> : <>-</>}</Cell>
