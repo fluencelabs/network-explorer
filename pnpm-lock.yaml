@@ -12,8 +12,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.25)(react@18.2.0)
   '@fluencelabs/deal-ts-clients':
-    specifier: v0.15.5-feat-CHAIN-474-un-confirmed-peers-cus-4714c3b-5730-1.0
-    version: 0.15.5-feat-CHAIN-474-un-confirmed-peers-cus-4714c3b-5730-1.0
+    specifier: ' v0.15.5-feat-CHAIN-474-un-confirmed-peers-cus-7d4c0b7-5731-1.0'
+    version: 0.15.5-feat-CHAIN-474-un-confirmed-peers-cus-7d4c0b7-5731-1.0
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -2170,8 +2170,8 @@ packages:
     resolution: {integrity: sha512-X8R8Oj771YRl/w+c1HqAC1szL8zWQRwFvgDwT129k9ACdBoud/+/rX9V0qiMl6LWUdP9voC2nDVZYPMQQsb6eA==}
     dev: false
 
-  /@fluencelabs/deal-ts-clients@0.15.5-feat-CHAIN-474-un-confirmed-peers-cus-4714c3b-5730-1.0:
-    resolution: {integrity: sha512-zguVmVETLRKowMwgIzS10VMWJoHo0EFkBJhNb7ivGBDpjpeapriSCAl6gBN0Mhec1zNPZL3vnybPQsTGElBSMQ==}
+  /@fluencelabs/deal-ts-clients@0.15.5-feat-CHAIN-474-un-confirmed-peers-cus-7d4c0b7-5731-1.0:
+    resolution: {integrity: sha512-V+g5YXvJJGrajQKHB4f+okkwBJv7zENmw/OaQMTHiY7w2c0tJQQrLw1LoXCHEVr76JNQQTYpPHqfKMFx8tGtWg==}
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.9.0)
       debug: 4.3.6
@@ -2902,6 +2902,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.7
+      napi-wasm: 1.1.0
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -9420,6 +9421,10 @@ packages:
     hasBin: true
     dev: false
 
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
+    dev: false
+
   /native-fetch@3.0.0(node-fetch@2.7.0):
     resolution: {integrity: sha512-G3Z7vx0IFb/FQ4JxvtqGABsOTIqRWvgQz6e+erkB+JJD6LrszQtMozEHI4EkmgZQvnGHrpLVzUWk7t4sJCIkVw==}
     peerDependencies:
@@ -10131,7 +10136,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 18.19.44
+      '@types/node': 22.2.0
       long: 5.2.3
     dev: false
 
