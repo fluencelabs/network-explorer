@@ -29,6 +29,7 @@ on:
         - stage
         - dar
         - kras
+        - mainnet-gelato
 
 jobs:
   deploy:
