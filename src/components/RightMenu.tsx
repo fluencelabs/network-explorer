@@ -10,7 +10,11 @@ import { ArrowIcon } from '../assets/icons'
 import { useCurrentEpoch } from '../hooks/useCurrentEpoch'
 
 import { colors } from '../constants/colors'
-import { FLUENCE_CLIENT_NETWORK } from '../constants/config'
+import {
+  CHAIN_ID,
+  FLUENCE_CLIENT_NETWORK,
+  GELATO_MAINNET_NETWORK_ID,
+} from '../constants/config'
 
 import { Button } from './Button'
 import { Select, SelectItem } from './Select'
@@ -32,6 +36,11 @@ const items: SelectItem<ContractsENV>[] = [
     value: 'kras',
     icon: <MainnetIcon />,
   },
+  {
+    label: 'New',
+    value: 'mainnet',
+    icon: <MainnetIcon />,
+  },
 ]
 
 // TODO: if no key in dict choose default instead of this hardcode.
@@ -47,6 +56,7 @@ const explorerUrls: Record<string, string> = {
   stage: 'https://explorer.stage.fluence.dev',
   dar: 'https://explorer.dar.fluence.dev',
   kras: 'https://explorer.kras.fluence.dev',
+  mainnet: 'https://explorer.new.fluence.dev',
 }
 
 export const RightMenu: React.FC = () => {
@@ -61,7 +71,12 @@ export const RightMenu: React.FC = () => {
         </StyledA>
       </LinksBlock>
       <Select
-        value={FLUENCE_CLIENT_NETWORK}
+        // TODO: remove the 'CHAIN_ID == GELATO_MAINNET_NETWORK_ID' condition once old Kras is deprecated
+        value={
+          CHAIN_ID == GELATO_MAINNET_NETWORK_ID
+            ? 'mainnet'
+            : FLUENCE_CLIENT_NETWORK
+        }
         onChange={(value) => window.open(explorerUrls[value], '_self')}
         items={items}
       >
