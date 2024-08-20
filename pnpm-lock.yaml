@@ -15,8 +15,8 @@ importers:
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1(@types/react@18.2.25)(react@18.2.0))(@types/react@18.2.25)(react@18.2.0)
       '@fluencelabs/deal-ts-clients':
-        specifier: 0.15.4
-        version: 0.15.4(bufferutil@4.0.8)(encoding@0.1.13)
+        specifier: 0.16.1
+        version: 0.16.1(bufferutil@4.0.8)(encoding@0.1.13)
       '@radix-ui/react-accordion':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1172,8 +1172,8 @@ packages:
   '@floating-ui/utils@0.2.4':
     resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
 
-  '@fluencelabs/deal-ts-clients@0.15.4':
-    resolution: {integrity: sha512-+B9W8ISRX6WqNd/blv9ZfAXfyQN2ffWmZwaD68sqI6zYdP+H4W6lS4iOv3uD1FvN4Zv3TS7kn8zFiH5uw+vOhw==}
+  '@fluencelabs/deal-ts-clients@0.16.1':
+    resolution: {integrity: sha512-sHXDItyg9AkOnRq0GnVszzFbuKLZJcTVi8Uv7AWBGBorR7WtmRtNoUpNGcOWj4C5T5iPa9NNF79SmuVa6zHcog==}
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -7567,7 +7567,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.4': {}
 
-  '@fluencelabs/deal-ts-clients@0.15.4(bufferutil@4.0.8)(encoding@0.1.13)':
+  '@fluencelabs/deal-ts-clients@0.16.1(bufferutil@4.0.8)(encoding@0.1.13)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.9.0)
       debug: 4.3.5
