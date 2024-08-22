@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.0](https://github.com/fluencelabs/network-explorer/compare/v0.0.4...v0.1.0) (2024-08-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** deal-ts-clients 0.18.0 ([#65](https://github.com/fluencelabs/network-explorer/issues/65))
+
+### Features
+
+* Update to (un)confirmed peers/CUs API [CHAIN-699] ([#62](https://github.com/fluencelabs/network-explorer/issues/62)) ([d7aa2a7](https://github.com/fluencelabs/network-explorer/commit/d7aa2a746056852a8d817cf41d6d7d28a1ab7ae0))
+
+
+### Bug Fixes
+
+* **deps:** deal-ts-clients 0.15.4, new stage, testnet & kras contracts ([#60](https://github.com/fluencelabs/network-explorer/issues/60)) ([a85c3ec](https://github.com/fluencelabs/network-explorer/commit/a85c3ec46861d99bcfcdb9b72a60f134dab9e343))
+* **deps:** deal-ts-clients 0.18.0 ([#65](https://github.com/fluencelabs/network-explorer/issues/65)) ([bd9a0cb](https://github.com/fluencelabs/network-explorer/commit/bd9a0cb65fca5a7850c94a25ae3ec1e2ccdb9c7c))
+
 ## [0.0.4](https://github.com/fluencelabs/network-explorer/compare/v0.0.3...v0.0.4) (2024-07-26)
 
 
