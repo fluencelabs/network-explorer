@@ -30,8 +30,8 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
   const {
     createdAtFrom,
     createdAtTo,
-    minPricePerWorkerEpoch = '',
-    maxPricePerWorkerEpoch = '',
+    minPricePerCuPerEpoch = '',
+    maxPricePerCuPerEpoch = '',
   } = filters
 
   return (
@@ -108,17 +108,17 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
         <Divider />
         <FromToContainer>
           <Text size={10} weight={700} uppercase color="grey400">
-            Price per epoch
+            Price per CU per epoch
           </Text>
           <FromToRow>
             <Text color="grey400" size={12}>
               from
             </Text>
             <NumberInput
-              value={minPricePerWorkerEpoch}
+              value={minPricePerCuPerEpoch}
               onChange={(e) =>
                 setFilter(
-                  'minPricePerWorkerEpoch',
+                  'minPricePerCuPerEpoch',
                   !e.target.value ? undefined : Number(e.target.value),
                 )
               }
@@ -128,10 +128,10 @@ export const DealsFilterModal: React.FC<DealsFilterModalProps> = ({
               to
             </Text>
             <NumberInput
-              value={maxPricePerWorkerEpoch}
+              value={maxPricePerCuPerEpoch}
               onChange={(e) =>
                 setFilter(
-                  'maxPricePerWorkerEpoch',
+                  'maxPricePerCuPerEpoch',
                   !e.target.value ? undefined : Number(e.target.value),
                 )
               }
