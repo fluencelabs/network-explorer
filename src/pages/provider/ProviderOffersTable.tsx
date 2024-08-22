@@ -143,8 +143,8 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
           </TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
-            field="pricePerWorkerEpoch"
-            isActive={orderBy === 'pricePerWorkerEpoch'}
+            field="pricePerCuPerEpoch"
+            isActive={orderBy === 'pricePerCuPerEpoch'}
             onSort={handleSort}
           >
             Price Per Epoch

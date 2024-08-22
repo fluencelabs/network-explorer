@@ -204,10 +204,10 @@ export const DealInfo: React.FC = () => {
             </Parameter>
             <Parameter>
               <Text size={10} weight={700} uppercase color="grey400">
-                Price Per Worker Epoch
+                Price Per CU Per Epoch
               </Text>
               <ParameterValue>
-                <Text size={20}>{deal.pricePerWorkerEpoch}</Text>
+                <Text size={20}>{deal.pricePerCuPerEpoch}</Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
                     {deal.paymentToken.symbol}

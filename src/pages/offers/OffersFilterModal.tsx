@@ -43,8 +43,8 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
   const {
     createdAtFrom,
     createdAtTo,
-    minPricePerWorkerEpoch = '',
-    maxPricePerWorkerEpoch = '',
+    minPricePerCuPerEpoch = '',
+    maxPricePerCuPerEpoch = '',
     onlyActive = false,
   } = filters
 
@@ -144,9 +144,9 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
               from
             </Text>
             <NumberInput
-              value={minPricePerWorkerEpoch}
+              value={minPricePerCuPerEpoch}
               onChange={(e) =>
-                setFilter('minPricePerWorkerEpoch', Number(e.target.value))
+                setFilter('minPricePerCuPerEpoch', Number(e.target.value))
               }
               placeholder="0"
             />
@@ -154,9 +154,9 @@ export const OffersFilterModal: React.FC<OffersFilterModalProps> = ({
               to
             </Text>
             <NumberInput
-              value={maxPricePerWorkerEpoch}
+              value={maxPricePerCuPerEpoch}
               onChange={(e) =>
-                setFilter('maxPricePerWorkerEpoch', Number(e.target.value))
+                setFilter('maxPricePerCuPerEpoch', Number(e.target.value))
               }
               placeholder="0"
             />
