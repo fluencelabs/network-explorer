@@ -38,7 +38,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(100px, 1fr)',
   'minmax(50px, 1fr)',
-  '60px',
+  '120px',
 ]
 
 interface ProviderRowProps {
