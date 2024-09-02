@@ -67,7 +67,7 @@ export const ProviderInfo: React.FC = () => {
           </Text>
         </Statistic>
       </StatisticsRow>
-
+      <Space height="64px" />
       <StatisticsRow>
         <Statistic>
           <StatisticTitle>
@@ -116,91 +116,6 @@ export const ProviderInfo: React.FC = () => {
           <Text size={32}>{provider.computeUnitsTotal}</Text>
         </Statistic>
       </StatisticsRow>
-      {/* <Space height="60px" />
-      <Charts>
-        <ChartWrapper>
-          <ChartLabel>
-            <Text size={20}>Capacity revenue</Text>
-            <TokenBadge bg="black900">
-              <Text size={12} weight={800} color="white">
-                FLT
-              </Text>
-            </TokenBadge>
-          </ChartLabel>
-          <DataInfoBlock>
-            <DataInfoHeader>
-              <Text color="grey400" size={10} weight={700}>
-                7D
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                1M
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                3M
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                6M
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                12M
-              </Text>
-              <Text color="grey400" size={10} weight={700} uppercase>
-                Total
-              </Text>
-            </DataInfoHeader>
-            <DataInfoContent>
-              <Text size={12}>10</Text>
-              <Text size={12}>60</Text>
-              <Text size={12}>230</Text>
-              <Text size={12}>450</Text>
-              <Text size={12}>1250</Text>
-              <Text size={12}>2500</Text>
-            </DataInfoContent>
-          </DataInfoBlock>
-          <AspectRatio.Root ratio={600 / 280}>
-            <Chart />
-          </AspectRatio.Root>
-        </ChartWrapper>
-        <ChartWrapper>
-          <ChartLabel>
-            <Text size={20}>Deal revenue</Text>
-            <Select items={items} value={value} onChange={setValue} />
-          </ChartLabel>
-          <DataInfoBlock>
-            <DataInfoHeader>
-              <Text color="grey400" size={10} weight={700}>
-                7D
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                1M
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                3M
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                6M
-              </Text>
-              <Text color="grey400" size={10} weight={700}>
-                12M
-              </Text>
-              <Text color="grey400" size={10} weight={700} uppercase>
-                Total
-              </Text>
-            </DataInfoHeader>
-            <DataInfoContent>
-              <Text size={12}>10</Text>
-              <Text size={12}>60</Text>
-              <Text size={12}>230</Text>
-              <Text size={12}>450</Text>
-              <Text size={12}>1250</Text>
-              <Text size={12}>2500</Text>
-            </DataInfoContent>
-          </DataInfoBlock>
-          <AspectRatio.Root ratio={600 / 280}>
-            <Chart />
-          </AspectRatio.Root>
-        </ChartWrapper>
-      </Charts> */}
     </Provider>
   )
 }
