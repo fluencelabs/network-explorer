@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
@@ -7,16 +7,63 @@ import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { CapacityStatus } from '../../components/CapacityStatus'
 import { Copyable } from '../../components/Copyable'
+import Hint from '../../components/Hint'
 import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
+import TokenBalance from '../../components/TokenBalance'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
 import { ProofsTable } from './ProofsTable'
+
+const Record: React.FC<{
+  title: ReactNode
+  hint?: ReactNode
+  balance: string | number
+  symbol?: string
+}> = ({ title, hint, balance, symbol }) => {
+  return (
+    <Parameter>
+      <Row>
+        <Text size={10} weight={700} uppercase color="grey400">
+          {title}
+        </Text>
+        {hint && <Hint>{hint}</Hint>}
+      </Row>
+      <ParameterValue>
+        <TokenBalance balance={balance} symbol={symbol} />
+      </ParameterValue>
+    </Parameter>
+  )
+}
+
+const Rewards: React.FC<{
+  title: string
+  symbol?: string
+  inVesting: string | number
+  availableToClaim: string | number
+  claimed: string | number
+}> = ({ title, symbol, inVesting, availableToClaim, claimed }) => {
+  return (
+    <div>
+      <Text size={24}>{title}</Text>
+      <Space height="24px" />
+      <Record title="In vesting" balance={inVesting} symbol={symbol} />
+      <Space height="32px" />
+      <Record
+        title="Available to claim"
+        balance={availableToClaim}
+        symbol={symbol}
+      />
+      <Space height="32px" />
+      <Record title="Total claimed" balance={claimed} symbol={symbol} />
+    </div>
+  )
+}
 
 export const CapacityInfo: React.FC = () => {
   const params = useParams()
@@ -175,11 +222,11 @@ export const CapacityInfo: React.FC = () => {
             <Info>
               <Row>
                 <Text size={10} weight={700} uppercase color="grey400">
-                  Reward delegator rate
+                  Reward staking reward
                 </Text>
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
-                    Share of rewards that will be allocated to the Delegator who
+                    Share of rewards that will be allocated to the Staker who
                     <br />
                     activated the Capacity commitment.
                   </Text>
@@ -203,11 +250,11 @@ export const CapacityInfo: React.FC = () => {
             <Info>
               <Row>
                 <Text size={10} weight={700} uppercase color="grey400">
-                  Delegator address
+                  Staker address
                 </Text>
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
-                    Delegator Address who can activate the Capacity commitment.
+                    Staker Address who can activate the Capacity commitment.
                   </Text>
                 </Tooltip>
               </Row>
@@ -235,123 +282,29 @@ export const CapacityInfo: React.FC = () => {
                 </Tooltip>
               </Row>
               <ParameterValue>
-                <Text size={12}>{capacity.rewardsTotal}</Text>
-                <TokenBadge bg="black900">
-                  <Text size={10} weight={800} color="white">
-                    {capacity.collateralToken.symbol}
-                  </Text>
-                </TokenBadge>
+                <TokenBalance
+                  balance={capacity.rewards.total}
+                  symbol={capacity.collateralToken.symbol}
+                />
               </ParameterValue>
             </Parameter>
           </ParametersRow>
           <Space height="40px" />
           <ParametersRow>
-            <div>
-              <Text size={24}>Provider</Text>
-              <Space height="24px" />
-              <Parameter>
-                <Row>
-                  <Text size={10} weight={700} uppercase color="grey400">
-                    Not Withdrawn Rewards
-                  </Text>
-                  <Tooltip trigger={<InfoOutlineIcon />}>
-                    <Text color="grey600" weight={600} size={12}>
-                      The total amount of FLT token rewards earned that have not
-                      <br />
-                      yet been withdrawn by the provider. Attention! Some of
-                      <br />
-                      them may be in Vesting still. Tokens available for
-                      <br />
-                      withdrawal now are Unlocked Rewards.
-                    </Text>
-                  </Tooltip>
-                </Row>
-                <ParameterValue>
-                  <Text size={12}>{capacity.rewardsNotWithdrawnProvider}</Text>
-                  <TokenBadge bg="black900">
-                    <Text size={10} weight={800} color="white">
-                      {capacity.collateralToken.symbol}
-                    </Text>
-                  </TokenBadge>
-                </ParameterValue>
-              </Parameter>
-              <Space height="32px" />
-              <Parameter>
-                <Row>
-                  <Text size={10} weight={700} uppercase color="grey400">
-                    Unlocked Rewards
-                  </Text>
-                  <Tooltip trigger={<InfoOutlineIcon />}>
-                    <Text color="grey600" weight={600} size={12}>
-                      The total amount of Unlocked Rewards that can be withdrawn
-                      <br />
-                      by the Provider right now.
-                    </Text>
-                  </Tooltip>
-                </Row>
-                <ParameterValue>
-                  <Text size={12}>{capacity.rewardsUnlockedProvider}</Text>
-                  <TokenBadge bg="black900">
-                    <Text size={10} weight={800} color="white">
-                      {capacity.collateralToken.symbol}
-                    </Text>
-                  </TokenBadge>
-                </ParameterValue>
-              </Parameter>
-            </div>
-            <div>
-              <Text size={24}>Delegator</Text>
-              <Space height="24px" />
-              <Parameter>
-                <Row>
-                  <Text size={10} weight={700} uppercase color="grey400">
-                    Not Withdrawn Rewards
-                  </Text>
-                  <Tooltip trigger={<InfoOutlineIcon />}>
-                    <Text color="grey600" weight={600} size={12}>
-                      The total amount of FLT token rewards earned that have not
-                      <br />
-                      yet been withdrawn by the Delegator. Attention! Some of
-                      <br />
-                      them may be in vesting. Tokens available for withdrawal
-                      <br />
-                      now are in Unlocked Rewards.
-                    </Text>
-                  </Tooltip>
-                </Row>
-                <ParameterValue>
-                  <Text size={12}>{capacity.rewardsNotWithdrawnDelegator}</Text>
-                  <TokenBadge bg="black900">
-                    <Text size={10} weight={800} color="white">
-                      {capacity.collateralToken.symbol}
-                    </Text>
-                  </TokenBadge>
-                </ParameterValue>
-              </Parameter>
-              <Space height="32px" />
-              <Parameter>
-                <Row>
-                  <Text size={10} weight={700} uppercase color="grey400">
-                    Unlocked Rewards
-                  </Text>
-                  <Tooltip trigger={<InfoOutlineIcon />}>
-                    <Text color="grey600" weight={600} size={12}>
-                      The total amount of Unlocked Rewards that can be withdrawn
-                      <br />
-                      by the Delegator now.
-                    </Text>
-                  </Tooltip>
-                </Row>
-                <ParameterValue>
-                  <Text size={12}>{capacity.rewardsUnlockedDelegator}</Text>
-                  <TokenBadge bg="black900">
-                    <Text size={10} weight={800} color="white">
-                      {capacity.collateralToken.symbol}
-                    </Text>
-                  </TokenBadge>
-                </ParameterValue>
-              </Parameter>
-            </div>
+            <Rewards
+              title="Provider"
+              symbol={capacity.collateralToken.symbol}
+              inVesting={capacity.rewards.provider.inVesting}
+              availableToClaim={capacity.rewards.provider.availableToClaim}
+              claimed={capacity.rewards.provider.claimed}
+            />
+            <Rewards
+              title="Staker"
+              symbol={capacity.collateralToken.symbol}
+              inVesting={capacity.rewards.delegator.inVesting}
+              availableToClaim={capacity.rewards.delegator.availableToClaim}
+              claimed={capacity.rewards.delegator.claimed}
+            />
           </ParametersRow>
           <Space height="80px" />
           <ListComputeUnitsTable capacityCommitmentId={id} />
