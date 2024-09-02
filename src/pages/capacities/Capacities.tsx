@@ -31,7 +31,7 @@ export const Capacities: React.FC = () => {
           <Search
             value={filters.search ?? ''}
             onChange={(search) => setFilter('search', search)}
-            placeholder="Search by Provider ID / Commitment ID / Peer ID / Delegator"
+            placeholder="Search by Provider ID / Commitment ID / Peer ID / Staker"
           />
         </FiltersBlock>
       </PageHeader>
