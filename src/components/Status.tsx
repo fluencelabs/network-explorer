@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { Colors, colors } from '../constants/colors'
-
-type StatusColor = Extract<
-  Colors,
-  'green' | 'red' | 'blue' | 'grey300' | 'grey200'
->
+import { colors } from '../constants/colors'
+import { StatusColor } from '../constants/statuses'
 
 interface StatusProps {
   type?: 'label' | 'dot'

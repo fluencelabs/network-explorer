@@ -1,78 +1,24 @@
 import React from 'react'
-import { CapacityCommitmentStatus as ICapacityCommitmentStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
+import { STATUS_NAMES } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/constants'
+import { CapacityCommitmentStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
+
+import { STATUS_COLORS } from '../constants/statuses'
 
 import { Status } from './Status'
 import { Text } from './Text'
 
 interface CapacityStatusProps {
-  status: ICapacityCommitmentStatus
+  status: CapacityCommitmentStatus
 }
 
 export const CapacityStatus: React.FC<CapacityStatusProps> = ({ status }) => {
-  if (status === 'active') {
-    return (
-      <Status color="green">
-        <Text color="white" weight={800} size={10} uppercase>
-          Active
-        </Text>
-      </Status>
-    )
-  }
-
-  if (status === 'inactive') {
-    return (
-      <Status color="grey300">
-        <Text color="white" weight={800} size={10} uppercase>
-          Inactive
-        </Text>
-      </Status>
-    )
-  }
-
-  if (status === 'failed') {
-    return (
-      <Status color="grey300">
-        <Text color="white" weight={800} size={10} uppercase>
-          Failed
-        </Text>
-      </Status>
-    )
-  }
-
-  if (status === 'removed') {
-    return (
-      <Status color="grey300">
-        <Text color="white" weight={800} size={10} uppercase>
-          Removed
-        </Text>
-      </Status>
-    )
-  }
-
-  if (status === 'waitDelegation') {
-    return (
-      <Status color="grey300">
-        <Text color="white" weight={800} size={10} uppercase>
-          Wait delegation
-        </Text>
-      </Status>
-    )
-  }
-
-  if (status === 'waitStart') {
-    return (
-      <Status color="grey300">
-        <Text color="white" weight={800} size={10} uppercase>
-          Wait start
-        </Text>
-      </Status>
-    )
-  }
+  const title = STATUS_NAMES[status]
+  const color = STATUS_COLORS[status]
 
   return (
-    <Status color="red">
+    <Status color={color}>
       <Text color="white" weight={800} size={10} uppercase>
-        undefined
+        {title}
       </Text>
     </Status>
   )
