@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.1](https://github.com/fluencelabs/network-explorer/compare/v0.1.0...v0.1.1) (2024-09-03)
+
+
+### Features
+
+* **capacity:** rename Delegator to Staker and show full rewards stats ([#69](https://github.com/fluencelabs/network-explorer/issues/69)) ([bdc9fe9](https://github.com/fluencelabs/network-explorer/commit/bdc9fe93a39ab6be98b0096f5135cfb631b56a8f))
+* **status:** use constant from ts-client for status naming ([#66](https://github.com/fluencelabs/network-explorer/issues/66)) ([4c45a08](https://github.com/fluencelabs/network-explorer/commit/4c45a0826ea88bb381ce6ed1a7ed69360490867d))
+
+
+### Bug Fixes
+
+* **ProviderInfo:** add spacing between rows ([#67](https://github.com/fluencelabs/network-explorer/issues/67)) ([6a0f426](https://github.com/fluencelabs/network-explorer/commit/6a0f426004dd1b962cb1ed56bdda06e2ed247d8f))
+* **ProviderInfo:** add spacing betweet rows ([6a0f426](https://github.com/fluencelabs/network-explorer/commit/6a0f426004dd1b962cb1ed56bdda06e2ed247d8f))
+* **ProvidersTable:** change width approved column ([#68](https://github.com/fluencelabs/network-explorer/issues/68)) ([780950e](https://github.com/fluencelabs/network-explorer/commit/780950e1227cfa70bd6b274b9fbd7479d1b196ef))
+
 ## [0.1.0](https://github.com/fluencelabs/network-explorer/compare/v0.0.4...v0.1.0) (2024-08-22)
 
 
