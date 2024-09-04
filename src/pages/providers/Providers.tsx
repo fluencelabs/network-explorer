@@ -29,7 +29,7 @@ export const Providers: React.FC = () => {
           <Search
             value={filters.search ?? ''}
             onChange={(value) => setFilters('search', value)}
-            placeholder="Search by Address / Provider name"
+            placeholder="Search by Provider address / Provider name"
           />
         </FiltersBlock>
       </PageHeader>
