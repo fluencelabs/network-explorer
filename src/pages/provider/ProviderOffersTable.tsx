@@ -50,7 +50,9 @@ const PROVIDER_OFFERS_PER_PAGE = 6
 
 type ProviderOfferSort = `${OfferShortOrderBy}:${OrderType}`
 
-export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = () => {
+export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
+  providerId,
+}) => {
   const [order, setOrder] = useState<ProviderOfferSort>('createdAt:desc')
   const [orderBy, orderType] = order.split(':') as [
     OfferShortOrderBy,
@@ -63,10 +65,17 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = () => {
 
   const { data: offers, isLoading } = useApiQuery(
     (client) =>
-      client.getOffersByProvider({}, offset, limit + 1, orderBy, orderType),
-    [page, orderBy, orderType],
+      client.getOffersByProvider(
+        { providerId },
+        offset,
+        limit + 1,
+        orderBy,
+        orderType,
+      ),
+    [page, orderBy, orderType, providerId],
     {
       key: `provider-offers:${JSON.stringify({
+        providerId,
         offset,
         limit,
         order,
