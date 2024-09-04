@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
@@ -7,11 +7,13 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
+import { formatDistanceToNowStrict } from 'date-fns'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { CapacityStatus } from '../../components/CapacityStatus'
+import { ClientContext } from '../../components/ClientProvider'
 import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
@@ -184,6 +186,7 @@ interface CapacityRowProps {
 
 const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
   const [, navigate] = useLocation()
+  const client = useContext(ClientContext)
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -195,6 +198,9 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
   const expiredAt = capacity.expiredAt
     ? formatUnixTimestamp(capacity.expiredAt)
     : { date: '-', time: '' }
+
+  const capacityDuration =
+    capacity.duration * (client?.getEpochDuration() || 0) * 1000
 
   return (
     <RowBlock>
@@ -216,7 +222,12 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Duration */}
             <Cell>
-              <Text size={12}>{capacity.duration}</Text>
+              <Text size={12}>
+                {formatDistanceToNowStrict(
+                  capacity.createdAt * 1000 + capacityDuration,
+                  { unit: 'day' },
+                )}
+              </Text>
             </Cell>
             {/* Expiration */}
             <Cell>
