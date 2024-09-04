@@ -1,6 +1,7 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
+import { STATUS_NAMES } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/constants'
 import {
   CapacityCommitmentsByPeerFilter,
   CapacityCommitmentsOrderBy,
@@ -47,8 +48,8 @@ const items: {
   label: string
 }[] = [
   { value: 'all', label: 'All' },
-  { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: 'active', label: STATUS_NAMES['active'] },
+  { value: 'inactive', label: STATUS_NAMES['inactive'] },
 ]
 
 interface PeerCapacityCommitmentsTableProps {

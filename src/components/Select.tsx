@@ -6,7 +6,7 @@ import { ArrowIcon } from '../assets/icons'
 
 import { colors } from '../constants/colors'
 
-import { Button } from './Button'
+import { Button, ButtonProps } from './Button'
 import { Text } from './Text'
 
 export interface SelectItem<Value extends string = string> {
@@ -19,12 +19,14 @@ interface SelectProps<Value extends string> {
   items: SelectItem<Value>[]
   value: Value
   onChange: (value: Value) => void
+  buttonVariant?: ButtonProps['variant']
   children?: (item: SelectItem) => React.ReactNode | React.ReactNode[]
 }
 
 export const Select = <Value extends string>({
   items,
   value,
+  buttonVariant = 'outline',
   onChange,
   children,
 }: SelectProps<Value>) => {
@@ -34,7 +36,7 @@ export const Select = <Value extends string>({
         {children ? (
           children(items.find((i) => i.value === value)!)
         ) : (
-          <StyledButton variant="outline">
+          <StyledButton variant={buttonVariant}>
             <RadixSelect.Value />
             <RadixSelect.Icon>
               <StyledArrowIcon />
@@ -74,8 +76,8 @@ const Content = styled(RadixSelect.Content)`
   box-shadow:
     0px 4px 6px -2px #18181b0d,
     0px 10px 15px -3px #18181b1a;
-  padding: 12px;
   gap: 8px;
+  padding: 12px 0;
 `
 
 const Viewport = styled(RadixSelect.Viewport)``
@@ -87,6 +89,7 @@ const Item = styled(RadixSelect.Item)`
   cursor: pointer;
   height: 24px;
   transition: background-color 100ms;
+  padding: 0 12px;
 
   border: none;
 

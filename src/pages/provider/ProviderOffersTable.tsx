@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
-  ChildEntitiesByProviderFilter,
   OfferShortOrderBy,
   OrderType,
-  ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { OfferShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
-import { ButtonGroup } from '../../components/ButtonGroup'
 import { EffectorsTooltip } from '../../components/EffectorsTooltip'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
@@ -31,7 +28,6 @@ import {
 import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
-import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatEffectors, formatHexData } from '../../utils/helpers'
 
@@ -54,22 +50,7 @@ const PROVIDER_OFFERS_PER_PAGE = 6
 
 type ProviderOfferSort = `${OfferShortOrderBy}:${OrderType}`
 
-const items: {
-  value: ProviderChildEntityStatusFilter | 'all'
-  label: string
-}[] = [
-  { value: 'all', label: 'All' },
-  { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
-]
-
-export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
-  providerId,
-}) => {
-  const [filters, setFilter] = useFilters<ChildEntitiesByProviderFilter>({
-    providerId,
-  })
-
+export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = () => {
   const [order, setOrder] = useState<ProviderOfferSort>('createdAt:desc')
   const [orderBy, orderType] = order.split(':') as [
     OfferShortOrderBy,
@@ -82,17 +63,10 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
 
   const { data: offers, isLoading } = useApiQuery(
     (client) =>
-      client.getOffersByProvider(
-        filters,
-        offset,
-        limit + 1,
-        orderBy,
-        orderType,
-      ),
-    [page, orderBy, orderType, filters],
+      client.getOffersByProvider({}, offset, limit + 1, orderBy, orderType),
+    [page, orderBy, orderType],
     {
       key: `provider-offers:${JSON.stringify({
-        filters,
         offset,
         limit,
         order,
@@ -109,19 +83,9 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
     setOrder(`${key}:${order}`)
   }
 
-  const handleSetStatus = (value: ProviderChildEntityStatusFilter) => {
-    setFilter('status', value)
-  }
-
   return (
     <>
       <Text size={32}>Offers</Text>
-      <Space height="24px" />
-      <ButtonGroup
-        value={filters.status ?? 'all'}
-        onSelect={handleSetStatus}
-        items={items}
-      />
       <Space height="32px" />
       <ScrollableTable>
         <TableHeader template={template}>
