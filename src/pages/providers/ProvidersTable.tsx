@@ -92,14 +92,14 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
         <TableHeader template={template}>
           <TableColumnTitle>Provider name</TableColumnTitle>
           <TableColumnTitle>Provider Address</TableColumnTitle>
-          <TableColumnTitle>Peers</TableColumnTitle>
+          <TableColumnTitle>Total Peers</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="computeUnitsTotal"
             isActive={orderBy === 'computeUnitsTotal'}
             onSort={handleSort}
           >
-            Compute Units{' '}
+            Confirmed CUs{' '}
             <Text size={10} weight={500} color="green" uppercase>
               ( Available )
             </Text>
@@ -157,6 +157,10 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
           </Cell>
           <Cell>
             <Text size={12}>{provider.peersTotal}</Text>
+            <Space width="6px" />
+            <ProviderComputeUnitsAvailable size={12} color="white">
+              {provider.peersInCapacityCommitment}
+            </ProviderComputeUnitsAvailable>
           </Cell>
           <Cell>
             <Text size={12}>{provider.computeUnitsTotal}</Text>
