@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import {
   CapacityCommitmentsByProviderFilter,
   CapacityCommitmentsOrderBy,
-  CapacityCommitmentsStatusFilter,
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
@@ -14,7 +13,7 @@ import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { CapacityStatus } from '../../components/CapacityStatus'
 import { Pagination } from '../../components/Pagination'
-import { SelectStatus } from '../../components/SelectStatus'
+import { SelectStatus, SelectStatusValue } from '../../components/SelectStatus'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -106,8 +105,8 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     setOrder(`${key}:${order}`)
   }
 
-  const handleSetStatus = (value: CapacityCommitmentsStatusFilter | 'all') => {
-    const filter = value === 'all' ? undefined : value
+  const handleSetStatus = (value: SelectStatusValue) => {
+    const filter = value === 'all' || value === 'undefined' ? undefined : value
     setFilter('status', filter)
   }
 

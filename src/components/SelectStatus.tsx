@@ -6,8 +6,10 @@ import { CapacityCommitmentStatus } from '@fluencelabs/deal-ts-clients/dist/deal
 import { Select } from './Select'
 import { Text } from './Text'
 
+export type SelectStatusValue = CapacityCommitmentStatus | 'all'
+
 const items: {
-  value: CapacityCommitmentStatus | 'all'
+  value: SelectStatusValue
   label: string
 }[] = [
   { value: 'all', label: 'All' },
@@ -23,8 +25,8 @@ export const SelectStatus = ({
   value,
   onChange,
 }: {
-  value?: CapacityCommitmentStatus
-  onChange: (value: CapacityCommitmentStatus | 'all') => void
+  value?: SelectStatusValue
+  onChange: (value: SelectStatusValue) => void
 }) => {
   return (
     <StatusContainer>
