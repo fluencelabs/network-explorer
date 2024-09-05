@@ -14,7 +14,7 @@ import {
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 
-const template = ['30px', 'minmax(10px, 300px)', 'minmax(10px, 100px)']
+const template = ['30px', 'minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 
 interface RequiredEffectorsTableProps {
   effectors: Effector[]
