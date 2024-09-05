@@ -181,5 +181,5 @@ const ParameterValue = styled.div`
 `
 
 const PeersTableWrapper = styled.div`
-  width: 45%;
+  width: 70%;
 `
