@@ -66,6 +66,20 @@ export const ProviderInfo: React.FC = () => {
             {provider.peersTotal - provider.peersInCapacityCommitment}
           </Text>
         </Statistic>
+
+        <Statistic>
+          <StatisticTitle>
+            <Text size={10} weight={700} uppercase color="grey400">
+              Total Peers
+            </Text>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600} size={12}>
+                The total number of peers
+              </Text>
+            </Tooltip>
+          </StatisticTitle>
+          <Text size={32}>{provider.peersTotal}</Text>
+        </Statistic>
       </StatisticsRow>
       <Space height="64px" />
       <StatisticsRow>
