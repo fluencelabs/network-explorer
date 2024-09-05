@@ -14,7 +14,6 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
-import { formatHexData } from '../../utils/helpers'
 
 const template = ['20px', 'minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 
@@ -58,7 +57,7 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
             </Cell>
             {/* Peer ID */}
             <Cell>
-              <A href={`/peer/${peer.id}`}>{formatHexData(peer.id, 10, 12)}</A>
+              <A href={`/peer/${peer.id}`}>{peer.id}</A>
             </Cell>
             {/* Compute units */}
             <Cell>
