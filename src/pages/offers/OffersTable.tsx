@@ -11,7 +11,6 @@ import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
 import { DetailsButton } from '../../components/DetailsButton'
-import { EffectorsTooltip } from '../../components/EffectorsTooltip'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
@@ -27,11 +26,11 @@ import {
   TableHeader,
   TablePagination,
 } from '../../components/Table'
-import { ShrinkText, Text } from '../../components/Text'
+import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
-import { formatEffectors, formatHexData } from '../../utils/helpers'
+import { formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
@@ -40,7 +39,6 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   '50px',
-  'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   '70px',
@@ -121,7 +119,6 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
           >
             Price per epoch
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Effectors list</TableColumnTitle>
         </TableHeader>
         <TableBody skeletonCount={OFFERS_PER_PAGE} isLoading={isLoading}>
           {pageOffers?.map((offer) => (
@@ -203,13 +200,6 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
                   {offer.paymentToken.symbol}
                 </Text>
               </TokenBadge>
-            </Cell>
-            {/* Effectors list */}
-            <Cell>
-              <ShrinkText size={12}>
-                {formatEffectors(offer.effectors)}
-              </ShrinkText>
-              <EffectorsTooltip effectors={offer.effectors} />
             </Cell>
             <Cell>
               <DetailsButton>

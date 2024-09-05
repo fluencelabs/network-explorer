@@ -35,8 +35,8 @@ import { colors } from '../../constants/colors'
 
 const template = [
   'minmax(150px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(100px, 1fr)',
+  'minmax(400px, 1fr)',
+  'minmax(50px, 1fr)',
   'minmax(50px, 1fr)',
   '120px',
 ]
