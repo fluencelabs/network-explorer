@@ -4,7 +4,7 @@ import { Colors } from './colors'
 
 export type StatusColor = Extract<
   Colors,
-  'green' | 'red' | 'blue' | 'grey300' | 'grey200'
+  'green' | 'red' | 'blue' | 'grey300' | 'grey200' | 'orange'
 >
 
 export const STATUS_COLORS: {
@@ -12,9 +12,9 @@ export const STATUS_COLORS: {
 } = {
   undefined: 'red',
   waitDelegation: 'grey300',
-  waitStart: 'grey300',
+  waitStart: 'orange',
   active: 'green',
-  inactive: 'grey300',
-  failed: 'grey300',
+  inactive: 'blue',
+  failed: 'red',
   removed: 'grey300',
 }

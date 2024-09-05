@@ -141,7 +141,7 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
             {/* Proof tx */}
             <Cell>
               <StyledA
-                href={`${BLOCKSCOUT_URL}tx/${proof.transactionId}`}
+                href={`${BLOCKSCOUT_URL}/tx/${proof.transactionId}`}
                 onClick={stopPropagation}
                 target="_blank"
               >

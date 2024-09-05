@@ -10,9 +10,9 @@ import { ProviderListEntry } from '@fluencelabs/deal-ts-clients/dist/dealExplore
 import { useLocation } from 'wouter'
 
 import { ApprovedIcon, ArrowIcon, InfoOutlineIcon } from '../../assets/icons'
-import ProviderYellow from '../../assets/providers/yellow.png'
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
+import { ProviderIcon } from '../../components/ProviderIcon'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -35,8 +35,8 @@ import { colors } from '../../constants/colors'
 
 const template = [
   'minmax(150px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(100px, 1fr)',
+  'minmax(400px, 1fr)',
+  'minmax(50px, 1fr)',
   'minmax(50px, 1fr)',
   '120px',
 ]
@@ -92,14 +92,14 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
         <TableHeader template={template}>
           <TableColumnTitle>Provider name</TableColumnTitle>
           <TableColumnTitle>Provider Address</TableColumnTitle>
-          <TableColumnTitle>Peers</TableColumnTitle>
+          <TableColumnTitle>Total Peers</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="computeUnitsTotal"
             isActive={orderBy === 'computeUnitsTotal'}
             onSort={handleSort}
           >
-            Compute Units{' '}
+            Confirmed CUs{' '}
             <Text size={10} weight={500} color="green" uppercase>
               ( Available )
             </Text>
@@ -148,7 +148,7 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
       <RowHeader onClick={() => navigate(`/provider/${provider.id}`)}>
         <Row template={template}>
           <Cell>
-            <ImgStyled src={ProviderYellow} />
+            <ProviderIcon address={provider.id} />
             <Space width="8px" />
             <Text size={14}>{provider.name}</Text>
           </Cell>
@@ -157,6 +157,10 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
           </Cell>
           <Cell>
             <Text size={12}>{provider.peersTotal}</Text>
+            <Space width="6px" />
+            <ProviderComputeUnitsAvailable size={12} color="white">
+              {provider.peersInCapacityCommitment}
+            </ProviderComputeUnitsAvailable>
           </Cell>
           <Cell>
             <Text size={12}>{provider.computeUnitsTotal}</Text>
@@ -192,9 +196,4 @@ const ProviderComputeUnitsAvailable = styled(Text)`
   background-color: ${colors.green};
   padding: 1px 6px;
   border-radius: 100px;
-`
-
-const ImgStyled = styled.img`
-  height: 24px;
-  width: 24px;
 `

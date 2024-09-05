@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
@@ -92,6 +92,10 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
       ttl: 1_000 * 60, // 1 minute
     },
   )
+
+  useEffect(() => {
+    selectPage(1)
+  }, [filters?.status])
 
   const hasNextPage = capacities && capacities.data.length > limit
   const pageCapacities = capacities && capacities.data.slice(0, limit)

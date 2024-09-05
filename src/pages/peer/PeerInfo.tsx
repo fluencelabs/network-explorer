@@ -13,12 +13,6 @@ import { useApiQuery } from '../../hooks'
 import { PeerCapacityCommitmentsTable } from './PeerCapacityCommitmentsTable'
 import { PeerDealsTable } from './PeerDealsTable'
 
-// const items = [
-//   { value: 'all', label: 'All' },
-//   { value: 'active', label: 'Active' },
-//   { value: 'inactive', label: 'Inactive' },
-// ]
-
 export const PeerInfo: React.FC = () => {
   const params = useParams()
 

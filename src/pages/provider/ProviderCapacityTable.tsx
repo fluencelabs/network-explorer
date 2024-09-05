@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import {
   CapacityCommitmentsByProviderFilter,
   CapacityCommitmentsOrderBy,
-  CapacityCommitmentsStatusFilter,
   OrderType,
-  ProviderChildEntityStatusFilter,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { formatDistanceToNowStrict } from 'date-fns'
@@ -14,10 +12,10 @@ import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
-import { ButtonGroup } from '../../components/ButtonGroup'
 import { CapacityStatus } from '../../components/CapacityStatus'
 import { ClientContext } from '../../components/ClientProvider'
 import { Pagination } from '../../components/Pagination'
+import { SelectStatus, SelectStatusValue } from '../../components/SelectStatus'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -59,15 +57,6 @@ const PROVIDER_CAPACITIES_PER_PAGE = 15
 
 type ProviderCapacitySort = `${CapacityCommitmentsOrderBy}:${OrderType}`
 
-const items: {
-  value: ProviderChildEntityStatusFilter | 'all'
-  label: string
-}[] = [
-  { value: 'all', label: 'All' },
-  { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
-]
-
 export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
   providerId,
 }) => {
@@ -107,6 +96,10 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     },
   )
 
+  useEffect(() => {
+    selectPage(1)
+  }, [filters?.status])
+
   const hasNextPage = capacities && capacities.data.length > limit
   const pageCapacities = capacities && capacities.data.slice(0, limit)
 
@@ -114,8 +107,8 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     setOrder(`${key}:${order}`)
   }
 
-  const handleSetStatus = (value: CapacityCommitmentsStatusFilter | 'all') => {
-    const filter = value === 'all' ? undefined : value
+  const handleSetStatus = (value: SelectStatusValue) => {
+    const filter = value === 'all' || value === 'undefined' ? undefined : value
     setFilter('status', filter)
   }
 
@@ -123,11 +116,7 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     <>
       <Text size={32}>Capacity commitments</Text>
       <Space height="24px" />
-      <ButtonGroup
-        value={filters.status ?? 'all'}
-        onSelect={handleSetStatus}
-        items={items}
-      />
+      <SelectStatus value={filters.status} onChange={handleSetStatus} />
       <Space height="32px" />
       <ScrollableTable>
         <TableHeader template={template}>
@@ -167,7 +156,7 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
           >
             Compute units
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Delegate Rate</TableColumnTitle>
+          <TableColumnTitle>Staker reward</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
         <TableBody
