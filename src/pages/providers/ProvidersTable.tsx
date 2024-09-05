@@ -10,9 +10,9 @@ import { ProviderListEntry } from '@fluencelabs/deal-ts-clients/dist/dealExplore
 import { useLocation } from 'wouter'
 
 import { ApprovedIcon, ArrowIcon, InfoOutlineIcon } from '../../assets/icons'
-import ProviderYellow from '../../assets/providers/yellow.png'
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
+import { ProviderIcon } from '../../components/ProviderIcon'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -148,7 +148,7 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
       <RowHeader onClick={() => navigate(`/provider/${provider.id}`)}>
         <Row template={template}>
           <Cell>
-            <ImgStyled src={ProviderYellow} />
+            <ProviderIcon address={provider.id} />
             <Space width="8px" />
             <Text size={14}>{provider.name}</Text>
           </Cell>
@@ -196,9 +196,4 @@ const ProviderComputeUnitsAvailable = styled(Text)`
   background-color: ${colors.green};
   padding: 1px 6px;
   border-radius: 100px;
-`
-
-const ImgStyled = styled.img`
-  height: 24px;
-  width: 24px;
 `
