@@ -92,7 +92,12 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
         <TableHeader template={template}>
           <TableColumnTitle>Provider name</TableColumnTitle>
           <TableColumnTitle>Provider Address</TableColumnTitle>
-          <TableColumnTitle>Total Peers</TableColumnTitle>
+          <TableColumnTitle>
+            Total Peers{' '}
+            <Text size={10} weight={500} color="green" uppercase>
+              ( Confirmed )
+            </Text>
+          </TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="computeUnitsTotal"
