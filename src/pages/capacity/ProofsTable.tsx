@@ -77,14 +77,7 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
   )
 
   const { data: currentEpoch, isLoading: isEpochLoading } = useApiQuery(
-    (client) => {
-      // TODO: return `getCurrentEpoch()` method to DealExplorerClient
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const result: Promise<number> = client.epochManager.getCurrentEpoch()
-      return result
-    },
-    [],
+    (client) => client.currentEpoch(),
   )
 
   const hasNextPage = proofs && proofs.data.length > limit
