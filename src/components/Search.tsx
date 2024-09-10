@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { SearchIcon } from '../assets/icons'
+import { CloseSmallIcon, SearchIcon } from '../assets/icons'
 import { media } from '../hooks/useMedia'
 
 import { colors } from '../constants/colors'
@@ -19,6 +19,7 @@ export const Search: React.FC<SearchInputProps> = ({
 }) => {
   return (
     <SearchInput>
+      <StyledSearchIcon />
       <Input
         value={value}
         onChange={(e) => {
@@ -26,7 +27,7 @@ export const Search: React.FC<SearchInputProps> = ({
         }}
         placeholder={placeholder}
       />
-      <StyledSearchIcon />
+      {!!value.length && <ClearIcon onClick={() => onChange('')} />}
     </SearchInput>
   )
 }
@@ -36,9 +37,10 @@ const SearchInput = styled.div`
   align-items: center;
   border-radius: 8px;
   background-color: ${colors.grey100};
-  width: 400px;
+  width: 450px;
   height: 32px;
-  padding-right: 12px;
+  padding-left: 10px;
+  position: relative;
 
   ${media.mobile} {
     width: 100%;
@@ -46,7 +48,7 @@ const SearchInput = styled.div`
 `
 
 const Input = styled.input`
-  padding: 6px 10px;
+  padding: 6px 36px 6px 6px;
   border: none;
   outline: none;
   font-weight: 500;
@@ -57,5 +59,14 @@ const Input = styled.input`
 `
 
 const StyledSearchIcon = styled(SearchIcon)`
+  cursor: pointer;
+  width: 20px;
+`
+
+const ClearIcon = styled(CloseSmallIcon)`
+  position: absolute;
+  right: 12px;
+
+  color: ${colors.grey400};
   cursor: pointer;
 `
