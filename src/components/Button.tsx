@@ -44,7 +44,7 @@ const buttons = {
   outline: OutlineButton,
 }
 
-interface ButtonProps {
+export interface ButtonProps {
   leftIcon?: React.ReactNode
   children: React.ReactNode | React.ReactNode[]
   rightIcon?: React.ReactNode

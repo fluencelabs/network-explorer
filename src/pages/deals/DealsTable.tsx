@@ -119,7 +119,6 @@ export const DealsTable: React.FC<DealsTableProps> = ({
             </Tooltip>
           </HeaderCellWithTooltip>
           <TableColumnTitle>Balance</TableColumnTitle>
-          <TableColumnTitle>Providers earnings</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
         <TableBody
@@ -204,17 +203,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             <Cell>
               <TextWithBadge>
                 <Text size={12}>{deal.balance}</Text>
-                <TokenBadge>
-                  <Text color="grey500" weight={800} size={10}>
-                    {deal.paymentToken.symbol}
-                  </Text>
-                </TokenBadge>
-              </TextWithBadge>
-            </Cell>
-            {/* Providers earnings */}
-            <Cell>
-              <TextWithBadge>
-                <Text size={12}>{deal.totalEarnings}</Text>
                 <TokenBadge>
                   <Text color="grey500" weight={800} size={10}>
                     {deal.paymentToken.symbol}

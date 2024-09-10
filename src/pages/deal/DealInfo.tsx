@@ -309,6 +309,7 @@ const Right = styled.div`
 const InfoRow = styled.div`
   display: grid;
   grid-template-columns: 400px 300px;
+  gap: 36px;
 `
 
 const Info = styled.div`
@@ -329,7 +330,7 @@ const ParametersRow = styled.div`
 `
 
 const ParametersRowSingle = styled(ParametersRow)`
-  grid-template-columns: 66%;
+  grid-template-columns: 70%;
 `
 
 const Parameter = styled.div`
@@ -361,7 +362,7 @@ const EmptyParameterValue = styled.div`
 `
 
 const RequiredEffectorsTableWrapper = styled.div`
-  width: 50%;
+  width: 70%;
 `
 
 const TextWithBadge = styled.div`

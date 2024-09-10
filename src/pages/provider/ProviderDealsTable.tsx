@@ -1,16 +1,10 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
-import { STATUS_NAMES } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/constants'
-import {
-  ChildEntitiesByProviderFilter,
-  ProviderChildEntityStatusFilter,
-} from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { DealShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
-import { ButtonGroup } from '../../components/ButtonGroup'
 import { DealStatus } from '../../components/DealStatus'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
@@ -29,7 +23,6 @@ import {
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
-import { useFilters } from '../../hooks/useFilters'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -49,27 +42,9 @@ interface ProviderDealsTableProps {
 
 const PER_PAGE = 5
 
-// type ProviderDealSort = `${DealsOrderBy}:${OrderType}`
-
-const items: {
-  value: ProviderChildEntityStatusFilter | 'all'
-  label: string
-}[] = [
-  { value: 'all', label: 'All' },
-  { value: 'active', label: STATUS_NAMES['active'] },
-  { value: 'inactive', label: STATUS_NAMES['inactive'] },
-]
-
 export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
   providerId,
 }) => {
-  const [filters, setFilter] = useFilters<ChildEntitiesByProviderFilter>({
-    providerId,
-  })
-
-  // const [order, setOrder] = useState<ProviderDealSort>('createdAt:desc')
-  // const [orderBy, orderType] = order.split(':') as [DealsOrderBy, OrderType]
-
   const { page, selectPage, limit, offset, getTotalPages } =
     usePagination(PER_PAGE)
 
@@ -78,48 +53,24 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
       client.getDealsByProvider(
         {
           providerId,
-          status: filters.status,
         },
         offset,
         limit + 1,
       ),
-    [page, filters],
+    [page, providerId],
   )
 
   const hasNextPage = deals && deals.data.length > limit
   const pageDeals = deals && deals.data.slice(0, limit)
 
-  // const handleSort = (key: DealsOrderBy, order: OrderType) => {
-  //   setOrder(`${key}:${order}`)
-  // }
-
-  const handleSetStatus = (value: ProviderChildEntityStatusFilter) => {
-    setFilter('status', value)
-  }
-
   return (
     <>
       <Text size={32}>Deals</Text>
-      <Space height="24px" />
-      <ButtonGroup
-        value={filters.status ?? 'all'}
-        onSelect={handleSetStatus}
-        items={items}
-      />
       <Space height="32px" />
       <ScrollableTable>
         <TableHeader template={template}>
           <TableColumnTitle>Deal Id</TableColumnTitle>
           <TableColumnTitle>Created at</TableColumnTitle>
-          {/* TODO -> Matched at */}
-          {/* <HeaderCellWithTooltip>
-            <TableColumnTitle>Offer Id</TableColumnTitle>
-            <Tooltip trigger={<InfoOutlineIcon />}>
-              <Text color="grey600" weight={600} size={12}>
-                The deal was matched from the capacity declared in this offer
-              </Text>
-            </Tooltip>
-          </HeaderCellWithTooltip> */}
           <TableColumnTitle>Payment Token</TableColumnTitle>
           <TableColumnTitle>Matched CU</TableColumnTitle>
           <TableColumnTitle>Active Workers</TableColumnTitle>
