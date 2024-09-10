@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.2](https://github.com/fluencelabs/network-explorer/compare/v0.1.1...v0.1.2) (2024-09-10)
+
+
+### Features
+
+* **Capacity:** format duration in days ([#76](https://github.com/fluencelabs/network-explorer/issues/76)) ([8f137ae](https://github.com/fluencelabs/network-explorer/commit/8f137aee2acb7245fee4f6a6d3c76d5ca57e48d3))
+* **peers:** update peers info ([#73](https://github.com/fluencelabs/network-explorer/issues/73)) ([2ba9da1](https://github.com/fluencelabs/network-explorer/commit/2ba9da1e75d1692204d50b06a816ff8b569ce6f2))
+* **ProviderIcon:** add ProviderIcon ([#72](https://github.com/fluencelabs/network-explorer/issues/72)) ([6cc4ce9](https://github.com/fluencelabs/network-explorer/commit/6cc4ce9f59356b9ccc4a4c6b35c1c379abbb6fb2))
+* **providers:** update peers name ([#79](https://github.com/fluencelabs/network-explorer/issues/79)) ([bf212ec](https://github.com/fluencelabs/network-explorer/commit/bf212ec7754f3745221ee2b9386564485c26db5f))
+* **search:** improve Search component ([#77](https://github.com/fluencelabs/network-explorer/issues/77)) ([547ff3a](https://github.com/fluencelabs/network-explorer/commit/547ff3ae9ead951a878c7c6c029a4ffe6ad2b1a7))
+* **statuses:** update status filter, status colors ([#71](https://github.com/fluencelabs/network-explorer/issues/71)) ([2db177e](https://github.com/fluencelabs/network-explorer/commit/2db177e324f79156969e3999acc22dcb61751c4c))
+* **tables:** remove some columns, expand width of columns ([#74](https://github.com/fluencelabs/network-explorer/issues/74)) ([1cc5257](https://github.com/fluencelabs/network-explorer/commit/1cc5257ff6123e3f702110f3ad1ac21ebb015095))
+
+
+### Bug Fixes
+
+* **deps:** bump deal-ts-clients to 0.18.7 ([#80](https://github.com/fluencelabs/network-explorer/issues/80)) ([bb8f574](https://github.com/fluencelabs/network-explorer/commit/bb8f5746c72154182efc369a87179bffb4b715b2))
+* **Proofs:** proof tx link ([#75](https://github.com/fluencelabs/network-explorer/issues/75)) ([abdd298](https://github.com/fluencelabs/network-explorer/commit/abdd2988c1f00a08e63ea349cf1f37d583092d63))
+
 ## [0.1.1](https://github.com/fluencelabs/network-explorer/compare/v0.1.0...v0.1.1) (2024-09-03)
 
 
