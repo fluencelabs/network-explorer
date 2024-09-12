@@ -10,11 +10,7 @@ import { ArrowIcon } from '../assets/icons'
 import { useCurrentEpoch } from '../hooks/useCurrentEpoch'
 
 import { colors } from '../constants/colors'
-import {
-  CHAIN_ID,
-  FLUENCE_CLIENT_NETWORK,
-  GELATO_MAINNET_NETWORK_ID,
-} from '../constants/config'
+import { FLUENCE_CLIENT_NETWORK } from '../constants/config'
 
 import { Button } from './Button'
 import { Select, SelectItem } from './Select'
@@ -70,12 +66,7 @@ export const RightMenu: React.FC = () => {
         </StyledA>
       </LinksBlock>
       <Select
-        // TODO: remove the 'CHAIN_ID == GELATO_MAINNET_NETWORK_ID' condition once old Kras is deprecated
-        value={
-          CHAIN_ID == GELATO_MAINNET_NETWORK_ID
-            ? 'mainnet'
-            : FLUENCE_CLIENT_NETWORK
-        }
+        value={FLUENCE_CLIENT_NETWORK}
         onChange={(value) => window.open(explorerUrls[value], '_self')}
         items={items}
       >
