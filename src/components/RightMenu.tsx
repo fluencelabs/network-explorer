@@ -54,9 +54,8 @@ if (FLUENCE_CLIENT_NETWORK === 'local') {
 
 const explorerUrls: Record<string, string> = {
   stage: 'https://explorer.stage.fluence.dev',
-  dar: 'https://explorer.dar.fluence.dev',
-  kras: 'https://explorer.kras.fluence.dev',
-  mainnet: 'https://explorer.new.fluence.dev',
+  testnet: 'https://explorer.testnet.fluence.dev',
+  mainnet: 'https://explorer.mainnet.fluence.dev',
 }
 
 export const RightMenu: React.FC = () => {
