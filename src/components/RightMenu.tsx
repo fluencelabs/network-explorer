@@ -24,13 +24,8 @@ const items: SelectItem<ContractsENV>[] = [
   },
   {
     label: 'Testnet',
-    value: 'dar',
+    value: 'testnet',
     icon: <TestnetIcon />,
-  },
-  {
-    label: 'Kras',
-    value: 'kras',
-    icon: <MainnetIcon />,
   },
   {
     label: 'Mainnet',
@@ -50,8 +45,8 @@ if (FLUENCE_CLIENT_NETWORK === 'local') {
 
 const explorerUrls: Record<string, string> = {
   stage: 'https://explorer.stage.fluence.dev',
-  dar: 'https://explorer.testnet.fluence.dev',
-  kras: 'https://explorer.mainnet.fluence.dev',
+  testnet: 'https://explorer.testnet.fluence.dev',
+  mainnet: 'https://explorer.mainnet.fluence.dev',
 }
 
 export const RightMenu: React.FC = () => {
