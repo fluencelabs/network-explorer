@@ -15,8 +15,8 @@ importers:
         specifier: ^11.11.0
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.3.2)(react@18.3.1))(@types/react@18.3.2)(react@18.3.1)
       '@fluencelabs/deal-ts-clients':
-        specifier: 0.18.7
-        version: 0.18.7(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
+        specifier: 0.19.1
+        version: 0.19.1(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
       '@radix-ui/react-accordion':
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1302,8 +1302,8 @@ packages:
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
 
-  '@fluencelabs/deal-ts-clients@0.18.7':
-    resolution: {integrity: sha512-kXKYq2w0SpQ+rEza4jwEi7o5XggSt+c9zBhxJUR2d7Zn5bTDooezD8qpQoihHUmaT6VHk+xw+WsCbU7rx/ktMA==}
+  '@fluencelabs/deal-ts-clients@0.19.1':
+    resolution: {integrity: sha512-BHzElQRyCraACKdXoqaVp68kODVGHlUv9eebLXvV49cC+B4KDHsbI7KI3FkcsWgb3/3AWf/Mf5M/iOw5PBA4KA==}
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -1327,20 +1327,12 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
-  '@ipld/dag-cbor@9.2.0':
-    resolution: {integrity: sha512-N14oMy0q4gM6OuZkIpisKe0JBSjf1Jb39VI+7jMLiWX9124u1Z3Fdj/Tag1NA0cVxxqWDh0CqsjcVfOKtelPDA==}
-    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
-
   '@ipld/dag-cbor@9.2.1':
     resolution: {integrity: sha512-nyY48yE7r3dnJVlxrdaimrbloh4RokQaNRdI//btfTkcTEZbpmSrbYcBQ4VKTf8ZxXAOUJy4VsRpkJo+y9RTnA==}
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
 
   '@ipld/dag-json@10.2.1':
     resolution: {integrity: sha512-P3LXQ1HhroyWxpQtI0vqLigM7QyLLS/pcApEz8c46VEOR1878n/ufy5eGlsG840RDm4RMIG2UWp6snuD+h/edQ==}
-    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
-
-  '@ipld/dag-pb@4.1.1':
-    resolution: {integrity: sha512-wsSNjIvcABXuH9MKXpvRGMXsS20+Kf2Q0Hq2+2dxN6Wpw/K0kDF3nDmCnO6wlpninQ0vzx1zq54O3ttn5pTH9A==}
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
 
   '@ipld/dag-pb@4.1.2':
@@ -2502,9 +2494,6 @@ packages:
   '@types/node@18.19.49':
     resolution: {integrity: sha512-ALCeIR6n0nQ7j0FUF1ycOhrp6+XutJWqEu/vtdEqXFUQwkBfgUA5cEg3ZNmjWGF/ZYA/FcF9QMkL55Ar0O6UrA==}
 
-  '@types/node@20.12.12':
-    resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
-
   '@types/node@22.5.3':
     resolution: {integrity: sha512-njripolh85IA9SQGTAqbmnNZTdxv7X/4OYGPz8tgy5JDr8MP+uDBa921GpYEoDDnwm0Hmn5ZPeJgiiSTPoOzkQ==}
 
@@ -3058,10 +3047,6 @@ packages:
 
   caniuse-lite@1.0.30001655:
     resolution: {integrity: sha512-jRGVy3iSGO5Uutn2owlb5gR6qsGngTw9ZTb4ali9f3glshcNmJ2noam4Mo9zia5P9Dk3jNNydy7vQjuE5dQmfg==}
-
-  cborg@4.2.1:
-    resolution: {integrity: sha512-LSdnRagOTx1QZ3/ECLEOMc5fYHaDBjjQkBeBGtZ9KkGa78Opb5UzUxJeuxhmYTZm1DUzdBjj9JT3fcQNRL9ZBg==}
-    hasBin: true
 
   cborg@4.2.3:
     resolution: {integrity: sha512-XBFbEJ6WMfn9L7woc2t+EzOxF8vGqddoopKBbrhIvZBt2WIUgSlT8xLmM6Aq1xv8eWt4yOSjwxWjYeuHU3CpJA==}
@@ -4890,9 +4875,6 @@ packages:
     resolution: {integrity: sha512-eajQ/ZH7qXZQR2AgtfpmSMizQzmyYVmCql7pdhldPuYQi4atACekbJaQplk6dWyIi10jCaFnd6pqvcEFXjbaJw==}
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
 
-  multiformats@13.1.1:
-    resolution: {integrity: sha512-JiptvwMmlxlzIlLLwhCi/srf/nk409UL0eUBr0kioRJq15hqqKyg68iftrBvhCRjR6Rw4fkNnSc4ZJXJDuta/Q==}
-
   multiformats@13.2.2:
     resolution: {integrity: sha512-RWI+nyf0q64vyOxL8LbKtjJMki0sogRL/8axvklNtiTM0iFCVtHwME9w6+0P1/v4dQvsIg8A45oT3ka1t/M/+A==}
 
@@ -6447,18 +6429,6 @@ packages:
 
   ws@7.5.10:
     resolution: {integrity: sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==}
-    engines: {node: '>=8.3.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
-  ws@7.5.9:
-    resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
     engines: {node: '>=8.3.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -8041,10 +8011,10 @@ snapshots:
 
   '@floating-ui/utils@0.2.2': {}
 
-  '@fluencelabs/deal-ts-clients@0.18.7(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)':
+  '@fluencelabs/deal-ts-clients@0.19.1(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.2)
-      debug: 4.3.4
+      debug: 4.3.6
       dotenv: 16.4.5
       ethers: 6.7.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       graphql: 16.8.2
@@ -8052,7 +8022,7 @@ snapshots:
       graphql-scalars: 1.23.0(graphql@16.8.2)
       graphql-tag: 2.12.6(graphql@16.8.2)
       ipfs-http-client: 60.0.1(encoding@0.1.13)
-      multiformats: 13.1.1
+      multiformats: 13.2.2
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -8081,11 +8051,6 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@ipld/dag-cbor@9.2.0':
-    dependencies:
-      cborg: 4.2.1
-      multiformats: 13.1.1
-
   '@ipld/dag-cbor@9.2.1':
     dependencies:
       cborg: 4.2.3
@@ -8093,12 +8058,8 @@ snapshots:
 
   '@ipld/dag-json@10.2.1':
     dependencies:
-      cborg: 4.2.1
-      multiformats: 13.1.1
-
-  '@ipld/dag-pb@4.1.1':
-    dependencies:
-      multiformats: 13.1.1
+      cborg: 4.2.3
+      multiformats: 13.2.2
 
   '@ipld/dag-pb@4.1.2':
     dependencies:
@@ -9679,10 +9640,6 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@20.12.12':
-    dependencies:
-      undici-types: 5.26.5
-
   '@types/node@22.5.3':
     dependencies:
       undici-types: 6.19.8
@@ -9717,7 +9674,7 @@ snapshots:
 
   '@types/secp256k1@4.0.6':
     dependencies:
-      '@types/node': 20.12.12
+      '@types/node': 22.5.3
 
   '@types/semver@7.5.8': {}
 
@@ -10008,7 +9965,7 @@ snapshots:
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/safe-json': 1.0.2
       events: 3.3.0
-      ws: 7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -10600,8 +10557,6 @@ snapshots:
   caniuse-lite@1.0.30001621: {}
 
   caniuse-lite@1.0.30001655: {}
-
-  cborg@4.2.1: {}
 
   cborg@4.2.3: {}
 
@@ -11745,12 +11700,12 @@ snapshots:
   graphql-scalars@1.23.0(graphql@16.8.2):
     dependencies:
       graphql: 16.8.2
-      tslib: 2.6.2
+      tslib: 2.7.0
 
   graphql-tag@2.12.6(graphql@16.8.2):
     dependencies:
       graphql: 16.8.2
-      tslib: 2.6.2
+      tslib: 2.7.0
 
   graphql@16.8.2: {}
 
@@ -11966,9 +11921,9 @@ snapshots:
 
   ipfs-http-client@60.0.1(encoding@0.1.13):
     dependencies:
-      '@ipld/dag-cbor': 9.2.0
+      '@ipld/dag-cbor': 9.2.1
       '@ipld/dag-json': 10.2.1
-      '@ipld/dag-pb': 4.1.1
+      '@ipld/dag-pb': 4.1.2
       '@libp2p/logger': 2.1.1
       '@libp2p/peer-id': 2.0.4
       '@multiformats/multiaddr': 11.6.1
@@ -12845,8 +12800,6 @@ snapshots:
 
   multiformats@12.1.3: {}
 
-  multiformats@13.1.1: {}
-
   multiformats@13.2.2: {}
 
   multiformats@9.9.0: {}
@@ -13297,7 +13250,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.12.12
+      '@types/node': 22.5.3
       long: 5.2.3
 
   proxy-compare@2.5.1: {}
@@ -14507,11 +14460,6 @@ snapshots:
       utf-8-validate: 5.0.10
 
   ws@7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10):
-    optionalDependencies:
-      bufferutil: 4.0.8
-      utf-8-validate: 5.0.10
-
-  ws@7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10):
     optionalDependencies:
       bufferutil: 4.0.8
       utf-8-validate: 5.0.10
