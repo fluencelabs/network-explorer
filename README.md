@@ -14,8 +14,8 @@ Currently, two official plugins are available:
 # Develop
 
 ```bash
-pnpm i
-pnpm run dev
+yarn
+yarn run dev
 ```
 
 ## Env

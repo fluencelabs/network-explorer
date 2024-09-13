@@ -10,11 +10,7 @@ import { ArrowIcon } from '../assets/icons'
 import { useCurrentEpoch } from '../hooks/useCurrentEpoch'
 
 import { colors } from '../constants/colors'
-import {
-  CHAIN_ID,
-  FLUENCE_CLIENT_NETWORK,
-  GELATO_MAINNET_NETWORK_ID,
-} from '../constants/config'
+import { FLUENCE_CLIENT_NETWORK } from '../constants/config'
 
 import { Button } from './Button'
 import { Select, SelectItem } from './Select'
@@ -27,17 +23,12 @@ const items: SelectItem<ContractsENV>[] = [
     icon: <TestnetIcon />,
   },
   {
-    label: 'Dar',
-    value: 'dar',
+    label: 'Testnet',
+    value: 'testnet',
     icon: <TestnetIcon />,
   },
   {
-    label: 'Kras',
-    value: 'kras',
-    icon: <MainnetIcon />,
-  },
-  {
-    label: 'New',
+    label: 'Mainnet',
     value: 'mainnet',
     icon: <MainnetIcon />,
   },
@@ -52,11 +43,18 @@ if (FLUENCE_CLIENT_NETWORK === 'local') {
   })
 }
 
+if (FLUENCE_CLIENT_NETWORK === 'kras') {
+  items.push({
+    label: 'Kras',
+    value: 'kras',
+    icon: <MainnetIcon />,
+  })
+}
+
 const explorerUrls: Record<string, string> = {
   stage: 'https://explorer.stage.fluence.dev',
-  dar: 'https://explorer.dar.fluence.dev',
-  kras: 'https://explorer.kras.fluence.dev',
-  mainnet: 'https://explorer.new.fluence.dev',
+  testnet: 'https://explorer.testnet.fluence.dev',
+  mainnet: 'https://explorer.mainnet.fluence.dev',
 }
 
 export const RightMenu: React.FC = () => {
@@ -71,12 +69,7 @@ export const RightMenu: React.FC = () => {
         </StyledA>
       </LinksBlock>
       <Select
-        // TODO: remove the 'CHAIN_ID == GELATO_MAINNET_NETWORK_ID' condition once old Kras is deprecated
-        value={
-          CHAIN_ID == GELATO_MAINNET_NETWORK_ID
-            ? 'mainnet'
-            : FLUENCE_CLIENT_NETWORK
-        }
+        value={FLUENCE_CLIENT_NETWORK}
         onChange={(value) => window.open(explorerUrls[value], '_self')}
         items={items}
       >
