@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/fluencelabs/network-explorer/compare/v0.1.2...v0.1.3) (2024-09-13)
+
+
+### Features
+
+* **networks:** change networks links ([#81](https://github.com/fluencelabs/network-explorer/issues/81)) ([1d9e07f](https://github.com/fluencelabs/network-explorer/commit/1d9e07f7b2b6cfac86a08b84998c35d728c12a87))
+
 ## [0.1.2](https://github.com/fluencelabs/network-explorer/compare/v0.1.1...v0.1.2) (2024-09-10)
 
 
