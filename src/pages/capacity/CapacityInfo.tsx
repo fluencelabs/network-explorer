@@ -222,7 +222,7 @@ export const CapacityInfo: React.FC = () => {
             <Info>
               <Row>
                 <Text size={10} weight={700} uppercase color="grey400">
-                  Reward staking reward
+                  Staking reward
                 </Text>
                 <Tooltip trigger={<InfoOutlineIcon />}>
                   <Text color="grey600" weight={600} size={12}>
