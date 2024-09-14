@@ -111,7 +111,7 @@ export const CapacitiesFilterModal: React.FC<CapacitiesFilterModalProps> = ({
         <Divider />
         <FromToContainer>
           <Text size={10} weight={700} uppercase color="grey400">
-            Reward Staking Reward
+            Staking reward
           </Text>
           <FromToRow>
             <Text color="grey400" size={12}>
