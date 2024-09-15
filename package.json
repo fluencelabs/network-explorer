@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fluencelabs/deal-ts-clients": "0.19.3",
+    "@fluencelabs/deal-ts-clients": "0.19.4",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -73,6 +73,5 @@
       "eslint --fix",
       "prettier --write"
     ]
-  },
-  "packageManager": "pnpm@8.6.12+sha1.a2f983fbf8f2531dc85db2a5d7f398063d51a6f3"
+  }
 }
