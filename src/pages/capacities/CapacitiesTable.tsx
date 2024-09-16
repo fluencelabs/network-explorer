@@ -7,7 +7,6 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
-import { formatDistanceStrict, formatDistanceToNowStrict } from 'date-fns'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -34,6 +33,7 @@ import {
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
+import { formatDuration } from '../../utils/formatDuration'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -132,7 +132,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
                 Duration capacity commitment in epochs. Currently, one epoch is
-                set as {formatDistanceToNowStrict(Date.now() + epochDuration)}
+                set as {formatDuration(epochDuration)}
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
@@ -229,18 +229,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Duration */}
             <Cell>
-              <Text size={12}>
-                {formatDistanceStrict(
-                  capacity.createdAt * 1000 + capacityDuration,
-                  capacity.createdAt * 1000,
-                  {
-                    unit:
-                      capacityDuration > 60 * 60 * 24 * 1000
-                        ? 'day'
-                        : undefined,
-                  },
-                )}
-              </Text>
+              <Text size={12}>{formatDuration(capacityDuration)}</Text>
             </Cell>
             {/* Expiration */}
             <Cell>
