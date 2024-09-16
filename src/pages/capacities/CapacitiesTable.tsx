@@ -61,6 +61,7 @@ interface CapacitiesTableProps {
 export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
   filters,
 }) => {
+  const client = useContext(ClientContext)
   const [order, setOrder] = useState<CapacitySort>('createdAt:desc')
   const [orderBy, orderType] = order.split(':') as [
     CapacityCommitmentsOrderBy,
@@ -104,6 +105,8 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
     setOrder(`${key}:${order}`)
   }
 
+  const epochDuration = (client?.getEpochDuration() || 0) * 1000
+
   return (
     <>
       <ScrollableTable>
@@ -129,7 +132,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
                 Duration capacity commitment in epochs. Currently, one epoch is
-                set as 24 hours.
+                set as {formatDistanceToNowStrict(Date.now() + epochDuration)}
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
