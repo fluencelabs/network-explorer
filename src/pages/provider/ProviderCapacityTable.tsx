@@ -7,7 +7,6 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
-import { formatDistanceToNowStrict } from 'date-fns'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -35,6 +34,7 @@ import { ShrinkText, Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
+import { formatDuration } from '../../utils/formatDuration'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -222,12 +222,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             {/* Duration */}
             <Cell>
               <Column>
-                <Text size={12}>
-                  {formatDistanceToNowStrict(
-                    capacity.createdAt * 1000 + capacityDuration,
-                    { unit: 'day' },
-                  )}
-                </Text>
+                <Text size={12}>{formatDuration(capacityDuration)}</Text>
               </Column>
             </Cell>
             {/* Expiration */}
