@@ -7,7 +7,7 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
-import { formatDistanceToNowStrict } from 'date-fns'
+import { formatDistanceStrict, formatDistanceToNowStrict } from 'date-fns'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -230,9 +230,15 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             {/* Duration */}
             <Cell>
               <Text size={12}>
-                {formatDistanceToNowStrict(
+                {formatDistanceStrict(
                   capacity.createdAt * 1000 + capacityDuration,
-                  { unit: 'day' },
+                  capacity.createdAt * 1000,
+                  {
+                    unit:
+                      capacityDuration > 60 * 60 * 24 * 1000
+                        ? 'day'
+                        : undefined,
+                  },
                 )}
               </Text>
             </Cell>
