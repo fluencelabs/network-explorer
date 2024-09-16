@@ -7,7 +7,6 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
-import { formatDistanceToNowStrict } from 'date-fns'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -34,6 +33,7 @@ import {
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
+import { formatDuration } from '../../utils/formatDuration'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -61,6 +61,7 @@ interface CapacitiesTableProps {
 export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
   filters,
 }) => {
+  const client = useContext(ClientContext)
   const [order, setOrder] = useState<CapacitySort>('createdAt:desc')
   const [orderBy, orderType] = order.split(':') as [
     CapacityCommitmentsOrderBy,
@@ -104,6 +105,8 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
     setOrder(`${key}:${order}`)
   }
 
+  const epochDuration = (client?.getEpochDuration() || 0) * 1000
+
   return (
     <>
       <ScrollableTable>
@@ -129,7 +132,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
             <Tooltip trigger={<InfoOutlineIcon />}>
               <Text color="grey600" weight={600} size={12}>
                 Duration capacity commitment in epochs. Currently, one epoch is
-                set as 24 hours.
+                set as {formatDuration(epochDuration)}
               </Text>
             </Tooltip>
           </HeaderCellWithTooltip>
@@ -226,12 +229,7 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
             </Cell>
             {/* Duration */}
             <Cell>
-              <Text size={12}>
-                {formatDistanceToNowStrict(
-                  capacity.createdAt * 1000 + capacityDuration,
-                  { unit: 'day' },
-                )}
-              </Text>
+              <Text size={12}>{formatDuration(capacityDuration)}</Text>
             </Cell>
             {/* Expiration */}
             <Cell>
