@@ -23,7 +23,6 @@ jobs:
 
     permissions:
       contents: read
-      contents: read
       deployments: write
       statuses: write
       pull-requests: write
