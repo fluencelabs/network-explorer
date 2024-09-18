@@ -41,7 +41,7 @@ jobs:
           jwtTtl: 300
           secrets: |
             kv/vercel/projects/network-explorer/${{ env.ENV }} id | PROJECT_ID ;
-            kv/vercel/projects/network-exporter/${{ env.ENV }} team_id | TEAM_ID ;
+            kv/vercel/projects/network-explorer/${{ env.ENV }} team_id | TEAM_ID ;
             kv/vercel/tokens/nahsi token | VERCEL_TOKEN ;
 
       - name: Deploy to vercel
