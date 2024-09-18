@@ -23,10 +23,8 @@ jobs:
 
     permissions:
       contents: read
-      deployments: write
-      statuses: write
-      pull-requests: write
       id-token: write
+      deployments: write
 
     steps:
       - name: Checkout
@@ -48,10 +46,10 @@ jobs:
             kv/vercel/tokens/nahsi token | VERCEL_TOKEN ;
 
       - name: Deploy to vercel
-        uses: nexterias/actions-vercel@v1
+        uses: amondnet/vercel-action@v25
         with:
-          token: ${{ steps.secrets.outputs.VERCEL_TOKEN }}
-          org-id: ${{ vars.TEAM_ID }}
-          project-id: ${{ vars.PROJECT_ID }}
-          production: true
-          github-deployment-environment: ${{ env.ENV }}
+          vercel-token: ${{ steps.secrets.outputs.VERCEL_TOKEN }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ vars.TEAM_ID }}
+          vercel-project-id: ${{ vars.PROJECT_ID }}
+          scope: ${{ env.TEAM_ID }}
