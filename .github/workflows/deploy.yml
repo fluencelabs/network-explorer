@@ -49,7 +49,7 @@ jobs:
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ steps.secrets.outputs.VERCEL_TOKEN }}
-          vercel-args: '--prod'
+          vercel-args: "--yes --prod"
           vercel-org-id: ${{ vars.TEAM_ID }}
           vercel-project-id: ${{ vars.PROJECT_ID }}
           scope: ${{ env.TEAM_ID }}
