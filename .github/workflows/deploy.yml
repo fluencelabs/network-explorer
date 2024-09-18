@@ -1,48 +1,54 @@
 name: deploy
 
 on:
-  workflow_call:
-    inputs:
-      ENV:
-        description: "env to deploy to"
-        type: string
-        required: true
-      VERCEL_ORG_ID:
-        description: "Vercel Organization ID"
-        type: string
-        required: true
-      VERCEL_PROJECT_ID:
-        description: "Vercel Project ID"
-        type: string
-        required: true
-    secrets:
-      VERCEL_TOKEN:
-        description: "Vercel Token"
-        required: true
-
   workflow_dispatch:
     inputs:
-      ENV:
+      environment:
         type: choice
         description: env to deploy to
         options:
-        - stage
-        - dar
-        - kras
-        - mainnet-gelato
+          - stage
+          - testnet
+          - mainnet
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name:  ${{ inputs.env || github.event.inputs.env }}
-    steps:
-      - uses: actions/checkout@v2
 
-      - uses: amondnet/vercel-action@v25
+    environment:
+      name: ${{ github.event.inputs.environment }}
+
+    env:
+      ENV: ${{ github.event.inputs.environment }}
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import secrets
+        id: secrets
+        uses: hashicorp/vault-action@v3.0.0
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          url: https://vault.fluence.dev
+          path: jwt/github
+          role: ci
+          method: jwt
+          jwtGithubAudience: "https://github.com/fluencelabs"
+          jwtTtl: 300
+          secrets: |
+            kv/vercel/projects/network-exporter/${{ env.ENV }} id | PROJECT_ID ;
+            kv/vercel/projects/network-exporter/${{ env.ENV }} team_id | TEAM_ID ;
+            kv/vercel/tokens/nahsi token | VERCEL_TOKEN ;
+
+      - name: Deploy to vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ steps.secrets.outputs.VERCEL_TOKEN }}
           vercel-args: '--prod'
-          vercel-org-id: ${{ vars.VERCEL_ORG_ID}}
-          vercel-project-id: ${{ vars.VERCEL_PROJECT_ID}}
-          scope: ${{ vars.VERCEL_ORG_ID}}
+          vercel-org-id: ${{ vars.TEAM_ID }}
+          vercel-project-id: ${{ vars.PROJECT_ID }}
+          scope: ${{ env.TEAM_ID }}
