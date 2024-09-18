@@ -54,4 +54,4 @@ jobs:
           org-id: ${{ vars.TEAM_ID }}
           project-id: ${{ vars.PROJECT_ID }}
           production: true
-          prebuilt: false
+          github-deployment-environment: ${{ env.ENV }}
