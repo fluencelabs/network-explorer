@@ -54,12 +54,17 @@ const PrettyJsonView = ({
   json: unknown
   isLoading?: boolean
 }) => {
+  console.log(json)
+
   const renderJson = (data: unknown) => {
     if (typeof data === 'string') {
       return <String>&quot;{data}&quot;</String>
     }
     if (typeof data === 'number') {
       return <Number>{data}</Number>
+    }
+    if (typeof data === 'bigint') {
+      return <Number>{data.toString()}</Number>
     }
     if (typeof data === 'boolean') {
       return <Boolean>{data.toString()}</Boolean>
