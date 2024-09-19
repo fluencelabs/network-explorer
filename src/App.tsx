@@ -6,6 +6,7 @@ import { Layout } from './components/Layout'
 import { Capacities } from './pages/capacities'
 import { CapacityInfo } from './pages/capacity'
 import { ComputeUnitInfo } from './pages/compute-unit'
+import { ConfigJson } from './pages/config/ConfigJson'
 import { DealInfo } from './pages/deal'
 import { Deals } from './pages/deals'
 import { OfferInfo } from './pages/offer'
@@ -38,6 +39,7 @@ export const App: React.FC = () => {
       <Route path={ROUTES.proofs} component={Proofs} />
       <Route path={ROUTES.peerInfo} component={PeerInfo} />
       <Route path={ROUTES.computeUnitInfo} component={ComputeUnitInfo} />
+      <Route path={ROUTES.config} component={ConfigJson} />
     </Layout>
   )
 }
