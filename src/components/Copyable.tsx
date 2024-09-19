@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import styled from '@emotion/styled'
 import * as RadixTooltip from '@radix-ui/react-tooltip'
 import copy from 'copy-to-clipboard'
@@ -11,9 +11,15 @@ import { Text } from './Text'
 
 interface CopyableProps {
   value: string
+  className?: string
+  children?: ReactNode
 }
 
-export const Copyable: React.FC<CopyableProps> = ({ value }) => {
+export const Copyable: React.FC<CopyableProps> = ({
+  value,
+  className,
+  children = <StyledCopyIcon />,
+}) => {
   const [notify, setNotify] = useState(false)
 
   const handleCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,8 +37,12 @@ export const Copyable: React.FC<CopyableProps> = ({ value }) => {
       <RadixTooltip.Provider delayDuration={0}>
         <RadixTooltip.Root open={notify}>
           <RadixTooltip.Trigger asChild>
-            <button style={{ height: '16px' }} onClick={handleCopy}>
-              <StyledCopyIcon />
+            <button
+              className={className}
+              style={{ height: '16px' }}
+              onClick={handleCopy}
+            >
+              {children}
             </button>
           </RadixTooltip.Trigger>
           <RadixTooltip.Portal>

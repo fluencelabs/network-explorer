@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
+import { Copyable } from '../../components/Copyable'
 import { useApiQuery } from '../../hooks'
 
 const Container = styled.div`
@@ -15,30 +16,22 @@ const Container = styled.div`
   overflow-x: auto;
   max-width: 100%;
   word-wrap: break-word;
+  position: relative;
 `
 
-const Key = styled.span`
-  color: #0366d6;
-  font-weight: bold;
+const StyledCopy = styled(Copyable)`
+  position: absolute;
+  scale: 1.4;
+  right: 10px;
+  top: 10px;
 `
 
-const String = styled.span`
-  color: #032f62;
+const CodeBlock = styled.code`
+  display: block;
+  white-space: pre-wrap;
 `
 
-const Number = styled.span`
-  color: #005cc5;
-`
-
-const Boolean = styled.span`
-  color: #d73a49;
-`
-
-const Null = styled.span`
-  color: #6a737d;
-  font-style: italic;
-`
-
+// Loading message or spinner
 const Loading = styled.div`
   text-align: center;
   color: #0366d6;
@@ -47,6 +40,10 @@ const Loading = styled.div`
   padding: 20px;
 `
 
+const replacer = (_: string, value: unknown) => {
+  return typeof value === 'bigint' ? value.toString() + 'n' : value
+}
+
 const PrettyJsonView = ({
   json,
   isLoading,
@@ -54,60 +51,20 @@ const PrettyJsonView = ({
   json: unknown
   isLoading?: boolean
 }) => {
-  console.log(json)
-
-  const renderJson = (data: unknown) => {
-    if (typeof data === 'string') {
-      return <String>&quot;{data}&quot;</String>
-    }
-    if (typeof data === 'number') {
-      return <Number>{data}</Number>
-    }
-    if (typeof data === 'bigint') {
-      return <Number>{data.toString()}</Number>
-    }
-    if (typeof data === 'boolean') {
-      return <Boolean>{data.toString()}</Boolean>
-    }
-    if (data === null) {
-      return <Null>null</Null>
-    }
-    if (Array.isArray(data)) {
-      return (
-        <>
-          {'['}
-          <br />
-          {data.map((item, index) => (
-            <div key={index} style={{ marginLeft: '20px' }}>
-              {renderJson(item)}
-              {index < data.length - 1 && ','}
-            </div>
-          ))}
-          {']'}
-        </>
-      )
-    }
-    if (typeof data === 'object') {
-      return (
-        <>
-          {'{'}
-          <br />
-          {Object.keys(data).map((key, index, array) => (
-            <div key={key} style={{ marginLeft: '20px' }}>
-              <Key>&quot;{key}&quot;</Key>:{' '}
-              {renderJson((data as { [key: string]: unknown })[key])}
-              {index < array.length - 1 && ','}
-            </div>
-          ))}
-          {'}'}
-        </>
-      )
-    }
+  const renderJsonString = (data: unknown) => {
+    return JSON.stringify(data, replacer, 2)
   }
+
+  const rendered = renderJsonString(json)
 
   return (
     <Container>
-      {isLoading ? <Loading>Loading...</Loading> : renderJson(json)}
+      <StyledCopy value={rendered} />
+      {isLoading ? (
+        <Loading>Loading...</Loading>
+      ) : (
+        <CodeBlock>{rendered}</CodeBlock>
+      )}
     </Container>
   )
 }
