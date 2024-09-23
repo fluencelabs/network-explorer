@@ -137,7 +137,7 @@ const ProofRow: React.FC<ProofRowProps> = ({ proof }) => {
               </A>
             </Cell>
             {/* Timestamp */}
-            <Cell>
+            <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{createdAt.date}</Text>
               <Text size={12}>{createdAt.time}</Text>
             </Cell>
