@@ -13,6 +13,7 @@ export const ROUTES = {
   proofs: '/proofs',
   peerInfo: '/peer/:id',
   computeUnitInfo: '/compute-unit/:id',
+  config: '/config',
 } as const
 
 export type Routes = typeof ROUTES
