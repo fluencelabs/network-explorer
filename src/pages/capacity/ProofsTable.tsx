@@ -162,7 +162,9 @@ const ProofRow: React.FC<ProofRow> = ({ proof, currentEpoch }) => {
               </Text>
               <Text size={12}>&nbsp;/&nbsp;</Text>
               <Text size={12} color={'red'}>
-                {proof.computeUnitsFailed}
+                {proof.createdAtEpoch != currentEpoch
+                  ? proof.computeUnitsFailed
+                  : '-'}
               </Text>
             </Cell>
             {/* Total proofs */}
