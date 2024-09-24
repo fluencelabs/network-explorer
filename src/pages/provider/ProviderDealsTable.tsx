@@ -1,6 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import styled from '@emotion/styled'
 import { DealShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useLocation } from 'wouter'
 
@@ -118,11 +117,9 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             <Cell>
               <A href={`/deal/${deal.id}`}>{formatHexData(deal.id)}</A>
             </Cell>
-            <Cell>
-              <Column>
-                <Text size={12}>{createdAt.date}</Text>
-                <Text size={12}>{createdAt.time}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{createdAt.date}</Text>
+              <Text size={12}>{createdAt.time}</Text>
             </Cell>
             {/* <Cell>
               <A href={`/offer/${deal.client}`}>{deal.client}</A>
@@ -150,8 +147,3 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
     </RowBlock>
   )
 }
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`
