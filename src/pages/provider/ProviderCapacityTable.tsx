@@ -162,6 +162,12 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
         <TableBody
           skeletonCount={PROVIDER_CAPACITIES_PER_PAGE}
           isLoading={isLoading}
+          isEmpty={!capacities?.total || capacities?.total?.length === 0}
+          noDataText={
+            filters?.status !== undefined
+              ? 'No capacity commitments with the status you specified'
+              : 'No capacity commitments'
+          }
         >
           {pageCapacities?.map((capacity) => (
             <CapacityRow key={capacity.id} capacity={capacity} />

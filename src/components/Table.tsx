@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import styled from '@emotion/styled'
 import { OrderType } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
@@ -17,6 +17,7 @@ interface TableBodyProps {
   skeletonCount?: number
   skeletonHeight?: number
   children: React.ReactNode | React.ReactNode[]
+  noDataText?: ReactNode
 }
 
 export const TableBody: React.FC<TableBodyProps> = ({
@@ -25,6 +26,7 @@ export const TableBody: React.FC<TableBodyProps> = ({
   skeletonCount = 5,
   skeletonHeight = 48,
   children,
+  noDataText,
 }) => {
   if (isLoading) {
     return (
@@ -41,7 +43,7 @@ export const TableBody: React.FC<TableBodyProps> = ({
       <TableBodyStyled>
         <EmptyTable>
           <Text size={12} color="grey500" weight={600} uppercase>
-            No data
+            {noDataText}
           </Text>
         </EmptyTable>
       </TableBodyStyled>
