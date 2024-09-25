@@ -17,6 +17,8 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { BLOCKSCOUT_URL } from '../../constants/config'
+
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
 import { ProofsTable } from './ProofsTable'
 
@@ -259,7 +261,11 @@ export const CapacityInfo: React.FC = () => {
                 </Tooltip>
               </Row>
               <TextWithIcon>
-                {capacity.delegatorAddress}
+                <A
+                  href={`${BLOCKSCOUT_URL}/address/${capacity.delegatorAddress}`}
+                >
+                  {capacity.delegatorAddress}
+                </A>
                 <Copyable value={capacity.delegatorAddress ?? ''} />
               </TextWithIcon>
             </Info>
