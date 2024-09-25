@@ -9,7 +9,7 @@ export const useFilters = <Filters extends Record<string, any>>(
   const urlParams = new URLSearchParams(search)
   const filter = urlParams.get('filter')
   const filtersData: Filters = filter
-    ? ({ status: filter } as unknown as Filters)
+    ? ({ ...defaultFilters, status: filter } as unknown as Filters)
     : defaultFilters
   const [filters, setFilters] = useState<Filters>(filtersData)
 
