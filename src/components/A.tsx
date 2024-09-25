@@ -8,6 +8,13 @@ interface AProps extends TextProps {
   children: React.ReactNode | React.ReactNode[]
 }
 
+function sameOrigin(a: string, b: string) {
+  const base = window.location.origin
+  const urlA = new URL(a, base)
+  const urlB = new URL(b, base)
+  return urlA.origin === urlB.origin
+}
+
 export const A: React.FC<AProps> = ({ children, href, ...textProps }) => {
   const [, navigate] = useLocation()
 
@@ -17,9 +24,13 @@ export const A: React.FC<AProps> = ({ children, href, ...textProps }) => {
     navigate(href)
   }
 
+  const linkProps = sameOrigin(href, window.location.href)
+    ? { onClick: handleClick }
+    : { target: '_blank', rel: 'noopener noreferrer' }
+
   return (
     <ShrinkText size={12} color="blue" {...textProps}>
-      <a href={href} onClick={handleClick}>
+      <a href={href} {...linkProps}>
         <Text size={12} color="blue" {...textProps}>
           {children}
         </Text>
