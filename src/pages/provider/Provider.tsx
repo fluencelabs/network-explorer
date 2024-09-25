@@ -10,6 +10,8 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { BLOCKSCOUT_URL } from '../../constants/config'
+
 interface ProviderProps {
   children: React.ReactNode | React.ReactNode[]
   provider: ProviderDetail
@@ -55,7 +57,9 @@ export const Provider: React.FC<ProviderProps> = ({ children, provider }) => {
                 Provider ID
               </Text>
               <TextWithIcon>
-                <A href={'#'}>{provider.id}</A>
+                <A href={`${BLOCKSCOUT_URL}/address/${provider.id}`}>
+                  {provider.id}
+                </A>
                 <Copyable value={provider.id} />
               </TextWithIcon>
             </Info>
