@@ -1,6 +1,5 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import styled from '@emotion/styled'
 import { STATUS_NAMES } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/constants'
 import {
   CapacityCommitmentsByPeerFilter,
@@ -189,18 +188,14 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity, index }) => {
               </A>
             </Cell>
             {/* Created at */}
-            <Cell>
-              <Column>
-                <Text size={12}>{createdAt.date}</Text>
-                <Text size={12}>{createdAt.time}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{createdAt.date}</Text>
+              <Text size={12}>{createdAt.time}</Text>
             </Cell>
             {/* Expiration */}
-            <Cell>
-              <Column>
-                <Text size={12}>{expiredAt.date}</Text>
-                <Text size={12}>{expiredAt.time}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{expiredAt.date}</Text>
+              <Text size={12}>{expiredAt.time}</Text>
             </Cell>
             {/* Compute units */}
             <Cell>
@@ -216,8 +211,3 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity, index }) => {
     </RowBlock>
   )
 }
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`
