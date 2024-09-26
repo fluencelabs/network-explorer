@@ -164,7 +164,16 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
           <TableColumnTitle>Delegation Rate</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
-        <TableBody skeletonCount={CAPACITIES_PER_PAGE} isLoading={isLoading}>
+        <TableBody
+          skeletonCount={CAPACITIES_PER_PAGE}
+          isLoading={isLoading}
+          isEmpty={!capacities?.total || capacities?.total?.length === 0}
+          noDataText={
+            filters?.status !== undefined
+              ? 'No capacity commitments with the status you specified'
+              : 'No capacity commitments'
+          }
+        >
           {pageCapacities?.map((capacity) => (
             <CapacityRow key={capacity.id} capacity={capacity} />
           ))}
