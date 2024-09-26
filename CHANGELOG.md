@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.6](https://github.com/fluencelabs/network-explorer/compare/v0.1.5...v0.1.6) (2024-09-26)
+
+
+### Features
+
+* **ConfigJson:** add config page ([#101](https://github.com/fluencelabs/network-explorer/issues/101)) ([ca3e67a](https://github.com/fluencelabs/network-explorer/commit/ca3e67a93c43a3ea9db03fc3b251587f80a71123))
+* **links:** add links to blockscout (staker address / provider address) ([#106](https://github.com/fluencelabs/network-explorer/issues/106)) ([6c14f4a](https://github.com/fluencelabs/network-explorer/commit/6c14f4af4534bb2c35eaa608d626958c6fab2195))
+* **Table:** show text if table is empty (capacity) ([#104](https://github.com/fluencelabs/network-explorer/issues/104)) ([c739399](https://github.com/fluencelabs/network-explorer/commit/c739399678aaeb7f0481d3f22ab3db6a05b9a92c))
+
+
+### Bug Fixes
+
+* **CapacitiesTable:** fix duration in tooltip ([#88](https://github.com/fluencelabs/network-explorer/issues/88)) ([f317b47](https://github.com/fluencelabs/network-explorer/commit/f317b4722c226465e0a5b94a66fda1877bc74e52))
+* **datetime:** fix datetime (tables) ([#102](https://github.com/fluencelabs/network-explorer/issues/102)) ([ac36ad2](https://github.com/fluencelabs/network-explorer/commit/ac36ad271b3b19a399ffb4853e33c62f0ada7be4))
+* **ProofsTable:** hide failed count cu for unfinished epoch ([#103](https://github.com/fluencelabs/network-explorer/issues/103)) ([a3cd6ca](https://github.com/fluencelabs/network-explorer/commit/a3cd6ca35fdc7f49572f792f887bdf4ba9d93418))
+* **TableBody:** fix show CC ([#108](https://github.com/fluencelabs/network-explorer/issues/108)) ([2c5d7ac](https://github.com/fluencelabs/network-explorer/commit/2c5d7ac04f4ab2ef99efa29e40bde9d105c4748b))
+* **vite-config:** fix capitalizeFirstLetter ([#91](https://github.com/fluencelabs/network-explorer/issues/91)) ([7355bf6](https://github.com/fluencelabs/network-explorer/commit/7355bf6698ab8a3f45b8342ee94c3b1da6088af5))
+
 ## [0.1.5](https://github.com/fluencelabs/network-explorer/compare/v0.1.4...v0.1.5) (2024-09-15)
 
 
