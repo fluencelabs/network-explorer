@@ -167,7 +167,7 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
         <TableBody
           skeletonCount={CAPACITIES_PER_PAGE}
           isLoading={isLoading}
-          isEmpty={!capacities?.total || capacities?.total?.length === 0}
+          isEmpty={capacities?.data.length === 0}
           noDataText={
             filters?.status !== undefined
               ? 'No capacity commitments with the status you specified'
