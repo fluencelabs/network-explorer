@@ -230,11 +230,9 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
               </A>
             </Cell>
             {/* Created at */}
-            <Cell>
-              <Column>
-                <Text size={12}>{createdAt.date}</Text>
-                <Text size={12}>{createdAt.time}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{createdAt.date}</Text>
+              <Text size={12}>{createdAt.time}</Text>
             </Cell>
             {/* Duration */}
             <Cell>

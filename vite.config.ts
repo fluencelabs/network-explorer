@@ -3,7 +3,8 @@ import { defineConfig, loadEnv } from 'vite'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgr from 'vite-plugin-svgr'
 
-export function capitalizeFirstLetter(word: string) {
+export function capitalizeFirstLetter(word?: string) {
+  if (!word) return ''
   return word.charAt(0).toUpperCase() + word.slice(1)
 }
 
@@ -25,7 +26,7 @@ export default defineConfig(({ mode }) => {
         transformIndexHtml(html) {
           return html.replace(
             /<title>(.*?)<\/title>/,
-            `<title>Fluence ${capitalizeFirstLetter(env.VITE_CHAIN)} Explorer </title>`,
+            `<title>Fluence ${capitalizeFirstLetter(env.VITE_CHAIN || 'local')} Explorer </title>`,
           )
         },
       },

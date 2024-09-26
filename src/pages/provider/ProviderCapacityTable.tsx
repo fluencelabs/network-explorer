@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import styled from '@emotion/styled'
 import {
   CapacityCommitmentsByProviderFilter,
   CapacityCommitmentsOrderBy,
@@ -219,24 +218,18 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
               </A>
             </Cell>
             {/* # Created At */}
-            <Cell>
-              <Column>
-                <Text size={12}>{createdAt.date}</Text>
-                <Text size={12}>{createdAt.time}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{createdAt.date}</Text>
+              <Text size={12}>{createdAt.time}</Text>
             </Cell>
             {/* Duration */}
-            <Cell>
-              <Column>
-                <Text size={12}>{formatDuration(capacityDuration)}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{formatDuration(capacityDuration)}</Text>
             </Cell>
             {/* Expiration */}
-            <Cell>
-              <Column>
-                <Text size={12}>{expiredAt.date}</Text>
-                <Text size={12}>{expiredAt.time}</Text>
-              </Column>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}>{expiredAt.date}</Text>
+              <Text size={12}>{expiredAt.time}</Text>
             </Cell>
             {/* Peer Id */}
             <Cell>
@@ -264,8 +257,3 @@ const CapacityRow: React.FC<CapacityRowProps> = ({ capacity }) => {
     </RowBlock>
   )
 }
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`
