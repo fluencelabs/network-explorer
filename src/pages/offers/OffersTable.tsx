@@ -38,7 +38,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  '50px',
+  '180px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   '70px',
@@ -99,7 +99,7 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
             Created At
           </TableColumnTitleWithSort>
           <TableColumnTitle>Provider</TableColumnTitle>
-          <TableColumnTitle>Peers</TableColumnTitle>
+          <TableColumnTitle>Total peers (Confirmed)</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="updatedAt" // TODO
@@ -183,6 +183,10 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             {/* Peers */}
             <Cell>
               <Text size={12}>{offer.peersCount}</Text>
+              <Space width="6px" />
+              <ProviderComputeUnitsAvailable size={12} color="white">
+                {offer.peersInActiveCCCount}
+              </ProviderComputeUnitsAvailable>
             </Cell>
             {/* Compute units */}
             <Cell>
