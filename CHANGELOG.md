@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/fluencelabs/network-explorer/compare/v0.1.6...v0.1.7) (2024-10-07)
+
+
+### Features
+
+* **Offers:** show active peers counter ([#109](https://github.com/fluencelabs/network-explorer/issues/109)) ([3e38f6b](https://github.com/fluencelabs/network-explorer/commit/3e38f6be8d96960996ff094f8744379e5f379361))
+
 ## [0.1.6](https://github.com/fluencelabs/network-explorer/compare/v0.1.5...v0.1.6) (2024-09-26)
 
 
