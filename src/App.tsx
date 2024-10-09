@@ -13,7 +13,12 @@ import { OfferInfo } from './pages/offer'
 import { Offers } from './pages/offers'
 import { PeerInfo } from './pages/peer'
 import { Proofs } from './pages/proofs'
-import { ProviderDeals, ProviderInfo, ProviderOffers } from './pages/provider'
+import {
+  ProviderDeals,
+  ProviderInfo,
+  ProviderOffers,
+  ProviderPeers,
+} from './pages/provider'
 import { ProviderCapacity } from './pages/provider/ProviderCapacity'
 import { Providers } from './pages/providers'
 import { ROUTES } from './constants'
@@ -28,6 +33,7 @@ export const App: React.FC = () => {
       <Route path={ROUTES.providers} component={Providers} />
       <Route path={ROUTES.providerInfo} component={ProviderInfo} />
       <Route path={ROUTES.providerOffers} component={ProviderOffers} />
+      <Route path={ROUTES.providerPeers} component={ProviderPeers} />
       <Route path={ROUTES.providerDeals} component={ProviderDeals} />
       <Route path={ROUTES.providerCapacity} component={ProviderCapacity} />
       <Route path={ROUTES.offers} component={Offers} />

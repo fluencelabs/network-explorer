@@ -1,3 +1,4 @@
-export * from './ProviderInfo.tsx'
-export * from './ProviderOffers.tsx'
-export * from './ProviderDeals.tsx'
+export * from './ProviderInfo'
+export * from './ProviderOffers'
+export * from './ProviderDeals'
+export * from './ProviderPeers'
