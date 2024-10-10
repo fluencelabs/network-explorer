@@ -6,9 +6,12 @@ import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
 import { InfoLoader } from '../../components/InfoLoader'
+import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useApiQuery } from '../../hooks'
+
+import { ROUTES } from '../../constants'
 
 import { PeerCapacityCommitmentsTable } from './PeerCapacityCommitmentsTable'
 import { PeerDealsTable } from './PeerDealsTable'
@@ -24,6 +27,16 @@ export const PeerInfo: React.FC = () => {
 
   if (!peer || isLoading) {
     return <InfoLoader />
+  }
+
+  if (!peer || !id) {
+    return (
+      <NotFound
+        message="Not found peer"
+        link={ROUTES.providers}
+        linkText="Go to providers page"
+      />
+    )
   }
 
   return (

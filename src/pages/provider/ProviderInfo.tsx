@@ -4,10 +4,13 @@ import { useParams } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
 import { InfoLoader } from '../../components/InfoLoader'
+import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
+
+import { ROUTES } from '../../constants'
 
 import { Provider } from './Provider'
 
@@ -29,8 +32,18 @@ export const ProviderInfo: React.FC = () => {
     client.getProvider(id ?? ''),
   )
 
-  if (!provider || isLoading) {
+  if (isLoading) {
     return <InfoLoader />
+  }
+
+  if (!provider || !id) {
+    return (
+      <NotFound
+        message="Not found provider"
+        link={ROUTES.providers}
+        linkText="Go to providers page"
+      />
+    )
   }
 
   return (
