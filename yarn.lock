@@ -916,7 +916,7 @@ __metadata:
 
 "@fluencelabs/deal-ts-clients@file:/Users/mihailerohov/fluence/compute-marketplace/ts-client::locator=fluence-explorer%40workspace%3A.":
   version: 0.20.0
-  resolution: "@fluencelabs/deal-ts-clients@file:/Users/mihailerohov/fluence/compute-marketplace/ts-client#/Users/mihailerohov/fluence/compute-marketplace/ts-client::hash=8c4aae&locator=fluence-explorer%40workspace%3A."
+  resolution: "@fluencelabs/deal-ts-clients@file:/Users/mihailerohov/fluence/compute-marketplace/ts-client#/Users/mihailerohov/fluence/compute-marketplace/ts-client::hash=cca605&locator=fluence-explorer%40workspace%3A."
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -928,7 +928,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/f8749b141a030ae7ccd7769143c0c7a087cbaa06dc5f0861c802e77a30e808b0e8ef19a972699a72e6e7ef23ffeaf5f7a837b87321f27d3dcc19f435f8b58569
+  checksum: 10c0/5aac6868d8abc60b31a171a1e6e8168a61ce5e50813a2d5f6cc7510ea2cf4df74333157fa751bfe42b15b6e7ff5c7e203185551354d9d94130709805194e8661
   languageName: node
   linkType: hard
 
