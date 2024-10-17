@@ -64,8 +64,7 @@ export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
         <TableHeader template={template}>
           <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Deal id</TableColumnTitle>
-          {/* <TableColumnTitle>Compute unit</TableColumnTitle>
-          <TableColumnTitle>Worker id</TableColumnTitle> */}
+          <TableColumnTitle>Compute Units Count</TableColumnTitle>
         </TableHeader>
         <TableBody
           isEmpty={!pageItems.length}
@@ -113,14 +112,8 @@ const DealRow: React.FC<DealRowProps> = ({ index, deal }) => {
             <Cell>
               <A href={`/deal/${deal.dealId}`}>{formatHexData(deal.dealId)}</A>
             </Cell>
-            {/* Compute unit */}
-            {/* <Cell>
-              <A href={`/compute-unit/${deal.workerIds}`}>
-                {deal.computeUnitId}
-              </A>
-            </Cell> */}
-            {/* Worker id */}
-            {/* <Cell><Text size={12}>{deal.workerId}</Text></Cell> */}
+            {/* Compute units count */}
+            <Cell></Cell>
           </Row>
         </RowTrigger>
       </RowHeader>
