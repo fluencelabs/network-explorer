@@ -43,14 +43,6 @@ if (FLUENCE_CLIENT_NETWORK === 'local') {
   })
 }
 
-if (FLUENCE_CLIENT_NETWORK === 'kras') {
-  items.push({
-    label: 'Kras',
-    value: 'kras',
-    icon: <MainnetIcon />,
-  })
-}
-
 const explorerUrls: Record<string, string> = {
   stage: 'https://explorer.stage.fluence.dev',
   testnet: 'https://explorer.testnet.fluence.dev',

@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
-import { OrderType } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
-import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
+import React from 'react'
+import { WorkerDetail } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
-import { Pagination } from '../../components/Pagination'
-import { Space } from '../../components/Space'
 import {
   Cell,
   Row,
@@ -16,11 +12,11 @@ import {
   TableBody,
   TableColumnTitle,
   TableHeader,
-  TablePagination,
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { WorkerStatus } from '../../components/WorkerStatus'
-import { useApiQuery, usePagination } from '../../hooks'
+import { useApiQuery } from '../../hooks'
+import { formatHexData } from '../../utils/helpers'
 
 const template = [
   '20px',
@@ -30,51 +26,21 @@ const template = [
   'minmax(10px, 1fr)',
 ]
 
-const CAPACITIES_PER_PAGE = 20
-
-type MatchingOrderBy = 'createdAt'
-type MatchingSort = `${MatchingOrderBy}:${OrderType}`
-
 interface MatchingTableProps {
   dealId: string
 }
 
 export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
-  const [order] = useState<MatchingSort>('createdAt:desc')
-  const [orderBy, orderType] = order.split(':') as [MatchingOrderBy, OrderType]
-
-  const { page, selectPage, limit, offset, getTotalPages } =
-    usePagination(CAPACITIES_PER_PAGE)
-
-  const { data: computeUnits, isLoading } = useApiQuery(
-    (client) =>
-      client.getComputeUnitsByDeal(
-        dealId,
-        offset,
-        limit + 1,
-        orderBy,
-        orderType,
-      ),
-    [page, orderBy, orderType, dealId],
+  const { data, isLoading } = useApiQuery(
+    (client) => client.getWorkersByDeal(dealId),
+    [dealId],
     {
       key: `matchingTable:${JSON.stringify({
         dealId,
-        offset,
-        limit,
-        order,
-        orderBy,
       })}`,
-      ttl: 1_000 * 60, // 1 minute
+      ttl: 1_000 * 60,
     },
   )
-
-  const hasNextPage = computeUnits && computeUnits.data.length > limit
-  const pageCapacities = computeUnits && computeUnits.data.slice(0, limit)
-  const indexMultiplier = offset + 1
-
-  // const handleSort = (key: MatchingOrderBy, order: OrderType) => {
-  //   setOrder(`${key}:${order}`)
-  // }
 
   return (
     <>
@@ -87,45 +53,24 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
           <TableColumnTitle>Worker Status</TableColumnTitle>
         </TableHeader>
         <TableBody
-          isEmpty={!pageCapacities?.length}
-          skeletonCount={CAPACITIES_PER_PAGE}
+          isEmpty={data?.data.length === 0}
+          skeletonCount={5}
           isLoading={isLoading}
+          noDataText="No found any workers"
         >
-          {pageCapacities?.map((unit, index) => (
-            <ComputeUnitWorkerRow
-              key={unit.id}
-              index={indexMultiplier + index}
-              computeUnit={unit}
-            />
+          {data?.data.map((worker) => (
+            <WorkerDetailRow key={worker.id} worker={worker} />
           ))}
         </TableBody>
       </ScrollableTable>
-      <Space height="32px" />
-      <TablePagination>
-        {!computeUnits ? (
-          <Skeleton width={200} height={34} count={1} />
-        ) : (
-          <Pagination
-            pages={getTotalPages(computeUnits.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
-        )}
-      </TablePagination>
     </>
   )
 }
-
-interface ComputeUnitWorkerRowProps {
-  index: number
-  computeUnit: ComputeUnitWorkerDetail
+interface WorkerDetailRowProps {
+  worker: WorkerDetail
 }
 
-const ComputeUnitWorkerRow: React.FC<ComputeUnitWorkerRowProps> = ({
-  index,
-  computeUnit,
-}) => {
+const WorkerDetailRow: React.FC<WorkerDetailRowProps> = ({ worker }) => {
   return (
     <RowBlock>
       <RowHeader>
@@ -133,25 +78,21 @@ const ComputeUnitWorkerRow: React.FC<ComputeUnitWorkerRowProps> = ({
           <Row template={template}>
             {/* # */}
             <Cell>
-              <Text size={12}>{index}</Text>
+              <Text size={12}>{formatHexData(worker.id, 10, 10)}</Text>
             </Cell>
             {/* Provider ID */}
             <Cell>
-              <A href={`/provider/${computeUnit.providerId}`}>
-                {computeUnit.providerId}
+              <A href={`/provider/${worker.providerId}`}>
+                {formatHexData(worker.providerId, 10, 10)}
               </A>
             </Cell>
             {/* Compute Unit */}
             <Cell>
-              <ShrinkText size={12}>NOT EXIST</ShrinkText>
-            </Cell>
-            {/* Worker Id  */}
-            <Cell>
-              <ShrinkText size={12}>{computeUnit.workerId}</ShrinkText>
+              <ShrinkText size={12}>{worker.cuCount}</ShrinkText>
             </Cell>
             {/* Status */}
             <Cell>
-              <WorkerStatus status={computeUnit.workerStatus} />
+              <WorkerStatus hasOffChainId={!!worker.offchainWorkerId} />
             </Cell>
           </Row>
         </RowTrigger>

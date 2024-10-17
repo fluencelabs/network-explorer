@@ -11,6 +11,7 @@ import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
+import { formatUSDcTokenValue } from '../../utils'
 
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
@@ -105,7 +106,7 @@ export const DealInfo: React.FC = () => {
                 Balance
               </Text>
               <TextWithBadge>
-                <Text size={12}>{deal.balance}</Text>
+                <Text size={12}>{formatUSDcTokenValue(deal.balance)}</Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
                     {deal.paymentToken.symbol}
@@ -130,7 +131,9 @@ export const DealInfo: React.FC = () => {
                 Earnings
               </Text>
               <TextWithBadge>
-                <Text size={12}>{deal.totalEarnings}</Text>
+                <Text size={12}>
+                  {formatUSDcTokenValue(deal.totalEarnings)}
+                </Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
                     {deal.paymentToken.symbol}
@@ -207,7 +210,9 @@ export const DealInfo: React.FC = () => {
                 Price Per CU Per Epoch
               </Text>
               <ParameterValue>
-                <Text size={20}>{deal.pricePerCuPerEpoch}</Text>
+                <Text size={20}>
+                  {formatUSDcTokenValue(deal.pricePerCuPerEpoch)}
+                </Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
                     {deal.paymentToken.symbol}

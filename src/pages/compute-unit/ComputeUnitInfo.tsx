@@ -9,7 +9,7 @@ import { Copyable } from '../../components/Copyable'
 import { InfoLoader } from '../../components/InfoLoader'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
-import { TokenBadge } from '../../components/TokenBadge'
+import TokenBalance from '../../components/TokenBalance'
 import { useApiQuery } from '../../hooks'
 
 import { ComputeUnitProofsTable } from './ComputeUnitProofsTable'
@@ -89,12 +89,10 @@ export const ComputeUnitInfo: React.FC = () => {
                 Collateral
               </Text>
               <Row>
-                <Text size={12}>{computeUnit.collateral}</Text>
-                <TokenBadge bg="black900">
-                  <Text size={10} weight={800} color="white">
-                    {computeUnit.collateralToken.symbol}
-                  </Text>
-                </TokenBadge>
+                <TokenBalance
+                  balance={computeUnit.collateral}
+                  symbol={computeUnit.collateralToken.symbol}
+                />
               </Row>
             </Info>
             <Info>
