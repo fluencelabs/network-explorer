@@ -27,6 +27,7 @@ import {
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
+import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -190,7 +191,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             </Cell>
             {/* Price Per Epoch */}
             <Cell gap="8px">
-              <Text size={12}>{offer.pricePerEpoch}</Text>
+              <Text size={12}>{formatUSDcTokenValue(offer.pricePerEpoch)}</Text>
               <TokenBadge bg="grey200">
                 <Text size={10} weight={800} color="grey500">
                   {offer.paymentToken.symbol}

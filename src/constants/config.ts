@@ -31,8 +31,9 @@ export const FORMAT_NATIVE_TOKEN_TO_FIXED_DEFAULT = 6
 export const SUBGRAPH_URL =
   import.meta.env.VITE_SUBGRAPH_URL ?? SUBGRAPH_URLS[FLUENCE_CLIENT_NETWORK]
 export const DEPLOYMENT = DEPLOYMENTS[FLUENCE_CLIENT_NETWORK]
+export const USDC_DECIMALS = 6
 
-const CHAIN = {
+export const CHAIN = {
   id: CHAIN_ID,
   name: FLUENCE_CLIENT_NETWORK,
   nativeCurrency: { name: 'FLT', symbol: 'FLT', decimals: 18 },

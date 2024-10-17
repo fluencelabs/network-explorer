@@ -15,6 +15,7 @@ import { TokenBadge } from '../../components/TokenBadge'
 import TokenBalance from '../../components/TokenBalance'
 import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
+import { formatNativeTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 import { BLOCKSCOUT_URL } from '../../constants/config'
@@ -25,7 +26,7 @@ import { ProofsTable } from './ProofsTable'
 const Record: React.FC<{
   title: ReactNode
   hint?: ReactNode
-  balance: string | number
+  balance: bigint
   symbol?: string
 }> = ({ title, hint, balance, symbol }) => {
   return (
@@ -46,9 +47,9 @@ const Record: React.FC<{
 const Rewards: React.FC<{
   title: string
   symbol?: string
-  inVesting: string | number
-  availableToClaim: string | number
-  claimed: string | number
+  inVesting: bigint
+  availableToClaim: bigint
+  claimed: bigint
 }> = ({ title, symbol, inVesting, availableToClaim, claimed }) => {
   return (
     <div>
@@ -180,7 +181,9 @@ export const CapacityInfo: React.FC = () => {
                 </Tooltip>
               </Row>
               <Row>
-                <Text size={12}>{capacity.totalCollateral}</Text>
+                <Text size={12}>
+                  {formatNativeTokenValue(capacity.totalCollateral)}
+                </Text>
                 <TokenBadge bg="black900">
                   <Text size={10} weight={800} color="white">
                     {capacity.collateralToken.symbol}
@@ -261,12 +264,10 @@ export const CapacityInfo: React.FC = () => {
                 </Tooltip>
               </Row>
               <TextWithIcon>
-                <A
-                  href={`${BLOCKSCOUT_URL}/address/${capacity.delegatorAddress}`}
-                >
-                  {capacity.delegatorAddress}
+                <A href={`${BLOCKSCOUT_URL}/address/${capacity.stakerAddress}`}>
+                  {capacity.stakerAddress}
                 </A>
-                <Copyable value={capacity.delegatorAddress ?? ''} />
+                <Copyable value={capacity.stakerAddress ?? ''} />
               </TextWithIcon>
             </Info>
           </InfoRow>
@@ -307,9 +308,9 @@ export const CapacityInfo: React.FC = () => {
             <Rewards
               title="Staker"
               symbol={capacity.collateralToken.symbol}
-              inVesting={capacity.rewards.delegator.inVesting}
-              availableToClaim={capacity.rewards.delegator.availableToClaim}
-              claimed={capacity.rewards.delegator.claimed}
+              inVesting={capacity.rewards.staker.inVesting}
+              availableToClaim={capacity.rewards.staker.availableToClaim}
+              claimed={capacity.rewards.staker.claimed}
             />
           </ParametersRow>
           <Space height="80px" />
