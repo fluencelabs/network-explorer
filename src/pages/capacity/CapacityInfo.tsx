@@ -9,6 +9,7 @@ import { CapacityStatus } from '../../components/CapacityStatus'
 import { Copyable } from '../../components/Copyable'
 import Hint from '../../components/Hint'
 import { InfoLoader } from '../../components/InfoLoader'
+import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -18,6 +19,7 @@ import { useApiQuery } from '../../hooks'
 import { formatNativeTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
+import { ROUTES } from '../../constants'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
@@ -77,8 +79,18 @@ export const CapacityInfo: React.FC = () => {
     client.getCapacityCommitment(id ?? ''),
   )
 
-  if (!capacity || isLoading || !id) {
+  if (isLoading) {
     return <InfoLoader />
+  }
+
+  if (!capacity || !id) {
+    return (
+      <NotFound
+        message="Not found capacity"
+        link={ROUTES.deals}
+        linkText="Go to capacities page"
+      />
+    )
   }
 
   const createdAt = formatUnixTimestamp(capacity.createdAt)
