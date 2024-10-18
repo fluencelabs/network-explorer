@@ -1,15 +1,16 @@
 import React from 'react'
-import { ComputeUnitWorkerDetail } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { Status } from './Status'
 import { Text } from './Text'
 
 interface WorkerStatusProps {
-  status: ComputeUnitWorkerDetail['workerStatus']
+  hasOffChainId: boolean
 }
 
-export const WorkerStatus: React.FC<WorkerStatusProps> = ({ status }) => {
-  if (status === 'registered') {
+export const WorkerStatus: React.FC<WorkerStatusProps> = ({
+  hasOffChainId,
+}) => {
+  if (hasOffChainId) {
     return (
       <Status color="blue">
         <Text color="white" weight={800} size={10} uppercase>
@@ -19,20 +20,10 @@ export const WorkerStatus: React.FC<WorkerStatusProps> = ({ status }) => {
     )
   }
 
-  if (status === 'waitingRegistration') {
-    return (
-      <Status color="grey200">
-        <Text color="grey500" weight={800} size={10} uppercase>
-          Waiting...
-        </Text>
-      </Status>
-    )
-  }
-
   return (
-    <Status color="red">
-      <Text color="white" weight={800} size={10} uppercase>
-        undefined
+    <Status color="grey200">
+      <Text color="grey500" weight={800} size={10} uppercase>
+        Waiting...
       </Text>
     </Status>
   )

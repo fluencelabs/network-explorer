@@ -77,7 +77,7 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
   )
 
   const { data: currentEpoch, isLoading: isEpochLoading } = useApiQuery(
-    (client) => client.currentEpoch(),
+    async (client) => client.currentEpoch(),
   )
 
   const hasNextPage = proofs && proofs.data.length > limit
