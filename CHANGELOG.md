@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.7](https://github.com/fluencelabs/network-explorer/compare/v0.1.6...v0.1.7) (2024-10-18)
+
+
+### Features
+
+* **NotFound:** add 404 page ([#112](https://github.com/fluencelabs/network-explorer/issues/112)) ([aa67663](https://github.com/fluencelabs/network-explorer/commit/aa67663a28d237c3273078a0b9e8bd5c624e16bb))
+* **Offers:** show active peers counter ([#109](https://github.com/fluencelabs/network-explorer/issues/109)) ([3e38f6b](https://github.com/fluencelabs/network-explorer/commit/3e38f6be8d96960996ff094f8744379e5f379361))
+* **ts-client:** update ts-client to 0.22.0 ([#113](https://github.com/fluencelabs/network-explorer/issues/113)) ([75eda4a](https://github.com/fluencelabs/network-explorer/commit/75eda4a6d2013c47ffa94c1103bcfa4b4b0e4ab1))
+
 ## [0.1.6](https://github.com/fluencelabs/network-explorer/compare/v0.1.5...v0.1.6) (2024-09-26)
 
 
