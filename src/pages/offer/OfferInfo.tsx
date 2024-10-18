@@ -10,6 +10,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
+import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 import { PeersTable } from './PeersTable'
@@ -99,7 +100,9 @@ export const OfferInfo: React.FC = () => {
                 Price per worker epoch
               </Text>
               <ParameterValue>
-                <Text size={20}>{offer.pricePerEpoch}</Text>
+                <Text size={20}>
+                  {formatUSDcTokenValue(offer.pricePerEpoch)}
+                </Text>
                 <TokenBadge bg="grey300">
                   <Text size={12} weight={800} color="grey600">
                     {offer.paymentToken.symbol}
