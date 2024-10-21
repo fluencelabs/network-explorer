@@ -7,10 +7,13 @@ import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { ComputeUnitStatus } from '../../components/ComputeUnitStatus'
 import { Copyable } from '../../components/Copyable'
 import { InfoLoader } from '../../components/InfoLoader'
+import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import TokenBalance from '../../components/TokenBalance'
 import { useApiQuery } from '../../hooks'
+
+import { ROUTES } from '../../constants'
 
 import { ComputeUnitProofsTable } from './ComputeUnitProofsTable'
 
@@ -23,8 +26,18 @@ export const ComputeUnitInfo: React.FC = () => {
     client.getComputeUnit(id ?? ''),
   )
 
-  if (!computeUnit || isLoading || !id) {
+  if (isLoading) {
     return <InfoLoader />
+  }
+
+  if (!computeUnit || !id) {
+    return (
+      <NotFound
+        message="Not found compute unit"
+        link={ROUTES.providers}
+        linkText="Go to providers page"
+      />
+    )
   }
 
   return (

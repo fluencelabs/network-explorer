@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
 import { DealStatus } from '../../components/DealStatus'
 import { InfoLoader } from '../../components/InfoLoader'
+import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
@@ -13,6 +14,7 @@ import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
 
+import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
@@ -28,8 +30,18 @@ export const DealInfo: React.FC = () => {
     client.getDeal(id ?? ''),
   )
 
-  if (!deal || isLoading || !id) {
+  if (isLoading) {
     return <InfoLoader />
+  }
+
+  if (!deal || !id) {
+    return (
+      <NotFound
+        message="Not found deal"
+        link={ROUTES.deals}
+        linkText="Go to deals page"
+      />
+    )
   }
 
   const renderProviderList = (list: string[]) => {

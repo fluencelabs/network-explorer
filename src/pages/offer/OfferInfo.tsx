@@ -6,12 +6,15 @@ import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
 import { InfoLoader } from '../../components/InfoLoader'
+import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+
+import { ROUTES } from '../../constants'
 
 import { PeersTable } from './PeersTable'
 import { SupportedEffectorsTable } from './SupportedEffectorsTable'
@@ -25,8 +28,18 @@ export const OfferInfo: React.FC = () => {
     client.getOffer(id ?? ''),
   )
 
-  if (!offer || isLoading || !id) {
+  if (isLoading) {
     return <InfoLoader />
+  }
+
+  if (!offer || !id) {
+    return (
+      <NotFound
+        message="Not found offer"
+        link={ROUTES.offers}
+        linkText="Go to offers page"
+      />
+    )
   }
 
   const createdAt = formatUnixTimestamp(offer.createdAt)
