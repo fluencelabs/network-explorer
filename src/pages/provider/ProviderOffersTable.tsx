@@ -27,6 +27,7 @@ import {
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
+import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -35,7 +36,7 @@ import { colors } from '../../constants/colors'
 const template = [
   'minmax(10px, 200px)',
   'minmax(10px, 120px)',
-  'minmax(10px, 60px)',
+  'minmax(10px, 200px)',
   'minmax(10px, 1fr)',
   '100px',
 ]
@@ -105,7 +106,7 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
           >
             Created At
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Peers</TableColumnTitle>
+          <TableColumnTitle>Total peers (Confirmed)</TableColumnTitle>
           <TableColumnTitle>
             Compute Units{' '}
             <Text size={10} weight={500} color="green" uppercase>
@@ -175,6 +176,10 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             {/* Peers */}
             <Cell>
               <Text size={12}>{offer.peersCount}</Text>
+              <Space width="6px" />
+              <ProviderComputeUnitsAvailable size={12} color="white">
+                {offer.peersInActiveCCCount}
+              </ProviderComputeUnitsAvailable>
             </Cell>
             {/* Compute Units */}
             <Cell>
@@ -186,7 +191,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             </Cell>
             {/* Price Per Epoch */}
             <Cell gap="8px">
-              <Text size={12}>{offer.pricePerEpoch}</Text>
+              <Text size={12}>{formatUSDcTokenValue(offer.pricePerEpoch)}</Text>
               <TokenBadge bg="grey200">
                 <Text size={10} weight={800} color="grey500">
                   {offer.paymentToken.symbol}

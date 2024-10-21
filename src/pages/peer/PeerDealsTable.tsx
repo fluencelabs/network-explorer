@@ -19,7 +19,6 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, useOrder, usePagination } from '../../hooks'
-import { formatHexData } from '../../utils/helpers'
 
 const template = [
   '30px',
@@ -64,8 +63,7 @@ export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
         <TableHeader template={template}>
           <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Deal id</TableColumnTitle>
-          <TableColumnTitle>Compute unit</TableColumnTitle>
-          <TableColumnTitle>Worker id</TableColumnTitle>
+          <TableColumnTitle>Compute Units Count</TableColumnTitle>
         </TableHeader>
         <TableBody
           isEmpty={!pageItems.length}
@@ -111,17 +109,11 @@ const DealRow: React.FC<DealRowProps> = ({ index, deal }) => {
             </Cell>
             {/* Deal id */}
             <Cell>
-              <A href={`/deal/${deal.dealId}`}>{formatHexData(deal.dealId)}</A>
+              <A href={`/deal/${deal.dealId}`}>{deal.dealId}</A>
             </Cell>
-            {/* Compute unit */}
+            {/* Compute units count */}
             <Cell>
-              <A href={`/compute-unit/${deal.computeUnitId}`}>
-                {deal.computeUnitId}
-              </A>
-            </Cell>
-            {/* Worker id */}
-            <Cell>
-              <Text size={12}>{deal.workerId}</Text>
+              <Text size={12}>{deal.cuCount}</Text>
             </Cell>
           </Row>
         </RowTrigger>

@@ -915,8 +915,8 @@ __metadata:
   linkType: hard
 
 "@fluencelabs/deal-ts-clients@file:/Users/mihailerohov/fluence/compute-marketplace/ts-client::locator=fluence-explorer%40workspace%3A.":
-  version: 0.20.0
-  resolution: "@fluencelabs/deal-ts-clients@file:/Users/mihailerohov/fluence/compute-marketplace/ts-client#/Users/mihailerohov/fluence/compute-marketplace/ts-client::hash=cca605&locator=fluence-explorer%40workspace%3A."
+  version: 0.22.0
+  resolution: "@fluencelabs/deal-ts-clients@file:/Users/mihailerohov/fluence/compute-marketplace/ts-client#/Users/mihailerohov/fluence/compute-marketplace/ts-client::hash=516e20&locator=fluence-explorer%40workspace%3A."
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -928,7 +928,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/5aac6868d8abc60b31a171a1e6e8168a61ce5e50813a2d5f6cc7510ea2cf4df74333157fa751bfe42b15b6e7ff5c7e203185551354d9d94130709805194e8661
+  checksum: 10c0/41d9a3ba279226c93119a610692c81698739adad8ee047d170f36ef89638ed0d47def9b91e7910dfc61bd460d94e1c63816f8520b2bf1e689f2bc88a1e1d5298
   languageName: node
   linkType: hard
 
@@ -6470,7 +6470,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "file:/Users/mihailerohov/fluence/compute-marketplace/ts-client"
+    "@fluencelabs/deal-ts-clients": /Users/mihailerohov/fluence/compute-marketplace/ts-client
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-checkbox": "npm:^1.0.4"

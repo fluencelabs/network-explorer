@@ -116,7 +116,11 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
             </Cell>
             {/* Status */}
             <Cell>
-              <CapacityStatus status={'active'} />
+              {peer.currentCapacityCommitment?.status && (
+                <CapacityStatus
+                  status={peer.currentCapacityCommitment?.status}
+                />
+              )}
             </Cell>
           </Row>
         </RowTrigger>
