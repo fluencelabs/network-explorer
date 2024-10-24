@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/fluencelabs/network-explorer/compare/v0.1.7...v0.1.8) (2024-10-24)
+
+
+### Features
+
+* **Peers:** add Provider.Peers ([#111](https://github.com/fluencelabs/network-explorer/issues/111)) ([e42c9a4](https://github.com/fluencelabs/network-explorer/commit/e42c9a44eeefce172445930f51a473a7345ee0f7))
+
 ## [0.1.7](https://github.com/fluencelabs/network-explorer/compare/v0.1.6...v0.1.7) (2024-10-18)
 
 
