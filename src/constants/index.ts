@@ -2,6 +2,7 @@ export const ROUTES = {
   providers: '/',
   providerInfo: '/provider/:id',
   providerOffers: '/provider/:id/offers',
+  providerPeers: '/provider/:id/peers',
   providerDeals: '/provider/:id/deals',
   providerCapacity: '/provider/:id/capacity',
   offers: '/offers',

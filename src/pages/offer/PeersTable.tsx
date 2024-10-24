@@ -14,8 +14,9 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+import { formatHexData } from '../../utils/helpers'
 
-const template = ['20px', 'minmax(10px, 1fr)', 'minmax(10px, 1fr)']
+const template = ['20px', 'minmax(10px, 1fr)', '100px', 'minmax(10px, 1fr)']
 
 interface PeersTableProps {
   peers: Peer[]
@@ -29,6 +30,7 @@ export const PeersTable: React.FC<PeersTableProps> = ({ peers }) => {
           <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Peer id</TableColumnTitle>
           <TableColumnTitle>Compute units</TableColumnTitle>
+          <TableColumnTitle>Current Capacity Commitment</TableColumnTitle>
         </TableHeader>
         <TableBody>
           {peers.map((peer, index) => (
@@ -62,6 +64,16 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
             {/* Compute units */}
             <Cell>
               <Text size={12}>{peer.computeUnits.length}</Text>
+            </Cell>
+            {/* Current Capacity Commitment */}
+            <Cell>
+              {peer.currentCapacityCommitmentId ? (
+                <A href={`/capacity/${peer.currentCapacityCommitmentId}`}>
+                  {formatHexData(peer.currentCapacityCommitmentId, 20, 20)}
+                </A>
+              ) : (
+                <Text size={12}>-</Text>
+              )}
             </Cell>
           </Row>
         </RowTrigger>

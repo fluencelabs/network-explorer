@@ -13,8 +13,8 @@ import { createConfig, createStorage, http } from 'wagmi'
 export const FLUENCE_CLIENT_NETWORK: ContractsENV =
   import.meta.env.VITE_FLUENCE_CLIENT_NETWORK ?? 'local'
 export const BLOCKSCOUT_URL =
-  (import.meta.env.VITE_BLOCKSCOUT_URL ?? FLUENCE_CLIENT_NETWORK === 'local')
-    ? null
+  import.meta.env.VITE_BLOCKSCOUT_URL || FLUENCE_CLIENT_NETWORK === 'local'
+    ? import.meta.env.VITE_BLOCKSCOUT_URL
     : BLOCK_SCOUT_URLS[FLUENCE_CLIENT_NETWORK]
 export const RPC_URL =
   import.meta.env.VITE_RPC_URL ?? RPC_URLS[FLUENCE_CLIENT_NETWORK]

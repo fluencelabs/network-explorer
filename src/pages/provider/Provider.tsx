@@ -47,6 +47,9 @@ export const Provider: React.FC<ProviderProps> = ({ children, provider }) => {
             <ActiveLink href={`/provider/${provider.id}/deals`}>
               Deals
             </ActiveLink>
+            <ActiveLink href={`/provider/${provider.id}/peers`}>
+              Peers
+            </ActiveLink>
           </LeftMenu>
         </Left>
         <Right>
