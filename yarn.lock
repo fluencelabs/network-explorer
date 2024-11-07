@@ -914,9 +914,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluencelabs/deal-ts-clients@npm:0.22.3":
-  version: 0.22.3
-  resolution: "@fluencelabs/deal-ts-clients@npm:0.22.3"
+"@fluencelabs/deal-ts-clients@npm:0.22.4-use-subgraph-do-9246196-6899-1.0":
+  version: 0.22.4-use-subgraph-do-9246196-6899-1.0
+  resolution: "@fluencelabs/deal-ts-clients@npm:0.22.4-use-subgraph-do-9246196-6899-1.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -928,7 +928,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/871afe9e643297cc639510e1f441011dcc5966a70012bb46ca265ad940d50e2b98114c9a279553821b56dae777f7ed5fd8fd8981e0e09d88467a940e5959db96
+  checksum: 10c0/8d8ad0159148051774cb8ad45b6bbfe1c2c137df62499a18c4d4cec66021f0b7faf1f731fc0f44a60b4d744ead6a8fb2f14d73bb255cfaf94b34af25e51df5ad
   languageName: node
   linkType: hard
 
@@ -6470,7 +6470,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "npm:0.22.3"
+    "@fluencelabs/deal-ts-clients": "npm:0.22.4-use-subgraph-do-9246196-6899-1.0"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
