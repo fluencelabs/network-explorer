@@ -19,7 +19,6 @@ import { useApiQuery } from '../../hooks'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
-  '20px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -46,10 +45,9 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
     <>
       <ScrollableTable>
         <TableHeader template={template}>
-          <TableColumnTitle>#</TableColumnTitle>
+          <TableColumnTitle>Worker Id</TableColumnTitle>
           <TableColumnTitle>Provider Id</TableColumnTitle>
           <TableColumnTitle>Compute Unit</TableColumnTitle>
-          <TableColumnTitle>Worker Id</TableColumnTitle>
           <TableColumnTitle>Worker Status</TableColumnTitle>
         </TableHeader>
         <TableBody
