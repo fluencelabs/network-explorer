@@ -2,6 +2,7 @@ import React from 'react'
 import { Peer } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import { A } from '../../components/A'
+import { CapacityStatus } from '../../components/CapacityStatus'
 import {
   Cell,
   Row,
@@ -16,7 +17,13 @@ import {
 import { Text } from '../../components/Text'
 import { formatHexData } from '../../utils/helpers'
 
-const template = ['20px', 'minmax(10px, 1fr)', '100px', 'minmax(10px, 1fr)']
+const template = [
+  '20px',
+  'minmax(10px, 1fr)',
+  'minmax(10px, 1fr)',
+  '100px',
+  '80px',
+]
 
 interface PeersTableProps {
   peers: Peer[]
@@ -29,8 +36,9 @@ export const PeersTable: React.FC<PeersTableProps> = ({ peers }) => {
         <TableHeader template={template}>
           <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Peer id</TableColumnTitle>
-          <TableColumnTitle>Compute units</TableColumnTitle>
           <TableColumnTitle>Current Capacity Commitment</TableColumnTitle>
+          <TableColumnTitle>Compute units</TableColumnTitle>
+          <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
         <TableBody>
           {peers.map((peer, index) => (
@@ -61,18 +69,26 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
             <Cell>
               <A href={`/peer/${peer.id}`}>{peer.id}</A>
             </Cell>
+            {/* Current CC */}
+            <Cell>
+              {peer.currentCapacityCommitment ? (
+                <A href={`/capacity/${peer.currentCapacityCommitment?.id}`}>
+                  {formatHexData(peer.currentCapacityCommitment?.id, 15, 15)}
+                </A>
+              ) : (
+                '-'
+              )}
+            </Cell>
             {/* Compute units */}
             <Cell>
               <Text size={12}>{peer.computeUnits.length}</Text>
             </Cell>
-            {/* Current Capacity Commitment */}
+            {/* Status */}
             <Cell>
-              {peer.currentCapacityCommitmentId ? (
-                <A href={`/capacity/${peer.currentCapacityCommitmentId}`}>
-                  {formatHexData(peer.currentCapacityCommitmentId, 20, 20)}
-                </A>
-              ) : (
-                <Text size={12}>-</Text>
+              {peer.currentCapacityCommitment?.status && (
+                <CapacityStatus
+                  status={peer.currentCapacityCommitment?.status}
+                />
               )}
             </Cell>
           </Row>
