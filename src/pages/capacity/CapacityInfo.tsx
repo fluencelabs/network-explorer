@@ -87,7 +87,7 @@ export const CapacityInfo: React.FC = () => {
     return (
       <NotFound
         message="Not found capacity"
-        link={ROUTES.deals}
+        link={ROUTES.capacities}
         linkText="Go to capacities page"
       />
     )
