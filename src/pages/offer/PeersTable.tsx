@@ -61,15 +61,12 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
       <RowHeader>
         <RowTrigger>
           <Row template={template}>
-            {/* # */}
             <Cell>
               <Text size={12}>{index + 1}</Text>
             </Cell>
-            {/* Peer ID */}
             <Cell>
               <A href={`/peer/${peer.id}`}>{peer.id}</A>
             </Cell>
-            {/* Current CC */}
             <Cell>
               {peer.currentCapacityCommitment ? (
                 <A href={`/capacity/${peer.currentCapacityCommitment.id}`}>
@@ -79,16 +76,16 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
                 '-'
               )}
             </Cell>
-            {/* Compute units */}
             <Cell>
               <Text size={12}>{peer.computeUnits.length}</Text>
             </Cell>
-            {/* Status */}
             <Cell>
-              {peer.currentCapacityCommitment?.status && (
+              {peer.currentCapacityCommitment?.status ? (
                 <CapacityStatus
-                  status={peer.currentCapacityCommitment?.status}
+                  status={peer.currentCapacityCommitment.status}
                 />
+              ) : (
+                '-'
               )}
             </Cell>
           </Row>
