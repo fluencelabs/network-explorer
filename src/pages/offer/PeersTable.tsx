@@ -72,8 +72,8 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
             {/* Current CC */}
             <Cell>
               {peer.currentCapacityCommitment ? (
-                <A href={`/capacity/${peer.currentCapacityCommitment?.id}`}>
-                  {formatHexData(peer.currentCapacityCommitment?.id, 15, 15)}
+                <A href={`/capacity/${peer.currentCapacityCommitment.id}`}>
+                  {formatHexData(peer.currentCapacityCommitment.id, 15, 15)}
                 </A>
               ) : (
                 '-'
