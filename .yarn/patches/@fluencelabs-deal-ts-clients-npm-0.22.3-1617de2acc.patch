@@ -1,0 +1,74 @@
+diff --git a/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.d.ts b/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.d.ts
+index 5a974d70fe6b15bfc4e85ee3c762a0fd92bbeb7f..d5ad11db1e996007187273f5ff2fafff3c39fe2b 100644
+--- a/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.d.ts
++++ b/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.d.ts
+@@ -78,6 +78,7 @@ export type OfferQueryQuery = {
+             currentCapacityCommitment?: {
+                 __typename?: 'CapacityCommitment';
+                 id: string;
++                status?: Types.CapacityCommitmentStatus | null
+             } | null;
+             offer: {
+                 __typename?: 'Offer';
+@@ -188,6 +189,7 @@ export type BasicPeerFragment = {
+     currentCapacityCommitment?: {
+         __typename?: 'CapacityCommitment';
+         id: string;
++        status?: Types.CapacityCommitmentStatus | null
+     } | null;
+ };
+ export type ProviderBasicIdCapacityCommitmentFragment = {
+diff --git a/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.js b/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.js
+index cec13c008cbf9ef529148ac847297c336af88b3a..28a8fd8328169488b1bc7ba08e3f8a527927fa35 100644
+--- a/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.js
++++ b/dist/dealExplorerClient/indexerClient/queries/offers-query.generated.js
+@@ -8,6 +8,7 @@ export const EffectorBasicFragmentDoc = gql `
+ export const ProviderBasicIdCapacityCommitmentFragmentDoc = gql `
+     fragment ProviderBasicIdCapacityCommitment on CapacityCommitment {
+   id
++  status
+ }
+     `;
+ export const BasicOfferFragmentDoc = gql `
+diff --git a/dist/dealExplorerClient/serializers/schemes.js b/dist/dealExplorerClient/serializers/schemes.js
+index 12edcf46ca3256b44e2fe5b3a1a76eed5b5a94e7..395d1afce8b26f050faeec2b0f441e47582b10e2 100644
+--- a/dist/dealExplorerClient/serializers/schemes.js
++++ b/dist/dealExplorerClient/serializers/schemes.js
+@@ -3,6 +3,7 @@ import { calculateTimestamp } from "../utils.js";
+ import { FLTToken } from "../constants.js";
+ import { serializeEffectors, serializeContractRateToPercentage, } from "../../utils/indexerClient/serializers.js";
+ import { peerIdContractHexToBase58 } from "../../utils/serializers/fluence.js";
++import { deserializeStatus } from "./stakerEncoders.js";
+ export const BIG_INT_ZERO = BigInt(0);
+ export function serializeOfferShort(offer, peersInActiveCCCount) {
+     return {
+@@ -119,7 +120,12 @@ export function serializePeers(peers) {
+         id: peerIdContractHexToBase58(peer.id),
+         offerId: peer.offer.id,
+         computeUnits: serializeComputeUnitsFromBasic(peer.computeUnits ?? []),
+-        currentCapacityCommitmentId: peer.currentCapacityCommitment?.id,
++        currentCapacityCommitment: peer.currentCapacityCommitment
++        ? {
++            ...peer.currentCapacityCommitment,
++            status: deserializeStatus(peer.currentCapacityCommitment.status),
++          }
++        : null,
+     }));
+ }
+ export function serializeDealsShort(deal, fromRpcForDealShort) {
+diff --git a/dist/dealExplorerClient/types/schemes.d.ts b/dist/dealExplorerClient/types/schemes.d.ts
+index 5ad681a0c462c860fe8e3ac53176e657129a93c1..1a2b2c320a321bcedc4665e4b02e0986ff89c352 100644
+--- a/dist/dealExplorerClient/types/schemes.d.ts
++++ b/dist/dealExplorerClient/types/schemes.d.ts
+@@ -116,7 +116,10 @@ export interface Peer {
+     id: string;
+     offerId: string;
+     computeUnits: ComputeUnit[];
+-    currentCapacityCommitmentId: string | undefined;
++    currentCapacityCommitment?: {
++        id: string;
++        status: CapacityCommitmentStatus;
++    } | null;
+ }
+ export interface ComputeUnit {
+     id: string;
