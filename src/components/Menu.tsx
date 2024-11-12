@@ -37,11 +37,6 @@ const MENU: {
     link: ROUTES.capacities,
     routes: [ROUTES.capacities, ROUTES.capacityInfo],
   },
-  {
-    title: 'Proofs',
-    link: ROUTES.proofs,
-    routes: [ROUTES.proofs, ROUTES.peerInfo],
-  },
 ]
 
 export const Menu: React.FC = () => {

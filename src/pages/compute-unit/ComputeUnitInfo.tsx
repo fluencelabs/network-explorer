@@ -15,8 +15,6 @@ import { useApiQuery } from '../../hooks'
 
 import { ROUTES } from '../../constants'
 
-import { ComputeUnitProofsTable } from './ComputeUnitProofsTable'
-
 export const ComputeUnitInfo: React.FC = () => {
   const params = useParams()
 
@@ -115,8 +113,6 @@ export const ComputeUnitInfo: React.FC = () => {
               <Text size={12}>{computeUnit.peerId}</Text>
             </Info>
           </InfoRow>
-          <Space height="60px" />
-          <ComputeUnitProofsTable computeUnitId={id} />
         </Right>
       </Content>
     </>

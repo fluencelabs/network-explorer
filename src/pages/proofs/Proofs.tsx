@@ -4,11 +4,8 @@ import { ProofsFilters } from '@fluencelabs/deal-ts-clients/dist/dealExplorerCli
 
 import { PageHeader } from '../../components/PageHeader'
 import { Search } from '../../components/Search'
-import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { useFilters } from '../../hooks/useFilters'
-
-import { ProofsTable } from './ProofsTable'
 
 export const Proofs: React.FC = () => {
   const [filters, setFilter] = useFilters<ProofsFilters>()
@@ -25,8 +22,6 @@ export const Proofs: React.FC = () => {
           />
         </FiltersBlock>
       </PageHeader>
-      <Space height="64px" />
-      <ProofsTable filters={filters} />
     </>
   )
 }
