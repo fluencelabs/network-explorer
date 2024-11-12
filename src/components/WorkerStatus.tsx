@@ -23,7 +23,7 @@ export const WorkerStatus: React.FC<WorkerStatusProps> = ({
   return (
     <Status color="grey200">
       <Text color="grey500" weight={800} size={10} uppercase>
-        Waiting...
+        Waiting registration
       </Text>
     </Status>
   )
