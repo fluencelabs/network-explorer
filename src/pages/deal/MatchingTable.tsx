@@ -19,6 +19,7 @@ import { useApiQuery } from '../../hooks'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
+  '30px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -45,6 +46,7 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
     <>
       <ScrollableTable>
         <TableHeader template={template}>
+          <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Worker Id</TableColumnTitle>
           <TableColumnTitle>Provider Id</TableColumnTitle>
           <TableColumnTitle>Compute Unit</TableColumnTitle>
@@ -56,8 +58,8 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
           isLoading={isLoading}
           noDataText="No found any workers"
         >
-          {data?.data.map((worker) => (
-            <WorkerDetailRow key={worker.id} worker={worker} />
+          {data?.data.map((worker, index) => (
+            <WorkerDetailRow key={worker.id} worker={worker} index={index} />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -66,29 +68,29 @@ export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
 }
 interface WorkerDetailRowProps {
   worker: WorkerDetail
+  index: number
 }
 
-const WorkerDetailRow: React.FC<WorkerDetailRowProps> = ({ worker }) => {
+const WorkerDetailRow: React.FC<WorkerDetailRowProps> = ({ worker, index }) => {
   return (
     <RowBlock>
       <RowHeader>
         <RowTrigger>
           <Row template={template}>
-            {/* # */}
+            <Cell>
+              <Text size={12}>{index + 1}</Text>
+            </Cell>
             <Cell>
               <Text size={12}>{formatHexData(worker.id, 10, 10)}</Text>
             </Cell>
-            {/* Provider ID */}
             <Cell>
               <A href={`/provider/${worker.providerId}`}>
                 {formatHexData(worker.providerId, 10, 10)}
               </A>
             </Cell>
-            {/* Compute Unit */}
             <Cell>
               <ShrinkText size={12}>{worker.cuCount}</ShrinkText>
             </Cell>
-            {/* Status */}
             <Cell>
               <WorkerStatus hasOffChainId={!!worker.offchainWorkerId} />
             </Cell>
