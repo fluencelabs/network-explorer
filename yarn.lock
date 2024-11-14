@@ -934,7 +934,7 @@ __metadata:
 
 "@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1-release-please-0c89317-6961-1.0#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-release-please-0c89317-6961-1.0-8374c6c564.patch":
   version: 0.23.1-release-please-0c89317-6961-1.0
-  resolution: "@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1-release-please-0c89317-6961-1.0#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-release-please-0c89317-6961-1.0-8374c6c564.patch::version=0.23.1-release-please-0c89317-6961-1.0&hash=b8f7cd"
+  resolution: "@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1-release-please-0c89317-6961-1.0#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-release-please-0c89317-6961-1.0-8374c6c564.patch::version=0.23.1-release-please-0c89317-6961-1.0&hash=a1259b"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -946,7 +946,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/10f7e16a3964b2e8f386d166a3927789f6238a0ba20c8011330e0146e60758cfe75318fbaf695c287a0c3a63b5414acff4cca080f15b708bb7b74b33d75568d6
+  checksum: 10c0/4b2d083db394e497e69852894362deeda7851bf56f23fe021e38ce36cff616b139017dc110f30d44f70e5685ee5b9ac8b27bd35a512ddbb51be92012debe2f18
   languageName: node
   linkType: hard
 
