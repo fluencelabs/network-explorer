@@ -1,5 +1,5 @@
 diff --git a/dist/client/config.d.ts b/dist/client/config.d.ts
-index 2425167caa8b0f75217fe90db01527b1baad7b68..c5256e22578e589067345c5150c9cf67ba31bb12 100644
+index 2425167caa8b0f75217fe90db01527b1baad7b68..c74ebe6e930dd82d478b726e34e42a0baa1b128f 100644
 --- a/dist/client/config.d.ts
 +++ b/dist/client/config.d.ts
 @@ -24,8 +24,8 @@ export declare const BLOCK_SCOUT_URLS: {
@@ -8,13 +8,13 @@ index 2425167caa8b0f75217fe90db01527b1baad7b68..c5256e22578e589067345c5150c9cf67
  export declare const SUBGRAPH_URLS: {
 -    readonly mainnet: "https://subgraph.mainnet.fluence.dev/subgraphs/v0.22";
 -    readonly testnet: "https://subgraph.testnet.fluence.dev/subgraphs/v0.22";
-+    readonly mainnet: "https://subgraph-do.mainnet.fluence.dev/subgraphs/name/fluence-deal-contracts-6688303f";
-+    readonly testnet: "https://subgraph-do.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-6688303f";
++    readonly mainnet: "https://subgraph.mainnet.fluence.dev/subgraphs/name/fluence-deal-contracts-2bd115d4";
++    readonly testnet: "https://subgraph.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-2bd115d4";
      readonly stage: "https://subgraph.stage.fluence.dev/subgraphs/v0.22";
      readonly local: "http://localhost:8000/subgraphs/name/fluence-deal-contracts";
  };
 diff --git a/dist/client/config.js b/dist/client/config.js
-index 81b322ce3436ea2d60935c67ac6ccb0c52657238..8c3dcffd89fff746c73426616f0bcebcc257206b 100644
+index 81b322ce3436ea2d60935c67ac6ccb0c52657238..8ad032ce17cea644252e2bf84515fb2bc642f127 100644
 --- a/dist/client/config.js
 +++ b/dist/client/config.js
 @@ -18,8 +18,8 @@ export const BLOCK_SCOUT_URLS = {
@@ -23,8 +23,8 @@ index 81b322ce3436ea2d60935c67ac6ccb0c52657238..8c3dcffd89fff746c73426616f0bcebc
  export const SUBGRAPH_URLS = {
 -    mainnet: `https://subgraph.mainnet.fluence.dev/subgraphs/v${SUBGRAPH_VERSION}`,
 -    testnet: `https://subgraph.testnet.fluence.dev/subgraphs/v${SUBGRAPH_VERSION}`,
-+    mainnet: `https://subgraph-do.mainnet.fluence.dev/subgraphs/name/fluence-deal-contracts-6688303f`,
-+    testnet: `https://subgraph-do.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-6688303f`,
++    mainnet: `https://subgraph.mainnet.fluence.dev/subgraphs/name/fluence-deal-contracts-2bd115d4`,
++    testnet: `https://subgraph.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-2bd115d4`,
      stage: `https://subgraph.stage.fluence.dev/subgraphs/v${SUBGRAPH_VERSION}`,
      local: "http://localhost:8000/subgraphs/name/fluence-deal-contracts",
  };
