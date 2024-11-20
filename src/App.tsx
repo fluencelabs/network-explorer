@@ -12,7 +12,6 @@ import { Deals } from './pages/deals'
 import { OfferInfo } from './pages/offer'
 import { Offers } from './pages/offers'
 import { PeerInfo } from './pages/peer'
-import { Proofs } from './pages/proofs'
 import {
   ProviderDeals,
   ProviderInfo,
@@ -42,7 +41,6 @@ export const App: React.FC = () => {
       <Route path={ROUTES.dealInfo} component={DealInfo} />
       <Route path={ROUTES.capacities} component={Capacities} />
       <Route path={ROUTES.capacityInfo} component={CapacityInfo} />
-      <Route path={ROUTES.proofs} component={Proofs} />
       <Route path={ROUTES.peerInfo} component={PeerInfo} />
       <Route path={ROUTES.computeUnitInfo} component={ComputeUnitInfo} />
       <Route path={ROUTES.config} component={ConfigJson} />

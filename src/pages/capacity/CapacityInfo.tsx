@@ -23,7 +23,6 @@ import { ROUTES } from '../../constants'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
 import { ListComputeUnitsTable } from './ListComputeUnitsTable'
-import { ProofsTable } from './ProofsTable'
 
 const Record: React.FC<{
   title: ReactNode
@@ -327,8 +326,6 @@ export const CapacityInfo: React.FC = () => {
           </ParametersRow>
           <Space height="80px" />
           <ListComputeUnitsTable capacityCommitmentId={id} />
-          <Space height="30px" />
-          <ProofsTable capacityCommitmentId={id} />
         </Right>
       </Content>
     </>
