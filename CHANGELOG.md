@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.9](https://github.com/fluencelabs/network-explorer/compare/v0.1.8...v0.1.9) (2024-11-20)
+
+
+### Features
+
+* remove Proofs Tab ([45472a1](https://github.com/fluencelabs/network-explorer/commit/45472a175f6a7952062e94c2d3b13b50e40f8c00))
+
+
+### Bug Fixes
+
+* **deal-ts-client:** remove patch with custom subgraph urls ([#122](https://github.com/fluencelabs/network-explorer/issues/122)) ([43536e4](https://github.com/fluencelabs/network-explorer/commit/43536e4dce1bc45e006c27f0522e0e3288e1c745))
+
 ## [0.1.8](https://github.com/fluencelabs/network-explorer/compare/v0.1.7...v0.1.8) (2024-11-12)
 
 
