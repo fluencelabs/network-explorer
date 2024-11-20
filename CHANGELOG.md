@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.8](https://github.com/fluencelabs/network-explorer/compare/v0.1.7...v0.1.8) (2024-11-12)
+
+
+### Features
+
+* **Peers:** add Provider.Peers ([#111](https://github.com/fluencelabs/network-explorer/issues/111)) ([e42c9a4](https://github.com/fluencelabs/network-explorer/commit/e42c9a44eeefce172445930f51a473a7345ee0f7))
+* **WorkerStatus:** update worker status text ([#117](https://github.com/fluencelabs/network-explorer/issues/117)) ([03298d2](https://github.com/fluencelabs/network-explorer/commit/03298d2f1aaef945aa3de6d32e60957029da12f6))
+
+
+### Bug Fixes
+
+* **CapacityInfo:** fix not found link to capacities ([#116](https://github.com/fluencelabs/network-explorer/issues/116)) ([a5ef6aa](https://github.com/fluencelabs/network-explorer/commit/a5ef6aa5dd35a7222f55520996ef7dd1eeb4212c))
+
 ## [0.1.7](https://github.com/fluencelabs/network-explorer/compare/v0.1.6...v0.1.7) (2024-10-18)
 
 
