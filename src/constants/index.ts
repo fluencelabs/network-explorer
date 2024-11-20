@@ -11,7 +11,6 @@ export const ROUTES = {
   dealInfo: '/deal/:id',
   capacities: '/capacities',
   capacityInfo: '/capacity/:id',
-  proofs: '/proofs',
   peerInfo: '/peer/:id',
   computeUnitInfo: '/compute-unit/:id',
   config: '/config',

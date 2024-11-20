@@ -45,7 +45,7 @@ export const PeerInfo: React.FC = () => {
         items={[
           {
             label: 'Peers',
-            path: '/proofs',
+            path: '/peers',
           },
           {
             label: id ?? '',
