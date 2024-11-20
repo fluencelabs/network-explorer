@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.10](https://github.com/fluencelabs/network-explorer/compare/v0.1.9...v0.1.10) (2024-11-20)
+
+
+### Features
+
+* **deal-ts-client:** use 0.23.1-pre version ([#123](https://github.com/fluencelabs/network-explorer/issues/123)) ([fa283c3](https://github.com/fluencelabs/network-explorer/commit/fa283c35278d46f8f7f63f1a1fa674aa0845cee3))
+
 ## [0.1.9](https://github.com/fluencelabs/network-explorer/compare/v0.1.8...v0.1.9) (2024-11-20)
 
 
