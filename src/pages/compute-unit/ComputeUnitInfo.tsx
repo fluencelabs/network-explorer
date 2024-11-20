@@ -32,7 +32,7 @@ export const ComputeUnitInfo: React.FC = () => {
     return (
       <NotFound
         message="Not found compute unit"
-        link={ROUTES.providers}
+        link={ROUTES.capacities}
         linkText="Go to providers page"
       />
     )
@@ -44,7 +44,7 @@ export const ComputeUnitInfo: React.FC = () => {
         items={[
           {
             label: 'Compute units',
-            path: '/proofs',
+            path: '/compute-unit',
           },
           {
             label: id,
