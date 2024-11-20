@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fluencelabs/deal-ts-clients": "patch:@fluencelabs/deal-ts-clients@npm%3A0.22.3#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.22.3-1617de2acc.patch",
+    "@fluencelabs/deal-ts-clients": "0.23.1-release-please-530a463-6996-1.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
