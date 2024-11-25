@@ -914,9 +914,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluencelabs/deal-ts-clients@npm:0.22.3":
-  version: 0.22.3
-  resolution: "@fluencelabs/deal-ts-clients@npm:0.22.3"
+"@fluencelabs/deal-ts-clients@npm:0.23.1-release-please-530a463-6996-1.0":
+  version: 0.23.1-release-please-530a463-6996-1.0
+  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.1-release-please-530a463-6996-1.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -928,25 +928,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/871afe9e643297cc639510e1f441011dcc5966a70012bb46ca265ad940d50e2b98114c9a279553821b56dae777f7ed5fd8fd8981e0e09d88467a940e5959db96
-  languageName: node
-  linkType: hard
-
-"@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.22.3#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.22.3-1617de2acc.patch":
-  version: 0.22.3
-  resolution: "@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.22.3#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.22.3-1617de2acc.patch::version=0.22.3&hash=1ab8ee"
-  dependencies:
-    "@graphql-typed-document-node/core": "npm:^3.2.0"
-    debug: "npm:^4.3.4"
-    dotenv: "npm:^16.3.1"
-    ethers: "npm:6.7.1"
-    graphql: "npm:^16.8.1"
-    graphql-request: "npm:^6.1.0"
-    graphql-scalars: "npm:^1.22.4"
-    graphql-tag: "npm:^2.12.6"
-    ipfs-http-client: "npm:^60.0.1"
-    multiformats: "npm:^13.0.1"
-  checksum: 10c0/fb40b9001e22de708e217c9c07ee110b9abdf2a667b397c5a0175c19c7711e587888fed1762a01a7262d64703b4f60a39c239cc1331142b05640bb894edf27c8
+  checksum: 10c0/e5779b4357e778a719fe473015fc52059cc54e3e1bc1ee659b27ca212b59ab84345e98c567fa4edb405cdf109deec579de87954c98bd01abc3afa509e15879ab
   languageName: node
   linkType: hard
 
@@ -6488,7 +6470,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "patch:@fluencelabs/deal-ts-clients@npm%3A0.22.3#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.22.3-1617de2acc.patch"
+    "@fluencelabs/deal-ts-clients": "npm:0.23.1-release-please-530a463-6996-1.0"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
