@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.11](https://github.com/fluencelabs/network-explorer/compare/v0.1.10...v0.1.11) (2024-11-27)
+
+
+### Bug Fixes
+
+* **deal-ts-client:** update deal-ts-client ([#127](https://github.com/fluencelabs/network-explorer/issues/127)) ([4928efb](https://github.com/fluencelabs/network-explorer/commit/4928efb48bd15fefbb6e56e241ffbacde68f8581))
+* **ProofsTable:** show ProofsTable on CC page ([#125](https://github.com/fluencelabs/network-explorer/issues/125)) ([0be9ab2](https://github.com/fluencelabs/network-explorer/commit/0be9ab28963077c45243e821b78d9765d043eba6))
+
 ## [0.1.10](https://github.com/fluencelabs/network-explorer/compare/v0.1.9...v0.1.10) (2024-11-20)
 
 
