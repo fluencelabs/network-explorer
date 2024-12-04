@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/fluencelabs/network-explorer/compare/v0.1.11...v0.1.12) (2024-12-04)
+
+
+### Bug Fixes
+
+* **PeersTable:** fix peers table ([#129](https://github.com/fluencelabs/network-explorer/issues/129)) ([e80277e](https://github.com/fluencelabs/network-explorer/commit/e80277eaf660812772aab3794138de641e5d3d95))
+
 ## [0.1.11](https://github.com/fluencelabs/network-explorer/compare/v0.1.10...v0.1.11) (2024-11-27)
 
 
