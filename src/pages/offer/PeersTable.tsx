@@ -77,7 +77,7 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
               )}
             </Cell>
             <Cell>
-              <Text size={12}>{peer.computeUnits.length}</Text>
+              <Text size={12}>{peer.computeUnitsTotal}</Text>
             </Cell>
             <Cell>
               {peer.currentCapacityCommitment?.status ? (
