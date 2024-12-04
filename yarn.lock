@@ -932,6 +932,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-637f5fb879.patch":
+  version: 0.23.1
+  resolution: "@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-637f5fb879.patch::version=0.23.1&hash=ecd36c"
+  dependencies:
+    "@graphql-typed-document-node/core": "npm:^3.2.0"
+    debug: "npm:^4.3.4"
+    dotenv: "npm:^16.3.1"
+    ethers: "npm:6.7.1"
+    graphql: "npm:^16.8.1"
+    graphql-request: "npm:^6.1.0"
+    graphql-scalars: "npm:^1.22.4"
+    graphql-tag: "npm:^2.12.6"
+    ipfs-http-client: "npm:^60.0.1"
+    multiformats: "npm:^13.0.1"
+  checksum: 10c0/ff30cff75c7fd1fe3d6aa0f593621b7a783646b2feb704178b62c8b00ea71785774db7bc550bead69078e63326883f88fc83fca3f6ccdd80fecf425455ec84de
+  languageName: node
+  linkType: hard
+
 "@graphql-typed-document-node/core@npm:^3.2.0":
   version: 3.2.0
   resolution: "@graphql-typed-document-node/core@npm:3.2.0"
@@ -6470,7 +6488,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "npm:0.23.1"
+    "@fluencelabs/deal-ts-clients": "patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-637f5fb879.patch"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
