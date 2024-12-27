@@ -22,15 +22,11 @@ import {
   ScrollableTable,
   TableBody,
   TableColumnTitle,
-  TableColumnTitleWithSort,
   TableHeader,
   TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
-import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
-import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
@@ -54,7 +50,7 @@ interface OffersTableProps {
 }
 
 export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
-  const [order, setOrder] = useState<OfferSort>('createdAt:desc')
+  const [order] = useState<OfferSort>('createdAt:desc')
   const [orderBy, orderType] = order.split(':') as [
     OfferShortOrderBy,
     OrderType,
@@ -82,44 +78,15 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
   const hasNextPage = offers && offers.data.length > limit
   const pageOffers = offers && offers.data.slice(0, limit)
 
-  const handleSort = (key: OfferShortOrderBy, order: OrderType) => {
-    setOrder(`${key}:${order}`)
-  }
-
   return (
     <>
       <ScrollableTable>
         <TableHeader template={template}>
           <TableColumnTitle>Offer Id</TableColumnTitle>
-          <TableColumnTitleWithSort
-            order={orderType}
-            field="createdAt"
-            isActive={orderBy === 'createdAt'}
-            onSort={handleSort}
-          >
-            Created At
-          </TableColumnTitleWithSort>
           <TableColumnTitle>Provider</TableColumnTitle>
           <TableColumnTitle>Total peers (Confirmed)</TableColumnTitle>
-          <TableColumnTitleWithSort
-            order={orderType}
-            field="updatedAt" // TODO
-            isActive={orderBy === 'updatedAt'}
-            onSort={handleSort}
-          >
-            Compute units{' '}
-            <Text size={10} weight={500} color="green" uppercase>
-              ( Available )
-            </Text>
-          </TableColumnTitleWithSort>
-          <TableColumnTitleWithSort
-            order={orderType}
-            field="pricePerCuPerEpoch"
-            isActive={orderBy === 'pricePerCuPerEpoch'}
-            onSort={handleSort}
-          >
-            Price per epoch
-          </TableColumnTitleWithSort>
+          <TableColumnTitle>CCP CUs</TableColumnTitle>
+          <TableColumnTitle>Deal CUs</TableColumnTitle>
         </TableHeader>
         <TableBody skeletonCount={OFFERS_PER_PAGE} isLoading={isLoading}>
           {pageOffers?.map((offer) => (
@@ -157,31 +124,21 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
     navigate(`/offer/${offer.id}`)
   }
 
-  const createdAt = formatUnixTimestamp(offer.createdAt)
-
   return (
     <RowBlock>
       <RowHeader onClick={handleClick}>
         <RowTrigger>
           <Row template={template}>
-            {/* Offer Id */}
             <Cell>
               <A href={`/offer/${offer.id}`}>
                 {formatHexData(offer.id, 8, 10)}
               </A>
             </Cell>
-            {/* Created at */}
-            <Cell flexDirection="column" alignItems="flex-start">
-              <Text size={12}>{createdAt.date}</Text>
-              <Text size={12}>{createdAt.time}</Text>
-            </Cell>
-            {/* Provider */}
             <Cell>
               <A href={`/provider/${offer.providerId}`}>
                 {formatHexData(offer.providerId, 8, 10)}
               </A>
             </Cell>
-            {/* Peers */}
             <Cell>
               <Text size={12}>{offer.peersCount}</Text>
               <Space width="6px" />
@@ -189,22 +146,11 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
                 {offer.peersInActiveCCCount}
               </ProviderComputeUnitsAvailable>
             </Cell>
-            {/* Compute units */}
             <Cell>
-              <Text size={12}>{offer.totalComputeUnits}</Text>
-              <Space width="6px" />
-              <ProviderComputeUnitsAvailable size={12} color="white">
-                {offer.freeComputeUnits}
-              </ProviderComputeUnitsAvailable>
+              <Text size={12}>{offer.computeUnitsInCapacityCommitment}</Text>
             </Cell>
-            {/* Price per epoch */}
-            <Cell gap="8px">
-              <Text size={12}>{formatUSDcTokenValue(offer.pricePerEpoch)}</Text>
-              <TokenBadge bg="grey200">
-                <Text size={10} weight={800} color="grey500">
-                  {offer.paymentToken.symbol}
-                </Text>
-              </TokenBadge>
+            <Cell>
+              <Text size={12}>{offer.computeUnitsInDeal}</Text>
             </Cell>
             <Cell>
               <DetailsButton>
