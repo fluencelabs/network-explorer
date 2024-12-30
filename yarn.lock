@@ -914,9 +914,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluencelabs/deal-ts-clients@npm:0.23.1":
-  version: 0.23.1
-  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.1"
+"@fluencelabs/deal-ts-clients@npm:0.23.2-ts-client-offers-v2-433c4f8-7387-1.0":
+  version: 0.23.2-ts-client-offers-v2-433c4f8-7387-1.0
+  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.2-ts-client-offers-v2-433c4f8-7387-1.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -928,25 +928,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/59eb53c1a12b18648c2ed6ef36474ec4b14597b42667e7272a1f942e22107596a1270d31ce06f5f136c5c270ceae98b106bc60ece505ebb07c01e9de024c349d
-  languageName: node
-  linkType: hard
-
-"@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-637f5fb879.patch":
-  version: 0.23.1
-  resolution: "@fluencelabs/deal-ts-clients@patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-637f5fb879.patch::version=0.23.1&hash=ecd36c"
-  dependencies:
-    "@graphql-typed-document-node/core": "npm:^3.2.0"
-    debug: "npm:^4.3.4"
-    dotenv: "npm:^16.3.1"
-    ethers: "npm:6.7.1"
-    graphql: "npm:^16.8.1"
-    graphql-request: "npm:^6.1.0"
-    graphql-scalars: "npm:^1.22.4"
-    graphql-tag: "npm:^2.12.6"
-    ipfs-http-client: "npm:^60.0.1"
-    multiformats: "npm:^13.0.1"
-  checksum: 10c0/ff30cff75c7fd1fe3d6aa0f593621b7a783646b2feb704178b62c8b00ea71785774db7bc550bead69078e63326883f88fc83fca3f6ccdd80fecf425455ec84de
+  checksum: 10c0/8c44537fa73c0cdffd247a817125301fb2f0b1ead20426e76241efc71e4be122a776a1def4f02e821cc683e0ff461555dfa2a4e5c035234752c2e30428fddbd0
   languageName: node
   linkType: hard
 
@@ -3439,6 +3421,13 @@ __metadata:
   version: 1.0.5
   resolution: "@types/estree@npm:1.0.5"
   checksum: 10c0/b3b0e334288ddb407c7b3357ca67dbee75ee22db242ca7c56fe27db4e1a31989cb8af48a84dd401deb787fe10cc6b2ab1ee82dc4783be87ededbe3d53c79c70d
+  languageName: node
+  linkType: hard
+
+"@types/js-yaml@npm:^4":
+  version: 4.0.9
+  resolution: "@types/js-yaml@npm:4.0.9"
+  checksum: 10c0/24de857aa8d61526bbfbbaa383aa538283ad17363fcd5bb5148e2c7f604547db36646440e739d78241ed008702a8920665d1add5618687b6743858fae00da211
   languageName: node
   linkType: hard
 
@@ -6488,7 +6477,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "patch:@fluencelabs/deal-ts-clients@npm%3A0.23.1#~/.yarn/patches/@fluencelabs-deal-ts-clients-npm-0.23.1-637f5fb879.patch"
+    "@fluencelabs/deal-ts-clients": "npm:0.23.2-ts-client-offers-v2-433c4f8-7387-1.0"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
@@ -6498,6 +6487,7 @@ __metadata:
     "@radix-ui/react-switch": "npm:^1.0.3"
     "@radix-ui/react-tooltip": "npm:^1.0.7"
     "@tanstack/react-query": "npm:^5.29.2"
+    "@types/js-yaml": "npm:^4"
     "@types/lodash.merge": "npm:^4.6.9"
     "@types/react": "npm:^18.2.25"
     "@types/react-datepicker": "npm:^4.19.3"
@@ -6519,6 +6509,7 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:^10.0.0"
     eslint-plugin-unused-imports: "npm:^3.0.0"
     husky: "npm:^8.0.3"
+    js-yaml: "npm:^4.1.0"
     lint-staged: "npm:^15.0.1"
     lodash.merge: "npm:^4.6.2"
     normalize.css: "npm:^8.0.1"

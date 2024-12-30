@@ -3,8 +3,10 @@ import { Peer } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types
 
 import { A } from '../../components/A'
 import { CapacityStatus } from '../../components/CapacityStatus'
+import { Space } from '../../components/Space'
 import {
   Cell,
+  ContentBlock,
   Row,
   RowBlock,
   RowHeader,
@@ -16,6 +18,8 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { formatHexData } from '../../utils/helpers'
+
+import { ResourceTable } from './ResourceTable'
 
 const template = [
   '20px',
@@ -89,6 +93,15 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
               )}
             </Cell>
           </Row>
+
+          {peer.resources && (
+            <>
+              <Space height="1rem" />
+              <ContentBlock>
+                <ResourceTable resources={peer.resources} />
+              </ContentBlock>
+            </>
+          )}
         </RowTrigger>
       </RowHeader>
     </RowBlock>

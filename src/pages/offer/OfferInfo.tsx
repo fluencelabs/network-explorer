@@ -16,6 +16,7 @@ import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 
 import { ROUTES } from '../../constants'
 
+import { OfferResourceTable } from './OfferResourceTable'
 import { PeersTable } from './PeersTable'
 import { SupportedEffectorsTable } from './SupportedEffectorsTable'
 
@@ -44,6 +45,8 @@ export const OfferInfo: React.FC = () => {
 
   const createdAt = formatUnixTimestamp(offer.createdAt)
   const updatedAt = formatUnixTimestamp(offer.updatedAt)
+
+  console.log('offer', offer)
 
   return (
     <>
@@ -130,6 +133,17 @@ export const OfferInfo: React.FC = () => {
           <PeersTableWrapper>
             <SupportedEffectorsTable effectors={offer.effectors} />
           </PeersTableWrapper>
+
+          {offer.resources && (
+            <>
+              <Space height="40px" />
+              <Text size={20}>Available resources</Text>
+              <Space height="24px" />
+              <PeersTableWrapper>
+                <OfferResourceTable resources={offer.resources} />
+              </PeersTableWrapper>
+            </>
+          )}
           <Space height="40px" />
           <Text size={20}>Peers</Text>
           <Space height="24px" />

@@ -35,7 +35,6 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  '180px',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   '70px',
@@ -124,6 +123,8 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
     navigate(`/offer/${offer.id}`)
   }
 
+  console.log('offer', offer)
+
   return (
     <RowBlock>
       <RowHeader onClick={handleClick}>
@@ -147,7 +148,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
               </ProviderComputeUnitsAvailable>
             </Cell>
             <Cell>
-              <Text size={12}>{offer.computeUnitsInCapacityCommitment}</Text>
+              <Text size={12}>0</Text>
             </Cell>
             <Cell>
               <Text size={12}>{offer.computeUnitsInDeal}</Text>
