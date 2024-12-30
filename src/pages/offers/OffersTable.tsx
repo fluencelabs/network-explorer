@@ -146,7 +146,7 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
               </ProviderComputeUnitsAvailable>
             </Cell>
             <Cell>
-              <Text size={12}>0</Text>
+              <Text size={12}>{offer.computeUnitsInCapacityCommitment}</Text>
             </Cell>
             <Cell>
               <Text size={12}>{offer.computeUnitsInDeal}</Text>
