@@ -123,8 +123,6 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
     navigate(`/offer/${offer.id}`)
   }
 
-  console.log('offer', offer)
-
   return (
     <RowBlock>
       <RowHeader onClick={handleClick}>

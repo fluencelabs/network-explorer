@@ -46,8 +46,6 @@ export const OfferInfo: React.FC = () => {
   const createdAt = formatUnixTimestamp(offer.createdAt)
   const updatedAt = formatUnixTimestamp(offer.updatedAt)
 
-  console.log('offer', offer)
-
   return (
     <>
       <Breadcrumbs
