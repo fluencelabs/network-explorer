@@ -18,7 +18,6 @@ import { ROUTES } from '../../constants'
 
 import { OfferResourceTable } from './OfferResourceTable'
 import { PeersTable } from './PeersTable'
-import { SupportedEffectorsTable } from './SupportedEffectorsTable'
 
 export const OfferInfo: React.FC = () => {
   const params = useParams()
@@ -126,12 +125,6 @@ export const OfferInfo: React.FC = () => {
             </Parameter>
           </ParametersRow>
           <Space height="60px" />
-          <Text size={20}>Supported effectors</Text>
-          <Space height="24px" />
-          <PeersTableWrapper>
-            <SupportedEffectorsTable effectors={offer.effectors} />
-          </PeersTableWrapper>
-
           {offer.resources && (
             <>
               <Space height="40px" />
