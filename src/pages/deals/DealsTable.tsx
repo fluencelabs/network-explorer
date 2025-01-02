@@ -48,6 +48,7 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
+  'minmax(10px, 1fr)',
   '70px',
 ]
 
@@ -88,6 +89,8 @@ export const DealsTable: React.FC<DealsTableProps> = ({
       ttl: 1_000 * 60, // 1 minute
     },
   )
+
+  console.log('deals', deals)
 
   const hasNextPage = deals && deals.data.length > limit
   const pageDeals = deals && deals.data.slice(0, limit)
@@ -163,6 +166,9 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   }
 
   const createdAt = formatUnixTimestamp(deal.createdAt)
+  const rentingPeriodAt = deal.minRentingPeriodEndAt
+    ? formatUnixTimestamp(deal.minRentingPeriodEndAt)
+    : null
 
   return (
     <RowBlock>
@@ -177,6 +183,16 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{createdAt.date}</Text>
               <Text size={12}>{createdAt.time}</Text>
+            </Cell>
+            <Cell flexDirection="column" alignItems="flex-start">
+              {rentingPeriodAt ? (
+                <>
+                  <Text size={12}>{rentingPeriodAt.date}</Text>
+                  <Text size={12}>{rentingPeriodAt.time}</Text>
+                </>
+              ) : (
+                '-'
+              )}
             </Cell>
             {/* Client */}
             <Cell

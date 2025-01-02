@@ -18,7 +18,7 @@ import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
-import { MatchingTable } from './MatchingTable'
+import { PeersTable } from './PeersTable'
 import { RequiredEffectorsTable } from './RequiredEffectorsTable'
 
 export const DealInfo: React.FC = () => {
@@ -298,7 +298,7 @@ export const DealInfo: React.FC = () => {
             </Parameter>
           </ParametersRow>
           <Space height="40px" />
-          <MatchingTable dealId={id} />
+          <PeersTable workers={deal.joinedWorkers} />
         </Right>
       </Content>
     </>
