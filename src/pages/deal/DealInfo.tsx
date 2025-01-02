@@ -19,7 +19,6 @@ import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
 import { PeersTable } from './PeersTable'
-import { RequiredEffectorsTable } from './RequiredEffectorsTable'
 
 export const DealInfo: React.FC = () => {
   const params = useParams()
@@ -252,12 +251,6 @@ export const DealInfo: React.FC = () => {
             </ParameterSmall>
           </ParametersRowSingle>
           <Space height="60px" />
-          <Text size={20}>Required effectors</Text>
-          <Space height="24px" />
-          <RequiredEffectorsTableWrapper>
-            <RequiredEffectorsTable effectors={deal.effectors} />
-          </RequiredEffectorsTableWrapper>
-          <Space height="59px" />
           <Text size={20}>Matching result</Text>
           <Space height="30px" />
           <ParametersRow>
@@ -376,10 +369,6 @@ const EmptyParameterValue = styled.div`
   width: 100%;
   background: ${colors.grey100};
   border-radius: 8px;
-`
-
-const RequiredEffectorsTableWrapper = styled.div`
-  width: 70%;
 `
 
 const TextWithBadge = styled.div`
