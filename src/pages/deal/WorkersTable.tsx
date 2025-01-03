@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { CapacityCommitmentStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/indexerClient/generated.types'
 
 import { A } from '../../components/A'
@@ -17,7 +17,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 
-import { ResourceTable } from './ResourceTable'
+import { ResourceTable } from './RentedResourceTable'
 
 const template = [
   '20px',
@@ -28,6 +28,12 @@ const template = [
 ]
 
 interface WorkersTableProps {
+  resources: {
+    id: string
+    type: number
+    quantity: string
+    metadata?: string
+  }[]
   workers?:
     | {
         id: string
@@ -49,7 +55,10 @@ interface WorkersTableProps {
     | null
 }
 
-export const PeersTable: React.FC<WorkersTableProps> = ({ workers }) => {
+export const WorkersTable: React.FC<WorkersTableProps> = ({
+  workers,
+  resources,
+}) => {
   return (
     <>
       <ScrollableTable>
@@ -60,7 +69,12 @@ export const PeersTable: React.FC<WorkersTableProps> = ({ workers }) => {
         </TableHeader>
         <TableBody>
           {workers?.map((worker, index) => (
-            <PeerRow key={worker.id} index={index} worker={worker} />
+            <PeerRow
+              key={worker.id}
+              index={index}
+              worker={worker}
+              resources={resources}
+            />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -69,6 +83,12 @@ export const PeersTable: React.FC<WorkersTableProps> = ({ workers }) => {
 }
 
 interface WorkerRowProps {
+  resources: {
+    id: string
+    type: number
+    quantity: string
+    metadata?: string
+  }[]
   index: number
   worker: {
     id: string
@@ -93,7 +113,18 @@ interface WorkerRowProps {
   }
 }
 
-const PeerRow: React.FC<WorkerRowProps> = ({ index, worker }) => {
+const PeerRow: React.FC<WorkerRowProps> = ({ index, worker, resources }) => {
+  const resourceWithDetails = useMemo(() => {
+    const resourceToDetails = new Map(
+      worker.peer.resources?.map((resource) => [resource.id, resource.details]),
+    )
+
+    return resources.map((resource) => ({
+      ...resource,
+      details: resourceToDetails.get(resource.id),
+    }))
+  }, [worker.peer.resources, resources])
+
   return (
     <RowBlock>
       <RowHeader>
@@ -109,11 +140,11 @@ const PeerRow: React.FC<WorkerRowProps> = ({ index, worker }) => {
               <A href={`/peer/${worker.peer.id}`}>{worker.peer.id}</A>
             </Cell>
           </Row>
-          {worker.peer.resources && (
+          {resourceWithDetails && (
             <>
               <Space height="1rem" />
               <ContentBlock>
-                <ResourceTable resources={worker.peer.resources} />
+                <ResourceTable resources={resourceWithDetails} />
               </ContentBlock>
             </>
           )}

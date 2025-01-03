@@ -18,7 +18,7 @@ import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
-import { PeersTable } from './PeersTable'
+import { WorkersTable } from './WorkersTable'
 
 export const DealInfo: React.FC = () => {
   const params = useParams()
@@ -291,7 +291,10 @@ export const DealInfo: React.FC = () => {
             </Parameter>
           </ParametersRow>
           <Space height="40px" />
-          <PeersTable workers={deal.joinedWorkers} />
+          <WorkersTable
+            workers={deal.joinedWorkers}
+            resources={deal.resources}
+          />
         </Right>
       </Content>
     </>
