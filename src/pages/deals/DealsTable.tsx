@@ -90,8 +90,6 @@ export const DealsTable: React.FC<DealsTableProps> = ({
     },
   )
 
-  console.log('deals', deals)
-
   const hasNextPage = deals && deals.data.length > limit
   const pageDeals = deals && deals.data.slice(0, limit)
 
@@ -112,6 +110,7 @@ export const DealsTable: React.FC<DealsTableProps> = ({
           >
             Created At
           </TableColumnTitleWithSort>
+          <TableColumnTitle>Max renting period</TableColumnTitle>
           <TableColumnTitle>Deal Creator</TableColumnTitle>
           <HeaderCellWithTooltip>
             <TableColumnTitle>Matching</TableColumnTitle>
