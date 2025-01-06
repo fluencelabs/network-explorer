@@ -300,6 +300,7 @@ export const DealInfo: React.FC = () => {
             ))}
           <Space height="40px" />
           <WorkersTable
+            dealId={deal.id}
             workers={deal.joinedWorkers}
             resources={deal.resources}
           />

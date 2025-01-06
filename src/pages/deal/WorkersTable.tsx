@@ -29,6 +29,7 @@ const template = [
 ]
 
 interface WorkersTableProps {
+  dealId: string
   resources: {
     id: string
     type: number
@@ -57,6 +58,7 @@ interface WorkersTableProps {
 }
 
 export const WorkersTable: React.FC<WorkersTableProps> = ({
+  dealId,
   workers,
   resources,
 }) => {
@@ -79,6 +81,7 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({
             ))}
           {workers?.map((worker, index) => (
             <PeerRow
+              dealId={dealId}
               key={worker.id}
               index={index}
               worker={worker}
@@ -92,6 +95,7 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({
 }
 
 interface WorkerRowProps {
+  dealId: string
   resources: {
     id: string
     type: number
@@ -122,17 +126,25 @@ interface WorkerRowProps {
   }
 }
 
-const PeerRow: React.FC<WorkerRowProps> = ({ index, worker, resources }) => {
+const PeerRow: React.FC<WorkerRowProps> = ({
+  index,
+  dealId,
+  worker,
+  resources,
+}) => {
   const resourceWithDetails = useMemo(() => {
     const resourceToDetails = new Map(
-      worker.peer.resources?.map((resource) => [resource.id, resource.details]),
+      worker.peer.resources?.map((resource) => [
+        resource.id.replace(worker.peer.id, ''),
+        resource.details,
+      ]),
     )
 
     return resources.map((resource) => ({
       ...resource,
-      details: resourceToDetails.get(resource.id),
+      details: resourceToDetails.get(resource.id.replace(dealId, '')),
     }))
-  }, [worker.peer.resources, resources])
+  }, [dealId, worker.peer, resources])
 
   return (
     <RowBlock>
