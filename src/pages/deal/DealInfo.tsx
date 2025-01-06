@@ -18,6 +18,7 @@ import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
+import { ResourceTable } from './ResourceTable'
 import { WorkersTable } from './WorkersTable'
 
 export const DealInfo: React.FC = () => {
@@ -290,6 +291,15 @@ export const DealInfo: React.FC = () => {
               </ParameterValue>
             </Parameter>
           </ParametersRow>
+          {!deal.joinedWorkers ||
+            (deal.joinedWorkers.length === 0 && (
+              <>
+                <Space height="40px" />
+                <ResourceTable resources={deal.resources} />
+              </>
+            ))}
+          <Space height="40px" />
+          <ResourceTable resources={deal.resources} />
           <Space height="40px" />
           <WorkersTable
             workers={deal.joinedWorkers}
@@ -364,7 +374,7 @@ const ParameterValue = styled.div`
   gap: 8px;
 `
 
-const EmptyParameterValue = styled.div`
+export const EmptyParameterValue = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

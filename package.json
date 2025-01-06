@@ -14,7 +14,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fluencelabs/deal-ts-clients": "0.23.2-ts-client-deals-v2-89bd968-7395-1.0",
+    "@fluencelabs/deal-ts-clients": "file:/Users/mihailerohov/fluence/compute-marketplace/ts-client",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",

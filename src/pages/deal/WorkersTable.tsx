@@ -17,7 +17,8 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 
-import { ResourceTable } from './RentedResourceTable'
+import { EmptyParameterValue } from './DealInfo'
+import { RentedResourceTable } from './RentedResourceTable'
 
 const template = [
   '20px',
@@ -68,6 +69,14 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({
           <TableColumnTitle>Peer id</TableColumnTitle>
         </TableHeader>
         <TableBody>
+          {!workers ||
+            (workers?.length === 0 && (
+              <EmptyParameterValue>
+                <Text size={12} color="grey500">
+                  No information
+                </Text>
+              </EmptyParameterValue>
+            ))}
           {workers?.map((worker, index) => (
             <PeerRow
               key={worker.id}
@@ -144,7 +153,7 @@ const PeerRow: React.FC<WorkerRowProps> = ({ index, worker, resources }) => {
             <>
               <Space height="1rem" />
               <ContentBlock>
-                <ResourceTable resources={resourceWithDetails} />
+                <RentedResourceTable resources={resourceWithDetails} />
               </ContentBlock>
             </>
           )}

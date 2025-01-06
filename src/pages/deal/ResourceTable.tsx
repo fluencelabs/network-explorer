@@ -3,6 +3,7 @@ import React from 'react'
 import {
   Cell,
   Row,
+  RowBlock,
   RowHeader,
   RowTrigger,
   ScrollableTable,
@@ -28,12 +29,10 @@ interface ResourceTableProps {
   resources?:
     | {
         id: string
-        details: string
-        resource?: {
-          metadata: string
-          type: number
-          id: string
-        }
+        details?: string
+        quantity: string
+        metadata?: string
+        type: number
       }[]
     | null
 }
@@ -45,9 +44,8 @@ export const ResourceTable: React.FC<ResourceTableProps> = ({ resources }) => {
         <TableHeader template={template}>
           <TableColumnTitle>Resource ID</TableColumnTitle>
           <TableColumnTitle>Type</TableColumnTitle>
-          <TableColumnTitle>Rented</TableColumnTitle>
+          <TableColumnTitle>Requested</TableColumnTitle>
           <TableColumnTitle>Metadata</TableColumnTitle>
-          <TableColumnTitle>Details</TableColumnTitle>
         </TableHeader>
         <TableBody>
           {resources?.map((resource) => (
@@ -62,45 +60,42 @@ export const ResourceTable: React.FC<ResourceTableProps> = ({ resources }) => {
 interface ResourceRowProps {
   resource: {
     id: string
-    details: string
-    resource?: {
-      metadata: string
-      type: number
-      id: string
-    }
+    details?: string
+    quantity: string
+    metadata?: string
+    type: number
   }
 }
 
 const ResourceRow: React.FC<ResourceRowProps> = ({
-  resource: { id, details, resource },
+  resource: { id, type, metadata, quantity },
 }: ResourceRowProps) => {
-  const resourceName =
-    resource && Object.values(ResourceType).includes(resource.type)
-      ? ResourceTypeNames[resource.type as ResourceType]
-      : 'Unknown'
+  const resourceName = Object.values(ResourceType).includes(type)
+    ? ResourceTypeNames[type as ResourceType]
+    : 'Unknown'
 
   return (
-    <RowHeader>
-      <RowTrigger>
-        <Row template={template}>
-          <Cell>
-            <Text size={12}>{formatHexData(id, 8, 10)}</Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>{resourceName}</Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>
-              <JsonToYamlView data={resource?.metadata ?? '{}'} />
-            </Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>
-              <JsonToYamlView data={details} />
-            </Text>
-          </Cell>
-        </Row>
-      </RowTrigger>
-    </RowHeader>
+    <RowBlock>
+      <RowHeader>
+        <RowTrigger>
+          <Row template={template}>
+            <Cell>
+              <Text size={12}>{formatHexData(id, 8, 10)}</Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>{resourceName}</Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>{quantity}</Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>
+                <JsonToYamlView data={metadata ?? '{}'} />
+              </Text>
+            </Cell>
+          </Row>
+        </RowTrigger>
+      </RowHeader>
+    </RowBlock>
   )
 }

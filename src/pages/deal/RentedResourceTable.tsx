@@ -3,6 +3,7 @@ import React from 'react'
 import {
   Cell,
   Row,
+  RowBlock,
   RowHeader,
   RowTrigger,
   ScrollableTable,
@@ -36,7 +37,9 @@ interface ResourceTableProps {
     | null
 }
 
-export const ResourceTable: React.FC<ResourceTableProps> = ({ resources }) => {
+export const RentedResourceTable: React.FC<ResourceTableProps> = ({
+  resources,
+}) => {
   return (
     <>
       <ScrollableTable>
@@ -75,30 +78,32 @@ const ResourceRow: React.FC<ResourceRowProps> = ({
     : 'Unknown'
 
   return (
-    <RowHeader>
-      <RowTrigger>
-        <Row template={template}>
-          <Cell>
-            <Text size={12}>{formatHexData(id, 8, 10)}</Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>{resourceName}</Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>{quantity}</Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>
-              <JsonToYamlView data={metadata ?? '{}'} />
-            </Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>
-              <JsonToYamlView data={details ?? '{}'} />
-            </Text>
-          </Cell>
-        </Row>
-      </RowTrigger>
-    </RowHeader>
+    <RowBlock>
+      <RowHeader>
+        <RowTrigger>
+          <Row template={template}>
+            <Cell>
+              <Text size={12}>{formatHexData(id, 8, 10)}</Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>{resourceName}</Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>{quantity}</Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>
+                <JsonToYamlView data={metadata ?? '{}'} />
+              </Text>
+            </Cell>
+            <Cell>
+              <Text size={12}>
+                <JsonToYamlView data={details ?? '{}'} />
+              </Text>
+            </Cell>
+          </Row>
+        </RowTrigger>
+      </RowHeader>
+    </RowBlock>
   )
 }
