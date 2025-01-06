@@ -299,8 +299,6 @@ export const DealInfo: React.FC = () => {
               </>
             ))}
           <Space height="40px" />
-          <ResourceTable resources={deal.resources} />
-          <Space height="40px" />
           <WorkersTable
             workers={deal.joinedWorkers}
             resources={deal.resources}
