@@ -29,7 +29,7 @@ export const FORMAT_NATIVE_TOKEN_TO_FIXED_DEFAULT = 6
 
 // TODO: remove hardcoded subgraph before merging
 export const SUBGRAPH_URL =
-  'https://subgraph.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-04bb860b'
+  'https://subgraph.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-57330ca7'
 
 // export const SUBGRAPH_URL =
 //   import.meta.env.VITE_SUBGRAPH_URL ?? SUBGRAPH_URLS[FLUENCE_CLIENT_NETWORK]
