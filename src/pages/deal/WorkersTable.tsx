@@ -20,13 +20,7 @@ import { Text } from '../../components/Text'
 import { EmptyParameterValue } from './DealInfo'
 import { RentedResourceTable } from './RentedResourceTable'
 
-const template = [
-  '20px',
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  '100px',
-  '80px',
-]
+const template = ['minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 
 interface WorkersTableProps {
   dealId: string
