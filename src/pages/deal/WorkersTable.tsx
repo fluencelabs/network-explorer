@@ -66,7 +66,6 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({
     <>
       <ScrollableTable>
         <TableHeader template={template}>
-          <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Worker id</TableColumnTitle>
           <TableColumnTitle>Peer id</TableColumnTitle>
         </TableHeader>
@@ -126,12 +125,7 @@ interface WorkerRowProps {
   }
 }
 
-const PeerRow: React.FC<WorkerRowProps> = ({
-  index,
-  dealId,
-  worker,
-  resources,
-}) => {
+const PeerRow: React.FC<WorkerRowProps> = ({ dealId, worker, resources }) => {
   const resourceWithDetails = useMemo(() => {
     const resourceToDetails = new Map(
       worker.peer.resources?.map((resource) => [
@@ -151,9 +145,6 @@ const PeerRow: React.FC<WorkerRowProps> = ({
       <RowHeader>
         <RowTrigger>
           <Row template={template}>
-            <Cell>
-              <Text size={12}>{index + 1}</Text>
-            </Cell>
             <Cell>
               <Text size={12}>{worker.id}</Text>
             </Cell>
