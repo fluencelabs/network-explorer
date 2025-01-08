@@ -1,5 +1,4 @@
 import React from 'react'
-import { Peer } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import {
   Cell,
@@ -25,48 +24,52 @@ const template = [
 ]
 
 interface ResourceTableProps {
-  resources: Peer['resources']
+  resources?:
+    | {
+        id: string
+        details?: string
+        quantity: string
+        metadata?: string
+        type: number
+      }[]
+    | null
 }
 
-export const ResourceTable: React.FC<ResourceTableProps> = ({ resources }) => {
+export const RentedResourceTable: React.FC<ResourceTableProps> = ({
+  resources,
+}) => {
   return (
-    <>
-      <ScrollableTable>
-        <TableHeader template={template}>
-          <TableColumnTitle>Resource ID</TableColumnTitle>
-          <TableColumnTitle>Type</TableColumnTitle>
-          <TableColumnTitle>Total</TableColumnTitle>
-          <TableColumnTitle>Available</TableColumnTitle>
-          <TableColumnTitle>Metadata</TableColumnTitle>
-        </TableHeader>
-        <TableBody>
-          {resources?.map((resource) => (
-            <ResourceRow key={resource.id} resource={resource} />
-          ))}
-        </TableBody>
-      </ScrollableTable>
-    </>
+    <ScrollableTable>
+      <TableHeader template={template}>
+        <TableColumnTitle>Resource ID</TableColumnTitle>
+        <TableColumnTitle>Type</TableColumnTitle>
+        <TableColumnTitle>Rented</TableColumnTitle>
+        <TableColumnTitle>Metadata</TableColumnTitle>
+        <TableColumnTitle>Details</TableColumnTitle>
+      </TableHeader>
+      <TableBody>
+        {resources?.map((resource) => (
+          <ResourceRow key={resource.id} resource={resource} />
+        ))}
+      </TableBody>
+    </ScrollableTable>
   )
 }
 
 interface ResourceRowProps {
   resource: {
     id: string
-    maxSupply: number
-    availableSupply: number
-    details: string
-    resource?: {
-      metadata: string
-      type: number
-      id: string
-    }
+    details?: string
+    quantity: string
+    metadata?: string
+    type: number
   }
 }
 
 const ResourceRow: React.FC<ResourceRowProps> = ({
-  resource: { id, details, availableSupply, maxSupply, resource },
+  resource: { id, details, type, metadata, quantity },
 }: ResourceRowProps) => {
-  const resourceName = resource && getResourceName(resource.type)
+  const resourceName = getResourceName(type)
 
   return (
     <RowHeader>
@@ -79,14 +82,16 @@ const ResourceRow: React.FC<ResourceRowProps> = ({
             <Text size={12}>{resourceName}</Text>
           </Cell>
           <Cell>
-            <Text size={12}>{availableSupply}</Text>
-          </Cell>
-          <Cell>
-            <Text size={12}>{maxSupply}</Text>
+            <Text size={12}>{quantity}</Text>
           </Cell>
           <Cell>
             <Text size={12}>
-              <JsonToYamlView data={details} />
+              <JsonToYamlView data={metadata ?? '{}'} />
+            </Text>
+          </Cell>
+          <Cell>
+            <Text size={12}>
+              <JsonToYamlView data={details ?? '{}'} />
             </Text>
           </Cell>
         </Row>

@@ -12,12 +12,10 @@ import { useLocation } from 'wouter'
 import { A } from '../../components/A'
 import { Copyable } from '../../components/Copyable'
 import { DealStatus } from '../../components/DealStatus'
-import { DetailsButton } from '../../components/DetailsButton'
 import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
   Cell,
-  HeaderCellWithTooltip,
   Row,
   RowBlock,
   RowHeader,
@@ -31,7 +29,6 @@ import {
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
-import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
@@ -47,8 +44,6 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  '70px',
 ]
 
 export const DEALS_PER_PAGE = 5
@@ -109,16 +104,8 @@ export const DealsTable: React.FC<DealsTableProps> = ({
           >
             Created At
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Deal Creator</TableColumnTitle>
-          <HeaderCellWithTooltip>
-            <TableColumnTitle>Matching</TableColumnTitle>
-            <Tooltip>
-              <Text color="grey600" weight={600} size={12}>
-                Matching State: Minimum Workers Required for the Deal, Current
-                Matched Workers / Maximum Workers
-              </Text>
-            </Tooltip>
-          </HeaderCellWithTooltip>
+          <TableColumnTitle>Max renting period</TableColumnTitle>
+          <TableColumnTitle>Client</TableColumnTitle>
           <TableColumnTitle>Balance</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
         </TableHeader>
@@ -163,22 +150,33 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   }
 
   const createdAt = formatUnixTimestamp(deal.createdAt)
+  const rentingPeriodAt =
+    deal.minRentingPeriodEndAt === null
+      ? null
+      : formatUnixTimestamp(deal.minRentingPeriodEndAt)
 
   return (
     <RowBlock>
       <RowHeader onClick={handleClick}>
         <RowTrigger>
           <Row template={template}>
-            {/* deal ID */}
             <Cell>
               <A href={`/deal/${deal.id}`}>{formatHexData(deal.id)}</A>
             </Cell>
-            {/* Created at */}
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{createdAt.date}</Text>
               <Text size={12}>{createdAt.time}</Text>
             </Cell>
-            {/* Client */}
+            <Cell flexDirection="column" alignItems="flex-start">
+              {rentingPeriodAt ? (
+                <>
+                  <Text size={12}>{rentingPeriodAt.date}</Text>
+                  <Text size={12}>{rentingPeriodAt.time}</Text>
+                </>
+              ) : (
+                '-'
+              )}
+            </Cell>
             <Cell
               onMouseOver={() => setCopyshown(true)}
               onMouseLeave={() => setCopyshown(false)}
@@ -194,13 +192,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
               </ShrinkText>
               {copyShown && <Copyable value={deal.client} />}
             </Cell>
-            {/* Matching */}
-            <Cell>
-              <Text size={12}>
-                {deal.minWorkers}, {deal.matchedWorkers}/{deal.targetWorkers}
-              </Text>
-            </Cell>
-            {/* Balance */}
             <Cell>
               <TextWithBadge>
                 <Text size={12}>{formatUSDcTokenValue(deal.balance)}</Text>
@@ -211,16 +202,8 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
                 </TokenBadge>
               </TextWithBadge>
             </Cell>
-            {/* Status */}
             <Cell>
               <DealStatus status={deal.status} />
-            </Cell>
-            <Cell>
-              <DetailsButton>
-                <Text size={10} weight={800} uppercase>
-                  Details
-                </Text>
-              </DetailsButton>
             </Cell>
           </Row>
         </RowTrigger>

@@ -17,9 +17,8 @@ import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { JsonToYamlView } from '../../components/YamlView'
 import { formatUSDcTokenValue } from '../../utils'
+import { getResourceName } from '../../utils/getResourceName'
 import { formatHexData } from '../../utils/helpers'
-
-import { ResourceType, ResourceTypeNames } from './ResourceTable'
 
 const TextWithBadge = styled.div`
   display: flex;
@@ -67,9 +66,7 @@ interface OfferResourceRowProps {
 const ResourceRow: React.FC<OfferResourceRowProps> = ({
   offerResource: { id, resource, price },
 }: OfferResourceRowProps) => {
-  const resourceName = Object.values(ResourceType).includes(resource.type)
-    ? ResourceTypeNames[resource.type as ResourceType]
-    : 'Unknown'
+  const resourceName = getResourceName(resource.type)
 
   return (
     <RowBlock>

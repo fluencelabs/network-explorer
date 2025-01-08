@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
 import { useParams } from 'wouter'
 
+import { A } from '../../components/A'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { Copyable } from '../../components/Copyable'
 import { DealStatus } from '../../components/DealStatus'
@@ -10,7 +11,6 @@ import { NotFound } from '../../components/NotFound'
 import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
-import { Tooltip } from '../../components/Tooltip'
 import { useApiQuery } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
 
@@ -18,8 +18,8 @@ import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
-import { MatchingTable } from './MatchingTable'
-import { RequiredEffectorsTable } from './RequiredEffectorsTable'
+import { ResourceTable } from './ResourceTable'
+import { WorkersTable } from './WorkersTable'
 
 export const DealInfo: React.FC = () => {
   const params = useParams()
@@ -29,6 +29,12 @@ export const DealInfo: React.FC = () => {
   const { data: deal, isLoading } = useApiQuery((client) =>
     client.getDeal(id ?? ''),
   )
+
+  const providerAddress = useMemo(() => {
+    if (!deal || !deal.joinedWorkers || deal.joinedWorkers.length === 0)
+      return null
+    return deal.joinedWorkers[0].peer.provider
+  }, [deal])
 
   if (isLoading) {
     return <InfoLoader />
@@ -42,23 +48,6 @@ export const DealInfo: React.FC = () => {
         linkText="Go to deals page"
       />
     )
-  }
-
-  const renderProviderList = (list: string[]) => {
-    if (!list.length)
-      return (
-        <EmptyParameterValue>
-          <Text size={12} color="grey500">
-            No information
-          </Text>
-        </EmptyParameterValue>
-      )
-
-    return list.map((address) => (
-      <Text size={12} key={address}>
-        {address}
-      </Text>
-    ))
   }
 
   return (
@@ -140,7 +129,7 @@ export const DealInfo: React.FC = () => {
             </Info>
             <Info>
               <Text size={10} weight={700} uppercase color="grey400">
-                Earnings
+                Total provider earnings
               </Text>
               <TextWithBadge>
                 <Text size={12}>
@@ -155,150 +144,95 @@ export const DealInfo: React.FC = () => {
             </Info>
           </InfoRow>
           <Space height="56px" />
-          <Text size={20}>Matching parameters</Text>
+          {providerAddress && (
+            <>
+              <Text size={20}>Matching result</Text>
+              <Space height="24px" />
+              <InfoRow>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Provider
+                  </Text>
+                  <TextWithIcon>
+                    <Text size={12}>{providerAddress}</Text>
+                    {providerAddress && <Copyable value={providerAddress} />}
+                  </TextWithIcon>
+                </Info>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Payment token
+                  </Text>
+                  <A
+                    href={`${BLOCKSCOUT_URL}/address/${deal.paymentToken.address}`}
+                  >
+                    <Text size={20}>{deal.paymentToken.symbol}</Text>
+                  </A>
+                </Info>
+              </InfoRow>
+              <Space height="32px" />
+              <InfoRow>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Datacenter
+                  </Text>
+                  <TextWithIcon>
+                    <Text size={20}>-</Text>
+                  </TextWithIcon>
+                </Info>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Price Per Epoch
+                  </Text>
+                  <TextWithIcon>
+                    <Text size={20}>
+                      {formatUSDcTokenValue(deal.pricePerEpoch)}
+                    </Text>
+                    <TokenBadge bg="grey200">
+                      <Text size={10} weight={800} color="grey500">
+                        {deal.paymentToken.symbol}
+                      </Text>
+                    </TokenBadge>
+                  </TextWithIcon>
+                </Info>
+              </InfoRow>
+              <Space height="32px" />
+              <InfoRow>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    Country
+                  </Text>
+                  <TextWithIcon>
+                    <Text size={20}>-</Text>
+                  </TextWithIcon>
+                </Info>
+              </InfoRow>
+              <Space height="32px" />
+              <InfoRow>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
+                    City
+                  </Text>
+                  <TextWithIcon>
+                    <Text size={20}>-</Text>
+                  </TextWithIcon>
+                </Info>
+              </InfoRow>
+            </>
+          )}
           <Space height="30px" />
-          <ParametersRow>
-            <Parameter>
-              <Row>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Min Workers
-                </Text>
-                <Tooltip>
-                  <Text color="grey600" weight={600} size={12}>
-                    The minimum number of workers required for a Deal to be
-                    active and serviced by the subnet.
-                  </Text>
-                </Tooltip>
-              </Row>
-              <ParameterValue>
-                <Text size={20}>{deal.minWorkers}</Text>
-              </ParameterValue>
-            </Parameter>
-            <Parameter>
-              <Row>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Target Workers
-                </Text>
-                <Tooltip>
-                  <Text color="grey600" weight={600} size={12}>
-                    The maximum number of workers that can be involved in
-                    servicing the Deal.
-                  </Text>
-                </Tooltip>
-              </Row>
-              <ParameterValue>
-                <Text size={20}>{deal.targetWorkers}</Text>
-              </ParameterValue>
-            </Parameter>
-            <Parameter>
-              <Row>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Max Workers Per Provider
-                </Text>
-                <Tooltip>
-                  <Text color="grey600" weight={600} size={12}>
-                    The maximum number of workers from the same provider that
-                    can participate in a Deal.
-                  </Text>
-                </Tooltip>
-              </Row>
-              <ParameterValue>
-                <Text size={20}>{deal.maxWorkersPerProvider}</Text>
-              </ParameterValue>
-            </Parameter>
-          </ParametersRow>
-          <Space height="48px" />
-          <ParametersRow>
-            <Parameter>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Payment Token
-              </Text>
-              <ParameterValue>
-                <Text size={20}>{deal.paymentToken.symbol}</Text>
-              </ParameterValue>
-            </Parameter>
-            <Parameter>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Price Per CU Per Epoch
-              </Text>
-              <ParameterValue>
-                <Text size={20}>
-                  {formatUSDcTokenValue(deal.pricePerCuPerEpoch)}
-                </Text>
-                <TokenBadge bg="grey200">
-                  <Text size={10} weight={800} color="grey500">
-                    {deal.paymentToken.symbol}
-                  </Text>
-                </TokenBadge>
-              </ParameterValue>
-            </Parameter>
-          </ParametersRow>
+          {!deal.joinedWorkers ||
+            (deal.joinedWorkers.length === 0 && (
+              <>
+                <Space height="40px" />
+                <ResourceTable resources={deal.resources} />
+              </>
+            ))}
           <Space height="40px" />
-          <ParametersRowSingle>
-            <ParameterSmall>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Providers Whitelist
-              </Text>
-              {renderProviderList(deal.whitelist)}
-            </ParameterSmall>
-          </ParametersRowSingle>
-          <Space height="32px" />
-          <ParametersRowSingle>
-            <ParameterSmall>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Providers Blacklist
-              </Text>
-              {renderProviderList(deal.blacklist)}
-            </ParameterSmall>
-          </ParametersRowSingle>
-          <Space height="60px" />
-          <Text size={20}>Required effectors</Text>
-          <Space height="24px" />
-          <RequiredEffectorsTableWrapper>
-            <RequiredEffectorsTable effectors={deal.effectors} />
-          </RequiredEffectorsTableWrapper>
-          <Space height="59px" />
-          <Text size={20}>Matching result</Text>
-          <Space height="30px" />
-          <ParametersRow>
-            <Parameter>
-              <Row>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Min, Matched / Target
-                </Text>
-                <Tooltip>
-                  <Text color="grey600" weight={600} size={12}>
-                    Minimum Workers Required for the Deal, Current Matched
-                    Workers / Maximum Workers.
-                  </Text>
-                </Tooltip>
-              </Row>
-              <ParameterValue>
-                <Text size={20}>
-                  {deal.minWorkers}, {deal.matchedWorkers}/{deal.targetWorkers}
-                </Text>
-              </ParameterValue>
-            </Parameter>
-            <Parameter>
-              <Row>
-                <Text size={10} weight={700} uppercase color="grey400">
-                  Registered / Matched
-                </Text>
-                <Tooltip>
-                  <Text color="grey600" weight={600} size={12}>
-                    The number of workers registered in the deal after matching.
-                  </Text>
-                </Tooltip>
-              </Row>
-              <ParameterValue>
-                <Text size={20}>
-                  {deal.registeredWorkers}/{deal.matchedWorkers}
-                </Text>
-              </ParameterValue>
-            </Parameter>
-          </ParametersRow>
-          <Space height="40px" />
-          <MatchingTable dealId={id} />
+          <WorkersTable
+            dealId={deal.id}
+            workers={deal.joinedWorkers}
+            resources={deal.resources}
+          />
         </Right>
       </Content>
     </>
@@ -341,34 +275,7 @@ const TextWithIcon = styled.div`
   gap: 4px;
 `
 
-const ParametersRow = styled.div`
-  display: grid;
-  grid-template-columns: 200px 200px 200px;
-`
-
-const ParametersRowSingle = styled(ParametersRow)`
-  grid-template-columns: 70%;
-`
-
-const Parameter = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-`
-
-const ParameterSmall = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`
-
-const ParameterValue = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`
-
-const EmptyParameterValue = styled.div`
+export const EmptyParameterValue = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -378,17 +285,7 @@ const EmptyParameterValue = styled.div`
   border-radius: 8px;
 `
 
-const RequiredEffectorsTableWrapper = styled.div`
-  width: 70%;
-`
-
 const TextWithBadge = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`
-
-const Row = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
