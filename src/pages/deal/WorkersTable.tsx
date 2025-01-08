@@ -57,33 +57,31 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({
   resources,
 }) => {
   return (
-    <>
-      <ScrollableTable>
-        <TableHeader template={template}>
-          <TableColumnTitle>Worker id</TableColumnTitle>
-          <TableColumnTitle>Peer id</TableColumnTitle>
-        </TableHeader>
-        <TableBody>
-          {!workers ||
-            (workers?.length === 0 && (
-              <EmptyParameterValue>
-                <Text size={12} color="grey500">
-                  No information
-                </Text>
-              </EmptyParameterValue>
-            ))}
-          {workers?.map((worker, index) => (
-            <PeerRow
-              dealId={dealId}
-              key={worker.id}
-              index={index}
-              worker={worker}
-              resources={resources}
-            />
+    <ScrollableTable>
+      <TableHeader template={template}>
+        <TableColumnTitle>Worker id</TableColumnTitle>
+        <TableColumnTitle>Peer id</TableColumnTitle>
+      </TableHeader>
+      <TableBody>
+        {!workers ||
+          (workers?.length === 0 && (
+            <EmptyParameterValue>
+              <Text size={12} color="grey500">
+                No information
+              </Text>
+            </EmptyParameterValue>
           ))}
-        </TableBody>
-      </ScrollableTable>
-    </>
+        {workers?.map((worker, index) => (
+          <PeerRow
+            dealId={dealId}
+            key={worker.id}
+            index={index}
+            worker={worker}
+            resources={resources}
+          />
+        ))}
+      </TableBody>
+    </ScrollableTable>
   )
 }
 
