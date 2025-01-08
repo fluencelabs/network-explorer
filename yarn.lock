@@ -914,9 +914,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluencelabs/deal-ts-clients@npm:0.23.2-ts-client-deals-v2-35c08fb-7404-1.0":
-  version: 0.23.2-ts-client-deals-v2-35c08fb-7404-1.0
-  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.2-ts-client-deals-v2-35c08fb-7404-1.0"
+"@fluencelabs/deal-ts-clients@npm:0.23.2-ts-client-deals-v2-9ed83c5-7420-1.0":
+  version: 0.23.2-ts-client-deals-v2-9ed83c5-7420-1.0
+  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.2-ts-client-deals-v2-9ed83c5-7420-1.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -928,7 +928,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/b6fa72fa175838f23ca9bc12fcc90b2e2efc11c742265f9a00647868fb94f73629b0bc478df417951597c1e9586ae0a0af7dd2107d17a73a1ead2f1918c67ace
+  checksum: 10c0/459a877fb2ee4a5ec596a91d213311f70fecd359512c4a41cd0b484922ab905c82092104c499b5435d7ef73a56a1e6aff3af0e87c64d940561bb724301ad2697
   languageName: node
   linkType: hard
 
@@ -6477,7 +6477,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "npm:0.23.2-ts-client-deals-v2-35c08fb-7404-1.0"
+    "@fluencelabs/deal-ts-clients": "npm:0.23.2-ts-client-deals-v2-9ed83c5-7420-1.0"
     "@radix-ui/react-accordion": "npm:^1.1.2"
     "@radix-ui/react-aspect-ratio": "npm:^1.0.3"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
