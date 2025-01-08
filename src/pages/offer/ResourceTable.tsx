@@ -13,6 +13,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { JsonToYamlView } from '../../components/YamlView'
+import { getResourceName } from '../../utils/getResourceName'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
@@ -22,24 +23,6 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(200px, 1fr)',
 ]
-
-export enum ResourceType {
-  PHYSICAL_CORE,
-  RAM,
-  STORAGE,
-  PUBLIC_IP,
-  NETWORK_BANDWIDTH,
-  GPU,
-}
-
-export const ResourceTypeNames = {
-  [ResourceType.PHYSICAL_CORE]: 'vCPU',
-  [ResourceType.RAM]: 'RAM',
-  [ResourceType.STORAGE]: 'STORAGE',
-  [ResourceType.PUBLIC_IP]: 'IP',
-  [ResourceType.NETWORK_BANDWIDTH]: 'BANDWIDTH',
-  [ResourceType.GPU]: 'GPU',
-} as const
 
 interface ResourceTableProps {
   resources: Peer['resources']
@@ -83,10 +66,7 @@ interface ResourceRowProps {
 const ResourceRow: React.FC<ResourceRowProps> = ({
   resource: { id, details, availableSupply, maxSupply, resource },
 }: ResourceRowProps) => {
-  const resourceName =
-    resource && Object.values(ResourceType).includes(resource.type)
-      ? ResourceTypeNames[resource.type as ResourceType]
-      : 'Unknown'
+  const resourceName = resource && getResourceName(resource.type)
 
   return (
     <RowHeader>

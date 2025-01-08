@@ -120,8 +120,9 @@ interface WorkerRowProps {
 }
 
 const PeerRow: React.FC<WorkerRowProps> = ({ dealId, worker, resources }) => {
+  // An array of resources augmented with corresponding details from worker.peer.resources
   const resourceWithDetails = useMemo(() => {
-    const resourceToDetails = new Map(
+    const resourceIdToDetails = new Map(
       worker.peer.resources?.map((resource) => [
         resource.id.replace(worker.peer.id, ''),
         resource.details,
@@ -130,7 +131,7 @@ const PeerRow: React.FC<WorkerRowProps> = ({ dealId, worker, resources }) => {
 
     return resources.map((resource) => ({
       ...resource,
-      details: resourceToDetails.get(resource.id.replace(dealId, '')),
+      details: resourceIdToDetails.get(resource.id.replace(dealId, '')),
     }))
   }, [dealId, worker.peer, resources])
 

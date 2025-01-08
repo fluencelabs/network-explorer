@@ -13,9 +13,8 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { JsonToYamlView } from '../../components/YamlView'
+import { getResourceName } from '../../utils/getResourceName'
 import { formatHexData } from '../../utils/helpers'
-
-import { ResourceType, ResourceTypeNames } from '../offer/ResourceTable'
 
 const template = [
   'minmax(10px, 1fr)',
@@ -70,9 +69,7 @@ interface ResourceRowProps {
 const ResourceRow: React.FC<ResourceRowProps> = ({
   resource: { id, type, metadata, quantity },
 }: ResourceRowProps) => {
-  const resourceName = Object.values(ResourceType).includes(type)
-    ? ResourceTypeNames[type as ResourceType]
-    : 'Unknown'
+  const resourceName = getResourceName(type)
 
   return (
     <RowBlock>

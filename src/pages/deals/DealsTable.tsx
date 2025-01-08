@@ -150,20 +150,19 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   }
 
   const createdAt = formatUnixTimestamp(deal.createdAt)
-  const rentingPeriodAt = deal.minRentingPeriodEndAt
-    ? formatUnixTimestamp(deal.minRentingPeriodEndAt)
-    : null
+  const rentingPeriodAt =
+    deal.minRentingPeriodEndAt === null
+      ? null
+      : formatUnixTimestamp(deal.minRentingPeriodEndAt)
 
   return (
     <RowBlock>
       <RowHeader onClick={handleClick}>
         <RowTrigger>
           <Row template={template}>
-            {/* deal ID */}
             <Cell>
               <A href={`/deal/${deal.id}`}>{formatHexData(deal.id)}</A>
             </Cell>
-            {/* Created at */}
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{createdAt.date}</Text>
               <Text size={12}>{createdAt.time}</Text>
@@ -178,7 +177,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
                 '-'
               )}
             </Cell>
-            {/* Client */}
             <Cell
               onMouseOver={() => setCopyshown(true)}
               onMouseLeave={() => setCopyshown(false)}
@@ -194,7 +192,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
               </ShrinkText>
               {copyShown && <Copyable value={deal.client} />}
             </Cell>
-            {/* Balance */}
             <Cell>
               <TextWithBadge>
                 <Text size={12}>{formatUSDcTokenValue(deal.balance)}</Text>
@@ -205,7 +202,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
                 </TokenBadge>
               </TextWithBadge>
             </Cell>
-            {/* Status */}
             <Cell>
               <DealStatus status={deal.status} />
             </Cell>
