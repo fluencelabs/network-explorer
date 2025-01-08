@@ -122,14 +122,14 @@ const PeerRow: React.FC<WorkerRowProps> = ({ dealId, worker, resources }) => {
   const resourceWithDetails = useMemo(() => {
     const resourceIdToDetails = new Map(
       worker.peer.resources?.map((resource) => [
-        resource.id.replace(worker.peer.id, ''),
+        `${dealId}${resource.resource?.id}`,
         resource.details,
       ]),
     )
 
     return resources.map((resource) => ({
       ...resource,
-      details: resourceIdToDetails.get(resource.id.replace(dealId, '')),
+      details: resourceIdToDetails.get(resource.id),
     }))
   }, [dealId, worker.peer, resources])
 
