@@ -38,21 +38,19 @@ interface ResourceTableProps {
 
 export const ResourceTable: React.FC<ResourceTableProps> = ({ resources }) => {
   return (
-    <>
-      <ScrollableTable>
-        <TableHeader template={template}>
-          <TableColumnTitle>Resource ID</TableColumnTitle>
-          <TableColumnTitle>Type</TableColumnTitle>
-          <TableColumnTitle>Requested</TableColumnTitle>
-          <TableColumnTitle>Metadata</TableColumnTitle>
-        </TableHeader>
-        <TableBody>
-          {resources?.map((resource) => (
-            <ResourceRow key={resource.id} resource={resource} />
-          ))}
-        </TableBody>
-      </ScrollableTable>
-    </>
+    <ScrollableTable>
+      <TableHeader template={template}>
+        <TableColumnTitle>Resource ID</TableColumnTitle>
+        <TableColumnTitle>Type</TableColumnTitle>
+        <TableColumnTitle>Requested</TableColumnTitle>
+        <TableColumnTitle>Metadata</TableColumnTitle>
+      </TableHeader>
+      <TableBody>
+        {resources?.map((resource) => (
+          <ResourceRow key={resource.id} resource={resource} />
+        ))}
+      </TableBody>
+    </ScrollableTable>
   )
 }
 

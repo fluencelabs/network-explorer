@@ -39,22 +39,20 @@ export const RentedResourceTable: React.FC<ResourceTableProps> = ({
   resources,
 }) => {
   return (
-    <>
-      <ScrollableTable>
-        <TableHeader template={template}>
-          <TableColumnTitle>Resource ID</TableColumnTitle>
-          <TableColumnTitle>Type</TableColumnTitle>
-          <TableColumnTitle>Rented</TableColumnTitle>
-          <TableColumnTitle>Metadata</TableColumnTitle>
-          <TableColumnTitle>Details</TableColumnTitle>
-        </TableHeader>
-        <TableBody>
-          {resources?.map((resource) => (
-            <ResourceRow key={resource.id} resource={resource} />
-          ))}
-        </TableBody>
-      </ScrollableTable>
-    </>
+    <ScrollableTable>
+      <TableHeader template={template}>
+        <TableColumnTitle>Resource ID</TableColumnTitle>
+        <TableColumnTitle>Type</TableColumnTitle>
+        <TableColumnTitle>Rented</TableColumnTitle>
+        <TableColumnTitle>Metadata</TableColumnTitle>
+        <TableColumnTitle>Details</TableColumnTitle>
+      </TableHeader>
+      <TableBody>
+        {resources?.map((resource) => (
+          <ResourceRow key={resource.id} resource={resource} />
+        ))}
+      </TableBody>
+    </ScrollableTable>
   )
 }
 
