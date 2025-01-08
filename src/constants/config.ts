@@ -4,6 +4,7 @@ import {
   ContractsENV,
   DEPLOYMENTS,
   RPC_URLS,
+  SUBGRAPH_URLS,
 } from '@fluencelabs/deal-ts-clients'
 import { Chain } from 'viem'
 import { createConfig, createStorage, http } from 'wagmi'
@@ -27,13 +28,8 @@ export const FILTER_ONLY_APPROVED_PROVIDERS_DEFAULT =
 export const FORMAT_PAYMENT_TOKEN_TO_FIXED_DEFAULT = 3
 export const FORMAT_NATIVE_TOKEN_TO_FIXED_DEFAULT = 6
 
-// TODO: remove hardcoded subgraph before merging
 export const SUBGRAPH_URL =
-  'https://subgraph.testnet.fluence.dev/subgraphs/name/fluence-deal-contracts-57330ca7'
-
-// export const SUBGRAPH_URL =
-//   import.meta.env.VITE_SUBGRAPH_URL ?? SUBGRAPH_URLS[FLUENCE_CLIENT_NETWORK]
-
+  import.meta.env.VITE_SUBGRAPH_URL ?? SUBGRAPH_URLS[FLUENCE_CLIENT_NETWORK]
 export const DEPLOYMENT = DEPLOYMENTS[FLUENCE_CLIENT_NETWORK]
 export const USDC_DECIMALS = 6
 
