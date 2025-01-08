@@ -16,8 +16,10 @@ export const ResourceTypeNames = {
   [ResourceType.GPU]: 'GPU',
 } as const
 
+function isResourceType(type: number): type is ResourceType {
+  return type in ResourceType
+}
+
 export function getResourceName(type: number) {
-  return Object.values(ResourceType).includes(type)
-    ? ResourceTypeNames[type as ResourceType]
-    : 'Unknown'
+  return isResourceType(type) ? ResourceTypeNames[type] : 'Unknown'
 }
