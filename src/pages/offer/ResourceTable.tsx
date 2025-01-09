@@ -37,7 +37,7 @@ export const ResourceTable: React.FC<ResourceTableProps> = ({ resources }) => {
           <TableColumnTitle>Type</TableColumnTitle>
           <TableColumnTitle>Total</TableColumnTitle>
           <TableColumnTitle>Available</TableColumnTitle>
-          <TableColumnTitle>Metadata</TableColumnTitle>
+          <TableColumnTitle>Details</TableColumnTitle>
         </TableHeader>
         <TableBody>
           {resources?.map((resource) => (
