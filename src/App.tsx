@@ -7,6 +7,7 @@ import { Capacities } from './pages/capacities'
 import { CapacityInfo } from './pages/capacity'
 import { ComputeUnitInfo } from './pages/compute-unit'
 import { ConfigJson } from './pages/config'
+import { DataCenters } from './pages/data-centers'
 import { DealInfo } from './pages/deal'
 import { Deals } from './pages/deals'
 import { OfferInfo } from './pages/offer'
@@ -38,6 +39,7 @@ export const App: React.FC = () => {
       <Route path={ROUTES.offers} component={Offers} />
       <Route path={ROUTES.offerInfo} component={OfferInfo} />
       <Route path={ROUTES.deals} component={Deals} />
+      <Route path={ROUTES.dataCenters} component={DataCenters} />
       <Route path={ROUTES.dealInfo} component={DealInfo} />
       <Route path={ROUTES.capacities} component={Capacities} />
       <Route path={ROUTES.capacityInfo} component={CapacityInfo} />
