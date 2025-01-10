@@ -20,7 +20,18 @@ export const fetchAndDecodeEvents = async () => {
     const logs = await contract.queryFilter(filter, 0, 'latest')
 
     return {
-      data: logs.map(
+      data: (
+        logs as unknown[] as {
+          args: {
+            id: string
+            countryCode: string
+            cityCode: string
+            index: string
+            tier: string
+            certifications: string[]
+          }
+        }[]
+      ).map(
         ({
           args: { id, countryCode, cityCode, index, tier, certifications },
         }) => ({
@@ -32,7 +43,7 @@ export const fetchAndDecodeEvents = async () => {
           certifications,
         }),
       ),
-      total: logs.length,
+      total: String(logs.length),
     }
   } catch (error) {
     console.error('Error fetching or decoding events:', error)

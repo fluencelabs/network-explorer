@@ -94,7 +94,14 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
 }
 
 interface DataCenterRowProps {
-  dataCenter: DataCenterShort
+  dataCenter: {
+    id: string
+    countryCode: string
+    index: string
+    cityCode: string
+    tier: string
+    certifications?: string[]
+  }
 }
 
 const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
