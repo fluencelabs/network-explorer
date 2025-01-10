@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { OrderType } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
@@ -17,7 +16,9 @@ import {
   TableHeader,
   TablePagination,
 } from '../../components/Table'
+import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
+import { fetchAndDecodeEvents } from '../../utils/getDatacenters'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
@@ -26,12 +27,10 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
+  'minmax(500px, 1fr)',
 ]
 
 export const DATA_CENTERS_PER_PAGE = 5
-
-type DataCenterSort = `${DataCentersShortOrderBy}:${OrderType}`
 
 interface DataCentersTableProps {
   pagination: ReturnType<typeof usePagination>
@@ -40,26 +39,15 @@ interface DataCentersTableProps {
 export const DataCentersTable: React.FC<DataCentersTableProps> = ({
   pagination,
 }) => {
-  const [order] = useState<DataCenterSort>('createdAt:desc')
-  const [orderBy, orderType] = order.split(':') as [
-    DataCentersShortOrderBy,
-    OrderType,
-  ]
-
-  const { page, selectPage, limit, offset, getTotalPages } = pagination
+  const { page, selectPage, limit, getTotalPages } = pagination
 
   const { data: dataCenters, isLoading } = useApiQuery(
-    (client) => {
-      return client.getDataCenters({}, offset, limit + 1, orderBy, orderType)
+    () => {
+      return fetchAndDecodeEvents()
     },
-    [page, orderBy, orderType],
+    [page],
     {
-      key: `dataCenters:${JSON.stringify({
-        offset,
-        limit,
-        order,
-        orderBy,
-      })}`,
+      key: `dataCenters:${JSON.stringify({})}`,
       ttl: 1_000 * 60, // 1 minute
     },
   )
@@ -121,19 +109,23 @@ const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
               </A>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
-              {dataCenter.countryCode}-{dataCenter.cityCode}-{dataCenter.index}
+              <Text size={12}>
+                {' '}
+                {dataCenter.countryCode}-{dataCenter.cityCode}-
+                {dataCenter.index}
+              </Text>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
-              {dataCenter.countryCode}
+              <Text size={12}>{dataCenter.countryCode}</Text>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
-              {dataCenter.cityCode}
+              <Text size={12}>{dataCenter.cityCode}</Text>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
-              {dataCenter.tier}
+              <Text size={12}> {dataCenter.tier}</Text>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
-              {dataCenter.certifications?.join(', ')}
+              <Text size={12}> {dataCenter.certifications?.join(', ')}</Text>
             </Cell>
           </Row>
         </RowTrigger>
