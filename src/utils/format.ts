@@ -63,3 +63,16 @@ export const formatNativeTokenValue = (value: bigint, maxDecimalDigits = 6) => {
 export const formatUSDcTokenValue = (value: bigint, maxDecimalDigits = 2) => {
   return formatTokenUnits(value, USDC_DECIMALS, maxDecimalDigits)
 }
+
+export const formatRoundedUSDcTokenValue = (
+  value: bigint,
+  maxDecimalDigits = 2,
+) => {
+  if (value < 10 ** USDC_DECIMALS - maxDecimalDigits)
+    return formatTokenUnits(value, USDC_DECIMALS, USDC_DECIMALS)
+  return formatTokenUnits(value, USDC_DECIMALS, maxDecimalDigits)
+}
+
+export const formatFullUSDcTokenValue = (value: bigint) => {
+  return formatTokenUnits(value, USDC_DECIMALS, USDC_DECIMALS)
+}
