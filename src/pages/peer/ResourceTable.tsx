@@ -81,10 +81,10 @@ const ResourceRow: React.FC<ResourceRowProps> = ({
               <Text size={12}>{resourceName}</Text>
             </Cell>
             <Cell>
-              <Text size={12}>{availableSupply}</Text>
+              <Text size={12}>{maxSupply}</Text>
             </Cell>
             <Cell>
-              <Text size={12}>{maxSupply}</Text>
+              <Text size={12}>{availableSupply}</Text>
             </Cell>
             <Cell>
               <Text size={12}>
