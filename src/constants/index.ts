@@ -15,6 +15,7 @@ export const ROUTES = {
   computeUnitInfo: '/compute-unit/:id',
   config: '/config',
   dataCenters: '/data-centers',
+  resources: '/resources',
 } as const
 
 export type Routes = typeof ROUTES

@@ -21,6 +21,7 @@ import {
 } from './pages/provider'
 import { ProviderCapacity } from './pages/provider/ProviderCapacity'
 import { Providers } from './pages/providers'
+import { Resources } from './pages/resources'
 import { ROUTES } from './constants'
 
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -40,6 +41,7 @@ export const App: React.FC = () => {
       <Route path={ROUTES.offerInfo} component={OfferInfo} />
       <Route path={ROUTES.deals} component={Deals} />
       <Route path={ROUTES.dataCenters} component={DataCenters} />
+      <Route path={ROUTES.resources} component={Resources} />
       <Route path={ROUTES.dealInfo} component={DealInfo} />
       <Route path={ROUTES.capacities} component={Capacities} />
       <Route path={ROUTES.capacityInfo} component={CapacityInfo} />
