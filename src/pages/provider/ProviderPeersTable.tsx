@@ -34,7 +34,7 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
-import { getDatacenterCode } from '../../utils/getDataCenterCode'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [

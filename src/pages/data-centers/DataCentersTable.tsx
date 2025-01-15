@@ -1,5 +1,6 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import { Datacenter } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/indexerClient/generated.types'
 
 import { A } from '../../components/A'
 import { Pagination } from '../../components/Pagination'
@@ -18,16 +19,18 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
-import { getDatacenterCode } from '../../utils/getDataCenterCode'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
-  'minmax(500px, 1fr)',
+  'minmax(50px, 1fr)',
+  'minmax(50px, 1fr)',
+  'minmax(50px, 1fr)',
+  'minmax(50px, 1fr)',
+  'minmax(50px, 1fr)',
+  'minmax(400px, 1fr)',
+  'minmax(50px, 1fr)',
+  'minmax(50px, 1fr)',
 ]
 
 export const DATA_CENTERS_PER_PAGE = 5
@@ -67,6 +70,8 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
           <TableColumnTitle>City</TableColumnTitle>
           <TableColumnTitle>Tier</TableColumnTitle>
           <TableColumnTitle>Certificates</TableColumnTitle>
+          <TableColumnTitle>Providers</TableColumnTitle>
+          <TableColumnTitle>Peers</TableColumnTitle>
         </TableHeader>
         <TableBody
           skeletonCount={DATA_CENTERS_PER_PAGE}
@@ -96,14 +101,17 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
 }
 
 interface DataCenterRowProps {
-  dataCenter: {
-    id: string
-    countryCode: string
-    cityIndex: string
-    cityCode: string
-    tier: string
-    certifications?: string[] | null
-  }
+  dataCenter: Pick<
+    Datacenter,
+    | 'id'
+    | 'certifications'
+    | 'countryCode'
+    | 'cityIndex'
+    | 'cityCode'
+    | 'tier'
+    | 'providerCount'
+    | 'peerCount'
+  >
 }
 
 const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
@@ -131,6 +139,12 @@ const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}> {dataCenter.certifications?.join(', ')}</Text>
+            </Cell>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}> {dataCenter.providerCount}</Text>
+            </Cell>
+            <Cell flexDirection="column" alignItems="flex-start">
+              <Text size={12}> {dataCenter.peerCount}</Text>
             </Cell>
           </Row>
         </RowTrigger>

@@ -27,7 +27,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
-import { getDatacenterCode } from '../../utils/getDataCenterCode'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'

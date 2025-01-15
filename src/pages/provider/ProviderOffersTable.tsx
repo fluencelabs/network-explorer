@@ -29,7 +29,7 @@ import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
-import { getDatacenterCode } from '../../utils/getDataCenterCode'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
