@@ -18,7 +18,6 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
-import { fetchAndDecodeEvents } from '../../utils/getDatacenters'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
@@ -42,8 +41,8 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
   const { page, selectPage, limit, getTotalPages } = pagination
 
   const { data: dataCenters, isLoading } = useApiQuery(
-    () => {
-      return fetchAndDecodeEvents()
+    (client) => {
+      return client.getDataCenters()
     },
     [page],
     {
@@ -71,8 +70,8 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
           skeletonHeight={48}
           isLoading={isLoading}
         >
-          {pageDataCenters?.map((dataCenters) => (
-            <DataCenterRow key={dataCenters.id} dataCenter={dataCenters} />
+          {pageDataCenters?.map((dataCenter) => (
+            <DataCenterRow key={dataCenter.id} dataCenter={dataCenter} />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -82,7 +81,7 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
           <Skeleton width={200} height={34} count={1} />
         ) : (
           <Pagination
-            pages={getTotalPages(dataCenters.total)}
+            pages={getTotalPages(String(dataCenters.total))}
             page={page}
             hasNextPage={hasNextPage}
             onSelect={selectPage}
@@ -97,10 +96,10 @@ interface DataCenterRowProps {
   dataCenter: {
     id: string
     countryCode: string
-    index: string
+    cityIndex: string
     cityCode: string
     tier: string
-    certifications?: string[]
+    certifications?: string[] | null
   }
 }
 
@@ -119,7 +118,7 @@ const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
               <Text size={12}>
                 {' '}
                 {dataCenter.countryCode}-{dataCenter.cityCode}-
-                {dataCenter.index}
+                {dataCenter.cityIndex}
               </Text>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
