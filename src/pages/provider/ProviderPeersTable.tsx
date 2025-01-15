@@ -34,10 +34,12 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+import { getDatacenterCode } from '../../utils/getDataCenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
   '20px',
+  'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   '50px',
@@ -56,6 +58,7 @@ export const PeersTable: React.FC<PeersTableProps> = ({ peers }) => {
         <TableHeader template={template}>
           <TableColumnTitle>#</TableColumnTitle>
           <TableColumnTitle>Peer id</TableColumnTitle>
+          <TableColumnTitle>Datacenter</TableColumnTitle>
           <TableColumnTitle>Offer id</TableColumnTitle>
           <TableColumnTitle>CUs</TableColumnTitle>
           <TableColumnTitle>Current CC</TableColumnTitle>
@@ -82,29 +85,33 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
       <RowHeader>
         <RowTrigger>
           <Row template={template}>
-            {/* # */}
             <Cell>
               <Text size={12}>{index + 1}</Text>
             </Cell>
-            {/* Peer ID */}
             <Cell>
-              <A href={`/peer/${peer.id}`}>{formatHexData(peer.id, 20, 20)}</A>
+              <A href={`/peer/${peer.id}`}>{formatHexData(peer.id)}</A>
             </Cell>
-            {/* Offer ID */}
+            <Cell>
+              {peer.offer?.datacenter ? (
+                <Text size={12}>
+                  {getDatacenterCode(peer.offer.datacenter)}
+                </Text>
+              ) : (
+                '-'
+              )}
+            </Cell>
             <Cell>
               {peer.offer?.id ? (
                 <A href={`/offer/${peer.offer?.id}`}>
-                  {formatHexData(peer.offer?.id, 15, 15)}
+                  {formatHexData(peer.offer?.id)}
                 </A>
               ) : (
                 '-'
               )}
             </Cell>
-            {/* Compute units */}
             <Cell>
               <Text size={12}>{peer.computeUnitsTotal}</Text>
             </Cell>
-            {/* Current CC */}
             <Cell>
               {peer.currentCapacityCommitment ? (
                 <A href={`/capacity/${peer.currentCapacityCommitment?.id}`}>
@@ -114,7 +121,6 @@ const PeerRow: React.FC<PeerRowProps> = ({ index, peer }) => {
                 '-'
               )}
             </Cell>
-            {/* Status */}
             <Cell>
               {peer.currentCapacityCommitment?.status && (
                 <CapacityStatus

@@ -18,6 +18,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
+import { getDatacenterCode } from '../../utils/getDataCenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 const template = [
@@ -117,11 +118,7 @@ const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
               </A>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
-              <Text size={12}>
-                {' '}
-                {dataCenter.countryCode}-{dataCenter.cityCode}-
-                {dataCenter.cityIndex}
-              </Text>
+              <Text size={12}>{getDatacenterCode(dataCenter)}</Text>
             </Cell>
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{dataCenter.countryCode}</Text>
