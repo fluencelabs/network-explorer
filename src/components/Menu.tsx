@@ -33,14 +33,19 @@ const MENU: {
     routes: [ROUTES.deals, ROUTES.dealInfo],
   },
   {
-    title: 'DataCenters',
+    title: 'Capacity',
+    link: ROUTES.capacities,
+    routes: [ROUTES.capacities, ROUTES.capacityInfo],
+  },
+  {
+    title: 'Datacenters',
     link: ROUTES.dataCenters,
     routes: [ROUTES.dataCenters],
   },
   {
-    title: 'Capacity',
-    link: ROUTES.capacities,
-    routes: [ROUTES.capacities, ROUTES.capacityInfo],
+    title: 'Resources',
+    link: ROUTES.resources,
+    routes: [ROUTES.resources],
   },
 ]
 
