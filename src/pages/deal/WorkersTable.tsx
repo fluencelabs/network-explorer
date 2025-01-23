@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { CapacityCommitmentStatus } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/indexerClient/generated.types'
+import React from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import { A } from '../../components/A'
 import { Space } from '../../components/Space'
@@ -17,6 +17,9 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 
+import { DealJoinedWorkerFragment, getSdk } from '../../../generated/graphql'
+import { graphQLClient } from '../../constants/config'
+
 import { EmptyParameterValue } from './DealInfo'
 import { RentedResourceTable } from './RentedResourceTable'
 
@@ -24,38 +27,21 @@ const template = ['minmax(10px, 1fr)', 'minmax(10px, 1fr)']
 
 interface WorkersTableProps {
   dealId: string
-  resources: {
-    id: string
-    type: number
-    quantity: string
-    metadata?: string
-  }[]
-  workers?:
-    | {
-        id: string
-        peer: {
-          id: string
-          resources?:
-            | {
-                id: string
-                details: string
-                resource?: {
-                  metadata: string
-                  type: number
-                  id: string
-                }
-              }[]
-            | null
-        }
-      }[]
-    | null
 }
 
-export const WorkersTable: React.FC<WorkersTableProps> = ({
-  dealId,
-  workers,
-  resources,
-}) => {
+export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['dealWorkers', dealId],
+    queryFn: ({ queryKey: [, dealId] }) =>
+      getSdk(graphQLClient).DealQuery({
+        id: dealId,
+      }),
+  })
+
+  if (isLoading) return null
+
+  const workers = data?.data.deal?.joinedWorkers
+
   return (
     <ScrollableTable>
       <TableHeader template={template}>
@@ -71,68 +57,17 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({
               </Text>
             </EmptyParameterValue>
           ))}
-        {workers?.map((worker, index) => (
-          <PeerRow
-            dealId={dealId}
-            key={worker.id}
-            index={index}
-            worker={worker}
-            resources={resources}
-          />
-        ))}
+        {workers?.map((worker) => <PeerRow key={worker.id} worker={worker} />)}
       </TableBody>
     </ScrollableTable>
   )
 }
 
 interface WorkerRowProps {
-  dealId: string
-  resources: {
-    id: string
-    type: number
-    quantity: string
-    metadata?: string
-  }[]
-  index: number
-  worker: {
-    id: string
-    peer: {
-      id: string
-      currentCapacityCommitment?: {
-        id: string
-        status: CapacityCommitmentStatus
-      } | null
-      resources?:
-        | {
-            id: string
-            details: string
-            resource?: {
-              metadata: string
-              type: number
-              id: string
-            }
-          }[]
-        | null
-    }
-  }
+  worker: DealJoinedWorkerFragment
 }
 
-const PeerRow: React.FC<WorkerRowProps> = ({ dealId, worker, resources }) => {
-  // An array of resources augmented with corresponding details from worker.peer.resources
-  const resourceWithDetails = useMemo(() => {
-    const resourceIdToDetails = new Map(
-      worker.peer.resources?.map((resource) => [
-        `${dealId}${resource.resource?.id}`,
-        resource.details,
-      ]),
-    )
-
-    return resources.map((resource) => ({
-      ...resource,
-      details: resourceIdToDetails.get(resource.id),
-    }))
-  }, [dealId, worker.peer, resources])
-
+const PeerRow: React.FC<WorkerRowProps> = ({ worker }) => {
   return (
     <RowBlock>
       <RowHeader>
@@ -145,11 +80,11 @@ const PeerRow: React.FC<WorkerRowProps> = ({ dealId, worker, resources }) => {
               <A href={`/peer/${worker.peer.id}`}>{worker.peer.id}</A>
             </Cell>
           </Row>
-          {resourceWithDetails && (
+          {worker.resources && (
             <>
               <Space height="1rem" />
               <ContentBlock>
-                <RentedResourceTable resources={resourceWithDetails} />
+                <RentedResourceTable resources={worker.resources} />
               </ContentBlock>
             </>
           )}

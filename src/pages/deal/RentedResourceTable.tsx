@@ -15,6 +15,8 @@ import { JsonToYamlView } from '../../components/YamlView'
 import { getResourceName } from '../../utils/getResourceName'
 import { formatHexData } from '../../utils/helpers'
 
+import { DealWorkerToResourceFragment } from '../../../generated/graphql'
+
 const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -24,15 +26,7 @@ const template = [
 ]
 
 interface ResourceTableProps {
-  resources?:
-    | {
-        id: string
-        details?: string
-        quantity: string
-        metadata?: string
-        type: number
-      }[]
-    | null
+  resources?: DealWorkerToResourceFragment[]
 }
 
 export const RentedResourceTable: React.FC<ResourceTableProps> = ({
@@ -49,7 +43,10 @@ export const RentedResourceTable: React.FC<ResourceTableProps> = ({
       </TableHeader>
       <TableBody>
         {resources?.map((resource) => (
-          <ResourceRow key={resource.id} resource={resource} />
+          <ResourceRow
+            key={resource.peerResource.resourceDescription.id}
+            resource={resource}
+          />
         ))}
       </TableBody>
     </ScrollableTable>
@@ -57,17 +54,17 @@ export const RentedResourceTable: React.FC<ResourceTableProps> = ({
 }
 
 interface ResourceRowProps {
-  resource: {
-    id: string
-    details?: string
-    quantity: string
-    metadata?: string
-    type: number
-  }
+  resource: DealWorkerToResourceFragment
 }
 
 const ResourceRow: React.FC<ResourceRowProps> = ({
-  resource: { id, details, type, metadata, quantity },
+  resource: {
+    resourceRequirements: { quantity },
+    peerResource: {
+      details,
+      resourceDescription: { type, metadata, id },
+    },
+  },
 }: ResourceRowProps) => {
   const resourceName = getResourceName(type)
 
