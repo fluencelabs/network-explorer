@@ -27,11 +27,13 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { useApiQuery, usePagination } from '../../hooks'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
 const template = [
+  'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
@@ -82,6 +84,7 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
       <ScrollableTable>
         <TableHeader template={template}>
           <TableColumnTitle>Offer Id</TableColumnTitle>
+          <TableColumnTitle>Datacenter</TableColumnTitle>
           <TableColumnTitle>Provider</TableColumnTitle>
           <TableColumnTitle>Total peers (Confirmed)</TableColumnTitle>
           <TableColumnTitle>CCP CUs</TableColumnTitle>
@@ -132,6 +135,11 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
               <A href={`/offer/${offer.id}`}>
                 {formatHexData(offer.id, 8, 10)}
               </A>
+            </Cell>
+            <Cell>
+              <Text size={12}>
+                {offer.datacenter ? getDatacenterCode(offer.datacenter) : '-'}
+              </Text>
             </Cell>
             <Cell>
               <A href={`/provider/${offer.providerId}`}>

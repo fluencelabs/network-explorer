@@ -23,8 +23,8 @@ import { formatUSDcTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
+import { getSdk } from '../../../generated/graphql'
 import { BLOCKSCOUT_URL, graphQLClient } from '../../constants/config'
-import { getSdk } from '../../generated/graphql'
 
 const template = [
   'minmax(10px, 1fr)',

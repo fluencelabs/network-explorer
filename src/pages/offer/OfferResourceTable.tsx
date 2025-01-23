@@ -15,8 +15,12 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
+import { Tooltip } from '../../components/Tooltip'
 import { JsonToYamlView } from '../../components/YamlView'
-import { formatUSDcTokenValue } from '../../utils'
+import {
+  formatFullUSDcTokenValue,
+  formatRoundedUSDcTokenValue,
+} from '../../utils'
 import { getResourceName } from '../../utils/getResourceName'
 import { formatHexData } from '../../utils/helpers'
 
@@ -64,9 +68,9 @@ interface OfferResourceRowProps {
 }
 
 const ResourceRow: React.FC<OfferResourceRowProps> = ({
-  offerResource: { id, resource, price },
+  offerResource: { id, resourceDescription, price },
 }: OfferResourceRowProps) => {
-  const resourceName = getResourceName(resource.type)
+  const resourceName = getResourceName(resourceDescription.type)
 
   return (
     <RowBlock>
@@ -81,7 +85,17 @@ const ResourceRow: React.FC<OfferResourceRowProps> = ({
             </Cell>
             <Cell>
               <TextWithBadge>
-                <Text size={12}>{formatUSDcTokenValue(BigInt(price))}</Text>
+                <Tooltip
+                  trigger={
+                    <Text size={12}>
+                      {formatRoundedUSDcTokenValue(BigInt(price))}
+                    </Text>
+                  }
+                >
+                  <Text color="grey600" weight={600} size={12}>
+                    {formatFullUSDcTokenValue(BigInt(price))}
+                  </Text>
+                </Tooltip>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
                     USDC
@@ -91,7 +105,7 @@ const ResourceRow: React.FC<OfferResourceRowProps> = ({
             </Cell>
             <Cell>
               <Text size={12}>
-                <JsonToYamlView data={resource.metadata} />
+                <JsonToYamlView data={resourceDescription.metadata} />
               </Text>
             </Cell>
           </Row>
