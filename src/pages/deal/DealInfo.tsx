@@ -13,6 +13,8 @@ import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
+import { formatHexData } from '../../utils/helpers'
 
 import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
@@ -34,6 +36,12 @@ export const DealInfo: React.FC = () => {
     if (!deal || !deal.joinedWorkers || deal.joinedWorkers.length === 0)
       return null
     return deal.joinedWorkers[0].peer.provider
+  }, [deal])
+
+  const datacenter = useMemo(() => {
+    if (!deal || !deal.joinedWorkers || deal.joinedWorkers.length === 0)
+      return null
+    return deal.joinedWorkers[0].peer.offer.datacenter
   }, [deal])
 
   if (isLoading) {
@@ -175,9 +183,19 @@ export const DealInfo: React.FC = () => {
                   <Text size={10} weight={700} uppercase color="grey400">
                     Datacenter
                   </Text>
-                  <TextWithIcon>
-                    <Text size={20}>-</Text>
-                  </TextWithIcon>
+                  {datacenter ? (
+                    <>
+                      <TextWithIcon>
+                        <Text size={12}>{getDatacenterCode(datacenter)}</Text>
+                      </TextWithIcon>
+                    </>
+                  ) : (
+                    <>
+                      <TextWithIcon>
+                        <Text size={12}>{'-'}</Text>
+                      </TextWithIcon>
+                    </>
+                  )}
                 </Info>
                 <Info>
                   <Text size={10} weight={700} uppercase color="grey400">
@@ -199,10 +217,24 @@ export const DealInfo: React.FC = () => {
               <InfoRow>
                 <Info>
                   <Text size={10} weight={700} uppercase color="grey400">
+                    Datacenter ID
+                  </Text>
+                  <TextWithIcon>
+                    <Text size={12}>
+                      {datacenter ? formatHexData(datacenter?.id) : '-'}
+                    </Text>
+                    {datacenter && <Copyable value={datacenter?.id} />}
+                  </TextWithIcon>
+                </Info>
+              </InfoRow>
+              <Space height="32px" />
+              <InfoRow>
+                <Info>
+                  <Text size={10} weight={700} uppercase color="grey400">
                     Country
                   </Text>
                   <TextWithIcon>
-                    <Text size={20}>-</Text>
+                    <Text size={12}>{datacenter?.countryCode ?? '-'}</Text>
                   </TextWithIcon>
                 </Info>
               </InfoRow>
@@ -213,7 +245,7 @@ export const DealInfo: React.FC = () => {
                     City
                   </Text>
                   <TextWithIcon>
-                    <Text size={20}>-</Text>
+                    <Text size={12}>{datacenter?.cityCode ?? '-'}</Text>
                   </TextWithIcon>
                 </Info>
               </InfoRow>
