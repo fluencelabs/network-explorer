@@ -32,3 +32,9 @@ export const ShrinkText = styled(Text)`
   overflow: hidden;
   text-overflow: ellipsis;
 `
+
+export const TextWithIcon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`

@@ -1,0 +1,10 @@
+query DealBalanceTxesQuery($filters: DealBalanceTx_filter) {
+  dealBalanceTxes(where: $filters) {
+    user
+    type
+    tx
+    timestamp
+    id
+    amount
+  }
+}

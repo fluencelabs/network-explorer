@@ -18,6 +18,7 @@ import { ROUTES } from '../../constants'
 import { colors } from '../../constants/colors'
 import { BLOCKSCOUT_URL } from '../../constants/config'
 
+import { DealTxTable } from './DealTxTable'
 import { ResourceTable } from './ResourceTable'
 import { WorkersTable } from './WorkersTable'
 
@@ -233,6 +234,8 @@ export const DealInfo: React.FC = () => {
             workers={deal.joinedWorkers}
             resources={deal.resources}
           />
+          <Space height="40px" />
+          <DealTxTable dealId={id} />
         </Right>
       </Content>
     </>
