@@ -40,7 +40,7 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
 
   if (isLoading) return null
 
-  const workers = data?.data.deal?.joinedWorkers
+  const workers = data?.deal?.joinedWorkers
 
   return (
     <ScrollableTable>

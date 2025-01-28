@@ -34,21 +34,22 @@ const template = [
 ]
 
 export const DealTxTable: React.FC<{ dealId: string }> = ({ dealId }) => {
+  const pagination = usePagination(5)
+
   const { data, isLoading } = useQuery({
     queryKey: ['dealTx', dealId],
     queryFn: ({ queryKey: [, dealId] }) =>
       getSdk(graphQLClient).DealBalanceTxesQuery({
         filters: { deal_: { id: dealId } },
+        skip: pagination.page * pagination.limit,
+        first: pagination.limit,
       }),
   })
-
-  const pagination = usePagination(5)
 
   if (isLoading || !data) return null
 
   const hasNextPage =
-    data.data.dealBalanceTxes &&
-    data.data.dealBalanceTxes.length > pagination.limit
+    data.dealBalanceTxes && data.dealBalanceTxes.length > pagination.limit
 
   return (
     <>
@@ -59,8 +60,8 @@ export const DealTxTable: React.FC<{ dealId: string }> = ({ dealId }) => {
           <TableColumnTitle>Amount</TableColumnTitle>
           <TableColumnTitle></TableColumnTitle>
         </TableHeader>
-        <TableBody>
-          {data.data.dealBalanceTxes.map((data, index) => (
+        <TableBody isEmpty={data.dealBalanceTxes.length === 0}>
+          {data.dealBalanceTxes.map((data, index) => (
             <TransactionRow key={String(index)} {...data} />
           ))}
         </TableBody>
@@ -68,7 +69,7 @@ export const DealTxTable: React.FC<{ dealId: string }> = ({ dealId }) => {
       <Space height="32px" />
       <TablePagination>
         <Pagination
-          pages={pagination.getTotalPages(data.data.dealBalanceTxes.length)}
+          pages={pagination.getTotalPages(data.dealBalanceTxes.length)}
           page={pagination.page}
           hasNextPage={hasNextPage}
           onSelect={pagination.selectPage}
@@ -82,11 +83,11 @@ const TransactionRow: React.FC<{
   user: string
   type: number
   tx: string
-  timestamp: number
+  timestamp: string
   id: string
-  amount: number
+  amount: string
 }> = ({ amount, tx, timestamp, type }) => {
-  const { date, time } = formatUnixTimestamp(timestamp)
+  const { date, time } = formatUnixTimestamp(new Date(timestamp).valueOf())
 
   return (
     <RowBlock>

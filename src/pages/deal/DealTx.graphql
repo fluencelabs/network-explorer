@@ -1,5 +1,9 @@
-query DealBalanceTxesQuery($filters: DealBalanceTx_filter) {
-  dealBalanceTxes(where: $filters) {
+query DealBalanceTxesQuery($filters: DealBalanceTx_filter, $first: Int, $skip: Int) {
+  dealBalanceTxes(
+    where: $filters,
+    first: $first
+    skip: $skip
+  ) {
     user
     type
     tx

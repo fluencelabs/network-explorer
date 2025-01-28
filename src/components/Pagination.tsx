@@ -9,7 +9,7 @@ import { Text } from './Text'
 import { Hide } from './Visibility'
 
 interface PaginationProps {
-  pages: number
+  pages: number | null
   page: number
   hasNextPage?: boolean
   onSelect: (page: number) => void
@@ -25,7 +25,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const isLastPage = page === pages
 
   // If there is only one page, don't show pagination
-  if (page === 1 && (pages === -1 || pages === 0) && !hasNextPage) {
+  if (page === 1 && (pages === null || pages === 0) && !hasNextPage) {
     return null
   }
 
@@ -43,10 +43,10 @@ export const Pagination: React.FC<PaginationProps> = ({
 
       <Button>
         <MonospaceText>
-          <Hide if={pages === -1}>
+          <Hide if={pages === null}>
             Page {page} of {pages}
           </Hide>
-          <Hide if={pages !== -1}>{page}</Hide>
+          <Hide if={pages !== null}>{page}</Hide>
         </MonospaceText>
       </Button>
 
@@ -54,8 +54,8 @@ export const Pagination: React.FC<PaginationProps> = ({
         <Button onClick={() => onSelect(page + 1)}>
           <ArrowIcon />
         </Button>
-        <Hide if={pages === -1}>
-          <Button onClick={() => onSelect(pages)}>
+        <Hide if={pages === null}>
+          <Button onClick={() => pages !== null && onSelect(pages)}>
             <Text>Last</Text>
           </Button>
         </Hide>

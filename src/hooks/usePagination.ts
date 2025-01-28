@@ -15,7 +15,7 @@ export const usePagination = (perPage: number) => {
 
   const getTotalPages = (totalItems: string | number | null) => {
     if (!totalItems) {
-      return -1
+      return null
     }
 
     const count =
