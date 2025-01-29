@@ -1439,9 +1439,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluencelabs/deal-ts-clients@npm:0.23.2-feat-marketplace-v2-resources-078f687-7565-1.0":
-  version: 0.23.2-feat-marketplace-v2-resources-078f687-7565-1.0
-  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.2-feat-marketplace-v2-resources-078f687-7565-1.0"
+"@fluencelabs/deal-ts-clients@npm:0.23.2-feat-marketplace-v2-resources-ae4218e-7633-1.0":
+  version: 0.23.2-feat-marketplace-v2-resources-ae4218e-7633-1.0
+  resolution: "@fluencelabs/deal-ts-clients@npm:0.23.2-feat-marketplace-v2-resources-ae4218e-7633-1.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -1453,7 +1453,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/94dd9b4f4717a08f94edfb22f2be8a46c76ff11a17e4b79003c7848177357e42beb8fa43f6a639472e77021ca0a16095a4daab523e8dbb1698320b0e827fbb20
+  checksum: 10c0/ee01262e9ee88e1fb6c9433729c064ea25613ba674b2750156afe52e8ddef958b055eb1933dbe18ae3b2f15660e94621d4218237335d0c614362765b7e58ba5f
   languageName: node
   linkType: hard
 
@@ -8144,7 +8144,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "npm:0.23.2-feat-marketplace-v2-resources-078f687-7565-1.0"
+    "@fluencelabs/deal-ts-clients": "npm:0.23.2-feat-marketplace-v2-resources-ae4218e-7633-1.0"
     "@graphql-codegen/cli": "npm:^5.0.3"
     "@graphql-codegen/typescript": "npm:^4.1.0"
     "@graphql-codegen/typescript-graphql-request": "npm:^6.2.0"
