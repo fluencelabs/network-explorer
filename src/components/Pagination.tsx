@@ -6,7 +6,6 @@ import { ArrowIcon } from '../assets/icons'
 import { colors } from '../constants/colors'
 
 import { Text } from './Text'
-import { Hide } from './Visibility'
 
 interface PaginationProps {
   pages: number | null
@@ -31,35 +30,36 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <Wrapper>
-      <Hide if={isFirstPage}>
-        <Button onClick={() => onSelect(1)}>
-          <Text>First</Text>
-        </Button>
+      {!isFirstPage && (
+        <>
+          <Button onClick={() => onSelect(1)}>
+            <Text>First</Text>
+          </Button>
 
-        <Button onClick={() => onSelect(page - 1)}>
-          <LeftArrowIcon />
-        </Button>
-      </Hide>
+          <Button onClick={() => onSelect(page - 1)}>
+            <LeftArrowIcon />
+          </Button>
+        </>
+      )}
 
       <Button>
         <MonospaceText>
-          <Hide if={pages === null}>
-            Page {page} of {pages}
-          </Hide>
-          <Hide if={pages !== null}>{page}</Hide>
+          {pages === null ? page : `Page ${page} of ${pages}`}
         </MonospaceText>
       </Button>
 
-      <Hide if={isLastPage || !hasNextPage}>
-        <Button onClick={() => onSelect(page + 1)}>
-          <ArrowIcon />
-        </Button>
-        <Hide if={pages === null}>
-          <Button onClick={() => pages !== null && onSelect(pages)}>
-            <Text>Last</Text>
+      {!isLastPage && hasNextPage && (
+        <>
+          <Button onClick={() => onSelect(page + 1)}>
+            <ArrowIcon />
           </Button>
-        </Hide>
-      </Hide>
+          {pages !== null && (
+            <Button onClick={() => onSelect(pages)}>
+              <Text>Last</Text>
+            </Button>
+          )}
+        </>
+      )}
     </Wrapper>
   )
 }
