@@ -68,9 +68,9 @@ interface OfferResourceRowProps {
 }
 
 const ResourceRow: React.FC<OfferResourceRowProps> = ({
-  offerResource: { id, resource, price },
+  offerResource: { id, resourceDescription, price },
 }: OfferResourceRowProps) => {
-  const resourceName = getResourceName(resource.type)
+  const resourceName = getResourceName(resourceDescription.type)
 
   return (
     <RowBlock>
@@ -105,7 +105,7 @@ const ResourceRow: React.FC<OfferResourceRowProps> = ({
             </Cell>
             <Cell>
               <Text size={12}>
-                <JsonToYamlView data={resource.metadata} />
+                <JsonToYamlView data={resourceDescription.metadata} />
               </Text>
             </Cell>
           </Row>

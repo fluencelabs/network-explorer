@@ -27,7 +27,7 @@ import {
   TableHeader,
   TablePagination,
 } from '../../components/Table'
-import { ShrinkText, Text } from '../../components/Text'
+import { ShrinkText, Text, TextWithIcon } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
 import { formatUSDcTokenValue } from '../../utils'
@@ -193,14 +193,14 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
               {copyShown && <Copyable value={deal.client} />}
             </Cell>
             <Cell>
-              <TextWithBadge>
+              <TextWithIcon>
                 <Text size={12}>{formatUSDcTokenValue(deal.balance)}</Text>
                 <TokenBadge>
                   <Text color="grey500" weight={800} size={10}>
                     {deal.paymentToken.symbol}
                   </Text>
                 </TokenBadge>
-              </TextWithBadge>
+              </TextWithIcon>
             </Cell>
             <Cell>
               <DealStatus status={deal.status} />
@@ -211,12 +211,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
     </RowBlock>
   )
 }
-
-const TextWithBadge = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`
 
 const StyledA = styled.a`
   gap: 4px;
