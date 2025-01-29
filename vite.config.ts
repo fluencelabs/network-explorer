@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       graphqlCodegen({
         configFilePathOverride: 'codegen.ts',
+        enableWatcher: true,
       }),
       react({
         babel: {
