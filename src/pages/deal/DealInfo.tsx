@@ -198,21 +198,23 @@ export const DealInfo: React.FC = () => {
                     </>
                   )}
                 </Info>
-                <Info>
-                  <Text size={10} weight={700} uppercase color="grey400">
-                    Price Per Epoch
-                  </Text>
-                  <TextWithIcon>
-                    <Text size={20}>
-                      {formatUSDcTokenValue(deal.pricePerEpoch)}
+                {deal.pricePerEpoch !== null && (
+                  <Info>
+                    <Text size={10} weight={700} uppercase color="grey400">
+                      Price Per Epoch
                     </Text>
-                    <TokenBadge bg="grey200">
-                      <Text size={10} weight={800} color="grey500">
-                        {deal.paymentToken.symbol}
+                    <TextWithIcon>
+                      <Text size={20}>
+                        {formatUSDcTokenValue(deal.pricePerEpoch)}
                       </Text>
-                    </TokenBadge>
-                  </TextWithIcon>
-                </Info>
+                      <TokenBadge bg="grey200">
+                        <Text size={10} weight={800} color="grey500">
+                          {deal.paymentToken.symbol}
+                        </Text>
+                      </TokenBadge>
+                    </TextWithIcon>
+                  </Info>
+                )}
               </InfoRow>
               <Space height="32px" />
               <InfoRow>
