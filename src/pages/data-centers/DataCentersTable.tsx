@@ -88,12 +88,14 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
         {!dataCenters ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(String(dataCenters.total))}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          dataCenters.total !== null && (
+            <Pagination
+              pages={getTotalPages(String(dataCenters.total))}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </>

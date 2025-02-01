@@ -101,12 +101,14 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
         {!offers ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(offers.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          offers.total !== null && (
+            <Pagination
+              pages={getTotalPages(offers.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </>

@@ -115,12 +115,14 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
         {!proofs ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(proofs.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          proofs.total !== null && (
+            <Pagination
+              pages={getTotalPages(proofs.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </ProofsTableWrapper>

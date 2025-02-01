@@ -13,11 +13,7 @@ export const usePagination = (perPage: number) => {
     setPage(() => newPage)
   }
 
-  const getTotalPages = (totalItems: string | number | null) => {
-    if (!totalItems) {
-      return null
-    }
-
+  const getTotalPages = (totalItems: string | number) => {
     const count =
       typeof totalItems === 'string' ? parseInt(totalItems) : totalItems
 

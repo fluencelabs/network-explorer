@@ -68,7 +68,7 @@ export const formatRoundedUSDcTokenValue = (
   value: bigint,
   maxDecimalDigits = 2,
 ) => {
-  if (value < 10 ** USDC_DECIMALS - maxDecimalDigits)
+  if (value < 10 ** (USDC_DECIMALS - maxDecimalDigits))
     return formatTokenUnits(value, USDC_DECIMALS, USDC_DECIMALS)
   return formatTokenUnits(value, USDC_DECIMALS, maxDecimalDigits)
 }

@@ -103,12 +103,14 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
         {!computeUnits ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(computeUnits.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          computeUnits.total !== null && (
+            <Pagination
+              pages={getTotalPages(computeUnits.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </ListComputeUnitsTableWrapper>

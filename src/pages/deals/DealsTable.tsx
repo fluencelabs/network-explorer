@@ -122,12 +122,14 @@ export const DealsTable: React.FC<DealsTableProps> = ({
         {!deals ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(deals.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          deals.total !== null && (
+            <Pagination
+              pages={getTotalPages(deals.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </>
