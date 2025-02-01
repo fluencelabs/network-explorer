@@ -15,7 +15,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fluencelabs/deal-ts-clients": "0.23.2-feat-marketplace-v2-resources-5ea1227-7670-1.0",
+    "@fluencelabs/deal-ts-clients": "0.24.1-release-please-418572f-7683-1.0",
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/typescript": "^4.1.0",
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",

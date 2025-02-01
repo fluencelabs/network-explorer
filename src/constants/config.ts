@@ -33,7 +33,7 @@ export const SUBGRAPH_URL =
   import.meta.env.VITE_SUBGRAPH_URL ?? SUBGRAPH_URLS[FLUENCE_CLIENT_NETWORK]
 export const graphQLClient = new GraphQLClient(SUBGRAPH_URL)
 export const DEPLOYMENT = DEPLOYMENTS[FLUENCE_CLIENT_NETWORK]
-export const USDC_DECIMALS = 6
+export const USDC_DECIMALS = 7
 
 export const CHAIN = {
   id: CHAIN_ID,
