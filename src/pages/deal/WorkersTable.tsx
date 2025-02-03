@@ -16,6 +16,7 @@ import {
   TableHeader,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+import { peerIdContractHexToBase58 } from '../../utils/formatPeerIdHex'
 
 import { DealJoinedWorkerFragment, getSdk } from '../../../generated/graphql'
 import { graphQLClient } from '../../constants/config'
@@ -77,7 +78,9 @@ const PeerRow: React.FC<WorkerRowProps> = ({ worker }) => {
               <Text size={12}>{worker.id}</Text>
             </Cell>
             <Cell>
-              <A href={`/peer/${worker.peer.id}`}>{worker.peer.id}</A>
+              <A href={`/peer/${peerIdContractHexToBase58(worker.peer.id)}`}>
+                {peerIdContractHexToBase58(worker.peer.id)}
+              </A>
             </Cell>
           </Row>
           {worker.resources && (
