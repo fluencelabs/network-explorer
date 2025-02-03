@@ -54,8 +54,8 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
     (client) =>
       client.getComputeUnitsByCapacityCommitment(
         capacityCommitmentId,
-        offset,
-        limit + 1,
+        0,
+        1000,
         orderBy,
         orderType,
       ),
@@ -73,7 +73,12 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
   )
 
   const hasNextPage = computeUnits && computeUnits.data.length > limit
-  const pageComputeUnits = computeUnits && computeUnits.data.slice(0, limit)
+  const pageComputeUnits =
+    computeUnits &&
+    computeUnits.data.slice(
+      (page - 1) * COMPUTE_UNITS_PER_PAGE,
+      page * COMPUTE_UNITS_PER_PAGE,
+    )
   const indexMultiplier = offset + 1
 
   return (
@@ -103,14 +108,12 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
         {!computeUnits ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          computeUnits.total !== null && (
-            <Pagination
-              pages={getTotalPages(computeUnits.total)}
-              page={page}
-              hasNextPage={hasNextPage}
-              onSelect={selectPage}
-            />
-          )
+          <Pagination
+            pages={getTotalPages(computeUnits.data.length)}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
         )}
       </TablePagination>
     </ListComputeUnitsTableWrapper>
