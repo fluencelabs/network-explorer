@@ -170,7 +170,7 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
             </ProviderComputeUnitsAvailable>
           </Cell>
           <Cell>
-            <Text size={12}>{provider.computeUnitsTotal}</Text>
+            <Text size={12}>{provider.computeUnitsInCapacityCommitment}</Text>
             <Space width="6px" />
             <ProviderComputeUnitsAvailable size={12} color="white">
               {provider.computeUnitsInCapacityCommitment}
