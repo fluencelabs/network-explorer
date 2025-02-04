@@ -19,7 +19,7 @@ import {
 import { Text, TextWithIcon } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { usePagination } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
+import { formatTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData } from '../../utils/helpers'
 
@@ -33,7 +33,10 @@ const template = [
   '100px',
 ]
 
-export const DealTxTable: React.FC<{ dealId: string }> = ({ dealId }) => {
+export const DealTxTable: React.FC<{
+  dealId: string
+  paymentToken: { id: string; symbol: string; decimals: string }
+}> = ({ dealId, paymentToken }) => {
   const pagination = usePagination(5)
 
   const { data, isLoading } = useQuery({
@@ -62,7 +65,11 @@ export const DealTxTable: React.FC<{ dealId: string }> = ({ dealId }) => {
         </TableHeader>
         <TableBody isEmpty={data.dealBalanceTxes.length === 0}>
           {data.dealBalanceTxes.map((data, index) => (
-            <TransactionRow key={String(index)} {...data} />
+            <TransactionRow
+              paymentToken={paymentToken}
+              key={String(index)}
+              {...data}
+            />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -86,7 +93,8 @@ const TransactionRow: React.FC<{
   timestamp: string
   id: string
   amount: string
-}> = ({ amount, tx, timestamp, type }) => {
+  paymentToken: { id: string; symbol: string; decimals: string }
+}> = ({ amount, tx, timestamp, type, paymentToken }) => {
   const { date, time } = formatUnixTimestamp(new Date(timestamp).valueOf())
 
   return (
@@ -104,10 +112,15 @@ const TransactionRow: React.FC<{
             </Cell>
             <Cell>
               <TextWithIcon>
-                <Text size={12}>{formatUSDcTokenValue(BigInt(amount))}</Text>
+                <Text size={12}>
+                  {formatTokenValue(
+                    BigInt(amount),
+                    Number(paymentToken.decimals),
+                  )}
+                </Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
-                    tUSDC
+                    {paymentToken.symbol}
                   </Text>
                 </TokenBadge>
               </TextWithIcon>

@@ -276,7 +276,7 @@ export const DealInfo: React.FC = () => {
           <Space height="40px" />
           <WorkersTable dealId={deal.id} />
           <Space height="40px" />
-          <DealTxTable dealId={id} />
+          <DealTxTable dealId={id} paymentToken={deal.paymentToken} />
         </Right>
       </Content>
     </>
