@@ -12,7 +12,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
+import { formatTokenValue } from '../../utils'
 import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
@@ -116,7 +116,12 @@ export const DealInfo: React.FC = () => {
                 Balance
               </Text>
               <TextWithBadge>
-                <Text size={12}>{formatUSDcTokenValue(deal.balance)}</Text>
+                <Text size={12}>
+                  {formatTokenValue(
+                    deal.balance,
+                    Number(deal.paymentToken.decimals),
+                  )}
+                </Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
                     {deal.paymentToken.symbol}
@@ -142,7 +147,10 @@ export const DealInfo: React.FC = () => {
               </Text>
               <TextWithBadge>
                 <Text size={12}>
-                  {formatUSDcTokenValue(deal.totalEarnings)}
+                  {formatTokenValue(
+                    deal.totalEarnings,
+                    Number(deal.paymentToken.decimals),
+                  )}
                 </Text>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
@@ -205,7 +213,10 @@ export const DealInfo: React.FC = () => {
                     </Text>
                     <TextWithIcon>
                       <Text size={20}>
-                        {formatUSDcTokenValue(deal.pricePerEpoch)}
+                        {formatTokenValue(
+                          deal.pricePerEpoch,
+                          Number(deal.paymentToken.decimals),
+                        )}
                       </Text>
                       <TokenBadge bg="grey200">
                         <Text size={10} weight={800} color="grey500">

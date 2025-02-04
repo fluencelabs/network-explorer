@@ -1,9 +1,6 @@
 import { formatUnits } from 'viem'
 
-import {
-  FORMAT_PAYMENT_TOKEN_TO_FIXED_DEFAULT,
-  USDC_DECIMALS,
-} from '../constants/config.ts'
+import { FORMAT_PAYMENT_TOKEN_TO_FIXED_DEFAULT } from '../constants/config.ts'
 import { CHAIN } from '../constants/config.ts'
 
 export const format = (
@@ -60,22 +57,27 @@ export const formatNativeTokenValue = (value: bigint, maxDecimalDigits = 6) => {
   )
 }
 
-export const formatUSDcTokenValue = (value: bigint, maxDecimalDigits = 2) => {
-  return formatTokenUnits(value, USDC_DECIMALS, maxDecimalDigits)
+export const formatTokenValue = (
+  value: bigint,
+  tokenDecimals: number,
+  maxDecimalDigits = 2,
+) => {
+  return formatTokenUnits(value, tokenDecimals, maxDecimalDigits)
 }
 
-export const formatRoundedUSDcTokenValue = (
+export const formatRoundedTokenValue = (
   value: bigint,
+  tokenDecimals: number,
   maxDecimalDigits = 2,
 ) => {
   const decimals =
-    value < 10 ** (USDC_DECIMALS - maxDecimalDigits)
-      ? USDC_DECIMALS
+    value < 10 ** (tokenDecimals - maxDecimalDigits)
+      ? tokenDecimals
       : maxDecimalDigits
 
-  return formatTokenUnits(value, USDC_DECIMALS, decimals)
+  return formatTokenUnits(value, tokenDecimals, decimals)
 }
 
-export const formatFullUSDcTokenValue = (value: bigint) => {
-  return formatTokenUnits(value, USDC_DECIMALS, USDC_DECIMALS)
+export const formatFullTokenValue = (value: bigint, decimals: number) => {
+  return formatTokenUnits(value, decimals, decimals)
 }

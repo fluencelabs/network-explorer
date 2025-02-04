@@ -30,7 +30,7 @@ import {
 import { ShrinkText, Text, TextWithIcon } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
+import { formatTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { formatHexData, stopPropagation } from '../../utils/helpers'
 
@@ -196,7 +196,9 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             </Cell>
             <Cell>
               <TextWithIcon>
-                <Text size={12}>{formatUSDcTokenValue(deal.balance)}</Text>
+                <Text size={12}>
+                  {formatTokenValue(deal.balance, deal.paymentToken.decimals)}
+                </Text>
                 <TokenBadge>
                   <Text color="grey500" weight={800} size={10}>
                     {deal.paymentToken.symbol}

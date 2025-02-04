@@ -17,10 +17,7 @@ import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { Tooltip } from '../../components/Tooltip'
 import { JsonToYamlView } from '../../components/YamlView'
-import {
-  formatFullUSDcTokenValue,
-  formatRoundedUSDcTokenValue,
-} from '../../utils'
+import { formatFullTokenValue, formatRoundedTokenValue } from '../../utils'
 import { getResourceName } from '../../utils/getResourceName'
 import { formatHexData } from '../../utils/helpers'
 
@@ -39,10 +36,12 @@ const template = [
 
 interface ResourceTableProps {
   resources: Omit<OfferResource, 'offer'>[]
+  paymentToken: { id: string; symbol: string; decimals: string }
 }
 
 export const OfferResourceTable: React.FC<ResourceTableProps> = ({
   resources,
+  paymentToken,
 }) => {
   return (
     <>
@@ -55,7 +54,11 @@ export const OfferResourceTable: React.FC<ResourceTableProps> = ({
         </TableHeader>
         <TableBody>
           {resources.map((resource) => (
-            <ResourceRow key={resource.id} offerResource={resource} />
+            <ResourceRow
+              key={resource.id}
+              offerResource={resource}
+              paymentToken={paymentToken}
+            />
           ))}
         </TableBody>
       </ScrollableTable>
@@ -65,10 +68,12 @@ export const OfferResourceTable: React.FC<ResourceTableProps> = ({
 
 interface OfferResourceRowProps {
   offerResource: Omit<OfferResource, 'offer'>
+  paymentToken: { id: string; symbol: string; decimals: string }
 }
 
 const ResourceRow: React.FC<OfferResourceRowProps> = ({
   offerResource: { id, resourceDescription, price },
+  paymentToken,
 }: OfferResourceRowProps) => {
   const resourceName = getResourceName(resourceDescription.type)
 
@@ -88,17 +93,23 @@ const ResourceRow: React.FC<OfferResourceRowProps> = ({
                 <Tooltip
                   trigger={
                     <Text size={12}>
-                      {formatRoundedUSDcTokenValue(BigInt(price))}
+                      {formatRoundedTokenValue(
+                        BigInt(price),
+                        Number(paymentToken.decimals),
+                      )}
                     </Text>
                   }
                 >
                   <Text color="grey600" weight={600} size={12}>
-                    {formatFullUSDcTokenValue(BigInt(price))}
+                    {formatFullTokenValue(
+                      BigInt(price),
+                      Number(paymentToken.decimals),
+                    )}
                   </Text>
                 </Tooltip>
                 <TokenBadge bg="grey200">
                   <Text size={10} weight={800} color="grey500">
-                    USDC
+                    {paymentToken.symbol}
                   </Text>
                 </TokenBadge>
               </TextWithBadge>

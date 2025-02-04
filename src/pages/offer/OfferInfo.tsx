@@ -11,7 +11,7 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
+import { formatTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
 import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
@@ -116,7 +116,10 @@ export const OfferInfo: React.FC = () => {
               </Text>
               <ParameterValue>
                 <Text size={20}>
-                  {formatUSDcTokenValue(offer.pricePerEpoch)}
+                  {formatTokenValue(
+                    offer.pricePerEpoch,
+                    Number(offer.paymentToken.decimals),
+                  )}
                 </Text>
                 <TokenBadge bg="grey300">
                   <Text size={12} weight={800} color="grey600">
@@ -194,7 +197,10 @@ export const OfferInfo: React.FC = () => {
               <Text size={20}>Available resources</Text>
               <Space height="24px" />
               <PeersTableWrapper>
-                <OfferResourceTable resources={offer.resources} />
+                <OfferResourceTable
+                  resources={offer.resources}
+                  paymentToken={offer.paymentToken}
+                />
               </PeersTableWrapper>
             </>
           )}
