@@ -197,7 +197,10 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             <Cell>
               <TextWithIcon>
                 <Text size={12}>
-                  {formatTokenValue(deal.balance, deal.paymentToken.decimals)}
+                  {formatTokenValue(
+                    deal.balance,
+                    Number(deal.paymentToken.decimals),
+                  )}
                 </Text>
                 <TokenBadge>
                   <Text color="grey500" weight={800} size={10}>

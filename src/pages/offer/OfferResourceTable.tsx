@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { OfferResource } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/indexerClient/generated.types'
+import { PaymentToken } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 
 import {
   Cell,
@@ -36,7 +37,7 @@ const template = [
 
 interface ResourceTableProps {
   resources: Omit<OfferResource, 'offer'>[]
-  paymentToken: { id: string; symbol: string; decimals: string }
+  paymentToken: PaymentToken
 }
 
 export const OfferResourceTable: React.FC<ResourceTableProps> = ({
@@ -68,7 +69,7 @@ export const OfferResourceTable: React.FC<ResourceTableProps> = ({
 
 interface OfferResourceRowProps {
   offerResource: Omit<OfferResource, 'offer'>
-  paymentToken: { id: string; symbol: string; decimals: string }
+  paymentToken: PaymentToken
 }
 
 const ResourceRow: React.FC<OfferResourceRowProps> = ({

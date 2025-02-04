@@ -1,4 +1,5 @@
 import React from 'react'
+import { PaymentToken } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useQuery } from '@tanstack/react-query'
 
 import { A } from '../../components/A'
@@ -35,7 +36,7 @@ const template = [
 
 export const DealTxTable: React.FC<{
   dealId: string
-  paymentToken: { id: string; symbol: string; decimals: string }
+  paymentToken: PaymentToken
 }> = ({ dealId, paymentToken }) => {
   const pagination = usePagination(5)
 
@@ -93,7 +94,7 @@ const TransactionRow: React.FC<{
   timestamp: string
   id: string
   amount: string
-  paymentToken: { id: string; symbol: string; decimals: string }
+  paymentToken: PaymentToken
 }> = ({ amount, tx, timestamp, type, paymentToken }) => {
   const { date, time } = formatUnixTimestamp(new Date(timestamp).valueOf())
 
