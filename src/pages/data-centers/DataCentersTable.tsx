@@ -127,25 +127,53 @@ const DataCenterRow: React.FC<DataCenterRowProps> = ({ dataCenter }) => {
                 {formatHexData(dataCenter.id)}
               </A>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}>{getDatacenterCode(dataCenter)}</Text>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}>{dataCenter.countryCode}</Text>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}>{dataCenter.cityCode}</Text>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}> {dataCenter.tier}</Text>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}> {dataCenter.certifications?.join(', ')}</Text>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}> {dataCenter.providerCount}</Text>
             </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
+            <Cell
+              flexDirection="column"
+              alignItems="flex-start"
+              justifyContent="center"
+            >
               <Text size={12}> {dataCenter.peerCount}</Text>
             </Cell>
           </Row>

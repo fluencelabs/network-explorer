@@ -25,6 +25,8 @@ export const Text = styled.span<TextProps>(
     color: ${colors[color]};
     text-align: ${align};
     text-transform: ${uppercase ? 'uppercase' : 'none'};
+    text-wrap: auto;
+    line-height: 1.1rem;
   `,
 )
 
