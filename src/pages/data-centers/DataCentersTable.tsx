@@ -58,7 +58,7 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
   const hasNextPage = dataCenters && dataCenters.data.length > limit
   const pageDataCenters =
     dataCenters &&
-    dataCenters.data.slice((page - 1) * limit, page * limit + limit)
+    dataCenters.data.slice((page - 1) * limit, (page - 1) * limit + limit)
 
   return (
     <>
