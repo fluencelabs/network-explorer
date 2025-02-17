@@ -133,12 +133,14 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
         {!providers ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(providers.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          providers.total !== null && (
+            <Pagination
+              pages={getTotalPages(providers.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </>
@@ -168,7 +170,7 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
             </ProviderComputeUnitsAvailable>
           </Cell>
           <Cell>
-            <Text size={12}>{provider.computeUnitsTotal}</Text>
+            <Text size={12}>{provider.computeUnitsInCapacityCommitment}</Text>
             <Space width="6px" />
             <ProviderComputeUnitsAvailable size={12} color="white">
               {provider.computeUnitsInCapacityCommitment}

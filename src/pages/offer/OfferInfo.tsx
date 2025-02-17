@@ -11,13 +11,15 @@ import { Space } from '../../components/Space'
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
+import { formatTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
+import { formatHexData } from '../../utils/helpers'
 
 import { ROUTES } from '../../constants'
 
+import { OfferResourceTable } from './OfferResourceTable'
 import { PeersTable } from './PeersTable'
-import { SupportedEffectorsTable } from './SupportedEffectorsTable'
 
 export const OfferInfo: React.FC = () => {
   const params = useParams()
@@ -70,7 +72,7 @@ export const OfferInfo: React.FC = () => {
                 Offer ID
               </Text>
               <TextWithIcon>
-                <A href={`/offer/${id}`}>{offer!.id}</A>
+                <A href={`/offer/${id}`}>{formatHexData(offer!.id)}</A>
                 <Copyable value={id} />
               </TextWithIcon>
             </Info>
@@ -114,7 +116,10 @@ export const OfferInfo: React.FC = () => {
               </Text>
               <ParameterValue>
                 <Text size={20}>
-                  {formatUSDcTokenValue(offer.pricePerEpoch)}
+                  {formatTokenValue(
+                    offer.pricePerEpoch,
+                    Number(offer.paymentToken.decimals),
+                  )}
                 </Text>
                 <TokenBadge bg="grey300">
                   <Text size={12} weight={800} color="grey600">
@@ -124,12 +129,81 @@ export const OfferInfo: React.FC = () => {
               </ParameterValue>
             </Parameter>
           </ParametersRow>
+          <Space height="30px" />
+          <ParametersRow>
+            <Parameter>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Datacenter
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>
+                  {offer.datacenter ? getDatacenterCode(offer.datacenter) : '-'}
+                </Text>
+              </TextWithIcon>
+            </Parameter>
+          </ParametersRow>
+          <Space height="30px" />
+          <ParametersRow>
+            <Parameter>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Country
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>
+                  {offer.datacenter ? offer.datacenter.countryCode : '-'}
+                </Text>
+              </TextWithIcon>
+            </Parameter>
+            <Parameter>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Certifications
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>
+                  {offer.datacenter
+                    ? offer.datacenter.certifications?.join(', ')
+                    : '-'}
+                </Text>
+              </TextWithIcon>
+            </Parameter>
+          </ParametersRow>
+          <Space height="30px" />
+          <ParametersRow>
+            <Parameter>
+              <Text size={10} weight={700} uppercase color="grey400">
+                City
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>
+                  {offer.datacenter ? offer.datacenter.cityCode : '-'}
+                </Text>
+              </TextWithIcon>
+            </Parameter>
+            <Parameter>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Tier
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>
+                  {offer.datacenter ? offer.datacenter.tier : '-'}
+                </Text>
+              </TextWithIcon>
+            </Parameter>
+          </ParametersRow>
           <Space height="60px" />
-          <Text size={20}>Supported effectors</Text>
-          <Space height="24px" />
-          <PeersTableWrapper>
-            <SupportedEffectorsTable effectors={offer.effectors} />
-          </PeersTableWrapper>
+          {offer.resources && (
+            <>
+              <Space height="40px" />
+              <Text size={20}>Available resources</Text>
+              <Space height="24px" />
+              <PeersTableWrapper>
+                <OfferResourceTable
+                  resources={offer.resources}
+                  paymentToken={offer.paymentToken}
+                />
+              </PeersTableWrapper>
+            </>
+          )}
           <Space height="40px" />
           <Text size={20}>Peers</Text>
           <Space height="24px" />
@@ -179,15 +253,15 @@ const TextWithIcon = styled.div`
 `
 
 const ParametersRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 200px;
+  display: grid;
+  grid-template-columns: 160px 160px;
+  gap: 32px 100px;
 `
 
 const Parameter = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 12px;
 `
 
 const ParameterValue = styled.div`

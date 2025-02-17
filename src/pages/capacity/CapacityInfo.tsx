@@ -30,7 +30,8 @@ const Record: React.FC<{
   hint?: ReactNode
   balance: bigint
   symbol?: string
-}> = ({ title, hint, balance, symbol }) => {
+  decimals?: number
+}> = ({ title, hint, balance, symbol, decimals }) => {
   return (
     <Parameter>
       <Row>
@@ -40,7 +41,7 @@ const Record: React.FC<{
         {hint && <Hint>{hint}</Hint>}
       </Row>
       <ParameterValue>
-        <TokenBalance balance={balance} symbol={symbol} />
+        <TokenBalance balance={balance} symbol={symbol} decimals={decimals} />
       </ParameterValue>
     </Parameter>
   )
@@ -49,23 +50,35 @@ const Record: React.FC<{
 const Rewards: React.FC<{
   title: string
   symbol?: string
+  decimals?: number
   inVesting: bigint
   availableToClaim: bigint
   claimed: bigint
-}> = ({ title, symbol, inVesting, availableToClaim, claimed }) => {
+}> = ({ title, symbol, inVesting, availableToClaim, claimed, decimals }) => {
   return (
     <div>
       <Text size={24}>{title}</Text>
       <Space height="24px" />
-      <Record title="In vesting" balance={inVesting} symbol={symbol} />
+      <Record
+        title="In vesting"
+        balance={inVesting}
+        symbol={symbol}
+        decimals={decimals}
+      />
       <Space height="32px" />
       <Record
         title="Available to claim"
         balance={availableToClaim}
         symbol={symbol}
+        decimals={decimals}
       />
       <Space height="32px" />
-      <Record title="Total claimed" balance={claimed} symbol={symbol} />
+      <Record
+        title="Total claimed"
+        balance={claimed}
+        symbol={symbol}
+        decimals={decimals}
+      />
     </div>
   )
 }
@@ -304,6 +317,7 @@ export const CapacityInfo: React.FC = () => {
                 <TokenBalance
                   balance={capacity.rewards.total}
                   symbol={capacity.collateralToken.symbol}
+                  decimals={Number(capacity.collateralToken.decimals)}
                 />
               </ParameterValue>
             </Parameter>
@@ -316,6 +330,7 @@ export const CapacityInfo: React.FC = () => {
               inVesting={capacity.rewards.provider.inVesting}
               availableToClaim={capacity.rewards.provider.availableToClaim}
               claimed={capacity.rewards.provider.claimed}
+              decimals={Number(capacity.collateralToken.decimals)}
             />
             <Rewards
               title="Staker"
@@ -323,6 +338,7 @@ export const CapacityInfo: React.FC = () => {
               inVesting={capacity.rewards.staker.inVesting}
               availableToClaim={capacity.rewards.staker.availableToClaim}
               claimed={capacity.rewards.staker.claimed}
+              decimals={Number(capacity.collateralToken.decimals)}
             />
           </ParametersRow>
           <Space height="80px" />

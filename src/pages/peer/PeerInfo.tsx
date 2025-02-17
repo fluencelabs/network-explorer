@@ -15,6 +15,7 @@ import { ROUTES } from '../../constants'
 
 import { PeerCapacityCommitmentsTable } from './PeerCapacityCommitmentsTable'
 import { PeerDealsTable } from './PeerDealsTable'
+import { ResourceTable } from './ResourceTable'
 
 export const PeerInfo: React.FC = () => {
   const params = useParams()
@@ -105,6 +106,14 @@ export const PeerInfo: React.FC = () => {
               <Text size={12}>{peer.computeUnitsTotal}</Text>
             </Info>
           </InfoRow>
+          {peer.resources && (
+            <>
+              <Space height="60px" />
+              <Text size={20}>Resource model</Text>
+              <Space height="24px" />
+              <ResourceTable resources={peer.resources} />
+            </>
+          )}
           <Space height="80px" />
           <PeerCapacityCommitmentsTable peerId={peer.id} />
           <PeerDealsTable peerId={peer.id} />

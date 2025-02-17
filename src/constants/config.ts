@@ -6,6 +6,7 @@ import {
   RPC_URLS,
   SUBGRAPH_URLS,
 } from '@fluencelabs/deal-ts-clients'
+import { GraphQLClient } from 'graphql-request'
 import { Chain } from 'viem'
 import { createConfig, createStorage, http } from 'wagmi'
 
@@ -30,8 +31,8 @@ export const FORMAT_NATIVE_TOKEN_TO_FIXED_DEFAULT = 6
 
 export const SUBGRAPH_URL =
   import.meta.env.VITE_SUBGRAPH_URL ?? SUBGRAPH_URLS[FLUENCE_CLIENT_NETWORK]
+export const graphQLClient = new GraphQLClient(SUBGRAPH_URL)
 export const DEPLOYMENT = DEPLOYMENTS[FLUENCE_CLIENT_NETWORK]
-export const USDC_DECIMALS = 6
 
 export const CHAIN = {
   id: CHAIN_ID,

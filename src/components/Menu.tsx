@@ -37,6 +37,16 @@ const MENU: {
     link: ROUTES.capacities,
     routes: [ROUTES.capacities, ROUTES.capacityInfo],
   },
+  {
+    title: 'Datacenters',
+    link: ROUTES.dataCenters,
+    routes: [ROUTES.dataCenters],
+  },
+  {
+    title: 'Resources',
+    link: ROUTES.resources,
+    routes: [ROUTES.resources],
+  },
 ]
 
 export const Menu: React.FC = () => {

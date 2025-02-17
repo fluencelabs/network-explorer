@@ -103,6 +103,7 @@ export const ComputeUnitInfo: React.FC = () => {
                 <TokenBalance
                   balance={computeUnit.collateral}
                   symbol={computeUnit.collateralToken.symbol}
+                  decimals={Number(computeUnit.collateralToken.decimals)}
                 />
               </Row>
             </Info>

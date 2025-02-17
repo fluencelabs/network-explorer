@@ -25,10 +25,18 @@ export const Text = styled.span<TextProps>(
     color: ${colors[color]};
     text-align: ${align};
     text-transform: ${uppercase ? 'uppercase' : 'none'};
+    text-wrap: auto;
+    line-height: 1.1rem;
   `,
 )
 
 export const ShrinkText = styled(Text)`
   overflow: hidden;
   text-overflow: ellipsis;
+`
+
+export const TextWithIcon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `

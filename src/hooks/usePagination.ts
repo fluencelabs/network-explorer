@@ -13,12 +13,11 @@ export const usePagination = (perPage: number) => {
     setPage(() => newPage)
   }
 
-  const getTotalPages = (totalItems: string | null) => {
-    if (!totalItems) {
-      return -1
-    }
+  const getTotalPages = (totalItems: string | number) => {
+    const count =
+      typeof totalItems === 'string' ? parseInt(totalItems) : totalItems
 
-    return Math.ceil(parseInt(totalItems) / perPage)
+    return Math.ceil(count / perPage)
   }
 
   const getPageItems = <T>(items: T[]) => {

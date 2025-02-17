@@ -27,14 +27,16 @@ import {
 import { Text } from '../../components/Text'
 import { TokenBadge } from '../../components/TokenBadge'
 import { useApiQuery, usePagination } from '../../hooks'
-import { formatUSDcTokenValue } from '../../utils'
+import { formatTokenValue } from '../../utils'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
+import { getDatacenterCode } from '../../utils/getDatacenterCode'
 import { formatHexData } from '../../utils/helpers'
 
 import { colors } from '../../constants/colors'
 
 const template = [
   'minmax(10px, 200px)',
+  'minmax(10px, 120px)',
   'minmax(10px, 120px)',
   'minmax(10px, 200px)',
   'minmax(10px, 1fr)',
@@ -98,6 +100,7 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
       <ScrollableTable>
         <TableHeader template={template}>
           <TableColumnTitle>Offer Id</TableColumnTitle>
+          <TableColumnTitle>Datacenter</TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
             field="createdAt"
@@ -136,12 +139,14 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
         {!offers ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(offers.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          offers.total !== null && (
+            <Pagination
+              pages={getTotalPages(offers.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </>
@@ -168,6 +173,11 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
                 {formatHexData(offer.id, 8, 10)}
               </A>
             </Cell>
+            <Cell>
+              <Text size={12}>
+                {offer.datacenter ? getDatacenterCode(offer.datacenter) : '-'}
+              </Text>
+            </Cell>
             {/* Created At */}
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{createdAt.date}</Text>
@@ -191,7 +201,12 @@ const OfferRow: React.FC<OfferRowProps> = ({ offer }) => {
             </Cell>
             {/* Price Per Epoch */}
             <Cell gap="8px">
-              <Text size={12}>{formatUSDcTokenValue(offer.pricePerEpoch)}</Text>
+              <Text size={12}>
+                {formatTokenValue(
+                  offer.pricePerEpoch,
+                  Number(offer.paymentToken.decimals),
+                )}
+              </Text>
               <TokenBadge bg="grey200">
                 <Text size={10} weight={800} color="grey500">
                   {offer.paymentToken.symbol}

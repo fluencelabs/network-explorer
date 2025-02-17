@@ -6,10 +6,9 @@ import { ArrowIcon } from '../assets/icons'
 import { colors } from '../constants/colors'
 
 import { Text } from './Text'
-import { Hide } from './Visibility'
 
 interface PaginationProps {
-  pages: number
+  pages: number | null
   page: number
   hasNextPage?: boolean
   onSelect: (page: number) => void
@@ -25,41 +24,42 @@ export const Pagination: React.FC<PaginationProps> = ({
   const isLastPage = page === pages
 
   // If there is only one page, don't show pagination
-  if (page === 1 && (pages === -1 || pages === 0) && !hasNextPage) {
+  if (page === 1 && (pages === null || pages === 0) && !hasNextPage) {
     return null
   }
 
   return (
     <Wrapper>
-      <Hide if={isFirstPage}>
-        <Button onClick={() => onSelect(1)}>
-          <Text>First</Text>
-        </Button>
+      {!isFirstPage && (
+        <>
+          <Button onClick={() => onSelect(1)}>
+            <Text>First</Text>
+          </Button>
 
-        <Button onClick={() => onSelect(page - 1)}>
-          <LeftArrowIcon />
-        </Button>
-      </Hide>
+          <Button onClick={() => onSelect(page - 1)}>
+            <LeftArrowIcon />
+          </Button>
+        </>
+      )}
 
       <Button>
         <MonospaceText>
-          <Hide if={pages === -1}>
-            Page {page} of {pages}
-          </Hide>
-          <Hide if={pages !== -1}>{page}</Hide>
+          {pages === null ? page : `Page ${page} of ${pages}`}
         </MonospaceText>
       </Button>
 
-      <Hide if={isLastPage || !hasNextPage}>
-        <Button onClick={() => onSelect(page + 1)}>
-          <ArrowIcon />
-        </Button>
-        <Hide if={pages === -1}>
-          <Button onClick={() => onSelect(pages)}>
-            <Text>Last</Text>
+      {!isLastPage && hasNextPage && (
+        <>
+          <Button onClick={() => onSelect(page + 1)}>
+            <ArrowIcon />
           </Button>
-        </Hide>
-      </Hide>
+          {pages !== null && (
+            <Button onClick={() => onSelect(pages)}>
+              <Text>Last</Text>
+            </Button>
+          )}
+        </>
+      )}
     </Wrapper>
   )
 }

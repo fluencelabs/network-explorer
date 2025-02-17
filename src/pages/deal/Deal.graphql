@@ -1,0 +1,38 @@
+query DealQuery($id: ID!) {
+  deal(id: $id) {
+    joinedWorkers {
+      ...DealJoinedWorker
+    }
+  }
+}
+
+fragment DealJoinedWorker on Worker {
+  id
+  peer {
+    id
+  }
+  resources {
+    ...DealWorkerToResource
+  }
+}
+
+fragment DealWorkerToResource on WorkerToResource {
+  resourceRequirements {
+    quantity
+    id
+    resourceDescription {
+      id
+    }
+  }
+  peerResource {
+    details
+    availableSupply
+    id
+    maxSupply
+    resourceDescription {
+      id
+      metadata
+      type
+    }
+  }
+}

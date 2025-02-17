@@ -36,7 +36,7 @@ export const Deals: React.FC = () => {
           />
         </FiltersBlock>
       </PageHeader>
-      <Space height="40px" />
+      <Space height="32px" />
       <DealsTable filters={filters} pagination={pagination} />
     </>
   )

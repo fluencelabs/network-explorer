@@ -225,3 +225,18 @@ export const TablePagination = styled.div`
     justify-content: flex-start;
   }
 `
+
+export const ContentBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${colors.white};
+  border-radius: 8px;
+
+  ${TableHeader} {
+    border-bottom: 1px solid ${colors.grey300};
+  }
+
+  ${RowHeader} + ${RowHeader} {
+    border-top: 1px solid ${colors.grey300};
+  }
+`

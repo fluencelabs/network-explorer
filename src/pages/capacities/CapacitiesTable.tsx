@@ -184,12 +184,14 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
         {!capacities ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          <Pagination
-            pages={getTotalPages(capacities.total)}
-            page={page}
-            hasNextPage={hasNextPage}
-            onSelect={selectPage}
-          />
+          capacities.total !== null && (
+            <Pagination
+              pages={getTotalPages(capacities.total)}
+              page={page}
+              hasNextPage={hasNextPage}
+              onSelect={selectPage}
+            />
+          )
         )}
       </TablePagination>
     </>
