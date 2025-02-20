@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.13](https://github.com/fluencelabs/network-explorer/compare/v0.1.12...v0.1.13) (2025-02-17)
+
+
+### Features
+
+* **offers:** marketplace v2 offer ([#131](https://github.com/fluencelabs/network-explorer/issues/131)) ([e359e15](https://github.com/fluencelabs/network-explorer/commit/e359e1586da0acb892ee58b5289dce59411aa3a5))
+
 ## [0.1.12](https://github.com/fluencelabs/network-explorer/compare/v0.1.11...v0.1.12) (2024-12-04)
 
 
