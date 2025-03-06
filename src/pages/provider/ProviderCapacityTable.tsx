@@ -69,25 +69,38 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     OrderType,
   ]
 
-  const { page, selectPage, limit, offset, getTotalPages } = usePagination(
+  const { page, selectPage, limit, getTotalPages } = usePagination(
     PROVIDER_CAPACITIES_PER_PAGE,
   )
 
   const { data: capacities, isLoading } = useApiQuery(
-    (client) =>
-      client.getCapacityCommitmentsByProvider(
-        filters,
-        offset,
-        limit + 1,
-        orderBy,
-        orderType,
-      ),
+    async (client) => {
+      const capacities = []
+      const batch = 1000
+
+      let index = 0
+      let hasItems = true
+
+      while (hasItems) {
+        const data = await client.getCapacityCommitmentsByProvider(
+          filters,
+          index,
+          batch,
+          orderBy,
+          orderType,
+        )
+
+        index += batch
+        capacities.push(...data.data)
+        if (data.data.length < batch) hasItems = false
+      }
+
+      return capacities
+    },
     [page, orderBy, orderType, filters],
     {
       key: `provider-capacities:${JSON.stringify({
         filters,
-        offset,
-        limit,
         order,
         orderBy,
       })}`,
@@ -99,8 +112,8 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     selectPage(1)
   }, [filters?.status])
 
-  const hasNextPage = capacities && capacities.data.length > limit
-  const pageCapacities = capacities && capacities.data.slice(0, limit)
+  const hasNextPage = capacities && capacities.length > limit
+  const pageCapacities = capacities && capacities.slice(0, limit)
 
   const handleSort = (key: CapacityCommitmentsOrderBy, order: OrderType) => {
     setOrder(`${key}:${order}`)
@@ -161,7 +174,7 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
         <TableBody
           skeletonCount={PROVIDER_CAPACITIES_PER_PAGE}
           isLoading={isLoading}
-          isEmpty={capacities?.data.length === 0}
+          isEmpty={capacities?.length === 0}
           noDataText={
             filters?.status !== undefined
               ? 'No capacity commitments with the status you specified'
@@ -178,9 +191,9 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
         {!capacities ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          capacities.total !== null && (
+          capacities.length > limit && (
             <Pagination
-              pages={getTotalPages(capacities.total)}
+              pages={getTotalPages(capacities.length)}
               page={page}
               hasNextPage={hasNextPage}
               onSelect={selectPage}
