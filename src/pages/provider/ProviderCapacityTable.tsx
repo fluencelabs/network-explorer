@@ -73,6 +73,10 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
 
   const { page, selectPage } = usePagination(PROVIDER_CAPACITIES_PER_PAGE)
 
+  useEffect(() => {
+    selectPage(1)
+  }, [filters?.status])
+
   const { data, isLoading, hasNextPage, fetchNextPage, fetchPreviousPage } =
     useInfiniteQuery({
       enabled: !!client,
@@ -114,10 +118,6 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
         })}`,
       staleTime: 1_000 * 60,
     })
-
-  useEffect(() => {
-    selectPage(1)
-  }, [filters?.status])
 
   const pageData = data?.pages[page - 1]
   const capacities = pageData?.data
