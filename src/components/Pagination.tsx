@@ -64,6 +64,52 @@ export const Pagination: React.FC<PaginationProps> = ({
   )
 }
 
+interface LoadMorePaginationProps {
+  page: number
+  hasNextPage?: boolean
+  onNext: () => void
+  onPrev: () => void
+  onFirst: () => void
+}
+
+export const LoadMorePagination: React.FC<LoadMorePaginationProps> = ({
+  page,
+  hasNextPage = true,
+  onNext,
+  onPrev,
+  onFirst,
+}) => {
+  const isFirstPage = page === 1
+
+  return (
+    <Wrapper>
+      {!isFirstPage && (
+        <>
+          <Button onClick={() => onFirst()}>
+            <Text>First</Text>
+          </Button>
+
+          <Button onClick={() => onPrev()}>
+            <LeftArrowIcon />
+          </Button>
+        </>
+      )}
+
+      <Button>
+        <MonospaceText>{page}</MonospaceText>
+      </Button>
+
+      {hasNextPage && (
+        <>
+          <Button onClick={() => onNext()}>
+            <ArrowIcon />
+          </Button>
+        </>
+      )}
+    </Wrapper>
+  )
+}
+
 const Wrapper = styled.div`
   display: flex;
   gap: 2px;

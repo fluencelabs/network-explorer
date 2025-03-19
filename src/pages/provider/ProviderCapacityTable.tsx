@@ -6,13 +6,14 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
 import { A } from '../../components/A'
 import { CapacityStatus } from '../../components/CapacityStatus'
 import { ClientContext } from '../../components/ClientProvider'
-import { Pagination } from '../../components/Pagination'
+import { LoadMorePagination } from '../../components/Pagination'
 import { SelectStatus, SelectStatusValue } from '../../components/SelectStatus'
 import { Space } from '../../components/Space'
 import {
@@ -31,7 +32,7 @@ import {
 } from '../../components/Table'
 import { ShrinkText, Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
-import { useApiQuery, usePagination } from '../../hooks'
+import { useClient, usePagination } from '../../hooks'
 import { useFilters } from '../../hooks/useFilters'
 import { formatDuration } from '../../utils/formatDuration'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
@@ -59,6 +60,7 @@ type ProviderCapacitySort = `${CapacityCommitmentsOrderBy}:${OrderType}`
 export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
   providerId,
 }) => {
+  const client = useClient()
   const [filters, setFilter] = useFilters<CapacityCommitmentsByProviderFilter>({
     providerId,
   })
@@ -69,38 +71,56 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
     OrderType,
   ]
 
-  const { page, selectPage, limit, offset, getTotalPages } = usePagination(
-    PROVIDER_CAPACITIES_PER_PAGE,
-  )
-
-  const { data: capacities, isLoading } = useApiQuery(
-    (client) =>
-      client.getCapacityCommitmentsByProvider(
-        filters,
-        offset,
-        limit + 1,
-        orderBy,
-        orderType,
-      ),
-    [page, orderBy, orderType, filters],
-    {
-      key: `provider-capacities:${JSON.stringify({
-        filters,
-        offset,
-        limit,
-        order,
-        orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
-  )
+  const { page, selectPage } = usePagination(PROVIDER_CAPACITIES_PER_PAGE)
 
   useEffect(() => {
     selectPage(1)
   }, [filters?.status])
 
-  const hasNextPage = capacities && capacities.data.length > limit
-  const pageCapacities = capacities && capacities.data.slice(0, limit)
+  const { data, isLoading, hasNextPage, fetchNextPage, fetchPreviousPage } =
+    useInfiniteQuery({
+      enabled: !!client,
+      queryKey: [
+        'provider-capacities',
+        page,
+        orderBy,
+        orderType,
+        filters.status,
+        filters.providerId,
+        client,
+      ],
+      queryFn: async ({ pageParam }) => {
+        if (!client) return { data: [], nextPage: undefined }
+
+        const data = await client.getCapacityCommitmentsByProvider(
+          filters,
+          PROVIDER_CAPACITIES_PER_PAGE * pageParam,
+          PROVIDER_CAPACITIES_PER_PAGE * (pageParam + 1),
+          orderBy,
+          orderType,
+        )
+
+        return {
+          data: data.data,
+          nextPage:
+            data.data.length < PROVIDER_CAPACITIES_PER_PAGE
+              ? undefined
+              : pageParam + 1,
+        }
+      },
+      initialPageParam: 0,
+      getNextPageParam: (data) => data.nextPage,
+      queryKeyHashFn: () =>
+        `provider-capacities:${JSON.stringify({
+          filters,
+          order,
+          orderBy,
+        })}`,
+      staleTime: 1_000 * 60,
+    })
+
+  const pageData = data?.pages[page - 1]
+  const capacities = pageData?.data
 
   const handleSort = (key: CapacityCommitmentsOrderBy, order: OrderType) => {
     setOrder(`${key}:${order}`)
@@ -161,31 +181,39 @@ export const ProviderCapacityTable: React.FC<ProviderCapacityTableProps> = ({
         <TableBody
           skeletonCount={PROVIDER_CAPACITIES_PER_PAGE}
           isLoading={isLoading}
-          isEmpty={capacities?.data.length === 0}
+          isEmpty={capacities?.length === 0}
           noDataText={
             filters?.status !== undefined
               ? 'No capacity commitments with the status you specified'
               : 'No capacity commitments'
           }
         >
-          {pageCapacities?.map((capacity) => (
+          {capacities?.map((capacity) => (
             <CapacityRow key={capacity.id} capacity={capacity} />
           ))}
         </TableBody>
       </ScrollableTable>
       <Space height="32px" />
       <TablePagination>
-        {!capacities ? (
+        {isLoading ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          capacities.total !== null && (
-            <Pagination
-              pages={getTotalPages(capacities.total)}
-              page={page}
-              hasNextPage={hasNextPage}
-              onSelect={selectPage}
-            />
-          )
+          <LoadMorePagination
+            page={page}
+            hasNextPage={
+              page !== data?.pages.length ||
+              (page === data?.pages.length && hasNextPage)
+            }
+            onNext={() => {
+              selectPage(page + 1)
+              fetchNextPage()
+            }}
+            onPrev={() => {
+              selectPage(page - 1)
+              fetchPreviousPage()
+            }}
+            onFirst={() => selectPage(1)}
+          />
         )}
       </TablePagination>
     </>
