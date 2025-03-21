@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/fluencelabs/network-explorer/compare/v0.1.13...v0.1.14) (2025-03-19)
+
+
+### Bug Fixes
+
+* **ProviderCapacityTable:** fetch all records for certain provider ([#139](https://github.com/fluencelabs/network-explorer/issues/139)) ([65494ff](https://github.com/fluencelabs/network-explorer/commit/65494fff994bde10e0858163064eee465587583f))
+
 ## [0.1.13](https://github.com/fluencelabs/network-explorer/compare/v0.1.12...v0.1.13) (2025-02-17)
 
 
