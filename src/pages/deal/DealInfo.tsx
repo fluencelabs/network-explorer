@@ -160,6 +160,28 @@ export const DealInfo: React.FC = () => {
               </TextWithBadge>
             </Info>
           </InfoRow>
+          <Space height="32px" />
+          <InfoRow>
+            <Info></Info>
+            <Info>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Total staker earnings
+              </Text>
+              <TextWithBadge>
+                <Text size={12}>
+                  {formatTokenValue(
+                    deal.totalEarnings,
+                    Number(deal.paymentToken.decimals),
+                  )}
+                </Text>
+                <TokenBadge bg="grey200">
+                  <Text size={10} weight={800} color="grey500">
+                    {deal.paymentToken.symbol}
+                  </Text>
+                </TokenBadge>
+              </TextWithBadge>
+            </Info>
+          </InfoRow>
           <Space height="56px" />
           {providerAddress && (
             <>
