@@ -15,7 +15,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fluencelabs/deal-ts-clients": "0.24.1-feat-stacker-deal-rewards-3b1ddfd-7931-1.0",
+    "@fluencelabs/deal-ts-clients": "0.24.1-feat-stacker-deal-rewards-8455a30-7939-1.0",
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/typescript": "^4.1.0",
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
