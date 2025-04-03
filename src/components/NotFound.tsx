@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import { A } from './A'
 import { Button } from './Button'
+import { Space } from './Space'
 import { Text } from './Text'
 
 export const NotFound: React.FC<{
@@ -13,6 +14,7 @@ export const NotFound: React.FC<{
   return (
     <Centered>
       <Text size={60}>404</Text>
+      <Space height="8px" />
       {message && (
         <Text size={24} color="grey400">
           {message}
