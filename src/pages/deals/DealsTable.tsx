@@ -46,7 +46,7 @@ const template = [
   'minmax(10px, 1fr)',
 ]
 
-export const DEALS_PER_PAGE = 5
+export const DEALS_PER_PAGE = 9
 
 type DealSort = `${DealsShortOrderBy}:${OrderType}`
 

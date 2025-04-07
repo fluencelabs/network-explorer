@@ -81,14 +81,12 @@ export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
         {!deals ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          deals.total !== null && (
-            <Pagination
-              pages={getTotalPages(deals.total)}
-              page={page}
-              hasNextPage={hasNextPage}
-              onSelect={selectPage}
-            />
-          )
+          <Pagination
+            pages={deals.total !== null ? getTotalPages(deals.total) : null}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
         )}
       </TablePagination>
     </>

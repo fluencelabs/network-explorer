@@ -51,7 +51,7 @@ const template = [
   '70px',
 ]
 
-const CAPACITIES_PER_PAGE = 10
+const CAPACITIES_PER_PAGE = 8
 
 type CapacitySort = `${CapacityCommitmentsOrderBy}:${OrderType}`
 
