@@ -38,6 +38,7 @@ const template = [
   'minmax(400px, 1fr)',
   'minmax(50px, 1fr)',
   'minmax(50px, 1fr)',
+  'minmax(50px, 1fr)',
   '120px',
 ]
 
@@ -100,14 +101,19 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
           </TableColumnTitle>
           <TableColumnTitleWithSort
             order={orderType}
-            field="computeUnitsTotal"
-            isActive={orderBy === 'computeUnitsTotal'}
+            field="computeUnitsInCapacityCommitment"
+            isActive={orderBy === 'computeUnitsInCapacityCommitment'}
             onSort={handleSort}
           >
-            Confirmed CUs{' '}
-            <Text size={10} weight={500} color="green" uppercase>
-              ( Available )
-            </Text>
+            Available CUs
+          </TableColumnTitleWithSort>
+          <TableColumnTitleWithSort
+            order={orderType}
+            field="computeUnitsInDeal"
+            isActive={orderBy === 'computeUnitsInDeal'}
+            onSort={handleSort}
+          >
+            CU in Deals
           </TableColumnTitleWithSort>
           <HeaderCellWithTooltip>
             <TableColumnTitle>Approved</TableColumnTitle>
@@ -175,6 +181,9 @@ const ProviderRow: React.FC<ProviderRowProps> = ({ provider }) => {
             <ProviderComputeUnitsAvailable size={12} color="white">
               {provider.computeUnitsInCapacityCommitment}
             </ProviderComputeUnitsAvailable>
+          </Cell>
+          <Cell>
+            <Text size={12}>{provider.computeUnitsInDeal}</Text>
           </Cell>
           <Cell>{provider.isApproved ? <ApprovedIcon /> : <>-</>}</Cell>
         </Row>
