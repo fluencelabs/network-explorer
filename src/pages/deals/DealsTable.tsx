@@ -68,19 +68,19 @@ export const DealsTable: React.FC<DealsTableProps> = ({
   const { page, selectPage, limit, offset, getTotalPages } = pagination
 
   const { data: deals, isLoading } = useApiQuery(
-    (client) => {
-      return client.getDeals(filters, offset, limit + 1, orderBy, orderType)
-    },
-    [page, orderBy, orderType, filters],
-    {
-      key: `deals:${JSON.stringify({
+    [
+      'deals',
+      JSON.stringify({
+        page,
         filters,
         offset,
         limit,
         order,
         orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
+      }),
+    ],
+    (client) => {
+      return client.getDeals(filters, offset, limit + 1, orderBy, orderType)
     },
   )
 

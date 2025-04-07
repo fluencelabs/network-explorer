@@ -55,6 +55,17 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
     usePagination(PROOFS_PER_PAGE)
 
   const { data: proofs, isLoading } = useApiQuery(
+    [
+      'capacity-commitment-proofs',
+      JSON.stringify({
+        page,
+        capacityCommitmentId,
+        offset,
+        limit,
+        order,
+        orderBy,
+      }),
+    ],
     (client) =>
       client.getProofsByCapacityCommitment(
         capacityCommitmentId,
@@ -63,20 +74,10 @@ export const ProofsTable: React.FC<ProofsTableProps> = ({
         orderBy,
         orderType,
       ),
-    [page, orderBy, orderType],
-    {
-      key: `capacity-commitment-proofs:${JSON.stringify({
-        capacityCommitmentId,
-        offset,
-        limit,
-        order,
-        orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
   )
 
   const { data: currentEpoch, isLoading: isEpochLoading } = useApiQuery(
+    ['currentEpoch'],
     async (client) => client.currentEpoch(),
   )
 

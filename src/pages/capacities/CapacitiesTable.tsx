@@ -7,7 +7,6 @@ import {
   OrderType,
 } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/filters'
 import { CapacityCommitmentShort } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { useLocation } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -33,6 +32,7 @@ import {
 } from '../../components/Table'
 import { Text } from '../../components/Text'
 import { Tooltip } from '../../components/Tooltip'
+import { useApiQuery } from '../../hooks'
 import { usePagination } from '../../hooks'
 import { formatDuration } from '../../utils/formatDuration'
 import { formatUnixTimestamp } from '../../utils/formatUnixTimestamp'
@@ -69,40 +69,36 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
     OrderType,
   ]
 
-  const { page, selectPage } = usePagination(CAPACITIES_PER_PAGE)
+  const { page, selectPage, offset, limit } = usePagination(CAPACITIES_PER_PAGE)
 
   useEffect(() => {
     selectPage(1)
   }, [filters?.status])
 
-  const { data, isLoading, hasNextPage, fetchNextPage, fetchPreviousPage } =
-    useInfiniteQuery({
-      enabled: !!client,
-      queryKey: ['capacities', orderBy, orderType, filters, client],
-      queryFn: async ({ pageParam }) => {
-        if (!client) return { data: [], nextPage: undefined }
+  const { data, isLoading } = useApiQuery(
+    [
+      'getCapacityCommitments',
+      JSON.stringify({
+        offset,
+        limit,
+        orderBy,
+        orderType,
+        filters,
+        page,
+      }),
+    ],
+    (client) =>
+      client.getCapacityCommitments(
+        filters,
+        offset,
+        limit + 1,
+        orderBy,
+        orderType,
+      ),
+  )
 
-        const data = await client.getCapacityCommitments(
-          filters,
-          CAPACITIES_PER_PAGE * pageParam,
-          CAPACITIES_PER_PAGE * (pageParam + 1),
-          orderBy,
-          orderType,
-        )
-
-        return {
-          data: data.data,
-          nextPage:
-            data.data.length < CAPACITIES_PER_PAGE ? undefined : pageParam + 1,
-        }
-      },
-      initialPageParam: 0,
-      getNextPageParam: (data) => data.nextPage,
-      staleTime: 1_000 * 60,
-    })
-
-  const pageData = data?.pages[page - 1]
-  const capacities = pageData?.data
+  const hasNextPage = data && data.data.length > limit
+  const capacities = data?.data.slice(0, limit)
 
   const handleSort = (key: CapacityCommitmentsOrderBy, order: OrderType) => {
     setOrder(`${key}:${order}`)
@@ -189,17 +185,12 @@ export const CapacitiesTable: React.FC<CapacitiesTableProps> = ({
         ) : (
           <LoadMorePagination
             page={page}
-            hasNextPage={
-              page !== data?.pages.length ||
-              (page === data?.pages.length && hasNextPage)
-            }
+            hasNextPage={hasNextPage}
             onNext={() => {
               selectPage(page + 1)
-              fetchNextPage()
             }}
             onPrev={() => {
               selectPage(page - 1)
-              fetchPreviousPage()
             }}
             onFirst={() => selectPage(1)}
           />

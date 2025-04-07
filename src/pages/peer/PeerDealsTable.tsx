@@ -38,19 +38,19 @@ export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
     usePagination(5)
 
   const { data: deals, isLoading } = useApiQuery(
-    (client) =>
-      client.getDealsByPeer(peerId, offset, limit + 1, orderBy, orderType),
-    [page, orderBy, orderType],
-    {
-      key: `peer-deals:${JSON.stringify({
+    [
+      'getDealsByPeer',
+      JSON.stringify({
+        page,
         peerId,
         offset,
         limit,
         orderBy,
         orderType,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
+      }),
+    ],
+    (client) =>
+      client.getDealsByPeer(peerId, offset, limit + 1, orderBy, orderType),
   )
 
   const { hasNextPage, pageItems } = getPageItems(deals?.data ?? [])

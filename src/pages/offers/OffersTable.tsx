@@ -61,19 +61,19 @@ export const OffersTable: React.FC<OffersTableProps> = ({ filters }) => {
     usePagination(OFFERS_PER_PAGE)
 
   const { data: offers, isLoading } = useApiQuery(
-    (client) =>
-      client.getOffers(filters, offset, limit + 1, orderBy, orderType),
-    [page, orderBy, orderType, filters],
-    {
-      key: `offers:${JSON.stringify({
+    [
+      'offers',
+      JSON.stringify({
+        page,
         filters,
         offset,
         limit,
         order,
         orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
+      }),
+    ],
+    (client) =>
+      client.getOffers(filters, offset, limit + 1, orderBy, orderType),
   )
 
   const hasNextPage = offers && offers.data.length > limit

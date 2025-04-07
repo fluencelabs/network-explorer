@@ -70,7 +70,7 @@ const PrettyJsonView = ({
 }
 
 export function ConfigJson() {
-  const { data, isLoading } = useApiQuery((client) =>
+  const { data, isLoading } = useApiQuery(['getNetworkConstants'], (client) =>
     client.getNetworkConstants(),
   )
 
