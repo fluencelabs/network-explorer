@@ -62,11 +62,20 @@ export const PeerInfo: React.FC = () => {
           <InfoRow>
             <Info>
               <Text size={10} weight={700} uppercase color="grey400">
-                Peer ID
+                Peer ID (base58)
               </Text>
               <TextWithIcon>
                 <Text size={12}>{id}</Text>
                 <Copyable value={id ?? ''} />
+              </TextWithIcon>
+            </Info>
+            <Info>
+              <Text size={10} weight={700} uppercase color="grey400">
+                Peer ID (bytes)
+              </Text>
+              <TextWithIcon>
+                <Text size={12}>{peer.idHex ?? '-'}</Text>
+                <Copyable value={peer.idHex ?? ''} />
               </TextWithIcon>
             </Info>
             <Info>
