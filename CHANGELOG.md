@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.15](https://github.com/fluencelabs/network-explorer/compare/v0.1.14...v0.1.15) (2025-04-09)
+
+
+### Features
+
+* **deal-ts-clients:** bump @fluencelabs/deal-ts-clients ([#141](https://github.com/fluencelabs/network-explorer/issues/141)) ([39a4df6](https://github.com/fluencelabs/network-explorer/commit/39a4df623e90dda8f98ac3a7d64333d6362e58a1))
+* **ProviderInfo:** add Compute Units in Deals ([#146](https://github.com/fluencelabs/network-explorer/issues/146)) ([5808b65](https://github.com/fluencelabs/network-explorer/commit/5808b65047cc98521f738bf88e85e563b8d4bcbe))
+
 ## [0.1.14](https://github.com/fluencelabs/network-explorer/compare/v0.1.13...v0.1.14) (2025-03-19)
 
 
