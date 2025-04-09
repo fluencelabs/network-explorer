@@ -29,8 +29,9 @@ export const DealInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: deal, isLoading } = useApiQuery((client) =>
-    client.getDeal(id ?? ''),
+  const { data: deal, isLoading } = useApiQuery(
+    ['getDeal', JSON.stringify({ id })],
+    (client) => client.getDeal(id ?? ''),
   )
 
   const providerAddress = useMemo(() => {

@@ -65,6 +65,17 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
   )
 
   const { data: offers, isLoading } = useApiQuery(
+    [
+      'provider-offers',
+      JSON.stringify({
+        providerId,
+        offset,
+        limit,
+        order,
+        orderBy,
+        page,
+      }),
+    ],
     (client) =>
       client.getOffersByProvider(
         { providerId },
@@ -73,17 +84,6 @@ export const ProviderOffersTable: React.FC<ProviderOffersTableProps> = ({
         orderBy,
         orderType,
       ),
-    [page, orderBy, orderType, providerId],
-    {
-      key: `provider-offers:${JSON.stringify({
-        providerId,
-        offset,
-        limit,
-        order,
-        orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
   )
 
   const hasNextPage = offers && offers.data.length > limit

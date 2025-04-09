@@ -11,4 +11,8 @@ query DealBalanceTxesQuery($filters: DealBalanceTx_filter, $first: Int, $skip: I
     id
     amount
   }
+  
+  dealBalanceTxesCount: dealBalanceTxes(where: $filters) {
+    id
+  }
 }

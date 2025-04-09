@@ -1,7 +1,10 @@
-query DealQuery($id: ID!) {
+query DealQuery($id: ID!, $first: Int, $skip: Int) {
   deal(id: $id) {
-    joinedWorkers {
+    joinedWorkers(first: $first, skip: $skip) {
       ...DealJoinedWorker
+    }
+    joinedWorkersCount: joinedWorkers {
+      id
     }
   }
 }

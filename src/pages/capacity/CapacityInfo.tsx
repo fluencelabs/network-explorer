@@ -88,8 +88,9 @@ export const CapacityInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: capacity, isLoading } = useApiQuery((client) =>
-    client.getCapacityCommitment(id ?? ''),
+  const { data: capacity, isLoading } = useApiQuery(
+    ['getCapacityCommitment', JSON.stringify({ id })],
+    (client) => client.getCapacityCommitment(id ?? ''),
   )
 
   if (isLoading) {
