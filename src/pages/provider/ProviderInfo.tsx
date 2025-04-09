@@ -115,6 +115,20 @@ export const ProviderInfo: React.FC = () => {
         <Statistic>
           <StatisticTitle>
             <Text size={10} weight={700} uppercase color="grey400">
+              Compute Units in Deals
+            </Text>
+            <Tooltip trigger={<InfoOutlineIcon />}>
+              <Text color="grey600" weight={600} size={12}>
+                The total number of Compute Units participating in Deals
+              </Text>
+            </Tooltip>
+          </StatisticTitle>
+          <Text size={32}>{provider.computeUnitsInDeal}</Text>
+        </Statistic>
+
+        <Statistic>
+          <StatisticTitle>
+            <Text size={10} weight={700} uppercase color="grey400">
               Confirmed Compute Units
             </Text>
             <Tooltip trigger={<InfoOutlineIcon />}>
