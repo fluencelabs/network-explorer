@@ -1439,9 +1439,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fluencelabs/deal-ts-clients@npm:0.24.1-feat-893-49d0a0c-7955-1.0":
-  version: 0.24.1-feat-893-49d0a0c-7955-1.0
-  resolution: "@fluencelabs/deal-ts-clients@npm:0.24.1-feat-893-49d0a0c-7955-1.0"
+"@fluencelabs/deal-ts-clients@npm:0.24.2-release-please-415cb8f-7970-1.0":
+  version: 0.24.2-release-please-415cb8f-7970-1.0
+  resolution: "@fluencelabs/deal-ts-clients@npm:0.24.2-release-please-415cb8f-7970-1.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
     debug: "npm:^4.3.4"
@@ -1453,7 +1453,7 @@ __metadata:
     graphql-tag: "npm:^2.12.6"
     ipfs-http-client: "npm:^60.0.1"
     multiformats: "npm:^13.0.1"
-  checksum: 10c0/c38977149179e1d8b8da2609101eb5a89f581fa3678854d63ffed7016ce2e46b04dd8cc4d6a5c4b23155fde6b45312d9f8d8efc5b8f7a0caf149d07cc7c87a78
+  checksum: 10c0/4295741d81e2358a3972a8f7d54644d344927ec339cf9961dcc4f140e0b290b8f1ba7b6590ff308d46d791c51242ec2358242b9c236326f67439f240f4ef4b3e
   languageName: node
   linkType: hard
 
@@ -8144,7 +8144,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fluencelabs/deal-ts-clients": "npm:0.24.1-feat-893-49d0a0c-7955-1.0"
+    "@fluencelabs/deal-ts-clients": "npm:0.24.2-release-please-415cb8f-7970-1.0"
     "@graphql-codegen/cli": "npm:^5.0.3"
     "@graphql-codegen/typescript": "npm:^4.1.0"
     "@graphql-codegen/typescript-graphql-request": "npm:^6.2.0"
