@@ -26,7 +26,7 @@ export const PeerInfo: React.FC = () => {
     client.getPeer(id ?? ''),
   )
 
-  if (!peer || isLoading) {
+  if (isLoading) {
     return <InfoLoader />
   }
 
