@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import styled from '@emotion/styled'
+import { RewardsStatistics } from '@fluencelabs/deal-ts-clients/dist/dealExplorerClient/types/schemes'
 import { useParams } from 'wouter'
 
 import { InfoOutlineIcon } from '../../assets/icons'
@@ -79,6 +80,60 @@ const Rewards: React.FC<{
         symbol={symbol}
         decimals={decimals}
       />
+    </div>
+  )
+}
+
+const StakerRewards: React.FC<{
+  title: string
+  symbol?: string
+  decimals?: number
+
+  total: RewardsStatistics
+  deals: RewardsStatistics
+  capacityCommitments: RewardsStatistics
+}> = ({
+  title: mainTitle,
+  symbol,
+  total,
+  deals,
+  capacityCommitments,
+  decimals,
+}) => {
+  return (
+    <div>
+      <Text size={24}>{mainTitle}</Text>
+      <Space height="24px" />
+      <ParametersStakerRewards>
+        {[
+          { record: capacityCommitments, title: 'CCs' },
+          { record: deals, title: 'Deals' },
+          { record: total, title: 'Total' },
+        ].map((group) => (
+          <div key={group.title}>
+            <Record
+              title={`In vesting / ${group.title}`}
+              balance={group.record.inVesting}
+              symbol={symbol}
+              decimals={decimals}
+            />
+            <Space height="32px" />
+            <Record
+              title={`Available to claim / ${group.title}`}
+              balance={group.record.availableToClaim}
+              symbol={symbol}
+              decimals={decimals}
+            />
+            <Space height="32px" />
+            <Record
+              title={`Total claimed / ${group.title}`}
+              balance={group.record.claimed}
+              symbol={symbol}
+              decimals={decimals}
+            />
+          </div>
+        ))}
+      </ParametersStakerRewards>
     </div>
   )
 }
@@ -323,7 +378,7 @@ export const CapacityInfo: React.FC = () => {
             </Parameter>
           </ParametersRow>
           <Space height="40px" />
-          <ParametersRow>
+          <ParametersRewards>
             <Rewards
               title="Provider"
               symbol={capacity.collateralToken.symbol}
@@ -332,15 +387,13 @@ export const CapacityInfo: React.FC = () => {
               claimed={capacity.rewards.provider.claimed}
               decimals={Number(capacity.collateralToken.decimals)}
             />
-            <Rewards
+            <StakerRewards
               title="Staker"
               symbol={capacity.collateralToken.symbol}
-              inVesting={capacity.rewards.staker.inVesting}
-              availableToClaim={capacity.rewards.staker.availableToClaim}
-              claimed={capacity.rewards.staker.claimed}
               decimals={Number(capacity.collateralToken.decimals)}
+              {...capacity.rewards.staker}
             />
-          </ParametersRow>
+          </ParametersRewards>
           <Space height="80px" />
           <ListComputeUnitsTable capacityCommitmentId={id} />
           <Space height="30px" />
@@ -394,6 +447,18 @@ const ParametersRow = styled.div`
   display: grid;
   grid-template-columns: 200px 200px;
   gap: 120px;
+`
+
+const ParametersRewards = styled.div`
+  display: grid;
+  grid-template-columns: 200px 600px;
+  gap: 120px;
+`
+
+const ParametersStakerRewards = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
 `
 
 const Parameter = styled.div`

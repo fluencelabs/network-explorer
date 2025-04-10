@@ -43,7 +43,6 @@ const template = [
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
   'minmax(10px, 1fr)',
-  'minmax(10px, 1fr)',
 ]
 
 export const DEALS_PER_PAGE = 5
@@ -104,7 +103,6 @@ export const DealsTable: React.FC<DealsTableProps> = ({
           >
             Created At
           </TableColumnTitleWithSort>
-          <TableColumnTitle>Max renting period</TableColumnTitle>
           <TableColumnTitle>Client</TableColumnTitle>
           <TableColumnTitle>Balance</TableColumnTitle>
           <TableColumnTitle>Status</TableColumnTitle>
@@ -152,10 +150,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
   }
 
   const createdAt = formatUnixTimestamp(deal.createdAt)
-  const rentingPeriodAt =
-    deal.minRentingPeriodEndAt === null
-      ? null
-      : formatUnixTimestamp(deal.minRentingPeriodEndAt)
 
   return (
     <RowBlock>
@@ -168,16 +162,6 @@ const DealRow: React.FC<DealRowProps> = ({ deal }) => {
             <Cell flexDirection="column" alignItems="flex-start">
               <Text size={12}>{createdAt.date}</Text>
               <Text size={12}>{createdAt.time}</Text>
-            </Cell>
-            <Cell flexDirection="column" alignItems="flex-start">
-              {rentingPeriodAt ? (
-                <>
-                  <Text size={12}>{rentingPeriodAt.date}</Text>
-                  <Text size={12}>{rentingPeriodAt.time}</Text>
-                </>
-              ) : (
-                '-'
-              )}
             </Cell>
             <Cell
               onMouseOver={() => setCopyshown(true)}
