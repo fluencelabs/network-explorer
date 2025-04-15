@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.15](https://github.com/fluencelabs/network-explorer/compare/v0.1.14...v0.1.15) (2025-04-15)
+
+
+### Features
+
+* **CapacityInfo:** expand staker deals info ([#143](https://github.com/fluencelabs/network-explorer/issues/143)) ([586760d](https://github.com/fluencelabs/network-explorer/commit/586760d2ffec0215068918941eb66eb34b005f40))
+* **deal-ts-clients:** bump @fluencelabs/deal-ts-clients ([#141](https://github.com/fluencelabs/network-explorer/issues/141)) ([39a4df6](https://github.com/fluencelabs/network-explorer/commit/39a4df623e90dda8f98ac3a7d64333d6362e58a1))
+* **PeerInfo:** add hex value for peer ([#147](https://github.com/fluencelabs/network-explorer/issues/147)) ([87454bb](https://github.com/fluencelabs/network-explorer/commit/87454bb683b95109c86698ef0fe7d614742e609c))
+* **ProviderInfo:** add Compute Units in Deals ([#146](https://github.com/fluencelabs/network-explorer/issues/146)) ([5808b65](https://github.com/fluencelabs/network-explorer/commit/5808b65047cc98521f738bf88e85e563b8d4bcbe))
+
+
+### Bug Fixes
+
+* **OfferInfo:** hide if maxProtocolVersion is specified ([#145](https://github.com/fluencelabs/network-explorer/issues/145)) ([fdd7cbc](https://github.com/fluencelabs/network-explorer/commit/fdd7cbcebade6040207b07efe2fc513b30800bf0))
+* **PeerInfo:** fix show not found page ([#144](https://github.com/fluencelabs/network-explorer/issues/144)) ([df846bc](https://github.com/fluencelabs/network-explorer/commit/df846bc08dae6731837ddb9659ce0b6640b0c2c1))
+* **WorkerTable:** fix pagination ([#148](https://github.com/fluencelabs/network-explorer/issues/148)) ([d489578](https://github.com/fluencelabs/network-explorer/commit/d48957862508cb69f9afe29b733ca7c7d154bbc7))
+
 ## [0.1.14](https://github.com/fluencelabs/network-explorer/compare/v0.1.13...v0.1.14) (2025-03-19)
 
 
