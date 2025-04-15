@@ -31,11 +31,13 @@ interface PeerDealsTableProps {
   peerId: string
 }
 
+const PEERS_PER_PAGE = 5
+
 export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
   const { orderBy, orderType } = useOrder<'id'>('id:desc')
 
   const { page, selectPage, limit, offset, getTotalPages, getPageItems } =
-    usePagination(5)
+    usePagination(PEERS_PER_PAGE)
 
   const { data: deals, isLoading } = useApiQuery(
     [

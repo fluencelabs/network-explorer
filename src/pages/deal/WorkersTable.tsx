@@ -33,9 +33,10 @@ interface WorkersTableProps {
   dealId: string
 }
 
+export const WORKERS_PER_PAGE = 5
+
 export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
-  // Define pagination with 5 items per page
-  const pagination = usePagination(5)
+  const pagination = usePagination(WORKERS_PER_PAGE)
 
   const { data, isLoading } = useQuery({
     queryKey: ['dealWorkers', dealId, pagination.page],

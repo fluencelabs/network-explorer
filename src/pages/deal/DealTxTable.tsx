@@ -34,11 +34,13 @@ const template = [
   '100px',
 ]
 
+export const DEALS_PER_PAGE = 5
+
 export const DealTxTable: React.FC<{
   dealId: string
   paymentToken: PaymentToken
 }> = ({ dealId, paymentToken }) => {
-  const pagination = usePagination(5)
+  const pagination = usePagination(DEALS_PER_PAGE)
 
   const { data, isLoading } = useQuery({
     queryKey: ['dealTx', dealId, pagination.page],
