@@ -31,20 +31,10 @@ export const ComputeUnitStatus: React.FC<ComputeUnitStatusProps> = ({
     )
   }
 
-  if (status === 'removed') {
-    return (
-      <Status color="grey300">
-        <Text color="white" weight={800} size={10} uppercase>
-          Removed
-        </Text>
-      </Status>
-    )
-  }
-
   return (
     <Status color="grey300">
       <Text color="white" weight={800} size={10} uppercase>
-        Unknown
+        Removed
       </Text>
     </Status>
   )
