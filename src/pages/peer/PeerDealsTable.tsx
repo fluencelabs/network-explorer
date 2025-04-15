@@ -31,26 +31,28 @@ interface PeerDealsTableProps {
   peerId: string
 }
 
+const PEERS_PER_PAGE = 5
+
 export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
   const { orderBy, orderType } = useOrder<'id'>('id:desc')
 
   const { page, selectPage, limit, offset, getTotalPages, getPageItems } =
-    usePagination(5)
+    usePagination(PEERS_PER_PAGE)
 
   const { data: deals, isLoading } = useApiQuery(
-    (client) =>
-      client.getDealsByPeer(peerId, offset, limit + 1, orderBy, orderType),
-    [page, orderBy, orderType],
-    {
-      key: `peer-deals:${JSON.stringify({
+    [
+      'getDealsByPeer',
+      JSON.stringify({
+        page,
         peerId,
         offset,
         limit,
         orderBy,
         orderType,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
+      }),
+    ],
+    (client) =>
+      client.getDealsByPeer(peerId, offset, limit + 1, orderBy, orderType),
   )
 
   const { hasNextPage, pageItems } = getPageItems(deals?.data ?? [])
@@ -81,14 +83,12 @@ export const PeerDealsTable: React.FC<PeerDealsTableProps> = ({ peerId }) => {
         {!deals ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          deals.total !== null && (
-            <Pagination
-              pages={getTotalPages(deals.total)}
-              page={page}
-              hasNextPage={hasNextPage}
-              onSelect={selectPage}
-            />
-          )
+          <Pagination
+            pages={deals.total !== null ? getTotalPages(deals.total) : null}
+            page={page}
+            hasNextPage={hasNextPage}
+            onSelect={selectPage}
+          />
         )}
       </TablePagination>
     </>

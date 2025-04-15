@@ -34,26 +34,31 @@ const template = [
   '100px',
 ]
 
+export const DEALS_PER_PAGE = 5
+
 export const DealTxTable: React.FC<{
   dealId: string
   paymentToken: PaymentToken
 }> = ({ dealId, paymentToken }) => {
-  const pagination = usePagination(5)
+  const pagination = usePagination(DEALS_PER_PAGE)
 
   const { data, isLoading } = useQuery({
-    queryKey: ['dealTx', dealId],
+    queryKey: ['dealTx', dealId, pagination.page],
     queryFn: ({ queryKey: [, dealId] }) =>
       getSdk(graphQLClient).DealBalanceTxesQuery({
-        filters: { deal_: { id: dealId } },
-        skip: pagination.page * pagination.limit,
+        filters: { deal_: { id: dealId.toString() } },
+        skip: pagination.offset,
         first: pagination.limit,
       }),
   })
 
   if (isLoading || !data) return null
 
-  const hasNextPage =
-    data.dealBalanceTxes && data.dealBalanceTxes.length > pagination.limit
+  const totalCount = data.dealBalanceTxesCount
+    ? data.dealBalanceTxesCount.length
+    : 0
+
+  const hasNextPage = pagination.offset + pagination.limit < totalCount
 
   return (
     <>
@@ -77,7 +82,7 @@ export const DealTxTable: React.FC<{
       <Space height="32px" />
       <TablePagination>
         <Pagination
-          pages={pagination.getTotalPages(data.dealBalanceTxes.length)}
+          pages={pagination.getTotalPages(totalCount)}
           page={pagination.page}
           hasNextPage={hasNextPage}
           onSelect={pagination.selectPage}

@@ -48,6 +48,7 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
     usePagination(PER_PAGE)
 
   const { data: deals, isLoading } = useApiQuery(
+    ['getDealsByProvider', JSON.stringify({ page, providerId })],
     (client) =>
       client.getDealsByProvider(
         {
@@ -56,7 +57,6 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
         offset,
         limit + 1,
       ),
-    [page, providerId],
   )
 
   const hasNextPage = deals && deals.data.length > limit

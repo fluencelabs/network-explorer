@@ -26,8 +26,9 @@ export const OfferInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: offer, isLoading } = useApiQuery((client) =>
-    client.getOffer(id ?? ''),
+  const { data: offer, isLoading } = useApiQuery(
+    ['getOffer', JSON.stringify({ id })],
+    (client) => client.getOffer(id ?? ''),
   )
 
   if (isLoading) {

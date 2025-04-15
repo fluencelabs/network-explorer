@@ -51,6 +51,17 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
   )
 
   const { data: computeUnits, isLoading } = useApiQuery(
+    [
+      'capacity-commitment-compute-units',
+      JSON.stringify({
+        page,
+        capacityCommitmentId,
+        offset,
+        limit,
+        order,
+        orderBy,
+      }),
+    ],
     (client) =>
       client.getComputeUnitsByCapacityCommitment(
         capacityCommitmentId,
@@ -59,17 +70,6 @@ export const ListComputeUnitsTable: React.FC<ListComputeUnitsTableProps> = ({
         orderBy,
         orderType,
       ),
-    [page, orderBy, orderType],
-    {
-      key: `capacity-commitment-compute-units:${JSON.stringify({
-        capacityCommitmentId,
-        offset,
-        limit,
-        order,
-        orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
   )
 
   const hasNextPage = computeUnits && computeUnits.data.length > limit

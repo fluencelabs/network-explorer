@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 
 import { A } from '../../components/A'
+import { Pagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -14,8 +15,10 @@ import {
   TableBody,
   TableColumnTitle,
   TableHeader,
+  TablePagination,
 } from '../../components/Table'
 import { Text } from '../../components/Text'
+import { usePagination } from '../../hooks'
 import { peerIdContractHexToBase58 } from '../../utils/formatPeerIdHex'
 
 import { DealJoinedWorkerFragment, getSdk } from '../../../generated/graphql'
@@ -30,12 +33,18 @@ interface WorkersTableProps {
   dealId: string
 }
 
+export const WORKERS_PER_PAGE = 5
+
 export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
+  const pagination = usePagination(WORKERS_PER_PAGE)
+
   const { data, isLoading } = useQuery({
-    queryKey: ['dealWorkers', dealId],
+    queryKey: ['dealWorkers', dealId, pagination.page],
     queryFn: ({ queryKey: [, dealId] }) =>
       getSdk(graphQLClient).DealQuery({
-        id: dealId,
+        id: dealId.toString(),
+        first: pagination.limit,
+        skip: pagination.offset,
       }),
   })
 
@@ -43,24 +52,43 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
 
   const workers = data?.deal?.joinedWorkers
 
+  const totalCount = data?.deal?.joinedWorkersCount?.length || 0
+
+  const hasNextPage = pagination.offset + pagination.limit < totalCount
+
   return (
-    <ScrollableTable>
-      <TableHeader template={template}>
-        <TableColumnTitle>Worker id</TableColumnTitle>
-        <TableColumnTitle>Peer id</TableColumnTitle>
-      </TableHeader>
-      <TableBody>
-        {!workers ||
-          (workers?.length === 0 && (
-            <EmptyParameterValue>
-              <Text size={12} color="grey500">
-                No information
-              </Text>
-            </EmptyParameterValue>
+    <>
+      <ScrollableTable>
+        <TableHeader template={template}>
+          <TableColumnTitle>Worker id</TableColumnTitle>
+          <TableColumnTitle>Peer id</TableColumnTitle>
+        </TableHeader>
+        <TableBody isLoading={isLoading} skeletonCount={pagination.limit}>
+          {!workers ||
+            (workers?.length === 0 && (
+              <EmptyParameterValue>
+                <Text size={12} color="grey500">
+                  No information
+                </Text>
+              </EmptyParameterValue>
+            ))}
+          {workers?.map((worker) => (
+            <PeerRow key={worker.id} worker={worker} />
           ))}
-        {workers?.map((worker) => <PeerRow key={worker.id} worker={worker} />)}
-      </TableBody>
-    </ScrollableTable>
+        </TableBody>
+      </ScrollableTable>
+      <Space height="32px" />
+      {totalCount > 0 && (
+        <TablePagination>
+          <Pagination
+            pages={pagination.getTotalPages(totalCount)}
+            page={pagination.page}
+            hasNextPage={hasNextPage}
+            onSelect={pagination.selectPage}
+          />
+        </TablePagination>
+      )}
+    </>
   )
 }
 

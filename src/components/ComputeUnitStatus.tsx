@@ -32,9 +32,9 @@ export const ComputeUnitStatus: React.FC<ComputeUnitStatusProps> = ({
   }
 
   return (
-    <Status color="red">
+    <Status color="grey300">
       <Text color="white" weight={800} size={10} uppercase>
-        undefined
+        Removed
       </Text>
     </Status>
   )

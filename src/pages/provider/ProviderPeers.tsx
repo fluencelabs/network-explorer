@@ -13,8 +13,9 @@ export const ProviderPeers: React.FC = () => {
 
   const { id } = params
 
-  const { data: provider, isLoading } = useApiQuery((client) =>
-    client.getProvider(id ?? ''),
+  const { data: provider, isLoading } = useApiQuery(
+    ['getProvider', JSON.stringify({ id })],
+    (client) => client.getProvider(id ?? ''),
   )
 
   if (!provider || isLoading) {

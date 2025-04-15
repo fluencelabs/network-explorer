@@ -45,14 +45,8 @@ export const DataCentersTable: React.FC<DataCentersTableProps> = ({
   const { page, selectPage, limit, getTotalPages } = pagination
 
   const { data: dataCenters, isLoading } = useApiQuery(
-    (client) => {
-      return client.getDataCenters()
-    },
-    [page],
-    {
-      key: `dataCenters:${JSON.stringify({})}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
+    ['dataCenters'],
+    (client) => client.getDataCenters(),
   )
 
   const hasNextPage = dataCenters && dataCenters.data.length > limit

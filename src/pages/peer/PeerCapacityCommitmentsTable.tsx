@@ -55,6 +55,8 @@ interface PeerCapacityCommitmentsTableProps {
   peerId: string
 }
 
+const PEERS_PER_PAGE = 5
+
 export const PeerCapacityCommitmentsTable: React.FC<
   PeerCapacityCommitmentsTableProps
 > = ({ peerId }) => {
@@ -66,9 +68,20 @@ export const PeerCapacityCommitmentsTable: React.FC<
     useOrder<CapacityCommitmentsOrderBy>('createdAt:desc')
 
   const { page, selectPage, limit, offset, getTotalPages, getPageItems } =
-    usePagination(5)
+    usePagination(PEERS_PER_PAGE)
 
   const { data: capacities, isLoading } = useApiQuery(
+    [
+      'peer-capacities',
+      JSON.stringify({
+        page,
+        filters,
+        offset,
+        limit,
+        orderBy,
+        orderType,
+      }),
+    ],
     (client) =>
       client.getCapacityCommitmentsByPeer(
         filters,
@@ -77,17 +90,6 @@ export const PeerCapacityCommitmentsTable: React.FC<
         orderBy,
         orderType,
       ),
-    [page, orderBy, orderType, filters],
-    {
-      key: `peer-capacities:${JSON.stringify({
-        filters,
-        offset,
-        limit,
-        orderBy,
-        orderType,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
   )
 
   const { hasNextPage, pageItems } = getPageItems(capacities?.data ?? [])

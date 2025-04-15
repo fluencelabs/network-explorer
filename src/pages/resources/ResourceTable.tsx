@@ -24,15 +24,8 @@ const template = [
 ]
 
 export const ResourceTable: React.FC = () => {
-  const { data, isLoading } = useApiQuery(
-    (client) => {
-      return client.getResources()
-    },
-    [],
-    {
-      key: `resources`,
-      ttl: 1_000 * 60, // 1 minute
-    },
+  const { data, isLoading } = useApiQuery(`resources`, (client) =>
+    client.getResources(),
   )
 
   return (

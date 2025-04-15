@@ -8,7 +8,7 @@ interface ProviderPeersTableProps {
 export const ProviderPeersTable: React.FC<ProviderPeersTableProps> = ({
   providerId,
 }) => {
-  const { data } = useApiQuery((client) =>
+  const { data } = useApiQuery(['getPeers', providerId], (client) =>
     client.getPeers({ provider: providerId }),
   )
 

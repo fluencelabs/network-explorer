@@ -64,19 +64,18 @@ export const ProviderTable: React.FC<ProviderTableProps> = ({ filters }) => {
     usePagination(PROVIDERS_PER_PAGE)
 
   const { data: providers, isLoading } = useApiQuery(
-    (client) =>
-      client.getProviders(filters, offset, limit + 1, orderBy, orderType),
-    [page, orderBy, orderType, filters],
-    {
-      key: `providers:${JSON.stringify({
+    [
+      'providers',
+      JSON.stringify({
         filters,
         offset,
         limit,
         order,
         orderBy,
-      })}`,
-      ttl: 1_000 * 60, // 1 minute
-    },
+      }),
+    ],
+    (client) =>
+      client.getProviders(filters, offset, limit + 1, orderBy, orderType),
   )
 
   const hasNextPage = providers && providers.data.length > limit

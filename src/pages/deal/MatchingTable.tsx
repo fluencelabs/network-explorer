@@ -32,14 +32,13 @@ interface MatchingTableProps {
 
 export const MatchingTable: React.FC<MatchingTableProps> = ({ dealId }) => {
   const { data, isLoading } = useApiQuery(
-    (client) => client.getWorkersByDeal(dealId),
-    [dealId],
-    {
-      key: `matchingTable:${JSON.stringify({
+    [
+      'matchingTable',
+      JSON.stringify({
         dealId,
-      })}`,
-      ttl: 1_000 * 60,
-    },
+      }),
+    ],
+    (client) => client.getWorkersByDeal(dealId),
   )
 
   return (
