@@ -110,26 +110,29 @@ export const OfferInfo: React.FC = () => {
           <Space height="56px" />
           <Text size={20}>Offer parameters</Text>
           <Space height="30px" />
-          <ParametersRow>
-            <Parameter>
-              <Text size={10} weight={700} uppercase color="grey400">
-                Price per worker epoch
-              </Text>
-              <ParameterValue>
-                <Text size={20}>
-                  {formatTokenValue(
-                    offer.pricePerEpoch,
-                    Number(offer.paymentToken.decimals),
-                  )}
+          {offer.maxProtocolVersion === null && (
+            <ParametersRow>
+              <Parameter>
+                <Text size={10} weight={700} uppercase color="grey400">
+                  Price per worker epoch
                 </Text>
-                <TokenBadge bg="grey300">
-                  <Text size={12} weight={800} color="grey600">
-                    {offer.paymentToken.symbol}
+                <ParameterValue>
+                  <Text size={20}>
+                    {formatTokenValue(
+                      offer.pricePerEpoch,
+                      Number(offer.paymentToken.decimals),
+                    )}
                   </Text>
-                </TokenBadge>
-              </ParameterValue>
-            </Parameter>
-          </ParametersRow>
+                  <TokenBadge bg="grey300">
+                    <Text size={12} weight={800} color="grey600">
+                      {offer.paymentToken.symbol}
+                    </Text>
+                  </TokenBadge>
+                </ParameterValue>
+              </Parameter>
+            </ParametersRow>
+          )}
+
           <Space height="30px" />
           <ParametersRow>
             <Parameter>
