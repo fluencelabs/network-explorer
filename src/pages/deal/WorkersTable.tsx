@@ -38,7 +38,7 @@ export const WORKERS_PER_PAGE = 5
 export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
   const pagination = usePagination(WORKERS_PER_PAGE)
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetchedAfterMount } = useQuery({
     queryKey: ['dealWorkers', dealId, pagination.page],
     queryFn: ({ queryKey: [, dealId] }) =>
       getSdk(graphQLClient).DealQuery({
@@ -48,7 +48,7 @@ export const WorkersTable: React.FC<WorkersTableProps> = ({ dealId }) => {
       }),
   })
 
-  if (isLoading) return null
+  if (isLoading || !isFetchedAfterMount) return null
 
   const workers = data?.deal?.joinedWorkers
 

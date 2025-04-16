@@ -29,9 +29,12 @@ export const DealInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: deal, isLoading } = useApiQuery(
-    ['getDeal', JSON.stringify({ id })],
-    (client) => client.getDeal(id ?? ''),
+  const {
+    data: deal,
+    isLoading,
+    isFetchedAfterMount,
+  } = useApiQuery(['getDeal', JSON.stringify({ id })], (client) =>
+    client.getDeal(id ?? ''),
   )
 
   const providerAddress = useMemo(() => {
@@ -46,7 +49,7 @@ export const DealInfo: React.FC = () => {
     return deal.joinedWorkers[0].peer.offer.datacenter
   }, [deal])
 
-  if (isLoading) {
+  if (isLoading || !isFetchedAfterMount) {
     return <InfoLoader />
   }
 

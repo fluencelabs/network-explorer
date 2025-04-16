@@ -26,12 +26,15 @@ export const OfferInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: offer, isLoading } = useApiQuery(
-    ['getOffer', JSON.stringify({ id })],
-    (client) => client.getOffer(id ?? ''),
+  const {
+    data: offer,
+    isLoading,
+    isFetchedAfterMount,
+  } = useApiQuery(['getOffer', JSON.stringify({ id })], (client) =>
+    client.getOffer(id ?? ''),
   )
 
-  if (isLoading) {
+  if (isLoading || !isFetchedAfterMount) {
     return <InfoLoader />
   }
 
