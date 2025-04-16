@@ -22,12 +22,15 @@ export const PeerInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: peer, isLoading } = useApiQuery(
-    ['getPeer', JSON.stringify({ id })],
-    (client) => client.getPeer(id ?? ''),
+  const {
+    data: peer,
+    isLoading,
+    isFetchedAfterMount,
+  } = useApiQuery(['getPeer', JSON.stringify({ id })], (client) =>
+    client.getPeer(id ?? ''),
   )
 
-  if (isLoading) {
+  if (isLoading || !isFetchedAfterMount) {
     return <InfoLoader />
   }
 

@@ -143,12 +143,15 @@ export const CapacityInfo: React.FC = () => {
 
   const { id } = params
 
-  const { data: capacity, isLoading } = useApiQuery(
-    ['getCapacityCommitment', JSON.stringify({ id })],
-    (client) => client.getCapacityCommitment(id ?? ''),
+  const {
+    data: capacity,
+    isLoading,
+    isFetchedAfterMount,
+  } = useApiQuery(['getCapacityCommitment', JSON.stringify({ id })], (client) =>
+    client.getCapacityCommitment(id ?? ''),
   )
 
-  if (isLoading) {
+  if (isLoading || !isFetchedAfterMount) {
     return <InfoLoader />
   }
 
