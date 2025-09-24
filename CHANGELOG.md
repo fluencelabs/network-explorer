@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.16](https://github.com/fluencelabs/network-explorer/compare/v0.1.15...v0.1.16) (2025-04-16)
+
+
+### Bug Fixes
+
+* **loading:** check isFetchedAfterMount before show 404 ([#149](https://github.com/fluencelabs/network-explorer/issues/149)) ([63f1ff8](https://github.com/fluencelabs/network-explorer/commit/63f1ff806086fba63b56f93a95e12b4212cf675b))
+
 ## [0.1.15](https://github.com/fluencelabs/network-explorer/compare/v0.1.14...v0.1.15) (2025-04-15)
 
 
