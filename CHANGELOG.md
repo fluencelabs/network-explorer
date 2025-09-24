@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.17](https://github.com/fluencelabs/network-explorer/compare/v0.1.16...v0.1.17) (2025-09-24)
+
+
+### Bug Fixes
+
+* **ProviderDealsTable:** fix paggination ([#152](https://github.com/fluencelabs/network-explorer/issues/152)) ([babed5f](https://github.com/fluencelabs/network-explorer/commit/babed5fe48859e8b54dfdd615765cb626b388bb9))
+
 ## [0.1.16](https://github.com/fluencelabs/network-explorer/compare/v0.1.15...v0.1.16) (2025-04-16)
 
 
