@@ -5,7 +5,7 @@ import { useLocation } from 'wouter'
 
 import { A } from '../../components/A'
 import { DealStatus } from '../../components/DealStatus'
-import { Pagination } from '../../components/Pagination'
+import { LoadMorePagination } from '../../components/Pagination'
 import { Space } from '../../components/Space'
 import {
   Cell,
@@ -44,8 +44,7 @@ const PER_PAGE = 5
 export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
   providerId,
 }) => {
-  const { page, selectPage, limit, offset, getTotalPages } =
-    usePagination(PER_PAGE)
+  const { page, selectPage, limit, offset } = usePagination(PER_PAGE)
 
   const { data: deals, isLoading } = useApiQuery(
     ['getDealsByProvider', JSON.stringify({ page, providerId })],
@@ -61,6 +60,10 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
 
   const hasNextPage = deals && deals.data.length > limit
   const pageDeals = deals && deals.data.slice(0, limit)
+
+  const onNext = () => selectPage(page + 1)
+  const onPrev = () => selectPage(page - 1)
+  const onFirst = () => selectPage(1)
 
   return (
     <>
@@ -84,14 +87,13 @@ export const ProviderDealsTable: React.FC<ProviderDealsTableProps> = ({
         {!deals ? (
           <Skeleton width={200} height={34} count={1} />
         ) : (
-          deals.total !== null && (
-            <Pagination
-              pages={getTotalPages(deals.total)}
-              page={page}
-              hasNextPage={hasNextPage}
-              onSelect={selectPage}
-            />
-          )
+          <LoadMorePagination
+            page={page}
+            hasNextPage={hasNextPage}
+            onNext={onNext}
+            onPrev={onPrev}
+            onFirst={onFirst}
+          />
         )}
       </TablePagination>
     </>
